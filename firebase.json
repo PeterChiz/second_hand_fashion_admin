@@ -1,0 +1,44 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "secondhandfashionapp",
+          "appId": "1:1088264323064:android:1deabeb15fe35785eb600d",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "secondhandfashionapp",
+          "configurations": {
+            "android": "1:1088264323064:android:1deabeb15fe35785eb600d",
+            "ios": "1:1088264323064:ios:cbf6121e033cd050eb600d",
+            "web": "1:1088264323064:web:c8c9ef56dbe54838eb600d"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

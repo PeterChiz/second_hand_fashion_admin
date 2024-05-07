@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "1088264323064",
+    "project_id": "secondhandfashionapp",
+    "storage_bucket": "secondhandfashionapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088264323064:android:1deabeb15fe35785eb600d",
+        "android_client_info": {
+          "package_name": "com.hoashopsi.second_hand_fashion_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088264323064-aqh3ljimnrn1tpuofpiuldkcqttse2im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUdkcAoVuY14QgS0Zda76-n402gQjZtBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088264323064-aqh3ljimnrn1tpuofpiuldkcqttse2im.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1088264323064-epq3lnu943bh19k96hntjfesf8qu28af.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hoashopsi.secondHandFashionApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088264323064:android:b73f6ac517e37755eb600d",
+        "android_client_info": {
+          "package_name": "com.hoashopsi.second_hand_fashion_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088264323064-ulnff27hq86vo2ai3nk02sdorhfq9bbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hoashopsi.second_hand_fashion_app",
+            "certificate_hash": "c33fed9f3cda2c6eec10a2262aa70296c8c2d324"
+          }
+        },
+        {
+          "client_id": "1088264323064-aqh3ljimnrn1tpuofpiuldkcqttse2im.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUdkcAoVuY14QgS0Zda76-n402gQjZtBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088264323064-aqh3ljimnrn1tpuofpiuldkcqttse2im.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1088264323064-epq3lnu943bh19k96hntjfesf8qu28af.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hoashopsi.secondHandFashionApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
