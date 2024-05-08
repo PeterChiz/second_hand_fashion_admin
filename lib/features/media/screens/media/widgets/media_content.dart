@@ -43,7 +43,7 @@ class MediaContent extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text('Gallery Folders', style: Theme.of(context).textTheme.headlineSmall),
+                  Text('Thư mục thư viện', style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(width: SHFSizes.spaceBtwItems),
 
                   // Media Dropdown
@@ -127,7 +127,7 @@ class MediaContent extends StatelessWidget {
                           width: SHFSizes.buttonWidth,
                           child: ElevatedButton.icon(
                             onPressed: () => controller.loadMoreBannerImages(),
-                            label: const Text('Load More'),
+                            label: const Text('Tải thêm'),
                             icon: const Icon(Iconsax.arrow_down),
                           ),
                         ),
@@ -148,7 +148,7 @@ class MediaContent extends StatelessWidget {
       child: SHFAnimationLoaderWidget(
         width: 300,
         height: 300,
-        text: 'Select your Desired Folder',
+        text: 'Chọn thư mục mong muốn của bạn',
         animation: SHFImages.packageAnimation,
         style: Theme.of(context).textTheme.titleLarge,
       ),
@@ -164,7 +164,7 @@ class MediaContent extends StatelessWidget {
     } else if (controller.selectedPath.value == MediaCategory.categories) {
       images = controller.allCategoryImages.where((image) => image.url.isNotEmpty).toList();
     } else if (controller.selectedPath.value == MediaCategory.products) {
-      images = controller.allProducSHFImages.where((image) => image.url.isNotEmpty).toList();
+      images = controller.allProductImages.where((image) => image.url.isNotEmpty).toList();
     } else if (controller.selectedPath.value == MediaCategory.users) {
       images = controller.allUserImages.where((image) => image.url.isNotEmpty).toList();
     }
@@ -175,7 +175,7 @@ class MediaContent extends StatelessWidget {
     return SizedBox(
       width: 120,
       child: ElevatedButton.icon(
-        label: const Text('Add'),
+        label: const Text('Thêm'),
         icon: const Icon(Iconsax.image),
         onPressed: () {
           if (alreadySelectedUrls != null) alreadySelectedUrls!.clear();

@@ -4,58 +4,58 @@ import '../../../media/controllers/media_controller.dart';
 import '../../../media/models/image_model.dart';
 import '../../models/product_variation_model.dart';
 
-class ProducSHFImagesController extends GetxController {
-  // Singleton instance
-  static ProducSHFImagesController get instance => Get.find();
+class ProductImagesController extends GetxController {
+  // Thể hiện duy nhất
+  static ProductImagesController get instance => Get.find();
 
-  // Rx Observables for the selected thumbnail image
+  // Rx Observables cho ảnh xem trước được chọn
   Rx<String?> selectedThumbnailImageUrl = Rx<String?>(null);
 
-  // Lists to store additional product images
-  final RxList<String> additionalProducSHFImagesUrls = <String>[].obs;
+  // Danh sách để lưu trữ các hình ảnh sản phẩm bổ sung
+  final RxList<String> additionalProductImagesUrls = <String>[].obs;
 
-  /// Function to remove Product image
+  /// Hàm để xóa hình ảnh Sản phẩm
   Future<void> removeImage(int index) async {
-    additionalProducSHFImagesUrls.removeAt(index);
+    additionalProductImagesUrls.removeAt(index);
   }
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn ảnh xem trước từ Phương tiện
   void selectThumbnailImage() async {
     final controller = Get.put(MediaController());
-    List<ImageModel>? selectedImages = await controller.selecSHFImagesFromMedia();
+    List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các ảnh được chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt ảnh được chọn là ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật ảnh chính bằng cách sử dụng selectedImage
       selectedThumbnailImageUrl.value = selectedImage.url;
     }
   }
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn ảnh xem trước từ Phương tiện
   void selectVariationImage(ProductVariationModel variation) async {
     final controller = Get.put(MediaController());
-    List<ImageModel>? selectedImages = await controller.selecSHFImagesFromMedia();
+    List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các ảnh được chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt ảnh được chọn là ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật ảnh chính bằng cách sử dụng selectedImage
       variation.image.value = selectedImage.url;
     }
   }
 
-  /// Pick Thumbnail Image from Gallery
-  void selectMultipleProducSHFImages() async {
+  /// Chọn ảnh xem trước từ Thư viện ảnh
+  void selectMultipleProductImages() async {
     final controller = Get.put(MediaController());
     List<ImageModel>? selectedImages =
-        await controller.selecSHFImagesFromMedia(allowMultipleSelection: true, alreadySelectedUrls: additionalProducSHFImagesUrls);
+    await controller.selectImagesFromMedia(allowMultipleSelection: true, alreadySelectedUrls: additionalProductImagesUrls);
 
-    // Handle the selected images
+    // Xử lý các ảnh được chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      additionalProducSHFImagesUrls.assignAll(selectedImages.map((e) => e.url));
+      additionalProductImagesUrls.assignAll(selectedImages.map((e) => e.url));
     }
   }
 }

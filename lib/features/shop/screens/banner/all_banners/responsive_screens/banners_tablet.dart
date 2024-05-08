@@ -22,7 +22,7 @@ class BannersTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Categories', breadcrumbItems: ['Categories']),
+              const SHFBreadcrumbsWithHeading(heading: 'Danh mục', breadcrumbItems: ['Categories']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Table Body

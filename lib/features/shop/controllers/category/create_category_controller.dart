@@ -32,7 +32,7 @@ class CreateCategoryController extends GetxController {
   /// Pick Thumbnail Image from Media
   void pickImage() async {
     final controller = Get.put(MediaController());
-    List<ImageModel>? selectedImages = await controller.selecSHFImagesFromMedia();
+    List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
     // Handle the selected images
     if (selectedImages != null && selectedImages.isNotEmpty) {
@@ -87,10 +87,10 @@ class CreateCategoryController extends GetxController {
 
       // Success Message & Redirect
       SHFLoaders.successSnackBar(
-          title: 'Congratulations', message: 'New Record has been added.');
+          title: 'Chúc mừng', message: 'Bản ghi mới đã được thêm vào.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 }

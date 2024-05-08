@@ -46,7 +46,7 @@ class CreateBrandController extends GetxController {
   /// Pick Thumbnail Image from Media
   void pickImage() async {
     final controller = Get.put(MediaController());
-    List<ImageModel>? selectedImages = await controller.selecSHFImagesFromMedia();
+    List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
     // Handle the selected images
     if (selectedImages != null && selectedImages.isNotEmpty) {
@@ -91,7 +91,7 @@ class CreateBrandController extends GetxController {
 
       // Register brand categories if any
       if (selectedCategories.isNotEmpty) {
-        if (newRecord.id.isEmpty) throw 'Error storing relational data. Try again';
+        if (newRecord.id.isEmpty) throw 'Lỗi lưu trữ dữ liệu quan hệ. Thử lại';
 
         // Loop selected Brand Categories
         for (var category in selectedCategories) {
@@ -117,10 +117,10 @@ class CreateBrandController extends GetxController {
       SHFFullScreenLoader.stopLoading();
 
       // Success Message & Redirect
-      SHFLoaders.successSnackBar(title: 'Congratulations', message: 'New Record has been added.');
+      SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi mới đã được thêm vào.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 }

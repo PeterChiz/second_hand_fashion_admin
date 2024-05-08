@@ -13,7 +13,7 @@ class ProductThumbnailImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProducSHFImagesController controller = Get.put(ProducSHFImagesController());
+    final ProductImagesController controller = Get.put(ProductImagesController());
 
     return SHFRoundedContainer(
       child: Column(

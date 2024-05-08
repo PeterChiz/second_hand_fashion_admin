@@ -63,7 +63,7 @@ class ImagePopup extends StatelessWidget {
               // Also provides an option to copy the image URL.
               Row(
                 children: [
-                  Expanded(child: Text('Image Name:', style: Theme.of(context).textTheme.bodyLarge)),
+                  Expanded(child: Text('Tên ảnh', style: Theme.of(context).textTheme.bodyLarge)),
                   Expanded(flex: 3, child: Text(image.filename, style: Theme.of(context).textTheme.titleLarge)),
                 ],
               ),
@@ -81,7 +81,7 @@ class ImagePopup extends StatelessWidget {
                       onPressed: () {
                         FlutterClipboard.copy(image.url).then((value) => SHFLoaders.customToast(message: 'URL copied!'));
                       },
-                      child: const Text('Copy URL'),
+                      child: const Text('Sao chép URL'),
                     ),
                   ),
                 ],
@@ -96,7 +96,7 @@ class ImagePopup extends StatelessWidget {
                     width: 300,
                     child: TextButton(
                       onPressed: () => MediaController.instance.removeCloudImageConfirmation(image),
-                      child: const Text('Delete Image', style: TextStyle(color: Colors.red)),
+                      child: const Text('Xóa ảnh', style: TextStyle(color: Colors.red)),
                     ),
                   ),
                 ],

@@ -39,9 +39,9 @@ class OrderController extends SHFBaseController<OrderModel> {
       await _orderRepository.updateOrderSpecificValue(order.docId, {'status': newStatus.toString()});
       updateItemFromLists(order);
       orderStatus.value = newStatus;
-      SHFLoaders.successSnackBar(title: 'Updated', message: 'Order Status Updated');
+      SHFLoaders.successSnackBar(title: 'Đã cập nhật', message: 'Trạng thái đơn hàng đã được cập nhật');
     } catch (e) {
-      SHFLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+      SHFLoaders.warningSnackBar(title: 'Có lỗi!', message: e.toString());
     } finally {
       statusLoader.value = false;
     }

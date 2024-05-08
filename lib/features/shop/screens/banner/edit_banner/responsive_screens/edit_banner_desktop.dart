@@ -20,7 +20,7 @@ class EditBannerDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              const SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Update Banner', breadcrumbItems: [SHFRoutes.categories, 'Update Banner']),
+              const SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Cập nhật Banner', breadcrumbItems: [SHFRoutes.categories, 'Cập nhật Banner']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

@@ -17,7 +17,7 @@ class CreateBannerDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Create Banner', breadcrumbItems: [SHFRoutes.categories, 'Create Banner']),
+              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Tạo Banner', breadcrumbItems: [SHFRoutes.categories, 'Tạo Banner']),
               SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

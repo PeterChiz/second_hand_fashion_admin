@@ -27,7 +27,7 @@ class CreateBannerForm extends StatelessWidget {
           children: [
             // Heading
             const SizedBox(height: SHFSizes.sm),
-            Text('Create New Banner', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Tạo Banner mới', style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: SHFSizes.spaceBtwSections),
 
             // Image Uploader & Featured Checkbox
@@ -46,12 +46,12 @@ class CreateBannerForm extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: SHFSizes.spaceBtwItems),
-                TextButton(onPressed: () => controller.pickImage(), child: const Text('Select Image')),
+                TextButton(onPressed: () => controller.pickImage(), child: const Text('Chọn ảnh')),
               ],
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-            Text('Make your Banner Active or InActive', style: Theme.of(context).textTheme.bodyMedium),
+            Text('Làm cho Banner của bạn hoạt động hoặc không hoạt động', style: Theme.of(context).textTheme.bodyMedium),
             Obx(
               () => CheckboxMenuButton(
                 value: controller.isActive.value,
@@ -81,7 +81,7 @@ class CreateBannerForm extends StatelessWidget {
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(onPressed: () => controller.createBanner(), child: const Text('Create')),
+                        child: ElevatedButton(onPressed: () => controller.createBanner(), child: const Text('Tạo')),
                       ),
               ),
             ),

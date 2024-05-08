@@ -54,7 +54,7 @@ class SHFImages {
 
 
   // -- Lottie Animations
-  static String defaulSHFLoaderAnimation = "assets/images/animations/default-loader-animation.json";
+  static String defaultLoaderAnimation = "assets/images/animations/default-loader-animation.json";
   static String cartAnimation = "assets/images/animations/lady-adding-product-in-cart-animation.json";
   static String orderCompletedAnimation = "assets/images/animations/order-complete-car-delivery-animation.json";
   static String packageAnimation = "assets/images/animations/98783-packaging-in-progress.json";

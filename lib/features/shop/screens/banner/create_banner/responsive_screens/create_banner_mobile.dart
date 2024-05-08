@@ -17,7 +17,7 @@ class CreateBannerMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SHFBreadcrumbsWithHeading(heading: 'Create Banner', breadcrumbItems: [SHFRoutes.categories, 'Create Banner']),
+              SHFBreadcrumbsWithHeading(heading: 'Tạo Banner', breadcrumbItems: [SHFRoutes.categories, 'Tạo Banner']),
               SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

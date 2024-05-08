@@ -26,54 +26,54 @@ class ProductController extends SHFBaseController<ProductModel> {
 
   @override
   Future<void> deleteItem(ProductModel item) async {
-    // You might want to add a check if any orders of this products exists, delete them first
+    // Bạn có thể muốn kiểm tra xem có bất kỳ đơn hàng nào của sản phẩm này tồn tại không, hãy xóa chúng trước
     final orderController = Get.put(OrderController());
 
-    // If no orders fetched, Fetch them first
+    // Nếu không có đơn hàng nào được lấy, Hãy lấy chúng trước
     if (orderController.allItems.isEmpty) {
       await orderController.fetchItems();
     }
 
-    // Check if any order exist containing this productId
+    // Kiểm tra xem có bất kỳ đơn hàng nào chứa id sản phẩm này không
     final orderExists = orderController.allItems.any((element) => element.items.any((element) => element.productId == item.id));
 
     if (orderExists) {
-      SHFLoaders.warningSnackBar(title: 'Dependents Exist', message: 'In order to Delete this Product, Delete dependent Orders first.');
+      SHFLoaders.warningSnackBar(title: 'Tồn tại các phụ thuộc', message: 'Để Xóa Sản phẩm này, Hãy Xóa các Đơn đặt hàng phụ thuộc trước.');
       return;
     }
     await _productRepository.deleteProduct(item);
   }
 
-  /// Sorting related code
+  /// Mã liên quan đến việc sắp xếp
   void sortByName(int sortColumnIndex, bool ascending) {
     sortByProperty(sortColumnIndex, ascending, (ProductModel product) => product.title.toLowerCase());
   }
 
-  /// Sorting related code
+  /// Mã liên quan đến việc sắp xếp
   void sortByPrice(int sortColumnIndex, bool ascending) {
     sortByProperty(sortColumnIndex, ascending, (ProductModel product) => product.title.toLowerCase());
   }
 
-  /// Sorting related code
+  /// Mã liên quan đến việc sắp xếp
   void sortByStock(int sortColumnIndex, bool ascending) {
     sortByProperty(sortColumnIndex, ascending, (ProductModel product) => product.stock);
   }
 
-  /// Get the product price or price range for variations.
+  /// Lấy giá sản phẩm hoặc phạm vi giá cho các biến thể.
   String getProductPrice(ProductModel product) {
     double smallestPrice = double.infinity;
     double largestPrice = 0.0;
 
-    // If no variations exist, return the simple price or sale price
+    // Nếu không có biến thể tồn tại, trả về giá đơn giản hoặc giá giảm giá
     if (product.productType == ProductType.single.toString() || product.productVariations!.isEmpty) {
       return (product.salePrice > 0.0 ? product.salePrice : product.price).toString();
     } else {
-      // Calculate the smallest and largest prices among variations
+      // Tính toán giá nhỏ nhất và lớn nhất trong số các biến thể
       for (var variation in product.productVariations!) {
-        // Determine the price to consider (sale price if available, otherwise regular price)
+        // Xác định giá cần xem xét (giá giảm giá nếu có, nếu không thì giá thông thường)
         double priceToConsider = variation.salePrice > 0.0 ? variation.salePrice : variation.price;
 
-        // Update smallest and largest prices
+        // Cập nhật giá nhỏ nhất và lớn nhất
         if (priceToConsider < smallestPrice) {
           smallestPrice = priceToConsider;
         }
@@ -83,17 +83,17 @@ class ProductController extends SHFBaseController<ProductModel> {
         }
       }
 
-      // If smallest and largest prices are the same, return a single price
+      // Nếu giá nhỏ nhất và lớn nhất giống nhau, trả về một giá duy nhất
       if (smallestPrice.isEqual(largestPrice)) {
         return largestPrice.toString();
       } else {
-        // Otherwise, return a price range
+        // Nếu không, trả về một phạm vi giá
         return '$smallestPrice - \$$largestPrice';
       }
     }
   }
 
-  /// -- Calculate Discount Percentage
+  /// -- Tính phần trăm giảm giá
   String? calculateSalePercentage(double originalPrice, double? salePrice) {
     if (salePrice == null || salePrice <= 0.0) return null;
     if (originalPrice <= 0) return null;
@@ -102,15 +102,15 @@ class ProductController extends SHFBaseController<ProductModel> {
     return percentage.toStringAsFixed(0);
   }
 
-  /// -- Calculate Product Stock
+  /// -- Tính tổng số lượng sản phẩm
   String getProductStockTotal(ProductModel product) {
     return product.productType == ProductType.single.toString()
         ? product.stock.toString()
         : product.productVariations!.fold<int>(0, (previousValue, element) => previousValue + element.stock).toString();
   }
 
-  /// -- Check Product Stock Status
+  /// -- Kiểm tra Trạng thái Hàng tồn kho
   String getProductStockStatus(ProductModel product) {
-    return product.stock > 0 ? 'In Stock' : 'Out of Stock';
+    return product.stock > 0 ? 'Còn hàng' : 'Hết hàng';
   }
 }

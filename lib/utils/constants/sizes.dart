@@ -14,7 +14,7 @@ class SHFSizes {
   static const double iconLg = 32.0;
 
   // Font sizes
-  static const double fonSHFSizesm = 14.0;
+  static const double fonSHFSizeSm = 14.0;
   static const double fontSizeMd = 16.0;
   static const double fontSizeLg = 18.0;
 
@@ -44,7 +44,7 @@ class SHFSizes {
   static const double dividerHeight = 1.0;
 
   // Product item dimensions
-  static const double producSHFImagesize = 120.0;
+  static const double productImageSize = 120.0;
   static const double productImageRadius = 16.0;
   static const double productItemHeight = 160.0;
 

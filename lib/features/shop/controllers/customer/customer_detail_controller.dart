@@ -40,7 +40,7 @@ class CustomerDetailController extends GetxController {
       // Add all rows as false [Not Selected] & Toggle when required
       selectedRows.assignAll(List.generate(customer.value.orders != null ? customer.value.orders!.length : 0, (index) => false));
     } catch (e) {
-      SHFLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi!', message: e.toString());
     } finally {
       ordersLoading.value = false;
     }
@@ -57,7 +57,7 @@ class CustomerDetailController extends GetxController {
         customer.value.addresses = await addressRepository.fetchUserAddresses(customer.value.id!);
       }
     } catch (e) {
-      SHFLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi!', message: e.toString());
     } finally {
       addressesLoading.value = false;
     }

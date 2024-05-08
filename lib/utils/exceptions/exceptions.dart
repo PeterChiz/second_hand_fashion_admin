@@ -1,54 +1,54 @@
-/// Exception class for handling various errors.
+/// Lớp ngoại lệ để xử lý các lỗi khác nhau.
 class SHFExceptions implements Exception {
-  /// The associated error message.
+  /// Thông điệp lỗi liên quan.
   final String message;
 
-  /// Default constructor with a generic error message.
-  const SHFExceptions([this.message = 'An unexpected error occurred. Please try again.']);
+  /// Constructor mặc định với một thông điệp lỗi chung.
+  const SHFExceptions([this.message = 'Đã xảy ra một lỗi không mong đợi. Vui lòng thử lại.']);
 
-  /// Create an authentication exception from a Firebase authentication exception code.
+  /// Tạo một ngoại lệ xác thực từ mã ngoại lệ xác thực Firebase.
   factory SHFExceptions.fromCode(String code) {
     switch (code) {
       case 'email-already-in-use':
-        return const SHFExceptions('The email address is already registered. Please use a different email.');
+        return const SHFExceptions('Địa chỉ email đã được đăng ký. Vui lòng sử dụng một email khác.');
       case 'invalid-email':
-        return const SHFExceptions('The email address provided is invalid. Please enter a valid email.');
+        return const SHFExceptions('Địa chỉ email được cung cấp không hợp lệ. Vui lòng nhập một email hợp lệ.');
       case 'weak-password':
-        return const SHFExceptions('The password is too weak. Please choose a stronger password.');
+        return const SHFExceptions('Mật khẩu quá yếu. Vui lòng chọn một mật khẩu mạnh hơn.');
       case 'user-disabled':
-        return const SHFExceptions('This user account has been disabled. Please contact support for assistance.');
+        return const SHFExceptions('Tài khoản người dùng này đã bị vô hiệu hóa. Vui lòng liên hệ hỗ trợ để được trợ giúp.');
       case 'user-not-found':
-        return const SHFExceptions('Invalid login details. User not found.');
+        return const SHFExceptions('Thông tin đăng nhập không hợp lệ. Người dùng không được tìm thấy.');
       case 'wrong-password':
-        return const SHFExceptions('Incorrect password. Please check your password and try again.');
+        return const SHFExceptions('Mật khẩu không chính xác. Vui lòng kiểm tra mật khẩu của bạn và thử lại.');
       case 'INVALID_LOGIN_CREDENTIALS':
-        return const SHFExceptions('Invalid login credentials. Please double-check your information.');
+        return const SHFExceptions('Thông tin đăng nhập không hợp lệ. Vui lòng kiểm tra lại thông tin của bạn.');
       case 'too-many-requests':
-        return const SHFExceptions('Too many requests. Please try again later.');
+        return const SHFExceptions('Quá nhiều yêu cầu. Vui lòng thử lại sau.');
       case 'invalid-argument':
-        return const SHFExceptions('Invalid argument provided to the authentication method.');
+        return const SHFExceptions('Đối số không hợp lệ được cung cấp cho phương thức xác thực.');
       case 'invalid-password':
-        return const SHFExceptions('Incorrect password. Please try again.');
+        return const SHFExceptions('Mật khẩu không chính xác. Vui lòng thử lại.');
       case 'invalid-phone-number':
-        return const SHFExceptions('The provided phone number is invalid.');
+        return const SHFExceptions('Số điện thoại được cung cấp không hợp lệ.');
       case 'operation-not-allowed':
-        return const SHFExceptions('The sign-in provider is disabled for your Firebase project.');
+        return const SHFExceptions('Nhà cung cấp đăng nhập bị vô hiệu hóa cho dự án Firebase của bạn.');
       case 'session-cookie-expired':
-        return const SHFExceptions('The Firebase session cookie has expired. Please sign in again.');
+        return const SHFExceptions('Cookie phiên Firebase đã hết hạn. Vui lòng đăng nhập lại.');
       case 'uid-already-exists':
-        return const SHFExceptions('The provided user ID is already in use by another user.');
+        return const SHFExceptions('ID người dùng đã được sử dụng bởi người dùng khác.');
       case 'sign_in_failed':
-        return const SHFExceptions('Sign-in failed. Please try again.');
+        return const SHFExceptions('Đăng nhập thất bại. Vui lòng thử lại.');
       case 'network-request-failed':
-        return const SHFExceptions('Network request failed. Please check your internet connection.');
+        return const SHFExceptions('Yêu cầu mạng thất bại. Vui lòng kiểm tra kết nối internet của bạn.');
       case 'internal-error':
-        return const SHFExceptions('Internal error. Please try again later.');
+        return const SHFExceptions('Lỗi nội bộ. Vui lòng thử lại sau.');
       case 'invalid-verification-code':
-        return const SHFExceptions('Invalid verification code. Please enter a valid code.');
+        return const SHFExceptions('Mã xác minh không hợp lệ. Vui lòng nhập một mã hợp lệ.');
       case 'invalid-verification-id':
-        return const SHFExceptions('Invalid verification ID. Please request a new verification code.');
+        return const SHFExceptions('ID xác minh không hợp lệ. Vui lòng yêu cầu một mã xác minh mới.');
       case 'quota-exceeded':
-        return const SHFExceptions('Quota exceeded. Please try again later.');
+        return const SHFExceptions('Đã vượt quá hạn ngạch. Vui lòng thử lại sau.');
       default:
         return const SHFExceptions();
     }

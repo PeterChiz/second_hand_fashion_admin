@@ -31,7 +31,7 @@ class EditBannerController extends GetxController {
   /// Pick Thumbnail Image from Media
   void pickImage() async {
     final controller = Get.put(MediaController());
-    List<ImageModel>? selectedImages = await controller.selecSHFImagesFromMedia();
+    List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
     // Handle the selected images
     if (selectedImages != null && selectedImages.isNotEmpty) {
@@ -83,10 +83,10 @@ class EditBannerController extends GetxController {
       SHFFullScreenLoader.stopLoading();
 
       // Success Message & Redirect
-      SHFLoaders.successSnackBar(title: 'Congratulations', message: 'Your Record has been updated.');
+      SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi của bạn đã được cập nhật.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 }

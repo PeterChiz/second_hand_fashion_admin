@@ -1,9 +1,9 @@
+// Import các controllers, models, và utility classes cần thiết
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-// Import necessary controllers, models, and utility classes
 import '../../../../data/repositories/product/product_repository.dart';
 import '../../../../features/shop/controllers/product/product_attributes_controller.dart';
 import '../../../../features/shop/controllers/product/product_controller.dart';
@@ -22,24 +22,24 @@ import '../../../../utils/popups/loaders.dart';
 import '../category/category_controller.dart';
 
 class EditProductController extends GetxController {
-  // Singleton instance
+  // Thể hiện duy nhất
   static EditProductController get instance => Get.find();
 
-  // Observables for loading state and product details
+  // Observable cho trạng thái tải và chi tiết sản phẩm
   final isLoading = false.obs;
   final selectedCategoriesLoader = false.obs;
   final productType = ProductType.single.obs;
   final productVisibility = ProductVisibility.hidden.obs;
 
-  // Controllers and keys
+  // Controllers và keys
   final variationsController = Get.put(ProductVariationController());
   final attributesController = Get.put(ProductAttributesController());
-  final imagesController = Get.put(ProducSHFImagesController());
+  final imagesController = Get.put(ProductImagesController());
   final productRepository = Get.put(ProductRepository());
   final stockPriceFormKey = GlobalKey<FormState>();
   final titleDescriptionFormKey = GlobalKey<FormState>();
 
-  // Text editing controllers for input fields
+  // Text editing controllers cho các trường nhập
   TextEditingController title = TextEditingController();
   TextEditingController description = TextEditingController();
   TextEditingController stock = TextEditingController();
@@ -47,53 +47,53 @@ class EditProductController extends GetxController {
   TextEditingController salePrice = TextEditingController();
   TextEditingController brandTextField = TextEditingController();
 
-  // Rx observables for selected brand and categories
+  // Rx observables cho thương hiệu và các danh mục được chọn
   final Rx<BrandModel?> selectedBrand = Rx<BrandModel?>(null);
   final RxList<CategoryModel> selectedCategories = <CategoryModel>[].obs;
   final List<CategoryModel> alreadyAddedCategories = <CategoryModel>[];
 
-  // Flags for tracking different tasks
+  // Flags để theo dõi các nhiệm vụ khác nhau
   RxBool thumbnailUploader = true.obs;
   RxBool productDataUploader = false.obs;
   RxBool additionalImagesUploader = true.obs;
   RxBool categoriesRelationshipUploader = false.obs;
 
-  // Initialize Product Data
+  // Khởi tạo dữ liệu sản phẩm
   void initProductData(ProductModel product) {
     try {
-      isLoading.value = true; // Set loading state while initializing data
+      isLoading.value = true; // Đặt trạng thái tải khi khởi tạo dữ liệu
 
-      // Basic Information
+      // Thông tin cơ bản
       title.text = product.title;
       description.text = product.description ?? '';
       productType.value = product.productType == ProductType.single.toString() ? ProductType.single : ProductType.variable;
 
-      // Stock & Pricing (assuming productType and productVisibility are handled elsewhere)
+      // Kho & Giá (giả sử productType và productVisibility được xử lý ở đâu đó)
       if (product.productType == ProductType.single.toString()) {
         stock.text = product.stock.toString();
         price.text = product.price.toString();
         salePrice.text = product.salePrice.toString();
       }
 
-      // Product Brand
+      // Thương hiệu sản phẩm
       selectedBrand.value = product.brand;
       brandTextField.text = product.brand?.name ?? '';
 
-      // Product Thumbnail and Images
+      // Ảnh đại diện và ảnh sản phẩm
       if (product.images != null) {
-        // Set the first image as the thumbnail
+        // Đặt ảnh đầu tiên là ảnh đại diện
         imagesController.selectedThumbnailImageUrl.value = product.thumbnail;
 
-        // Add the images to additionalProducSHFImagesUrl
-        imagesController.additionalProducSHFImagesUrls.assignAll(product.images ?? []);
+        // Thêm các ảnh vào additionalProducSHFImagesUrl
+        imagesController.additionalProductImagesUrls.assignAll(product.images ?? []);
       }
 
-      // Product Attributes & Variations (assuming you have a method to fetch variations in ProductVariationController)
+      // Thuộc tính và biến thể sản phẩm (giả sử bạn có một phương thức để lấy biến thể trong ProductVariationController)
       attributesController.productAttributes.assignAll(product.productAttributes ?? []);
       variationsController.productVariations.assignAll(product.productVariations ?? []);
       variationsController.initializeVariationControllers(product.productVariations ?? []);
 
-      isLoading.value = false; // Set loading state back to false after initialization
+      isLoading.value = false; // Đặt lại trạng thái tải sau khi khởi tạo
 
       update();
     } catch (e) {
@@ -101,9 +101,10 @@ class EditProductController extends GetxController {
     }
   }
 
+  // Load danh mục đã chọn
   Future<List<CategoryModel>> loadSelectedCategories(String productId) async {
     selectedCategoriesLoader.value = true;
-    // Product Categories
+    // Các danh mục sản phẩm
     final productCategories = await productRepository.getProductCategories(productId);
     final categoriesController = Get.put(CategoryController());
     if (categoriesController.allItems.isEmpty) await categoriesController.fetchItems();
@@ -116,42 +117,36 @@ class EditProductController extends GetxController {
     return categories;
   }
 
-  // Function to create a new product
+  // Chỉnh sửa sản phẩm
   Future<void> editProduct(ProductModel product) async {
     try {
-      // Show progress dialog
-      showProgressDialog();
+      showProgressDialog(); // Hiển thị hộp thoại tiến trình
 
-      // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Validate title and description form
       if (!titleDescriptionFormKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Validate stock and pricing form if ProductType = Single
       if (productType.value == ProductType.single && !stockPriceFormKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Ensure a brand is selected
       if (selectedBrand.value == null) throw 'Select Brand for this product';
 
-      // Check variation data if ProductType = Variable
       if (productType.value == ProductType.variable && ProductVariationController.instance.productVariations.isEmpty) {
-        throw 'There are no variations for the Product Type Variable. Create some variations or change Product type.';
+        throw 'Không có biến thể cho Loại Sản phẩm Biến thể. Tạo một số biến thể hoặc thay đổi loại Sản phẩm.';
       }
       if (productType.value == ProductType.variable) {
         final variationCheckFailed = ProductVariationController.instance.productVariations.any(
-          (element) =>
-              element.price.isNaN ||
+              (element) =>
+          element.price.isNaN ||
               element.price < 0 ||
               element.salePrice.isNaN ||
               element.salePrice < 0 ||
@@ -159,19 +154,16 @@ class EditProductController extends GetxController {
               element.stock < 0,
         );
 
-        if (variationCheckFailed) throw 'Variation data is not accurate. Please recheck variations';
+        if (variationCheckFailed) throw 'Dữ liệu biến thể không chính xác. Vui lòng kiểm tra lại biến thể';
       }
 
-      // Upload Product Thumbnail Image
-      final imagesController = ProducSHFImagesController.instance;
+      final imagesController = ProductImagesController.instance;
       if (imagesController.selectedThumbnailImageUrl.value == null || imagesController.selectedThumbnailImageUrl.value!.isEmpty) {
         throw 'Upload Product Thumbnail Image';
       }
 
-      // Upload Product Variation Images if any
       var variations = ProductVariationController.instance.productVariations;
       if (productType.value == ProductType.single && variations.isNotEmpty) {
-        // If admin added variations and then changed the Product Type, remove all variations
         ProductVariationController.instance.resetAllValues();
         variations.value = [];
       }
@@ -184,53 +176,38 @@ class EditProductController extends GetxController {
       product.productType = productType.value.toString();
       product.stock = int.tryParse(stock.text.trim()) ?? 0;
       product.price = double.tryParse(price.text.trim()) ?? 0;
-      product.images = imagesController.additionalProducSHFImagesUrls;
+      product.images = imagesController.additionalProductImagesUrls;
       product.salePrice = double.tryParse(salePrice.text.trim()) ?? 0;
       product.thumbnail = imagesController.selectedThumbnailImageUrl.value ?? '';
       product.productAttributes = ProductAttributesController.instance.productAttributes;
       product.productVariations = variations;
 
-      // Call Repository to Update New Product
       productDataUploader.value = true;
       await ProductRepository.instance.updateProduct(product);
 
-      // Register product categories if any
       if (selectedCategories.isNotEmpty) {
-        // Loop through selected Product Categories
         categoriesRelationshipUploader.value = true;
 
-        // Get the existing category IDs
         List<String> existingCategoryIds = alreadyAddedCategories.map((category) => category.id).toList();
 
         for (var category in selectedCategories) {
-          // Check if the category is not already associated with the product
           if (!existingCategoryIds.contains(category.id)) {
-            // Map Data
             final productCategory = ProductCategoryModel(productId: product.id, categoryId: category.id);
             await ProductRepository.instance.createProductCategory(productCategory);
           }
         }
 
-        // Remove categories not selected by the user`
         for (var existingCategoryId in existingCategoryIds) {
-          // Check if the category is not present in the selected categories
           if (!selectedCategories.any((category) => category.id == existingCategoryId)) {
-            // Remove the association
             await ProductRepository.instance.removeProductCategory(product.id, existingCategoryId);
           }
         }
       }
 
-      // Update Product List
       ProductController.instance.updateItemFromLists(product);
 
-      // Reset Form Values
-      // resetValues();
-
-      // Close the Progress Loader
       SHFFullScreenLoader.stopLoading();
 
-      // Show Success Message Loader
       showCompletionDialog();
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
@@ -238,7 +215,7 @@ class EditProductController extends GetxController {
     }
   }
 
-  // Reset form values and flags
+  // Đặt lại các giá trị của biểu mẫu và cờ
   void resetValues() {
     isLoading.value = false;
     productType.value = ProductType.single;
@@ -256,14 +233,13 @@ class EditProductController extends GetxController {
     ProductVariationController.instance.resetAllValues();
     ProductAttributesController.instance.resetProductAttributes();
 
-    // Reset Upload Flags
     thumbnailUploader.value = false;
     additionalImagesUploader.value = false;
     productDataUploader.value = false;
     categoriesRelationshipUploader.value = false;
   }
 
-  // Show the progress dialog
+  // Hiển thị hộp thoại tiến trình
   void showProgressDialog() {
     showDialog(
       context: Get.context!,
@@ -273,7 +249,7 @@ class EditProductController extends GetxController {
         child: AlertDialog(
           title: const Text('Updating Product'),
           content: Obx(
-            () => Column(
+                () => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(SHFImages.creatingProductIllustration, height: 200, width: 200),
@@ -292,7 +268,7 @@ class EditProductController extends GetxController {
     );
   }
 
-  // Build a checkbox widget
+  // Xây dựng widget checkbox
   Widget buildCheckbox(String label, RxBool value) {
     return Row(
       children: [
@@ -308,7 +284,7 @@ class EditProductController extends GetxController {
     );
   }
 
-  // Show completion dialog
+  // Hiển thị hộp thoại hoàn thành
   void showCompletionDialog() {
     Get.dialog(
       AlertDialog(

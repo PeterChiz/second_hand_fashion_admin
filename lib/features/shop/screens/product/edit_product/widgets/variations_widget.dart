@@ -81,7 +81,7 @@ class ProductVariations extends StatelessWidget {
             circular: true,
             imageType: variation.image.value.isNotEmpty ? ImageType.network : ImageType.asset,
             image: variation.image.value.isNotEmpty ? variation.image.value : SHFImages.defaultImage,
-            onIconButtonPressed: () => ProducSHFImagesController.instance.selectVariationImage(variation),
+            onIconButtonPressed: () => ProductImagesController.instance.selectVariationImage(variation),
           ),
         ),
         const SizedBox(height: SHFSizes.spaceBtwInputFields),

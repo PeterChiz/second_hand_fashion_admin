@@ -1,35 +1,34 @@
-/// Custom exception class to handle various format-related errors.
+/// Lớp ngoại lệ tùy chỉnh để xử lý các lỗi liên quan đến định dạng khác nhau.
 class SHFFormatException implements Exception {
-  /// The associated error message.
+  /// Thông điệp lỗi liên quan.
   final String message;
 
-  /// Default constructor with a generic error message.
-  const SHFFormatException([this.message = 'An unexpected format error occurred. Please check your input.']);
+  /// Hàm tạo mặc định với một thông điệp lỗi chung.
+  const SHFFormatException([this.message = 'Đã xảy ra một lỗi định dạng không mong đợi. Vui lòng kiểm tra đầu vào của bạn.']);
 
-  /// Create a format exception from a specific error message.
+  /// Tạo một ngoại lệ định dạng từ một thông điệp lỗi cụ thể.
   factory SHFFormatException.fromMessage(String message) {
     return SHFFormatException(message);
   }
 
-  /// Get the corresponding error message.
+  /// Lấy thông điệp lỗi tương ứng.
   String get formattedMessage => message;
 
-  /// Create a format exception from a specific error code.
+  /// Tạo một ngoại lệ định dạng từ một mã lỗi cụ thể.
   factory SHFFormatException.fromCode(String code) {
     switch (code) {
       case 'invalid-email-format':
-        return const SHFFormatException('The email address format is invalid. Please enter a valid email.');
+        return const SHFFormatException('Định dạng địa chỉ email không hợp lệ. Vui lòng nhập một email hợp lệ.');
       case 'invalid-phone-number-format':
-        return const SHFFormatException('The provided phone number format is invalid. Please enter a valid number.');
+        return const SHFFormatException('Định dạng số điện thoại được cung cấp không hợp lệ. Vui lòng nhập một số hợp lệ.');
       case 'invalid-date-format':
-        return const SHFFormatException('The date format is invalid. Please enter a valid date.');
+        return const SHFFormatException('Định dạng ngày không hợp lệ. Vui lòng nhập một ngày hợp lệ.');
       case 'invalid-url-format':
-        return const SHFFormatException('The URL format is invalid. Please enter a valid URL.');
+        return const SHFFormatException('Định dạng URL không hợp lệ. Vui lòng nhập một URL hợp lệ.');
       case 'invalid-credit-card-format':
-        return const SHFFormatException('The credit card format is invalid. Please enter a valid credit card number.');
+        return const SHFFormatException('Định dạng thẻ tín dụng không hợp lệ. Vui lòng nhập một số thẻ tín dụng hợp lệ.');
       case 'invalid-numeric-format':
-        return const SHFFormatException('The input should be a valid numeric format.');
-    // Add more cases as needed...
+        return const SHFFormatException('Đầu vào phải có định dạng số hợp lệ.');
       default:
         return const SHFFormatException();
     }

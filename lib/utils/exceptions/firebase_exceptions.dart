@@ -1,100 +1,100 @@
-/// Custom exception class to handle various Firebase-related errors.
+/// Lớp ngoại lệ tùy chỉnh để xử lý các lỗi liên quan đến Firebase khác nhau.
 class SHFFirebaseException implements Exception {
-  /// The error code associated with the exception.
+  /// Mã lỗi liên quan đến ngoại lệ.
   final String code;
 
-  /// Constructor that takes an error code.
+  /// Constructor nhận một mã lỗi.
   SHFFirebaseException(this.code);
 
-  /// Get the corresponding error message based on the error code.
+  /// Lấy thông điệp lỗi tương ứng dựa trên mã lỗi.
   String get message {
     switch (code) {
       case 'unknown':
-        return 'An unknown Firebase error occurred. Please try again.';
+        return 'Đã xảy ra một lỗi Firebase không xác định. Vui lòng thử lại.';
       case 'invalid-custom-token':
-        return 'The custom token format is incorrect. Please check your custom token.';
+        return 'Định dạng mã thông tự tạo không đúng. Vui lòng kiểm tra mã thông tự tạo của bạn.';
       case 'custom-token-mismatch':
-        return 'The custom token corresponds to a different audience.';
+        return 'Mã thông tự tạo tương ứng với một khán giả khác.';
       case 'user-disabled':
-        return 'The user account has been disabled.';
+        return 'Tài khoản người dùng đã bị vô hiệu hóa.';
       case 'user-not-found':
-        return 'No user found for the given email or UID.';
+        return 'Không tìm thấy người dùng nào cho email hoặc UID đã cho.';
       case 'invalid-email':
-        return 'The email address provided is invalid. Please enter a valid email.';
+        return 'Địa chỉ email được cung cấp không hợp lệ. Vui lòng nhập một email hợp lệ.';
       case 'email-already-in-use':
-        return 'The email address is already registered. Please use a different email.';
+        return 'Địa chỉ email đã được đăng ký. Vui lòng sử dụng một email khác.';
       case 'wrong-password':
-        return 'Incorrect password. Please check your password and try again.';
+        return 'Mật khẩu không chính xác. Vui lòng kiểm tra mật khẩu của bạn và thử lại.';
       case 'weak-password':
-        return 'The password is too weak. Please choose a stronger password.';
+        return 'Mật khẩu quá yếu. Vui lòng chọn một mật khẩu mạnh hơn.';
       case 'provider-already-linked':
-        return 'The account is already linked with another provider.';
+        return 'Tài khoản đã được liên kết với một nhà cung cấp khác.';
       case 'operation-not-allowed':
-        return 'This operation is not allowed. Contact support for assistance.';
+        return 'Thao tác này không được phép. Liên hệ hỗ trợ để được trợ giúp.';
       case 'invalid-credential':
-        return 'The supplied credential is malformed or has expired.';
+        return 'Thông tin đăng nhập được cung cấp không đúng cách hoặc đã hết hạn.';
       case 'invalid-verification-code':
-        return 'Invalid verification code. Please enter a valid code.';
+        return 'Mã xác minh không hợp lệ. Vui lòng nhập một mã hợp lệ.';
       case 'invalid-verification-id':
-        return 'Invalid verification ID. Please request a new verification code.';
+        return 'ID xác minh không hợp lệ. Vui lòng yêu cầu một mã xác minh mới.';
       case 'captcha-check-failed':
-        return 'The reCAPTCHA response is invalid. Please try again.';
+        return 'Phản hồi reCAPTCHA không hợp lệ. Vui lòng thử lại.';
       case 'app-not-authorized':
-        return 'The app is not authorized to use Firebase Authentication with the provided API key.';
+        return 'Ứng dụng không được ủy quyền để sử dụng Xác thực Firebase với khóa API được cung cấp.';
       case 'keychain-error':
-        return 'A keychain error occurred. Please check the keychain and try again.';
+        return 'Đã xảy ra lỗi bộ nhớ chính. Vui lòng kiểm tra keychain và thử lại.';
       case 'internal-error':
-        return 'An internal authentication error occurred. Please try again later.';
+        return 'Đã xảy ra lỗi xác thực nội bộ. Vui lòng thử lại sau.';
       case 'invalid-app-credential':
-        return 'The app credential is invalid. Please provide a valid app credential.';
+        return 'Thông tin đăng nhập ứng dụng không hợp lệ. Vui lòng cung cấp một thông tin đăng nhập ứng dụng hợp lệ.';
       case 'user-mismatch':
-        return 'The supplied credentials do not correspond to the previously signed-in user.';
+        return 'Thông tin đăng nhập cung cấp không tương ứng với người dùng đã đăng nhập trước đó.';
       case 'requires-recent-login':
-        return 'This operation is sensitive and requires recent authentication. Please log in again.';
+        return 'Thao tác này nhạy cảm và yêu cầu xác thực gần đây. Vui lòng đăng nhập lại.';
       case 'quota-exceeded':
-        return 'Quota exceeded. Please try again later.';
+        return 'Đã vượt quá hạn ngạch. Vui lòng thử lại sau.';
       case 'account-exists-with-different-credential':
-        return 'An account already exists with the same email but different sign-in credentials.';
+        return 'Một tài khoản đã tồn tại với cùng một email nhưng thông tin đăng nhập khác nhau.';
       case 'missing-iframe-start':
-        return 'The email template is missing the iframe start tag.';
+        return 'Mẫu email thiếu thẻ bắt đầu iframe.';
       case 'missing-iframe-end':
-        return 'The email template is missing the iframe end tag.';
+        return 'Mẫu email thiếu thẻ kết thúc iframe.';
       case 'missing-iframe-src':
-        return 'The email template is missing the iframe src attribute.';
+        return 'Mẫu email thiếu thuộc tính src của iframe.';
       case 'auth-domain-config-required':
-        return 'The authDomain configuration is required for the action code verification link.';
+        return 'Cấu hình authDomain được yêu cầu cho liên kết xác minh mã hành động.';
       case 'missing-app-credential':
-        return 'The app credential is missing. Please provide valid app credentials.';
+        return 'Thông tin đăng nhập ứng dụng đã mất. Vui lòng cung cấp thông tin đăng nhập ứng dụng hợp lệ.';
       case 'session-cookie-expired':
-        return 'The Firebase session cookie has expired. Please sign in again.';
+        return 'Cookie phiên Firebase đã hết hạn. Vui lòng đăng nhập lại.';
       case 'uid-already-exists':
-        return 'The provided user ID is already in use by another user.';
+        return 'ID người dùng đã được sử dụng bởi người dùng khác.';
       case 'web-storage-unsupported':
-        return 'Web storage is not supported or is disabled.';
+        return 'Lưu trữ Web không được hỗ trợ hoặc đã bị vô hiệu hóa.';
       case 'app-deleted':
-        return 'This instance of FirebaseApp has been deleted.';
+        return 'Phiên bản này của FirebaseApp đã bị xóa.';
       case 'user-token-mismatch':
-        return 'The provided user\'s token has a mismatch with the authenticated user\'s user ID.';
+        return 'Token của người dùng cung cấp không khớp với ID người dùng đã xác thực.';
       case 'invalid-message-payload':
-        return 'The email template verification message payload is invalid.';
+        return 'Dữ liệu cơ bản của thông báo xác minh mẫu email không hợp lệ.';
       case 'invalid-sender':
-        return 'The email template sender is invalid. Please verify the sender\'s email.';
+        return 'Người gửi mẫu email không hợp lệ. Vui lòng xác minh email của người gửi.';
       case 'invalid-recipient-email':
-        return 'The recipient email address is invalid. Please provide a valid recipient email.';
+        return 'Địa chỉ email người nhận không hợp lệ. Vui lòng cung cấp một địa chỉ email hợp lệ.';
       case 'missing-action-code':
-        return 'The action code is missing. Please provide a valid action code.';
+        return 'Mã hành động bị thiếu. Vui lòng cung cấp một mã hành động hợp lệ.';
       case 'user-token-expired':
-        return 'The user\'s token has expired, and authentication is required. Please sign in again.';
+        return 'Token của người dùng đã hết hạn và yêu cầu xác thực. Vui lòng đăng nhập lại.';
       case 'INVALID_LOGIN_CREDENTIALS':
-        return 'Invalid login credentials.';
+        return 'Thông tin đăng nhập không hợp lệ.';
       case 'expired-action-code':
-        return 'The action code has expired. Please request a new action code.';
+        return 'Mã hành động đã hết hạn. Vui lòng yêu cầu một mã hành động mới.';
       case 'invalid-action-code':
-        return 'The action code is invalid. Please check the code and try again.';
+        return 'Mã hành động không hợp lệ. Vui lòng kiểm tra mã và thử lại.';
       case 'credential-already-in-use':
-        return 'This credential is already associated with a different user account.';
+        return 'Thông tin đăng nhập này đã được liên kết với một tài khoản người dùng khác.';
       default:
-        return 'An unexpected Firebase error occurred. Please try again.';
+        return 'Đã xảy ra một lỗi Firebase không mong đợi. Vui lòng thử lại.';
     }
   }
 }

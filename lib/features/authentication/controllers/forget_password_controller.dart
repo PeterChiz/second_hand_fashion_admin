@@ -22,7 +22,7 @@ class ForgetPasswordController extends GetxController {
   sendPasswordResetEmail() async {
     try {
       // Start Loading
-      SHFFullScreenLoader.openLoadingDialog('Processing your request...', SHFImages.docerAnimation);
+      SHFFullScreenLoader.openLoadingDialog('Đang xử lý yêu cầu của bạn...', SHFImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -44,11 +44,11 @@ class ForgetPasswordController extends GetxController {
       SHFFullScreenLoader.stopLoading();
 
       // Redirect
-      SHFLoaders.successSnackBar(title: 'Email Sent', message: 'Email Link Sent to Reset your Password'.tr);
+      SHFLoaders.successSnackBar(title: 'Email đã gửi', message: 'Liên kết email được gửi để đặt lại mật khẩu của bạn'.tr);
       Get.offNamed(SHFRoutes.resetPassword,arguments: email.text.trim());
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 
@@ -56,7 +56,7 @@ class ForgetPasswordController extends GetxController {
   resendPasswordResetEmail(String email) async {
     try {
       // Start Loading
-      SHFFullScreenLoader.openLoadingDialog('Processing your request...', SHFImages.docerAnimation);
+      SHFFullScreenLoader.openLoadingDialog('Đang xử lý yêu cầu của bạn...', SHFImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -72,10 +72,10 @@ class ForgetPasswordController extends GetxController {
       SHFFullScreenLoader.stopLoading();
 
       // Show success message
-      SHFLoaders.successSnackBar(title: 'Email Sent', message: 'Email Link Sent to Reset your Password'.tr);
+      SHFLoaders.successSnackBar(title: 'Email đã gửi', message: 'Liên kết email được gửi để đặt lại mật khẩu của bạn'.tr);
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 }

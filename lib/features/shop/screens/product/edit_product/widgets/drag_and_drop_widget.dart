@@ -13,7 +13,7 @@ class DragAndDropWidget extends StatelessWidget {
   DragAndDropWidget({super.key, required this.product});
 
   final ProductModel product;
-  final ProducSHFImagesController controller = Get.put(ProducSHFImagesController());
+  final ProductImagesController controller = Get.put(ProductImagesController());
 
   @override
   Widget build(BuildContext context) {

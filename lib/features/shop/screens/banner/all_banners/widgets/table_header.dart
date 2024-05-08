@@ -14,7 +14,7 @@ class BannerTableHeader extends StatelessWidget {
       children: [
         SizedBox(
           width: 200,
-          child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createBanner), child: const Text('Create New Banner')),
+          child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createBanner), child: const Text('Tạo Banner mới')),
         ),
       ],
     );

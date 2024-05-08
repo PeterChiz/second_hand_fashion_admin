@@ -1,4 +1,3 @@
-
 import 'package:get/get.dart';
 import '../../../../data/abstract/base_data_table_controller.dart';
 import '../../../../utils/constants/enums.dart';
@@ -16,79 +15,79 @@ class DashboardController extends SHFBaseController<OrderModel> {
 
   @override
   Future<List<OrderModel>> fetchItems() async {
-    // Fetch Order if empty
+    // Lấy đơn hàng nếu trống
     if (orderController.allItems.isEmpty) {
       await orderController.fetchItems();
     }
 
-    // Reset weeklySales to zeros
+    // Đặt lại giá trị bán hàng hàng tuần thành 0
     weeklySales.value = List<double>.filled(7, 0.0);
 
-    // Calculate weekly sales
+    // Tính toán doanh số hàng tuần
     _calculateWeeklySales();
 
-    // Calculate Order Status counts
+    // Tính toán số lượng trạng thái đơn hàng
     _calculateOrderStatusData();
 
     return orderController.allItems;
   }
 
-  // Calculate weekly sales
+  // Tính toán doanh số hàng tuần
   void _calculateWeeklySales() {
     for (var order in orderController.allItems) {
       final DateTime orderWeekStart = SHFHelperFunctions.getStartOfWeek(order.orderDate);
 
-      // Check if the order is within the current week
+      // Kiểm tra xem đơn hàng có trong tuần hiện tại không
       if (orderWeekStart.isBefore(DateTime.now()) && orderWeekStart.add(const Duration(days: 7)).isAfter(DateTime.now())) {
-        int index = (order.orderDate.weekday - 1) % 7; // Adjust index based on DateTime weekday representation
+        int index = (order.orderDate.weekday - 1) % 7; // Điều chỉnh chỉ mục dựa trên biểu diễn ngày trong tuần của DateTime
 
-        // Ensure the index is non-negative
+        // Đảm bảo chỉ mục là không âm
         index = index < 0 ? index + 7 : index;
 
-        print('OrderDate: ${order.orderDate}, CurrentWeekDay: $orderWeekStart, Index: $index');
+        print('Ngày đơn hàng: ${order.orderDate}, Ngày bắt đầu Tuần: $orderWeekStart, Chỉ mục: $index');
 
         weeklySales[index] += order.totalAmount;
       }
     }
 
-    print('Weekly Sales: $weeklySales');
+    print('Doanh số hàng tuần: $weeklySales');
   }
 
-  // Call this function to calculate Order Status counts
+  // Gọi hàm này để tính toán số lượng trạng thái đơn hàng
   void _calculateOrderStatusData() {
-    // Reset status data
+    // Đặt lại dữ liệu trạng thái
     orderStatusData.clear();
 
-    // Map to store total amounts for each status
+    // Map để lưu tổng số tiền cho mỗi trạng thái
     totalAmounts.value = { for (var status in OrderStatus.values) status : 0.0 };
 
     for (var order in orderController.allItems) {
-      // Update status count
+      // Cập nhật số lượng trạng thái
       final OrderStatus status = order.status;
       final String displayStatus = getDisplayStatusName(status);
       orderStatusData[status] = (orderStatusData[status] ?? 0) + 1;
 
-      // Calculate total amounts for each status
+      // Tính tổng số tiền cho mỗi trạng thái
       totalAmounts[status] = totalAmounts[status]! + order.totalAmount;
     }
 
-    print('Order Status Data: $orderStatusData');
+    print('Dữ liệu trạng thái đơn hàng: $orderStatusData');
   }
 
   String getDisplayStatusName(OrderStatus status) {
     switch (status) {
       case OrderStatus.pending:
-        return 'Pending';
+        return 'Chờ xử lý';
       case OrderStatus.processing:
-        return 'Processing';
+        return 'Đang xử lý';
       case OrderStatus.shipped:
-        return 'Shipped';
+        return 'Đã gửi';
       case OrderStatus.delivered:
-        return 'Delivered';
+        return 'Đã giao hàng';
       case OrderStatus.cancelled:
-        return 'Cancelled';
+        return 'Đã hủy';
       default:
-        return 'Unknown';
+        return 'Không xác định';
     }
   }
 

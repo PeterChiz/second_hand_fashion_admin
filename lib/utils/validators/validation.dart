@@ -1,5 +1,3 @@
-
-
 /// VALIDATION CLASS
 class SHFValidator {
   /// Empty Text Validation
@@ -28,7 +26,10 @@ class SHFValidator {
 
     // Check if the username doesn't start or end with an underscore or hyphen.
     if (isValid) {
-      isValid = !username.startsWith('_') && !username.startsWith('-') && !username.endsWith('_') && !username.endsWith('-');
+      isValid = !username.startsWith('_') &&
+          !username.startsWith('-') &&
+          !username.endsWith('_') &&
+          !username.endsWith('-');
     }
 
     if (!isValid) {

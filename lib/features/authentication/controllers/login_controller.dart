@@ -51,7 +51,7 @@ class LoginController extends GetxController {
     try {
       // Start Loading
       isLoading.value = true;
-      SHFFullScreenLoader.openLoadingDialog('Logging you in...', SHFImages.docerAnimation);
+      SHFFullScreenLoader.openLoadingDialog('Đang đăng nhập...', SHFImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -86,7 +86,7 @@ class LoginController extends GetxController {
       // If user is not admin, logout and return
       if (user.role != AppRole.admin) {
         await AuthenticationRepository.instance.logout();
-        SHFLoaders.errorSnackBar(title: 'Not Authorized', message: 'You are not authorized or do have access. Contact Admin');
+        SHFLoaders.errorSnackBar(title: 'Không được ủy quyền', message: 'Bạn không được ủy quyền hoặc có quyền truy cập. Liên hệ với quản trị viên');
       } else {
         // Redirect
         AuthenticationRepository.instance.screenRedirect();
@@ -94,7 +94,7 @@ class LoginController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 
@@ -103,7 +103,7 @@ class LoginController extends GetxController {
     try {
       // Start Loading
       isLoading.value = true;
-      SHFFullScreenLoader.openLoadingDialog('Registering Admin Account...', SHFImages.docerAnimation);
+      SHFFullScreenLoader.openLoadingDialog('Đang đăng ký tài khoản quản trị...', SHFImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -121,7 +121,7 @@ class LoginController extends GetxController {
       await userRepository.createUser(
         UserModel(
           id: AuthenticationRepository.instance.authUser!.uid,
-          firstName: 'CwT',
+          firstName: 'Bùi Thiện Chí',
           lastName: 'Admin',
           email: SHFTexts.adminEmail,
           role: AppRole.admin,
@@ -137,7 +137,7 @@ class LoginController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 }

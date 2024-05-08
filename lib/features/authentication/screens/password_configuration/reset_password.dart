@@ -40,7 +40,7 @@ class ResetPasswordScreen extends StatelessWidget {
               /// Title & SubTitle
               Text(SHFTexts.changeYourPasswordTitle, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center),
               const SizedBox(height: SHFSizes.spaceBtwItems),
-              Text('mrtaimoorsikander@gmail.com', textAlign: TextAlign.center, style: Theme.of(context).textTheme.labelLarge),
+              Text('buithienchi209@gmail.com', textAlign: TextAlign.center, style: Theme.of(context).textTheme.labelLarge),
               const SizedBox(height: SHFSizes.spaceBtwItems),
               Text(
                 SHFTexts.changeYourPasswordSubTitle,

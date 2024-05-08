@@ -33,7 +33,7 @@ class MediaController extends GetxController {
   final int loadMoreCount = 25;
 
   late ListResult bannerImagesListResult;
-  late ListResult producSHFImagesListResult;
+  late ListResult productImagesListResult;
   late ListResult brandImagesListResult;
   late ListResult categoryImagesListResult;
   late ListResult userImagesListResult;
@@ -41,7 +41,7 @@ class MediaController extends GetxController {
   final RxInt selectedCloudImagesCount = 0.obs;
   final RxList<ImageModel> allImages = <ImageModel>[].obs;
   final RxList<ImageModel> allBannerImages = <ImageModel>[].obs;
-  final RxList<ImageModel> allProducSHFImages = <ImageModel>[].obs;
+  final RxList<ImageModel> allProductImages = <ImageModel>[].obs;
   final RxList<ImageModel> allBrandImages = <ImageModel>[].obs;
   final RxList<ImageModel> allCategoryImages = <ImageModel>[].obs;
   final RxList<ImageModel> allUserImages = <ImageModel>[].obs;
@@ -62,8 +62,8 @@ class MediaController extends GetxController {
         targetList = allBrandImages;
       } else if (selectedPath.value == MediaCategory.categories && allCategoryImages.isEmpty) {
         targetList = allCategoryImages;
-      } else if (selectedPath.value == MediaCategory.products && allProducSHFImages.isEmpty) {
-        targetList = allProducSHFImages;
+      } else if (selectedPath.value == MediaCategory.products && allProductImages.isEmpty) {
+        targetList = allProductImages;
       } else if (selectedPath.value == MediaCategory.users && allUserImages.isEmpty) {
         targetList = allUserImages;
       }
@@ -73,7 +73,7 @@ class MediaController extends GetxController {
       loading.value = false;
     } catch (e) {
       loading.value = false;
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: 'Unable to fetch Images, Something went wrong. Try again');
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: 'Không thể tìm nạp Hình ảnh, Đã xảy ra lỗi. Thử lại');
     }
   }
 
@@ -99,16 +99,16 @@ class MediaController extends GetxController {
 
   void uploadImagesConfirmation() {
     if (selectedPath.value == MediaCategory.folders) {
-      SHFLoaders.warningSnackBar(title: 'Select Folder', message: 'Please select the Folder in Order to upload the Images.');
+      SHFLoaders.warningSnackBar(title: 'Chọn thư mục', message: 'Vui lòng chọn Thư mục theo Thứ tự để tải Hình ảnh lên.');
       return;
     }
 
     SHFDialogs.defaultDialog(
       context: Get.context!,
-      title: 'Upload Images',
+      title: 'Đăng tải hình ảnh',
       confirmText: 'Upload',
       onConfirm: () async => await uploadImages(),
-      content: 'Are you sure you want to upload all the Images in ${selectedPath.value.name.toUpperCase()} folders?',
+      content: 'Bạn có chắc chắn muốn tải lên tất cả các Hình ảnh trong thư mục ${selectedPath.value.name.toUpperCase()} ?',
     );
   }
 
@@ -138,7 +138,7 @@ class MediaController extends GetxController {
           targetList = allCategoryImages;
           break;
         case MediaCategory.products:
-          targetList = allProducSHFImages;
+          targetList = allProductImages;
           break;
         case MediaCategory.users:
           targetList = allUserImages;
@@ -176,7 +176,7 @@ class MediaController extends GetxController {
       // Stop Loader in case of an error
       SHFFullScreenLoader.stopLoading();
       // Show a warning snackbar for the error
-      SHFLoaders.warningSnackBar(title: 'Error Uploading Images', message: 'Something went wrong while uploading your images.');
+      SHFLoaders.warningSnackBar(title: 'Lỗi tải hình ảnh lên', message: 'Đã xảy ra lỗi khi tải hình ảnh của bạn lên.');
     }
   }
 
@@ -192,7 +192,7 @@ class MediaController extends GetxController {
       } else if (selectedPath.value == MediaCategory.categories) {
         targetList = allCategoryImages;
       } else if (selectedPath.value == MediaCategory.products) {
-        targetList = allProducSHFImages;
+        targetList = allProductImages;
       } else if (selectedPath.value == MediaCategory.users) {
         targetList = allUserImages;
       }
@@ -204,7 +204,7 @@ class MediaController extends GetxController {
       loading.value = false;
     } catch (e) {
       loading.value = false;
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: 'Unable to fetch Images, Something went wrong. Try again');
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: 'Không thể tìm nạp Hình ảnh, Đã xảy ra lỗi. Thử lại');
     }
   }
 
@@ -227,7 +227,7 @@ class MediaController extends GetxController {
         path = SHFTexts.usersStoragePath;
         break;
       default:
-        path = 'Others';
+        path = 'Chọn cái khác';
     }
 
     return path;
@@ -240,13 +240,13 @@ class MediaController extends GetxController {
       builder: (context) => PopScope(
         canPop: false,
         child: AlertDialog(
-          title: const Text('Uploading Images'),
+          title: const Text('Tải hình ảnh lên'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Image.asset(SHFImages.uploadingImageIllustration, height: 300, width: 300),
               const SizedBox(height: SHFSizes.spaceBtwItems),
-              const Text('Sit Tight, Your images are uploading...'),
+              const Text('Hình ảnh của bạn đang được tải lên...'),
             ],
           ),
         ),
@@ -259,7 +259,7 @@ class MediaController extends GetxController {
     // Delete Confirmation
     SHFDialogs.defaultDialog(
       context: Get.context!,
-      content: 'Are you sure you want to delete this image?',
+      content: 'Bạn có chắc muốn xóa ảnh này không?',
       onConfirm: () {
         // Close the previous Dialog
         Get.back();
@@ -300,7 +300,7 @@ class MediaController extends GetxController {
           targetList = allCategoryImages;
           break;
         case MediaCategory.products:
-          targetList = allProducSHFImages;
+          targetList = allProductImages;
           break;
         case MediaCategory.users:
           targetList = allUserImages;
@@ -315,14 +315,14 @@ class MediaController extends GetxController {
       update();
       SHFFullScreenLoader.stopLoading();
 
-      SHFLoaders.successSnackBar(title: 'Image Deleted', message: 'Image successfully deleted from your cloud storage');
+      SHFLoaders.successSnackBar(title: 'Đã xóa hình ảnh', message: 'Hình ảnh đã được xóa thành công khỏi cloud storage của bạn');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 
-  Future<List<ImageModel>?> selecSHFImagesFromMedia(
+  Future<List<ImageModel>?> selectImagesFromMedia(
       {List<String>? alreadySelectedUrls, bool allowSelection = true, bool allowMultipleSelection = false}) async {
     List<ImageModel>? selectedImages = await Get.bottomSheet<List<ImageModel>>(
       enableDrag: false,

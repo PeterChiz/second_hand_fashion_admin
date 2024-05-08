@@ -47,7 +47,7 @@ class AdminController extends GetxController {
 
       return user;
     } catch (e) {
-      SHFLoaders.errorSnackBar(title: 'Something went wrong.', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Đã xảy ra lỗi.', message: e.toString());
       return UserModel.empty();
     }
   }
@@ -59,7 +59,7 @@ class AdminController extends GetxController {
       this.user.value = user;
       return user;
     } catch (e) {
-      SHFLoaders.errorSnackBar(title: 'Something went wrong.', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Đã xảy ra lỗi.', message: e.toString());
       return UserModel.empty();
     }
   }

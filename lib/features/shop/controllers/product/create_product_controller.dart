@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-// Import necessary controllers, models, and utility classes
+// Import các controllers, models, và utility classes cần thiết
 import '../../../../data/repositories/product/product_repository.dart';
 import '../../../../features/shop/controllers/product/product_attributes_controller.dart';
 import '../../../../features/shop/controllers/product/product_controller.dart';
@@ -20,20 +20,20 @@ import '../../../../utils/popups/full_screen_loader.dart';
 import '../../../../utils/popups/loaders.dart';
 
 class CreateProductController extends GetxController {
-  // Singleton instance
+  // Đối tượng singleton
   static CreateProductController get instance => Get.find();
 
-  // Observables for loading state and product details
+  // Các observables cho trạng thái loading và chi tiết sản phẩm
   final isLoading = false.obs;
   final productType = ProductType.single.obs;
   final productVisibility = ProductVisibility.hidden.obs;
 
-  // Controllers and keys
+  // Controllers và keys
   final stockPriceFormKey = GlobalKey<FormState>();
   final productRepository = Get.put(ProductRepository());
   final titleDescriptionFormKey = GlobalKey<FormState>();
 
-  // Text editing controllers for input fields
+  // Controllers cho việc chỉnh sửa văn bản
   TextEditingController title = TextEditingController();
   TextEditingController stock = TextEditingController();
   TextEditingController price = TextEditingController();
@@ -41,51 +41,51 @@ class CreateProductController extends GetxController {
   TextEditingController description = TextEditingController();
   TextEditingController brandTextField = TextEditingController();
 
-  // Rx observables for selected brand and categories
+  // Rx observables cho thương hiệu và danh mục được chọn
   final Rx<BrandModel?> selectedBrand = Rx<BrandModel?>(null);
   final RxList<CategoryModel> selectedCategories = <CategoryModel>[].obs;
 
-  // Flags for tracking different tasks
+  // Cờ để theo dõi các nhiệm vụ khác nhau
   RxBool thumbnailUploader = false.obs;
   RxBool additionalImagesUploader = false.obs;
   RxBool productDataUploader = false.obs;
   RxBool categoriesRelationshipUploader = false.obs;
 
-  // Function to create a new product
+  // Hàm để tạo sản phẩm mới
   Future<void> createProduct() async {
     try {
-      // Show progress dialog
+      // Hiển thị hộp thoại tiến trình
       showProgressDialog();
 
-      // Check Internet Connectivity
+      // Kiểm tra kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Validate title and description form
+      // Validate form tiêu đề và mô tả
       if (!titleDescriptionFormKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Validate stock and pricing form if ProductType = Single
+      // Validate form tồn kho và giá nếu ProductType = Single
       if (productType.value == ProductType.single && !stockPriceFormKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Ensure a brand is selected
-      if (selectedBrand.value == null) throw 'Select Brand for this product';
+      // Đảm bảo đã chọn thương hiệu
+      if (selectedBrand.value == null) throw 'Chọn Thương hiệu cho sản phẩm này';
 
-      // Check variation data if ProductType = Variable
+      // Kiểm tra dữ liệu biến thể nếu ProductType = Variable
       if (productType.value == ProductType.variable && ProductVariationController.instance.productVariations.isEmpty){
-        throw 'There are no variations for the Product Type Variable. Create some variations or change Product type.';
+        throw 'Không có biến thể nào cho Loại Sản phẩm Biến thể. Tạo một số biến thể hoặc thay đổi Loại Sản phẩm.';
       }
       if (productType.value == ProductType.variable) {
         final variationCheckFailed = ProductVariationController.instance.productVariations.any((element) =>
-            element.price.isNaN ||
+        element.price.isNaN ||
             element.price < 0 ||
             element.salePrice.isNaN ||
             element.salePrice < 0 ||
@@ -93,27 +93,26 @@ class CreateProductController extends GetxController {
             element.stock < 0 ||
             element.image.value.isEmpty);
 
-        if (variationCheckFailed) throw 'Variation data is not accurate. Please recheck variations';
+        if (variationCheckFailed) throw 'Dữ liệu biến thể không chính xác. Vui lòng kiểm tra lại các biến thể';
       }
 
-      // Upload Product Thumbnail Image
+      // Tải ảnh đại diện sản phẩm lên
       thumbnailUploader.value = true;
-      final imagesController = ProducSHFImagesController.instance;
-      if (imagesController.selectedThumbnailImageUrl.value == null) throw 'Select Product Thumbnail Image';
+      final imagesController = ProductImagesController.instance;
+      if (imagesController.selectedThumbnailImageUrl.value == null) throw 'Chọn ảnh đại diện cho sản phẩm';
 
-
-      // Additional Product Images
+      // Tải ảnh phụ sản phẩm lên
       additionalImagesUploader.value = true;
 
-      // Product Variation Images
+      // Ảnh biến thể sản phẩm
       final variations = ProductVariationController.instance.productVariations;
       if (productType.value == ProductType.single && variations.isNotEmpty) {
-        // If admin added variations and then changed the Product Type, remove all variations
+        // Nếu quản trị viên đã thêm biến thể và sau đó thay đổi Loại Sản phẩm, xóa tất cả biến thể
         ProductVariationController.instance.resetAllValues();
         variations.value = [];
       }
 
-      // Map Product Data to ProductModel
+      // Ánh xạ dữ liệu sản phẩm thành ProductModel
       final newRecord = ProductModel(
         id: '',
         sku: '',
@@ -125,45 +124,45 @@ class CreateProductController extends GetxController {
         productType: productType.value.toString(),
         stock: int.tryParse(stock.text.trim()) ?? 0,
         price: double.tryParse(price.text.trim()) ?? 0,
-        images: imagesController.additionalProducSHFImagesUrls,
+        images: imagesController.additionalProductImagesUrls,
         salePrice: double.tryParse(salePrice.text.trim()) ?? 0,
         thumbnail: imagesController.selectedThumbnailImageUrl.value ?? '',
         productAttributes: ProductAttributesController.instance.productAttributes,
         date: DateTime.now(),
       );
 
-      // Call Repository to Create New Product
+      // Gọi Repository để tạo Sản phẩm mới
       productDataUploader.value = true;
       newRecord.id = await ProductRepository.instance.createProduct(newRecord);
 
-      // Register product categories if any
+      // Đăng ký danh mục sản phẩm nếu có
       if (selectedCategories.isNotEmpty) {
-        if (newRecord.id.isEmpty) throw 'Error storing data. Try again';
+        if (newRecord.id.isEmpty) throw 'Lỗi lưu dữ liệu. Thử lại';
 
-        // Loop through selected Product Categories
+        // Lặp qua các Danh mục Sản phẩm đã chọn
         categoriesRelationshipUploader.value = true;
         for (var category in selectedCategories) {
-          // Map Data
+          // Ánh xạ Dữ liệu
           final productCategory = ProductCategoryModel(productId: newRecord.id, categoryId: category.id);
           await ProductRepository.instance.createProductCategory(productCategory);
         }
       }
 
-      // Update Product List
+      // Cập nhật danh sách Sản phẩm
       ProductController.instance.addItemToLists(newRecord);
 
-      // Close the Progress Loader
+      // Đóng hộp thoại tiến trình
       SHFFullScreenLoader.stopLoading();
 
-      // Show Success Message Loader
+      // Hiển thị hộp thoại Thành công
       showCompletionDialog();
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Rất tiếc', message: e.toString());
     }
   }
 
-  // Reset form values and flags
+  // Đặt lại các giá trị và cờ của biểu mẫu
   void resetValues() {
     isLoading.value = false;
     productType.value = ProductType.single;
@@ -181,14 +180,14 @@ class CreateProductController extends GetxController {
     ProductVariationController.instance.resetAllValues();
     ProductAttributesController.instance.resetProductAttributes();
 
-    // Reset Upload Flags
+    // Đặt lại cờ Tải lên
     thumbnailUploader.value = false;
     additionalImagesUploader.value = false;
     productDataUploader.value = false;
     categoriesRelationshipUploader.value = false;
   }
 
-  // Show the progress dialog
+  // Hiển thị hộp thoại tiến trình
   void showProgressDialog() {
     showDialog(
       context: Get.context!,
@@ -196,19 +195,19 @@ class CreateProductController extends GetxController {
       builder: (context) => PopScope(
         canPop: false,
         child: AlertDialog(
-          title: const Text('Creating Product'),
+          title: const Text('Đang tạo Sản phẩm'),
           content: Obx(
-            () => Column(
+                () => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(SHFImages.creatingProductIllustration, height: 200, width: 200),
                 const SizedBox(height: SHFSizes.spaceBtwItems),
-                buildCheckbox('Thumbnail Image', thumbnailUploader),
-                buildCheckbox('Additional Images', additionalImagesUploader),
-                buildCheckbox('Product Data, Attributes & Variations', productDataUploader),
-                buildCheckbox('Product Categories', categoriesRelationshipUploader),
+                buildCheckbox('Ảnh đại diện', thumbnailUploader),
+                buildCheckbox('Ảnh Phụ', additionalImagesUploader),
+                buildCheckbox('Dữ liệu Sản phẩm, Thuộc tính & Biến thể', productDataUploader),
+                buildCheckbox('Danh mục Sản phẩm', categoriesRelationshipUploader),
                 const SizedBox(height: SHFSizes.spaceBtwItems),
-                const Text('Sit Tight, Your product is uploading...'),
+                const Text('Đang tạo sản phẩm của bạn...'),
               ],
             ),
           ),
@@ -217,7 +216,7 @@ class CreateProductController extends GetxController {
     );
   }
 
-  // Build a checkbox widget
+  // Xây dựng widget checkbox
   Widget buildCheckbox(String label, RxBool value) {
     return Row(
       children: [
@@ -233,27 +232,27 @@ class CreateProductController extends GetxController {
     );
   }
 
-  // Show completion dialog
+  // Hiển thị hộp thoại hoàn thành
   void showCompletionDialog() {
     Get.dialog(
       AlertDialog(
-        title: const Text('Congratulations'),
+        title: const Text('Chúc mừng'),
         actions: [
           TextButton(
               onPressed: () {
                 Get.back();
                 Get.back();
               },
-              child: const Text('Go to Products'))
+              child: const Text('Đi đến Sản phẩm'))
         ],
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(SHFImages.productsIllustration, height: 200, width: 200),
             const SizedBox(height: SHFSizes.spaceBtwItems),
-            Text('Congratulations', style: Theme.of(Get.context!).textTheme.headlineSmall),
+            Text('Chúc mừng', style: Theme.of(Get.context!).textTheme.headlineSmall),
             const SizedBox(height: SHFSizes.spaceBtwItems),
-            const Text('Your Product has been Created'),
+            const Text('Sản phẩm của bạn đã được tạo'),
           ],
         ),
       ),

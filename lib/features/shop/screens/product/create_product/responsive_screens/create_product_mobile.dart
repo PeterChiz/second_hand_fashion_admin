@@ -22,7 +22,7 @@ class CreateProductMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(ProducSHFImagesController());
+    final controller = Get.put(ProductImagesController());
 
     return Scaffold(
       bottomNavigationBar: const ProductBottomNavigationButtons(),
@@ -84,8 +84,8 @@ class CreateProductMobileScreen extends StatelessWidget {
                         Text('All Product Images', style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: SHFSizes.spaceBtwItems),
                         ProductAdditionalImages(
-                          additionalProductImagesURLs: controller.additionalProducSHFImagesUrls,
-                          onTapToAddImages: () => controller.selectMultipleProducSHFImages(),
+                          additionalProductImagesURLs: controller.additionalProductImagesUrls,
+                          onTapToAddImages: () => controller.selectMultipleProductImages(),
                           onTapToRemoveImage: (index) => controller.removeImage(index),
                         ),
                       ],

@@ -11,7 +11,7 @@ class SHFTextFormFieldTheme {
     suffixIconColor: SHFColors.darkGrey,
     // constraints: const BoxConstraints.expand(height: SHFSizes.inputFieldHeight),
     labelStyle: const TextStyle().copyWith(fontSize: SHFSizes.fontSizeMd, color: SHFColors.textPrimary, fontFamily: 'Urbanist'),
-    hintStyle: const TextStyle().copyWith(fontSize: SHFSizes.fonSHFSizesm, color: SHFColors.textSecondary, fontFamily: 'Urbanist'),
+    hintStyle: const TextStyle().copyWith(fontSize: SHFSizes.fonSHFSizeSm, color: SHFColors.textSecondary, fontFamily: 'Urbanist'),
     errorStyle: const TextStyle().copyWith(fontStyle: FontStyle.normal, fontFamily: 'Urbanist'),
     floatingLabelStyle: const TextStyle().copyWith(color: SHFColors.textSecondary, fontFamily: 'Urbanist'),
     border: const OutlineInputBorder().copyWith(
@@ -42,7 +42,7 @@ class SHFTextFormFieldTheme {
     suffixIconColor: SHFColors.darkGrey,
     // constraints: const BoxConstraints.expand(height: SHFSizes.inputFieldHeight),
     labelStyle: const TextStyle().copyWith(fontSize: SHFSizes.fontSizeMd, color: SHFColors.white, fontFamily: 'Urbanist'),
-    hintStyle: const TextStyle().copyWith(fontSize: SHFSizes.fonSHFSizesm, color: SHFColors.white, fontFamily: 'Urbanist'),
+    hintStyle: const TextStyle().copyWith(fontSize: SHFSizes.fonSHFSizeSm, color: SHFColors.white, fontFamily: 'Urbanist'),
     floatingLabelStyle: const TextStyle().copyWith(color: SHFColors.white.withOpacity(0.8), fontFamily: 'Urbanist'),
     border: const OutlineInputBorder().copyWith(
       borderRadius: BorderRadius.circular(SHFSizes.inputFieldRadius),

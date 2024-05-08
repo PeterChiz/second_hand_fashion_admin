@@ -25,13 +25,13 @@ class MediaDesktopScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SHFBreadcrumbsWithHeading(heading: 'Media', breadcrumbItems: ['Media']),
+                  const SHFBreadcrumbsWithHeading(heading: 'Phương tiện truyền thông', breadcrumbItems: ['Media']),
                   SizedBox(
                     width: SHFSizes.buttonWidth * 1.5,
                     child: ElevatedButton.icon(
                       onPressed: () => controller.showImagesUploaderSection.value = !controller.showImagesUploaderSection.value,
                       icon: const Icon(Iconsax.cloud_add),
-                      label: const Text('Upload Images'),
+                      label: const Text('Đăng tải hình ảnh'),
                     ),
                   ),
                 ],

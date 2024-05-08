@@ -19,7 +19,7 @@ class EditBannerTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Update Banner', breadcrumbItems: [SHFRoutes.categories, 'Update Banner']),
+              const SHFBreadcrumbsWithHeading(heading: 'Cập nhật Banner', breadcrumbItems: [SHFRoutes.categories, 'Cập nhật Banner']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

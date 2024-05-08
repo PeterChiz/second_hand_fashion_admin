@@ -35,7 +35,7 @@ class SHFLoginForm extends StatelessWidget {
               () => TextFormField(
                 obscureText: controller.hidePassword.value,
                 controller: controller.password,
-                validator: (value) => SHFValidator.validateEmptyText('Password', value),
+                validator: (value) => SHFValidator.validateEmptyText('Mật khẩu', value),
                 decoration: InputDecoration(
                   labelText: SHFTexts.password,
                   prefixIcon: const Icon(Iconsax.password_check),
