@@ -16,17 +16,19 @@ class ProductThumbnailImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductImagesController controller = Get.put(ProductImagesController());
+    final ProductImagesController controller =
+        Get.put(ProductImagesController());
 
     return SHFRoundedContainer(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Product Thumbnail Text
-          Text('Product Thumbnail', style: Theme.of(context).textTheme.headlineSmall),
+          // Văn bản cho Ảnh Đại Diện Sản Phẩm
+          Text('Ảnh Đại Diện Sản Phẩm',
+              style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // Container for Product Thumbnail
+          // Container cho Ảnh Đại Diện Sản Phẩm
           SHFRoundedContainer(
             height: 300,
             backgroundColor: SHFColors.primaryBackground,
@@ -34,7 +36,7 @@ class ProductThumbnailImage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Thumbnail Image
+                  // Ảnh Đại Diện
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -43,20 +45,25 @@ class ProductThumbnailImage extends StatelessWidget {
                           () => SHFRoundedImage(
                             width: 220,
                             height: 220,
-                            image: controller.selectedThumbnailImageUrl.value ?? SHFImages.defaultSingleImageIcon,
-                            imageType: controller.selectedThumbnailImageUrl.value == null ? ImageType.asset : ImageType.network,
+                            image: controller.selectedThumbnailImageUrl.value ??
+                                SHFImages.defaultSingleImageIcon,
+                            imageType:
+                                controller.selectedThumbnailImageUrl.value ==
+                                        null
+                                    ? ImageType.asset
+                                    : ImageType.network,
                           ),
                         ),
                       ),
                     ],
                   ),
 
-                  // Add Thumbnail Button
+                  // Nút Thêm Ảnh Đại Diện
                   SizedBox(
                     width: 200,
                     child: OutlinedButton(
                       onPressed: () => controller.selectThumbnailImage(),
-                      child: const Text('Add Thumbnail'),
+                      child: const Text('Thêm Ảnh Đại Diện'),
                     ),
                   ),
                 ],

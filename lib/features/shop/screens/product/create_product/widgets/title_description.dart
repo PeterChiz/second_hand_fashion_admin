@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,14 +22,14 @@ class ProductTitleAndDescription extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Basic Information Text
-            Text('Basic Information', style: Theme.of(context).textTheme.headlineSmall),
+            Text('Thông Tin Cơ Bản', style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: SHFSizes.spaceBtwItems),
 
             // Product Title Input Field
             TextFormField(
               controller: controller.title,
-              validator: (value) => SHFValidator.validateEmptyText('Product Title', value),
-              decoration: const InputDecoration(labelText: 'Product Title'),
+              validator: (value) => SHFValidator.validationEmptyText('Tiêu đề Sản phẩm', value),
+              decoration: const InputDecoration(labelText: 'Tiêu đề Sản phẩm'),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
@@ -44,10 +43,10 @@ class ProductTitleAndDescription extends StatelessWidget {
                 controller: controller.description,
                 keyboardType: TextInputType.multiline,
                 textAlignVertical: TextAlignVertical.top,
-                validator: (value) => SHFValidator.validateEmptyText('Product Description', value),
+                validator: (value) => SHFValidator.validationEmptyText('Mô tả Sản phẩm', value),
                 decoration: const InputDecoration(
-                  labelText: 'Product Description',
-                  hintText: 'Add your Product Description here...',
+                  labelText: 'Mô tả Sản phẩm',
+                  hintText: 'Thêm mô tả của bạn ở đây...',
                   alignLabelWithHint: true,
                 ),
               ),

@@ -20,13 +20,13 @@ class CartItemModel {
     this.selectedVariation,
   });
 
-  /// Calculate Total Amount
+  /// Tính tổng số tiền
   String get totalAmount => (price * quantity).toStringAsFixed(1);
 
-  /// Empty Cart
+  /// Giỏ hàng trống
   static CartItemModel empty() => CartItemModel(productId: '', quantity: 0);
 
-  /// Convert a CartItem to a JSON Map
+  /// Chuyển đổi CartItem thành Map JSON
   Map<String, dynamic> toJson() {
     return {
       'productId': productId,
@@ -40,7 +40,7 @@ class CartItemModel {
     };
   }
 
-  /// Create a CartItem from a JSON Map
+  /// Tạo một CartItem từ một Map JSON
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
       productId: json['productId'],

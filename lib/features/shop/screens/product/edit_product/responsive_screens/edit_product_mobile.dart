@@ -41,8 +41,8 @@ class EditProductMobileScreen extends StatelessWidget {
               // Breadcrumbs
               const SHFBreadcrumbsWithHeading(
                 returnToPreviousScreen: true,
-                heading: 'Edit Product',
-                breadcrumbItems: [SHFRoutes.products, 'Edit Product'],
+                heading: 'Chỉnh sửa sản phẩm',
+                breadcrumbItems: [SHFRoutes.products, 'Chỉnh sửa sản phẩm'],
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
@@ -59,7 +59,7 @@ class EditProductMobileScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Heading
-                        Text('Stock & Pricing', style: Theme.of(context).textTheme.headlineSmall),
+                        Text('Tồn kho & Giá', style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: SHFSizes.spaceBtwItems),
 
                         // Product Type
@@ -91,7 +91,7 @@ class EditProductMobileScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('All Product Images', style: Theme.of(context).textTheme.headlineSmall),
+                        Text('Tất cả hình ảnh sản phẩm', style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: SHFSizes.spaceBtwItems),
                         ProductAdditionalImages(
                           additionalProductImagesURLs: controller.additionalProductImagesUrls,

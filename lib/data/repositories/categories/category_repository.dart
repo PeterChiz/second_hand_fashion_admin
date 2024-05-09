@@ -14,7 +14,7 @@ class CategoryRepository extends GetxController {
   // Firebase Firestore instance
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // Get all categories from the 'Categories' collection
+  // Lấy tất cả các danh mục từ bộ sưu tập 'Categories'
   Future<List<CategoryModel>> getAllCategories() async {
     try {
       final snapshot = await _db.collection("Categories").get();
@@ -25,11 +25,11 @@ class CategoryRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // Create a new category document in the 'Categories' collection
+  // Tạo một tài liệu danh mục mới trong bộ sưu tập 'Categories'
   Future<String> createCategory(CategoryModel category) async {
     try {
       final data = await _db.collection("Categories").add(category.toJson());
@@ -41,11 +41,11 @@ class CategoryRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // Update an existing category document in the 'Categories' collection
+  // Cập nhật một tài liệu danh mục đã tồn tại trong bộ sưu tập 'Categories'
   Future<void> updateCategory(CategoryModel category) async {
     try {
       await _db.collection("Categories").doc(category.id).update(category.toJson());
@@ -56,11 +56,11 @@ class CategoryRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // Delete an existing category document from the 'Categories' collection
+  // Xóa một tài liệu danh mục đã tồn tại khỏi bộ sưu tập 'Categories'
   Future<void> deleteCategory(String categoryId) async {
     try {
       await _db.collection("Categories").doc(categoryId).delete();
@@ -71,7 +71,7 @@ class CategoryRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 }

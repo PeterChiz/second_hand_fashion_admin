@@ -17,8 +17,8 @@ import '../../../models/image_model.dart';
 
 class MediaUploader extends StatelessWidget {
   const MediaUploader({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

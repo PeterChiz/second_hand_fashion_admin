@@ -4,16 +4,16 @@ import 'package:lottie/lottie.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 
-/// A widget for displaying an animated loading indicator with optional text and action button.
+/// Widget để hiển thị chỉ báo tải hoạt hình với văn bản tùy chọn và nút hành động.
 class SHFAnimationLoaderWidget extends StatelessWidget {
-  /// Default constructor for the SHFAnimationLoaderWidget.
+  /// Hàm tạo mặc định cho SHFAnimationLoaderWidget.
   ///
   /// Parameters:
-  ///   - text: The text to be displayed below the animation.
-  ///   - animation: The path to the Lottie animation file.
-  ///   - showAction: Whether to show an action button below the text.
-  ///   - actionText: The text to be displayed on the action button.
-  ///   - onActionPressed: Callback function to be executed when the action button is pressed.
+  ///   - text: Văn bản được hiển thị dưới hoạt hình.
+  ///   - animation: Đường dẫn đến tệp hoạt hình Lottie.
+  ///   - showAction: Có hiển thị nút hành động dưới văn bản hay không.
+  ///   - actionText: Văn bản được hiển thị trên nút hành động.
+  ///   - onActionPressed: Hàm gọi lại được thực thi khi nút hành động được nhấn.
   const SHFAnimationLoaderWidget({
     super.key,
     required this.text,
@@ -37,7 +37,7 @@ class SHFAnimationLoaderWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(animation, height: height ?? MediaQuery.of(context).size.height * 0.5, width: width), // Display Lottie animation
+          Lottie.asset(animation, height: height ?? MediaQuery.of(context).size.height * 0.5, width: width), // Hiển thị hoạt hình Lottie
           const SizedBox(height: SHFSizes.defaultSpace),
           Text(
             text,
@@ -47,16 +47,16 @@ class SHFAnimationLoaderWidget extends StatelessWidget {
           const SizedBox(height: SHFSizes.defaultSpace),
           showAction
               ? SizedBox(
-                  width: 250,
-                  child: OutlinedButton(
-                    onPressed: onActionPressed,
-                    style: OutlinedButton.styleFrom(backgroundColor: SHFColors.dark),
-                    child: Text(
-                      actionText!,
-                      style: Theme.of(context).textTheme.bodyMedium!.apply(color: SHFColors.light),
-                    ),
-                  ),
-                )
+            width: 250,
+            child: OutlinedButton(
+              onPressed: onActionPressed,
+              style: OutlinedButton.styleFrom(backgroundColor: SHFColors.dark),
+              child: Text(
+                actionText!,
+                style: Theme.of(context).textTheme.bodyMedium!.apply(color: SHFColors.light),
+              ),
+            ),
+          )
               : const SizedBox(),
         ],
       ),

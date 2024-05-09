@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import '../../../utils/constants/colors.dart';
 import '../../../utils/constants/sizes.dart';
 
-/// A circular loader widget with customizable foreground and background colors.
+/// Widget tròn loader với màu nền và màu nền có thể tùy chỉnh.
 class SHFCircularLoader extends StatelessWidget {
-  /// Default constructor for the SHFCircularLoader.
+  /// Constructor mặc định cho SHFCircularLoader.
   ///
   /// Parameters:
-  ///   - foregroundColor: The color of the circular loader.
-  ///   - backgroundColor: The background color of the circular loader.
+  ///   - foregroundColor: Màu của tròn loader.
+  ///   - backgroundColor: Màu nền của tròn loader.
   const SHFCircularLoader({
     super.key,
     this.foregroundColor = SHFColors.white,
@@ -23,9 +23,9 @@ class SHFCircularLoader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(SHFSizes.lg),
-      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle), // Circular background
+      decoration: BoxDecoration(color: backgroundColor, shape: BoxShape.circle), // Nền tròn
       child: Center(
-        child: CircularProgressIndicator(color: foregroundColor, backgroundColor: Colors.transparent), // Circular loader
+        child: CircularProgressIndicator(color: foregroundColor, backgroundColor: Colors.transparent), // Loader tròn
       ),
     );
   }

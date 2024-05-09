@@ -5,9 +5,9 @@ import '../../../utils/constants/sizes.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
 class SHFCircularIcon extends StatelessWidget {
-  /// A custom Circular Icon widget with a background color.
+  /// Một widget Circular Icon tùy chỉnh với màu nền.
   ///
-  /// Properties are:
+  /// Các thuộc tính là:
   /// Container [width], [height], & [backgroundColor].
   ///
   /// Icon's [size], [color] & [onPressed]
@@ -41,7 +41,8 @@ class SHFCircularIcon extends StatelessWidget {
                 : SHFColors.white.withOpacity(0.9),
         borderRadius: BorderRadius.circular(100),
       ),
-      child: IconButton(onPressed: onPressed, icon: Icon(icon, color: color, size: size)),
+      child: IconButton(
+          onPressed: onPressed, icon: Icon(icon, color: color, size: size)),
     );
   }
 }

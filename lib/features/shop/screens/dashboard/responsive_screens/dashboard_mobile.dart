@@ -12,7 +12,9 @@ import '../widgets/order_status_graph.dart';
 import '../widgets/weekly_sales.dart';
 
 class DashboardMobileScreen extends StatelessWidget {
-  const DashboardMobileScreen({super.key});
+  const DashboardMobileScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,7 @@ class DashboardMobileScreen extends StatelessWidget {
                 () => SHFDashboardCard(
                   stats: 25,
                   context: context,
-                  title: 'Sales total',
+                  title: 'Tổng doanh số',
                   subTitle:
                       '\$${controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount)}',
                 ),
@@ -40,7 +42,7 @@ class DashboardMobileScreen extends StatelessWidget {
                 () => SHFDashboardCard(
                   stats: 15,
                   context: context,
-                  title: 'Average Order Value',
+                  title: 'Giá trị trung bình đơn hàng',
                   subTitle:
                       '\$${(controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.orderController.allItems.length).toStringAsFixed(2)}',
                   icon: Iconsax.arrow_down,
@@ -52,24 +54,29 @@ class DashboardMobileScreen extends StatelessWidget {
                 () => SHFDashboardCard(
                   stats: 44,
                   context: context,
-                  title: 'Total Orders',
+                  title: 'Tổng số đơn hàng',
                   subTitle: '\$${controller.orderController.allItems.length}',
                 ),
               ),
               const SizedBox(height: SHFSizes.spaceBtwItems),
-              SHFDashboardCard(context: context, title: 'Visitors', subTitle: '25,035', stats: 2),
+              SHFDashboardCard(
+                  context: context,
+                  title: 'Khách truy cập',
+                  subTitle: '25,035',
+                  stats: 2),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Weekly Graphs
+              // Biểu đồ hàng tuần
               const SHFWeeklySalesGraph(),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Orders
+              // Đơn hàng
               SHFRoundedContainer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Recent Orders', style: Theme.of(context).textTheme.headlineSmall),
+                    Text('Đơn hàng gần đây',
+                        style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: SHFSizes.spaceBtwSections),
                     const DashboardOrderTable(),
                   ],
@@ -77,12 +84,13 @@ class DashboardMobileScreen extends StatelessWidget {
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Order Status Pie Graph
+              // Biểu đồ trạng thái đơn hàng
               SHFRoundedContainer(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Orders Status', style: Theme.of(context).textTheme.headlineSmall),
+                    Text('Trạng thái đơn hàng',
+                        style: Theme.of(context).textTheme.headlineSmall),
                     const SizedBox(height: SHFSizes.spaceBtwSections),
                     const OrderStatusPieChart(),
                   ],

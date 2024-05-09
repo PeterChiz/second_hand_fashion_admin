@@ -7,13 +7,13 @@ import '../../../utils/device/device_utility.dart';
 import '../../../utils/helpers/helper_functions.dart';
 
 class SHFAppBar extends StatelessWidget implements PreferredSizeWidget {
-  /// Custom appbar for achieving a desired design goal.
-  /// - Set [title] for a custom title.
-  /// - [showBackArrow] to toggle the visibility of the back arrow.
-  /// - [leadingIcon] for a custom leading icon.
-  /// - [leadingOnPressed] callback for the leading icon press event.
-  /// - [actions] for adding a list of action widgets.
-  /// - Horizontal padding of the appbar can be customized inside this widget.
+  /// Thanh ứng dụng tùy chỉnh để đạt được một mục tiêu thiết kế mong muốn.
+  /// - Đặt [title] để có một tiêu đề tùy chỉnh.
+  /// - [showBackArrow] để chuyển đổi tính hiển thị của mũi tên quay lại.
+  /// - [leadingIcon] để có một biểu tượng dẫn tùy chỉnh.
+  /// - [leadingOnPressed] là hàm gọi lại cho sự kiện nhấn biểu tượng dẫn.
+  /// - [actions] để thêm một danh sách các widget hành động.
+  /// - Khoảng lề ngang của thanh ứng dụng có thể được tùy chỉnh bên trong widget này.
   const SHFAppBar({
     super.key,
     this.title,

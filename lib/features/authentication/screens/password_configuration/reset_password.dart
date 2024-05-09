@@ -19,7 +19,7 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(ForgetPasswordController());
     return Scaffold(
-      /// Appbar to go back OR close all screens and Goto LoginScreen()
+      /// Thanh ứng dụng để quay lại hoặc đóng tất cả các màn hình và đi đến Màn hình Đăng nhập
       appBar: SHFAppBar(
         actions: [
           IconButton(onPressed: () => Get.offAll(const LoginScreen()), icon: const Icon(CupertinoIcons.clear)),
@@ -30,14 +30,14 @@ class ResetPasswordScreen extends StatelessWidget {
           padding: const EdgeInsets.all(SHFSizes.defaultSpace),
           child: Column(
             children: [
-              /// Image with 60% of screen width
+              /// Hình ảnh chiếc hộp thư với 60% chiều rộng màn hình
               Image(
                 image: const AssetImage(SHFImages.deliveredEmailIllustration),
                 width: SHFHelperFunctions.screenWidth() * 0.6,
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              /// Title & SubTitle
+              /// Tiêu đề & Phụ đề
               Text(SHFTexts.changeYourPasswordTitle, style: Theme.of(context).textTheme.headlineMedium, textAlign: TextAlign.center),
               const SizedBox(height: SHFSizes.spaceBtwItems),
               Text('buithienchi209@gmail.com', textAlign: TextAlign.center, style: Theme.of(context).textTheme.labelLarge),
@@ -49,7 +49,7 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              /// Buttons
+              /// Các nút
               SizedBox(width: double.infinity, child: ElevatedButton(onPressed: () => Get.offAll(() => const LoginScreen()), child: const Text(SHFTexts.done))),
               const SizedBox(height: SHFSizes.spaceBtwItems),
               SizedBox(

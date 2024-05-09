@@ -5,7 +5,7 @@ import '../../../utils/constants/enums.dart';
 import '../../shop/models/order_model.dart';
 import 'address_model.dart';
 
-/// Model class representing user data.
+/// Lớp mô hình đại diện cho dữ liệu người dùng.
 class UserModel {
   final String? id;
   String firstName;
@@ -34,16 +34,16 @@ class UserModel {
     this.updatedAt,
   });
 
-  /// Helper methods
-  String get fullName => '$firstName $lastName';
+  /// Các phương thức trợ giúp
+  String get fullName => '$lastName $firstName';
   String get formattedPhoneNo => SHFFormatter.formatPhoneNumber(phoneNumber);
   String get formattedDate => SHFFormatter.formatDate(createdAt);
   String get formattedUpdatedAtDate => SHFFormatter.formatDate(updatedAt);
 
-  /// Static function to create an empty user model.
-  static UserModel empty() => UserModel(email: ''); // Default createdAt to current time
+  /// Phương thức tĩnh để tạo một mô hình người dùng trống.
+  static UserModel empty() => UserModel(email: ''); // Thời gian tạo mặc định là thời gian hiện tại
 
-  /// Convert model to JSON structure for storing data in Firebase.
+  /// Chuyển đổi mô hình sang cấu trúc JSON để lưu trữ dữ liệu trong Firebase.
   Map<String, dynamic> toJson() {
     return {
       'FirstName': firstName,
@@ -58,19 +58,19 @@ class UserModel {
     };
   }
 
-  /// Factory method to create a UserModel from a Firebase document snapshot.
+  /// Phương thức factory để tạo một UserModel từ một snapshot của Firebase document.
   factory UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
       return UserModel(
         id: document.id,
         firstName: data.containsKey('FirstName') ? data['FirstName'] ?? '' : '',
-        lastName: data.containsKey('LastName') ?data['LastName'] ?? '' : '',
-        userName: data.containsKey('UserName') ?data['UserName'] ?? '' : '',
+        lastName: data.containsKey('LastName') ? data['LastName'] ?? '' : '',
+        userName: data.containsKey('UserName') ? data['UserName'] ?? '' : '',
         email: data.containsKey('Email') ? data['Email'] ?? '' : '',
-        phoneNumber: data.containsKey('PhoneNumber') ? data['PhoneNumber'] ?? '': '',
+        phoneNumber: data.containsKey('PhoneNumber') ? data['PhoneNumber'] ?? '' : '',
         profilePicture: data.containsKey('ProfilePicture') ? data['ProfilePicture'] ?? '' : '',
-        role: data.containsKey('Role') ? (data['Role'] ?? AppRole.user) == AppRole.admin.name.toString() ? AppRole.admin : AppRole.user: AppRole.user,
+        role: data.containsKey('Role') ? (data['Role'] ?? AppRole.user) == AppRole.admin.name.toString() ? AppRole.admin : AppRole.user : AppRole.user,
         createdAt: data.containsKey('CreatedAt') ? data['CreatedAt']?.toDate() ?? DateTime.now() : DateTime.now(),
         updatedAt: data.containsKey('UpdatedAt') ? data['UpdatedAt']?.toDate() ?? DateTime.now() : DateTime.now(),
       );
@@ -79,4 +79,3 @@ class UserModel {
     }
   }
 }
-

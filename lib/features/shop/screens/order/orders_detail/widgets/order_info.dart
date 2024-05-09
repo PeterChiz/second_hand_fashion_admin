@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -25,7 +24,7 @@ class OrderInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Order Information', style: Theme.of(context).textTheme.headlineMedium),
+          Text('Thông tin đơn hàng', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: SHFSizes.spaceBtwSections),
           Row(
             children: [
@@ -33,7 +32,7 @@ class OrderInfo extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Date'),
+                    const Text('Ngày đặt'),
                     Text(order.formattedOrderDate, style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
@@ -42,8 +41,8 @@ class OrderInfo extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Items'),
-                    Text('${order.items.length} Items', style: Theme.of(context).textTheme.bodyLarge),
+                    const Text('Sản phẩm'),
+                    Text('${order.items.length} sản phẩm', style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
               ),
@@ -52,9 +51,9 @@ class OrderInfo extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Status'),
+                    const Text('Trạng thái'),
                     Obx(
-                      () {
+                          () {
                         if(controller.statusLoader.value) return const SHFShimmerEffect(width: double.infinity, height: 55);
                         return SHFRoundedContainer(
                           radius: SHFSizes.cardRadiusSm,
@@ -88,7 +87,7 @@ class OrderInfo extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Total'),
+                    const Text('Tổng cộng'),
                     Text('\$${order.totalAmount}', style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),

@@ -4,14 +4,14 @@ import '../../../utils/constants/colors.dart';
 import '../../../utils/helpers/helper_functions.dart';
 import '../containers/circular_container.dart';
 
-/// A customized choice chip that can act like a radio button.
+/// Một chip lựa chọn tùy chỉnh có thể hoạt động như nút radio.
 class SHFChoiceChip extends StatelessWidget {
-  /// Create a chip that acts like a radio button.
+  /// Tạo một chip có thể hoạt động như nút radio.
   ///
-  /// Parameters:
-  ///   - text: The label text for the chip.
-  ///   - selected: Whether the chip is currently selected.
-  ///   - onSelected: Callback function when the chip is selected.
+  /// Tham số:
+  ///   - text: Văn bản nhãn cho chip.
+  ///   - selected: Xác định liệu chip đó có được chọn hay không.
+  ///   - onSelected: Hàm callback khi chip được chọn.
   const SHFChoiceChip({
     super.key,
     required this.text,
@@ -26,10 +26,10 @@ class SHFChoiceChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Theme(
-      // Use a transparent canvas color to match the existing styling.
+      // Sử dụng màu canvas trong suốt để phù hợp với kiểu dáng hiện tại.
       data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
       child: ChoiceChip(
-        // Use this function to get Colors as a Chip
+        // Sử dụng hàm này để nhận màu làm Chip
         avatar: SHFHelperFunctions.getColor(text) != null
             ? SHFCircularContainer(width: 50, height: 50, backgroundColor: SHFHelperFunctions.getColor(text)!)
             : null,

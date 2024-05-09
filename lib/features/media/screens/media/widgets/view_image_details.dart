@@ -15,31 +15,31 @@ import '../../../controllers/media_controller.dart';
 import '../../../models/image_model.dart';
 
 class ImagePopup extends StatelessWidget {
-  // The image model to display detailed information about.
+  // Thông tin chi tiết về hình ảnh cần hiển thị.
   final ImageModel image;
 
-  // Constructor for the ImagePopup class.
+  // Constructor cho lớp ImagePopup.
   const ImagePopup({super.key, required this.image});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Dialog(
-        // Define the shape of the dialog.
+        // Định hình hình dạng của hộp thoại.
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.borderRadiusLg)),
         child: SHFRoundedContainer(
-          // Set the width of the rounded container based on the screen size.
+          // Đặt độ rộng của container được làm tròn dựa trên kích thước màn hình.
           width: SHFDeviceUtils.isDesktopScreen(context) ? MediaQuery.of(context).size.width * 0.4 : double.infinity,
           padding: const EdgeInsets.all(SHFSizes.spaceBtwItems),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Display the image with an option to close the dialog.
+              // Hiển thị hình ảnh với tùy chọn đóng hộp thoại.
               SizedBox(
                 child: Stack(
                   children: [
-                    // Display the image with rounded container.
+                    // Hiển thị hình ảnh với container được làm tròn.
                     SHFRoundedContainer(
                       backgroundColor: SHFColors.primaryBackground,
                       child: SHFRoundedImage(
@@ -50,7 +50,7 @@ class ImagePopup extends StatelessWidget {
                         imageType: ImageType.network,
                       ),
                     ),
-                    // Close icon button positioned at the top-right corner.
+                    // Nút đóng được đặt ở góc trên bên phải.
                     Positioned(top: 0, right: 0, child: IconButton(onPressed: () => Get.back(), icon: const Icon(Iconsax.close_circle)))
                   ],
                 ),
@@ -58,28 +58,28 @@ class ImagePopup extends StatelessWidget {
               const Divider(),
               const SizedBox(height: SHFSizes.spaceBtwItems),
 
-              // Display various metadata about the image.
-              // Includes image name, path, type, size, creation and modification dates, and URL.
-              // Also provides an option to copy the image URL.
+              // Hiển thị các siêu dữ liệu khác về hình ảnh.
+              // Bao gồm tên ảnh, đường dẫn, loại, kích thước, ngày tạo và sửa đổi, và URL.
+              // Cung cấp tùy chọn sao chép URL hình ảnh.
               Row(
                 children: [
                   Expanded(child: Text('Tên ảnh', style: Theme.of(context).textTheme.bodyLarge)),
                   Expanded(flex: 3, child: Text(image.filename, style: Theme.of(context).textTheme.titleLarge)),
                 ],
               ),
-              // Similar rows for other metadata properties...
+              // Các hàng tương tự cho các thuộc tính siêu dữ liệu khác...
 
-              // Display the image URL with an option to copy it.
+              // Hiển thị URL hình ảnh với tùy chọn sao chép.
               Row(
                 children: [
-                  Expanded(child: Text('Image URL:', style: Theme.of(context).textTheme.bodyLarge)),
+                  Expanded(child: Text('URL hình ảnh:', style: Theme.of(context).textTheme.bodyLarge)),
                   Expanded(
                       flex: 2,
                       child: Text(image.url, style: Theme.of(context).textTheme.titleLarge, maxLines: 1, overflow: TextOverflow.ellipsis)),
                   Expanded(
                     child: OutlinedButton(
                       onPressed: () {
-                        FlutterClipboard.copy(image.url).then((value) => SHFLoaders.customToast(message: 'URL copied!'));
+                        FlutterClipboard.copy(image.url).then((value) => SHFLoaders.customToast(message: 'URL đã được sao chép!'));
                       },
                       child: const Text('Sao chép URL'),
                     ),
@@ -88,7 +88,7 @@ class ImagePopup extends StatelessWidget {
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Display a button to delete the image.
+              // Hiển thị nút để xóa hình ảnh.
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -96,7 +96,7 @@ class ImagePopup extends StatelessWidget {
                     width: 300,
                     child: TextButton(
                       onPressed: () => MediaController.instance.removeCloudImageConfirmation(image),
-                      child: const Text('Xóa ảnh', style: TextStyle(color: Colors.red)),
+                      child: const Text('Xóa hình ảnh', style: TextStyle(color: Colors.red)),
                     ),
                   ),
                 ],

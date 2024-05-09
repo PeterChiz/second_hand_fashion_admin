@@ -18,7 +18,7 @@ import '../widgets/variations_widget.dart';
 import '../widgets/visibility_widget.dart';
 
 class CreateProductMobileScreen extends StatelessWidget {
-  const CreateProductMobileScreen({super.key});
+  const CreateProductMobileScreen({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -32,35 +32,35 @@ class CreateProductMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Breadcrumbs
-              const SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Create Product', breadcrumbItems: [SHFRoutes.products, 'Create Product']),
+              // Dẫn đường
+              const SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Tạo sản phẩm', breadcrumbItems: [SHFRoutes.products, 'Tạo sản phẩm']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Create Product
+              // Tạo sản phẩm
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const ProductTitleAndDescription(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Stock & Pricing
+                  // Kho và Giá
                   SHFRoundedContainer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Heading
-                        Text('Stock & Pricing', style: Theme.of(context).textTheme.headlineSmall),
+                        // Tiêu đề
+                        Text('Kho và Giá', style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: SHFSizes.spaceBtwItems),
 
-                        // Product Type
+                        // Loại sản phẩm
                         const ProductTypeWidget(),
                         const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-                        // Stock
+                        // Kho
                         const ProductStockAndPricing(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Attributes
+                        // Thuộc tính
                         ProductAttributes(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
                       ],
@@ -68,20 +68,20 @@ class CreateProductMobileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Variations
+                  // Biến thể
                   const ProductVariations(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Sidebar
+                  // Thanh bên
                   const ProductThumbnailImage(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Product Images
+                  // Hình ảnh sản phẩm
                   SHFRoundedContainer(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('All Product Images', style: Theme.of(context).textTheme.headlineSmall),
+                        Text('Tất cả hình ảnh sản phẩm', style: Theme.of(context).textTheme.headlineSmall),
                         const SizedBox(height: SHFSizes.spaceBtwItems),
                         ProductAdditionalImages(
                           additionalProductImagesURLs: controller.additionalProductImagesUrls,
@@ -93,15 +93,15 @@ class CreateProductMobileScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Product Brand
+                  // Thương hiệu sản phẩm
                   const ProductBrand(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Product Categories
+                  // Danh mục sản phẩm
                   const ProductCategories(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Product Visibility
+                  // Tính năng hiển thị sản phẩm
                   const ProductVisibilityWidget(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
                 ],

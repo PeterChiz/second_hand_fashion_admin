@@ -28,23 +28,27 @@ class BrandModel {
 
   /// Empty Helper Function
   static BrandModel empty() => BrandModel(id: '', image: '', name: '');
+
+  /// Lấy ngày được định dạng
   String get formattedDate => SHFFormatter.formatDate(createdAt);
+
+  /// Lấy ngày được cập nhật được định dạng
   String get formattedUpdatedAtDate => SHFFormatter.formatDate(updatedAt);
 
-  /// Convert model to Json structure so that you can store data in Firebase
-  toJson() {
+  /// Chuyển đổi model thành cấu trúc Json để bạn có thể lưu trữ dữ liệu trong Firebase
+  Map<String, dynamic> toJson() {
     return {
       'Id': id,
       'Name': name,
       'Image': image,
       'CreatedAt': createdAt,
       'IsFeatured': isFeatured,
-      'ProductsCount': productsCount = 0,
-      'UpdatedAt': updatedAt = DateTime.now(),
+      'ProductsCount': productsCount ?? 0,
+      'UpdatedAt': updatedAt ?? DateTime.now(),
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to UserModel
+  /// Ánh xạ dữ liệu dạng Json từ tài liệu snapshot từ Firebase thành UserModel
   factory BrandModel.fromJson(Map<String, dynamic> document) {
     final data = document;
     if (data.isEmpty) return BrandModel.empty();
@@ -54,25 +58,25 @@ class BrandModel {
       image: data['Image'] ?? '',
       isFeatured: data['IsFeatured'] ?? false,
       productsCount: int.parse((data['ProductsCount'] ?? 0).toString()),
-      createdAt: data.containsKey('CreatedAt') ? data['CreatedAt']?.toDate() : null,
-      updatedAt: data.containsKey('UpdatedAt') ? data['UpdatedAt']?.toDate() : null,
+      createdAt: data.containsKey('CreatedAt') ? (data['CreatedAt'] as Timestamp).toDate() : null,
+      updatedAt: data.containsKey('UpdatedAt') ? (data['UpdatedAt'] as Timestamp).toDate() : null,
     );
   }
 
-  /// Map Json oriented document snapshot from Firebase to UserModel
+  /// Ánh xạ dữ liệu dạng Json từ tài liệu snapshot từ Firebase thành UserModel
   factory BrandModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
 
-      // Map JSON Record to the Model
+      // Ánh xạ bản ghi JSON thành Model
       return BrandModel(
         id: document.id,
         name: data['Name'] ?? '',
         image: data['Image'] ?? '',
-        productsCount: data['ProductsCount'] ?? '',
+        productsCount: data['ProductsCount'] ?? 0,
         isFeatured: data['IsFeatured'] ?? false,
-        createdAt: data.containsKey('CreatedAt') ? data['CreatedAt']?.toDate() : null,
-        updatedAt: data.containsKey('UpdatedAt') ? data['UpdatedAt']?.toDate() : null,
+        createdAt: data.containsKey('CreatedAt') ? (data['CreatedAt'] as Timestamp).toDate() : null,
+        updatedAt: data.containsKey('UpdatedAt') ? (data['UpdatedAt'] as Timestamp).toDate() : null,
       );
     } else {
       return BrandModel.empty();

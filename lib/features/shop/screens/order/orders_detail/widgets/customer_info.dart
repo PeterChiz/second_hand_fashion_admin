@@ -12,9 +12,9 @@ import '../../../../models/order_model.dart';
 
 class OrderCustomer extends StatelessWidget {
   const OrderCustomer({
-    super.key,
+    Key? key,
     required this.order,
-  });
+  }) : super(key: key);
 
   final OrderModel order;
 
@@ -33,17 +33,17 @@ class OrderCustomer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Customer', style: Theme.of(context).textTheme.headlineMedium),
+              Text('Thông tin khách hàng', style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: SHFSizes.spaceBtwSections),
               Obx(
-                () {
+                    () {
                   return Row(
                     children: [
                       SHFRoundedImage(
                         padding: 0,
                         backgroundColor: SHFColors.primaryBackground,
                         image:
-                            controller.customer.value.profilePicture.isNotEmpty ? controller.customer.value.profilePicture : SHFImages.user,
+                        controller.customer.value.profilePicture.isNotEmpty ? controller.customer.value.profilePicture : SHFImages.user,
                         imageType: controller.customer.value.profilePicture.isNotEmpty ? ImageType.network : ImageType.asset,
                       ),
                       const SizedBox(width: SHFSizes.spaceBtwItems),
@@ -69,14 +69,14 @@ class OrderCustomer extends StatelessWidget {
 
         // Contact Info
         Obx(
-          () => SizedBox(
+              () => SizedBox(
             width: double.infinity,
             child: SHFRoundedContainer(
               padding: const EdgeInsets.all(SHFSizes.defaultSpace),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Contact Person', style: Theme.of(context).textTheme.headlineMedium),
+                  Text('Liên hệ', style: Theme.of(context).textTheme.headlineMedium),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
                   Text(controller.customer.value.fullName, style: Theme.of(context).textTheme.titleSmall),
                   const SizedBox(height: SHFSizes.spaceBtwItems / 2),
@@ -93,7 +93,7 @@ class OrderCustomer extends StatelessWidget {
         ),
         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-        // Contact Info
+        // Shipping Address
         SizedBox(
           width: double.infinity,
           child: SHFRoundedContainer(
@@ -101,7 +101,7 @@ class OrderCustomer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Shipping Address', style: Theme.of(context).textTheme.headlineMedium),
+                Text('Địa chỉ giao hàng', style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: SHFSizes.spaceBtwSections),
                 Text(order.address != null ? order.address!.name : '', style: Theme.of(context).textTheme.titleSmall),
                 const SizedBox(height: SHFSizes.spaceBtwItems / 2),
@@ -112,7 +112,7 @@ class OrderCustomer extends StatelessWidget {
         ),
         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-        // Contact Info: Adjust this address as per your needs
+        // Billing Address
         SizedBox(
           width: double.infinity,
           child: SHFRoundedContainer(
@@ -120,7 +120,7 @@ class OrderCustomer extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Billing Address', style: Theme.of(context).textTheme.headlineMedium),
+                Text('Địa chỉ thanh toán', style: Theme.of(context).textTheme.headlineMedium),
                 const SizedBox(height: SHFSizes.spaceBtwSections),
                 Text(order.address != null ? order.address!.name : '', style: Theme.of(context).textTheme.titleSmall),
                 const SizedBox(height: SHFSizes.spaceBtwItems / 2),

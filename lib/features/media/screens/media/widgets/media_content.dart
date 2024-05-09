@@ -37,7 +37,7 @@ class MediaContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Media Images Header
+          /// Tiêu đề hình ảnh phương tiện truyền thông
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -46,27 +46,27 @@ class MediaContent extends StatelessWidget {
                   Text('Thư mục thư viện', style: Theme.of(context).textTheme.headlineSmall),
                   const SizedBox(width: SHFSizes.spaceBtwItems),
 
-                  // Media Dropdown
+                  // Dropdown Phương tiện truyền thông
                   _buildMediaDropdown(controller),
                 ],
               ),
 
-              // Add Selected Images Button
+              // Nút Thêm Hình Ảnh Đã Chọn
               if (allowSelection) buildAddSelectedImagesButton(),
             ],
           ),
           const SizedBox(height: SHFSizes.spaceBtwSections),
 
-          // Show Media
+          // Hiển thị Phương tiện truyền thông
           Obx(() {
-            // Get Selected Folder Images
+            // Lấy Hình Ảnh trong Thư Mục Đã Chọn
             List<ImageModel> images = _getSelectedFolderImages(controller);
 
-            // Check already selected Images
+            // Kiểm tra hình ảnh đã chọn trước đó
             final totalImages = controller.selectedCloudImagesCount.value;
 
-            // Load Selected Images from the Already Selected Images only once otherwise
-            // rebuild of UI will keep the images selected until all images loaded
+            // Tải Hình Ảnh Đã Chọn từ Danh Sách Hình Ảnh Đã Chọn chỉ một lần, nếu không
+            // sự thay đổi của UI sẽ giữ nguyên các hình ảnh đã chọn cho đến khi tất cả hình ảnh đã được tải
             if (!loadedPreviousSelection) {
               if (alreadySelectedUrls != null && alreadySelectedUrls!.isNotEmpty) {
                 for (var image in images) {
@@ -84,7 +84,7 @@ class MediaContent extends StatelessWidget {
             // Loader
             if (controller.loading.value && images.isEmpty) return const SHFLoaderAnimation();
 
-            // Empty Widget
+            // Widget Trống
             if (images.isEmpty) return _buildEmptyAnimationWidget(context);
 
             return Column(
@@ -96,27 +96,27 @@ class MediaContent extends StatelessWidget {
                   crossAxisAlignment: WrapCrossAlignment.start,
                   children: images
                       .map((image) => GestureDetector(
-                            onTap: () => Get.dialog(ImagePopup(image: image)),
-                            child: SizedBox(
-                              width: 140,
-                              height: 180,
-                              child: Column(
-                                children: [
-                                  allowSelection ? _buildListWithCheckbox(image) : _buildSimpleList(image),
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: SHFSizes.sm),
-                                      child: Text(image.filename, maxLines: 1, overflow: TextOverflow.ellipsis),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                    onTap: () => Get.dialog(ImagePopup(image: image)),
+                    child: SizedBox(
+                      width: 140,
+                      height: 180,
+                      child: Column(
+                        children: [
+                          allowSelection ? _buildListWithCheckbox(image) : _buildSimpleList(image),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: SHFSizes.sm),
+                              child: Text(image.filename, maxLines: 1, overflow: TextOverflow.ellipsis),
                             ),
-                          ))
+                          ),
+                        ],
+                      ),
+                    ),
+                  ))
                       .toList(),
                 ),
 
-                // Load More Button -> Show when all images loaded
+                // Nút Tải Thêm -> Hiển thị khi tất cả hình ảnh đã được tải
                 if (totalImages != images.length && !controller.loading.value)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: SHFSizes.spaceBtwSections),
@@ -180,16 +180,16 @@ class MediaContent extends StatelessWidget {
         onPressed: () {
           if (alreadySelectedUrls != null) alreadySelectedUrls!.clear();
 
-          // Create a copy of the selected images to send back
+          // Tạo bản sao của các hình ảnh đã chọn để gửi trở lại
           List<ImageModel> selectedImagesCopy = List.from(selectedImages);
 
-          // Before calling Get.back, clear the selectedImages
+          // Trước khi gọi Get.back, xóa các hình ảnh đã chọn
           for (var otherImage in selectedImages) {
             otherImage.isSelected.value = false;
           }
           selectedImages.clear();
 
-          // Now call Get.back with the result
+          // Bây giờ gọi Get.back với kết quả
           Get.back(result: selectedImagesCopy);
         },
       ),
@@ -198,7 +198,7 @@ class MediaContent extends StatelessWidget {
 
   Obx _buildMediaDropdown(MediaController controller) {
     return Obx(
-      () => SizedBox(
+          () => SizedBox(
         width: 140,
         child: DropdownButtonFormField<MediaCategory>(
           isExpanded: false,
@@ -253,15 +253,15 @@ class MediaContent extends StatelessWidget {
           top: SHFSizes.md,
           right: SHFSizes.md,
           child: Obx(
-            () => Checkbox(
+                () => Checkbox(
               value: image.isSelected.value,
               onChanged: (selected) {
-                // If selection is allowed, toggle the selected state
+                // Nếu cho phép chọn, hãy chuyển đổi trạng thái đã chọn
                 if (selected != null) {
                   image.isSelected.value = selected;
                   if (image.isSelected.value) {
                     if (!allowMultipleSelection) {
-                      // If multiple selection is not allowed, uncheck other checkboxes
+                      // Nếu không cho phép chọn nhiều, hãy bỏ chọn các hộp kiểm khác
                       for (var otherImage in selectedImages) {
                         if (otherImage != image) {
                           otherImage.isSelected.value = false;

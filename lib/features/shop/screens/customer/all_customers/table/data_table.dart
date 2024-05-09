@@ -6,28 +6,28 @@ import '../../../../controllers/customer/customer_controller.dart';
 import 'table_source.dart';
 
 class CustomerTable extends StatelessWidget {
-  const CustomerTable({super.key});
+  const CustomerTable({super.key, });
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CustomerController());
     return Obx(
-      () {
-        // Customers & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
+          () {
+        // Khách hàng và hàng được chọn được ẩn => Chỉ để cập nhật giao diện UI => Obx => [Các hàng sản phẩm]
         Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
         Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
 
-        // Table
+        // Bảng
         return SHFPaginatedDataTable(
           minWidth: 700,
           sortAscending: controller.sortAscending.value,
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
-            DataColumn2(label: const Text('Customer'), onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending)),
+            DataColumn2(label: const Text('Khách hàng'), onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending)),
             const DataColumn2(label: Text('Email')),
-            const DataColumn2(label: Text('Phone Number')),
-            const DataColumn2(label: Text('Registered')),
-            const DataColumn2(label: Text('Action'), fixedWidth: 100),
+            const DataColumn2(label: Text('Số điện thoại')),
+            const DataColumn2(label: Text('Đã đăng ký')),
+            const DataColumn2(label: Text('Hành động'), fixedWidth: 100),
           ],
           source: CustomerRows(),
         );

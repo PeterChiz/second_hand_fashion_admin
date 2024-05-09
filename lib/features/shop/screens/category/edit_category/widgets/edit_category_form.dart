@@ -13,7 +13,10 @@ import '../../../../controllers/category/edit_category_controller.dart';
 import '../../../../models/category_model.dart';
 
 class EditCategoryForm extends StatelessWidget {
-  const EditCategoryForm({super.key, required this.category});
+  const EditCategoryForm({
+    super.key,
+    required this.category,
+  });
 
   final CategoryModel category;
 
@@ -32,27 +35,38 @@ class EditCategoryForm extends StatelessWidget {
           children: [
             // Heading
             const SizedBox(height: SHFSizes.sm),
-            Text('Update Category', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Cập nhật danh mục',
+                style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: SHFSizes.spaceBtwSections),
 
             // Name Text Field
             TextFormField(
               controller: editController.name,
-              validator: (value) => SHFValidator.validateEmptyText('Name', value),
-              decoration: const InputDecoration(labelText: 'Category Name', prefixIcon: Icon(Iconsax.category)),
+              validator: (value) =>
+                  SHFValidator.validationEmptyText('Tên', value),
+              decoration: const InputDecoration(
+                  labelText: 'Tên danh mục',
+                  prefixIcon: Icon(Iconsax.category)),
             ),
 
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
             Obx(
               () => DropdownButtonFormField<CategoryModel>(
-                decoration:
-                    const InputDecoration(hintText: 'Parent Category', labelText: 'Parent Category', prefixIcon: Icon(Iconsax.bezier)),
-                value: editController.selectedParent.value.id.isNotEmpty ? editController.selectedParent.value : null,
-                onChanged: (newValue) => editController.selectedParent.value = newValue!,
+                decoration: const InputDecoration(
+                    hintText: 'Danh mục cha',
+                    labelText: 'Danh mục cha',
+                    prefixIcon: Icon(Iconsax.bezier)),
+                value: editController.selectedParent.value.id.isNotEmpty
+                    ? editController.selectedParent.value
+                    : null,
+                onChanged: (newValue) =>
+                    editController.selectedParent.value = newValue!,
                 items: categoryController.allItems
                     .map((item) => DropdownMenuItem(
                           value: item,
-                          child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [Text(item.name)]),
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [Text(item.name)]),
                         ))
                     .toList(),
               ),
@@ -65,8 +79,12 @@ class EditCategoryForm extends StatelessWidget {
               () => SHFImageUploader(
                 width: 80,
                 height: 80,
-                image: editController.imageURL.value.isNotEmpty ? editController.imageURL.value : SHFImages.defaultImage,
-                imageType: editController.imageURL.value.isNotEmpty ? ImageType.network : ImageType.asset,
+                image: editController.imageURL.value.isNotEmpty
+                    ? editController.imageURL.value
+                    : SHFImages.defaultImage,
+                imageType: editController.imageURL.value.isNotEmpty
+                    ? ImageType.network
+                    : ImageType.asset,
                 onIconButtonPressed: () => editController.pickImage(),
               ),
             ),
@@ -74,8 +92,9 @@ class EditCategoryForm extends StatelessWidget {
             Obx(
               () => CheckboxMenuButton(
                 value: editController.isFeatured.value,
-                onChanged: (value) => editController.isFeatured.value = value ?? false,
-                child: const Text('Featured'),
+                onChanged: (value) =>
+                    editController.isFeatured.value = value ?? false,
+                child: const Text('Nổi bật'),
               ),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),
@@ -86,7 +105,10 @@ class EditCategoryForm extends StatelessWidget {
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(onPressed: () => editController.updateCategory(category), child: const Text('Update')),
+                        child: ElevatedButton(
+                            onPressed: () =>
+                                editController.updateCategory(category),
+                            child: const Text('Cập nhật')),
                       ),
               ),
             ),

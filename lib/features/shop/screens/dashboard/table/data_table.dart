@@ -8,18 +8,24 @@ import '../../../controllers/order/order_controller.dart';
 import 'table_source.dart';
 
 class DashboardOrderTable extends StatelessWidget {
-  const DashboardOrderTable({super.key});
+  const DashboardOrderTable({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final controller = OrderController.instance;
     return Obx(
       () {
-        // Orders & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
-        Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
-        Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
+        // Các đơn hàng & Các hàng được chọn được ẩn => Chỉ để cập nhật giao diện người dùng => Obx => [ProductRows]
+        Visibility(
+            visible: false,
+            child: Text(controller.filteredItems.length.toString()));
+        Visibility(
+            visible: false,
+            child: Text(controller.selectedRows.length.toString()));
 
-        // Table
+        // Bảng
         return SHFPaginatedDataTable(
           minWidth: 700,
           dataRowHeight: SHFSizes.xl * 1.2,
@@ -27,11 +33,17 @@ class DashboardOrderTable extends StatelessWidget {
           sortAscending: controller.sortAscending.value,
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
-            DataColumn2(label: const Text('Order ID'), onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)),
-            const DataColumn2(label: Text('Date')),
-            const DataColumn2(label: Text('Items')),
-            DataColumn2(label: const Text('Status'), fixedWidth: SHFDeviceUtils.isMobileScreen(context) ? 120 : null),
-            const DataColumn2(label: Text('Amount')),
+            DataColumn2(
+                label: const Text('Mã đơn hàng'),
+                onSort: (columnIndex, ascending) =>
+                    controller.sortById(columnIndex, ascending)),
+            const DataColumn2(label: Text('Ngày')),
+            const DataColumn2(label: Text('Sản phẩm')),
+            DataColumn2(
+                label: const Text('Trạng thái'),
+                fixedWidth:
+                    SHFDeviceUtils.isMobileScreen(context) ? 120 : null),
+            const DataColumn2(label: Text('Số tiền')),
           ],
           source: OrderRows(),
         );

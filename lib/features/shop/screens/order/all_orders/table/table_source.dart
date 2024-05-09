@@ -28,7 +28,7 @@ class OrderRows extends DataTableSource {
           ),
         ),
         DataCell(Text(order.formattedOrderDate)),
-        DataCell(Text('${order.items.length} Items')),
+        DataCell(Text('${order.items.length} sản phẩm')),
         DataCell(
           SHFRoundedContainer(
             radius: SHFSizes.cardRadiusSm,

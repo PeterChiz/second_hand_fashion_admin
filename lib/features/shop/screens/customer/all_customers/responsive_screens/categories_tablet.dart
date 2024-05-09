@@ -22,7 +22,7 @@ class CustomersTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Customers', breadcrumbItems: ['Customers']),
+              const SHFBreadcrumbsWithHeading(heading: 'Khách hàng', breadcrumbItems: ['Khách hàng']),
               const SizedBox(height: SHFSizes.spaceBtwSections), // Table Body
 
               // Table Body

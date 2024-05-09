@@ -23,7 +23,7 @@ class OrderDetailDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: order.id, breadcrumbItems: const [SHFRoutes.orders, 'Details']),
+              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: order.id, breadcrumbItems: const [SHFRoutes.orders, 'Chi tiết']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Body

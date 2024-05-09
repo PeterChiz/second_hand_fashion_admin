@@ -7,19 +7,19 @@ import '../../../../controllers/brand/brand_controller.dart';
 import 'table_source.dart';
 
 class BrandTable extends StatelessWidget {
-  const BrandTable({super.key});
+  const BrandTable({super.key, });
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BrandController());
     return Obx(
-      () {
-        // Categories & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
+          () {
+        // Các Hạng mục và Hàng đã Chọn được Ẩn => Chỉ để cập nhật giao diện => Obx => [Các hàng sản phẩm]
         Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
         Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
 
         final lgTable = controller.filteredItems.any((element) => element.brandCategories != null && element.brandCategories!.length > 2);
-        // Table
+        // Bảng
         return SHFPaginatedDataTable(
           minWidth: 700,
           dataRowHeight: lgTable ? 96 : 64,
@@ -28,13 +28,13 @@ class BrandTable extends StatelessWidget {
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
             DataColumn2(
-                label: const Text('Brand'),
+                label: const Text('Thương hiệu'),
                 fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 200,
                 onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending)),
-            const DataColumn2(label: Text('Categories')),
-            DataColumn2(label: const Text('Featured'), fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 100),
-            DataColumn2(label: const Text('Date'), fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 200),
-            DataColumn2(label: const Text('Action'), fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 100),
+            const DataColumn2(label: Text('Danh mục')),
+            DataColumn2(label: const Text('Nổi bật'), fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 100),
+            DataColumn2(label: const Text('Ngày'), fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 200),
+            DataColumn2(label: const Text('Hành động'), fixedWidth: SHFDeviceUtils.isMobileScreen(Get.context!) ? null : 100),
           ],
           source: BrandRows(),
         );

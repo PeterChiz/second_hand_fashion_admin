@@ -31,7 +31,7 @@ class OrderController extends SHFBaseController<OrderModel> {
     await _orderRepository.deleteOrder(item.docId);
   }
 
-  /// Update Product Status
+  /// Cap nhat trang thai san pham
   Future<void> updateOrderStatus(OrderModel order, OrderStatus newStatus) async {
     try {
       statusLoader.value = true;

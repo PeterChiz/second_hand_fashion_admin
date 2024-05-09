@@ -25,9 +25,9 @@ class CustomerOrders extends StatelessWidget {
       child: Obx(
         () {
           if (controller.ordersLoading.value) return const SHFLoaderAnimation();
-          if (controller.allCustomerOrders.isEmpty)
-            return SHFAnimationLoaderWidget(
-                text: 'No Orders Found', animation: SHFImages.packageAnimation);
+          if (controller.allCustomerOrders.isEmpty) {
+            return SHFAnimationLoaderWidget(text: 'No Orders Found', animation: SHFImages.packageAnimation);
+          }
 
           final totalAmount = controller.allCustomerOrders.fold(0.0,
               (previousValue, element) => previousValue + element.totalAmount);

@@ -17,7 +17,7 @@ class CreateBrandDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Create Brand', breadcrumbItems: [SHFRoutes.categories, 'Create Brand']),
+              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Tạo thương hiệu', breadcrumbItems: [SHFRoutes.categories, 'Tạo thương hiệu']),
               SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

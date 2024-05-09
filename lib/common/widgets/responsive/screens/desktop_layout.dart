@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import '../../layouts/headers/header.dart';
 import '../../layouts/sidebars/sidebar.dart';
 
-/// Widget for the desktop layout
+/// Widget cho bố cục máy tính để bàn
 class DesktopLayout extends StatelessWidget {
   DesktopLayout({super.key, this.body});
 
-  /// Widget to be displayed as the body of the desktop layout
+  /// Widget để hiển thị là phần thân của bố cục máy tính để bàn
   final Widget? body;
 
-  /// Key for the scaffold widget
+  /// Key cho scaffold widget
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
@@ -18,13 +18,13 @@ class DesktopLayout extends StatelessWidget {
       key: scaffoldKey,
       body: Row(
         children: [
-          const Expanded(child: SHFSidebar()), // Sidebar
+          const Expanded(child: SHFSidebar()), // Thanh bên
           Expanded(
             flex: 5,
             child: Column(
               children: [
-                SHFHeader(scaffoldKey: scaffoldKey), // Header
-                Expanded(child: body ?? Container()), // Body
+                SHFHeader(scaffoldKey: scaffoldKey), // Đầu trang
+                Expanded(child: body ?? Container()), // Phần thân
               ],
             ),
           ),
@@ -33,4 +33,3 @@ class DesktopLayout extends StatelessWidget {
     );
   }
 }
-

@@ -1,4 +1,3 @@
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,10 +21,11 @@ class SHFWeeklySalesGraph extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Weekly Sales', style: Theme.of(context).textTheme.headlineSmall),
+          Text('Doanh số hàng tuần',
+              style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwSections),
 
-          // Graph
+          // Biểu đồ
           Obx(
             () => controller.weeklySales.isNotEmpty
                 ? SizedBox(
@@ -36,15 +36,16 @@ class SHFWeeklySalesGraph extends StatelessWidget {
                         borderData: FlBorderData(
                           show: true,
                           border: const Border(
-                            top: BorderSide.none, // Remove top border
-                            right: BorderSide.none, // Remove right border
+                            top: BorderSide.none, // Loại bỏ đường viền trên
+                            right:
+                                BorderSide.none, // Loại bỏ đường viền bên phải
                           ),
                         ),
                         gridData: const FlGridData(
                           show: true,
                           drawHorizontalLine: true,
-                          drawVerticalLine: false, // Remove vertical lines
-                          horizontalInterval: 200, // Set your desired interval
+                          drawVerticalLine: false, // Loại bỏ đường dọc
+                          horizontalInterval: 200, // Đặt khoảng cách mong muốn
                         ),
                         barGroups: controller.weeklySales
                             .asMap()
@@ -54,20 +55,31 @@ class SHFWeeklySalesGraph extends StatelessWidget {
                                 x: entry.key,
                                 barRods: [
                                   BarChartRodData(
-                                      width: 30, toY: entry.value, color: SHFColors.primary, borderRadius: BorderRadius.circular(SHFSizes.sm)),
+                                      width: 30,
+                                      toY: entry.value,
+                                      color: SHFColors.primary,
+                                      borderRadius:
+                                          BorderRadius.circular(SHFSizes.sm)),
                                 ],
                               ),
                             )
                             .toList(),
                         groupsSpace: SHFSizes.spaceBtwItems,
                         barTouchData: BarTouchData(
-                          touchTooltipData: BarTouchTooltipData(getTooltipColor: (_) => SHFColors.secondary),
-                          touchCallback: SHFDeviceUtils.isDesktopScreen(context) ? (barTouchEvent, barTouchResponse) {} : null,
+                          touchTooltipData: BarTouchTooltipData(
+                              getTooltipColor: (_) => SHFColors.secondary),
+                          touchCallback: SHFDeviceUtils.isDesktopScreen(context)
+                              ? (barTouchEvent, barTouchResponse) {}
+                              : null,
                         ),
                       ),
                     ),
                   )
-                : const SizedBox(height: 400, child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [SHFLoaderAnimation()])),
+                : const SizedBox(
+                    height: 400,
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [SHFLoaderAnimation()])),
           ),
         ],
       ),
@@ -81,16 +93,24 @@ class SHFWeeklySalesGraph extends StatelessWidget {
         sideTitles: SideTitles(
           showTitles: true,
           getTitlesWidget: (value, meta) {
-            // Map index to the desired day of the week
-            final days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+            // Ánh xạ chỉ mục thành ngày trong tuần mong muốn
+            final days = [
+              'Thứ 2',
+              'Thứ 3',
+              'Thứ 4',
+              'Thứ 5',
+              'Thứ 6',
+              'Thứ 7',
+              'Chủ Nhật'
+            ];
 
-            // Calculate the index and ensure it wraps around for the correct day
+            // Tính chỉ mục và đảm bảo nó vòng quanh cho ngày đúng
             final index = value.toInt() % days.length;
 
-            // Get the day corresponding to the calculated index
+            // Lấy ngày tương ứng với chỉ mục tính toán
             final day = days[index];
 
-            // Return a custom widget with the full day name
+            // Trả về một widget tùy chỉnh với tên ngày đầy đủ
             return SideTitleWidget(
               space: 0,
               axisSide: AxisSide.bottom,
@@ -99,7 +119,9 @@ class SHFWeeklySalesGraph extends StatelessWidget {
           },
         ),
       ),
-      leftTitles: const AxisTitles(sideTitles: SideTitles(showTitles: true, interval: 200, reservedSize: 50)),
+      leftTitles: const AxisTitles(
+          sideTitles:
+              SideTitles(showTitles: true, interval: 200, reservedSize: 50)),
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
     );

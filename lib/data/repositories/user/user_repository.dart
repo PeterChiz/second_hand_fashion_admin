@@ -10,13 +10,13 @@ import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 import '../authentication/authentication_repository.dart';
 
-/// Repository class for user-related operations.
+/// Lớp Repository cho các hoạt động liên quan đến người dùng.
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
 
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  /// Function to save user data to Firestore.
+  /// Hàm để lưu dữ liệu người dùng vào Firestore.
   Future<void> createUser(UserModel user) async {
     try {
       await _db.collection("Users").doc(user.id).set(user.toJson());
@@ -27,11 +27,11 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 
-  /// Function to fetch user details based on user ID.
+  /// Hàm để lấy chi tiết người dùng dựa trên ID người dùng.
   Future<List<UserModel>> getAllUsers() async {
     try {
       final querySnapshot = await _db.collection("Users").orderBy('FirstName').get();
@@ -43,12 +43,12 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      if (kDebugMode) print('Something Went Wrong: $e');
-      throw 'Something Went Wrong: $e';
+      if (kDebugMode) print('Có lỗi xảy ra: $e');
+      throw 'Có lỗi xảy ra: $e';
     }
   }
 
-  /// Function to fetch user details based on user ID.
+  /// Hàm để lấy chi tiết người dùng dựa trên ID người dùng.
   Future<UserModel> fetchUserDetails(String id) async {
     try {
       final documentSnapshot = await _db.collection("Users").doc(id).get();
@@ -64,12 +64,12 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      if (kDebugMode) print('Something Went Wrong: $e');
-      throw 'Something Went Wrong: $e';
+      if (kDebugMode) print('Có lỗi xảy ra: $e');
+      throw 'Có lỗi xảy ra: $e';
     }
   }
 
-  /// Function to fetch user details based on user ID.
+  /// Hàm để lấy chi tiết người quản trị.
   Future<UserModel> fetchAdminDetails() async {
     try {
       final documentSnapshot = await _db.collection("Users").doc(AuthenticationRepository.instance.authUser!.uid).get();
@@ -85,12 +85,12 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      if (kDebugMode) print('Something Went Wrong: $e');
-      throw 'Something Went Wrong: $e';
+      if (kDebugMode) print('Có lỗi xảy ra: $e');
+      throw 'Có lỗi xảy ra: $e';
     }
   }
 
-  /// Function to fetch user details based on user ID.
+  /// Hàm để lấy các đơn đặt hàng của người dùng dựa trên ID người dùng.
   Future<List<OrderModel>> fetchUserOrders(String userId) async {
     try {
       final documentSnapshot = await _db.collection("Orders").where('userId', isEqualTo: userId).get();
@@ -102,12 +102,12 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      if (kDebugMode) print('Something Went Wrong: $e');
-      throw 'Something Went Wrong: $e';
+      if (kDebugMode) print('Có lỗi xảy ra: $e');
+      throw 'Có lỗi xảy ra: $e';
     }
   }
 
-  /// Function to update user data in Firestore.
+  /// Hàm để cập nhật dữ liệu người dùng trong Firestore.
   Future<void> updateUserDetails(UserModel updatedUser) async {
     try {
       await _db.collection("Users").doc(updatedUser.id).update(updatedUser.toJson());
@@ -118,11 +118,11 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 
-  /// Update any field in specific Users Collection
+  /// Cập nhật bất kỳ trường nào trong Bộ sưu tập Người dùng cụ thể
   Future<void> updateSingleField(Map<String, dynamic> json) async {
     try {
       await _db.collection("Users").doc(AuthenticationRepository.instance.authUser!.uid).update(json);
@@ -133,11 +133,11 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 
-  /// Delete User Data
+  /// Xóa dữ liệu người dùng
   Future<void> deleteUser(String id) async {
     try {
       await _db.collection("Users").doc(id).delete();
@@ -146,7 +146,7 @@ class UserRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.message!;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -15,7 +14,7 @@ import '../../../../controllers/category/create_category_controller.dart';
 import '../../../../models/category_model.dart';
 
 class CreateCategoryForm extends StatelessWidget {
-  const CreateCategoryForm({super.key});
+  const CreateCategoryForm({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -31,38 +30,38 @@ class CreateCategoryForm extends StatelessWidget {
           children: [
             // Heading
             const SizedBox(height: SHFSizes.sm),
-            Text('Create New Category', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Tạo Danh mục mới', style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: SHFSizes.spaceBtwSections),
 
             // Name Text Field
             TextFormField(
               controller: createController.name,
-              validator: (value) => SHFValidator.validateEmptyText('Name', value),
-              decoration: const InputDecoration(labelText: 'Category Name', prefixIcon: Icon(Iconsax.category)),
+              validator: (value) => SHFValidator.validationEmptyText('Tên', value),
+              decoration: const InputDecoration(labelText: 'Tên danh mục', prefixIcon: Icon(Iconsax.category)),
             ),
 
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
             Obx(
-              () => categoryController.isLoading.value
+                  () => categoryController.isLoading.value
                   ? const SHFShimmerEffect(width: double.infinity, height: 55)
                   : DropdownButtonFormField<CategoryModel>(
-                      decoration: const InputDecoration(
-                          hintText: 'Parent Category', labelText: 'Parent Category', prefixIcon: Icon(Iconsax.bezier)),
-                      onChanged: (newValue) => createController.selectedParent.value = newValue!,
-                      items: categoryController.allItems
-                          .map((item) => DropdownMenuItem(
-                                value: item,
-                                child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [Text(item.name)]),
-                              ))
-                          .toList(),
-                    ),
+                decoration: const InputDecoration(
+                    hintText: 'Danh mục cha', labelText: 'Danh mục cha', prefixIcon: Icon(Iconsax.bezier)),
+                onChanged: (newValue) => createController.selectedParent.value = newValue!,
+                items: categoryController.allItems
+                    .map((item) => DropdownMenuItem(
+                  value: item,
+                  child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [Text(item.name)]),
+                ))
+                    .toList(),
+              ),
             ),
 
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),
 
             // Image Uploader & Featured Checkbox
             Obx(
-              () => SHFImageUploader(
+                  () => SHFImageUploader(
                 width: 80,
                 height: 80,
                 image: createController.imageURL.value.isNotEmpty ? createController.imageURL.value : SHFImages.defaultImage,
@@ -72,22 +71,22 @@ class CreateCategoryForm extends StatelessWidget {
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
             Obx(
-              () => CheckboxMenuButton(
+                  () => CheckboxMenuButton(
                 value: createController.isFeatured.value,
                 onChanged: (value) => createController.isFeatured.value = value ?? false,
-                child: const Text('Featured'),
+                child: const Text('Nổi bật'),
               ),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),
             Obx(
-              () => AnimatedSwitcher(
+                  () => AnimatedSwitcher(
                 duration: const Duration(seconds: 1),
                 child: createController.loading.value
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
-                        width: double.infinity,
-                        child: ElevatedButton(onPressed: () => createController.createCategory(), child: const Text('Create')),
-                      ),
+                  width: double.infinity,
+                  child: ElevatedButton(onPressed: () => createController.createCategory(), child: const Text('Tạo')),
+                ),
               ),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),

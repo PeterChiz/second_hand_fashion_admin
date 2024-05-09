@@ -11,57 +11,56 @@ import '../../appbar/appbar.dart';
 import '../../images/shf_rounded_image.dart';
 import '../../shimmers/shimmer.dart';
 
-/// Header widget for the application
+/// Widget tiêu đề cho ứng dụng
 class SHFHeader extends StatelessWidget implements PreferredSizeWidget {
-  const SHFHeader({
-    super.key,
+  const SHFHeader({super.key,
     required this.scaffoldKey,
   });
 
-  /// GlobalKey to access the Scaffold state
+  /// GlobalKey để truy cập trạng thái Scaffold
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
     final controller = AdminController.instance;
     return Container(
-      /// Background Color, Bottom Border
+      /// Màu nền, Đường viền dưới
       decoration: const BoxDecoration(
         color: SHFColors.white,
         border: Border(bottom: BorderSide(color: SHFColors.grey, width: 1)),
       ),
       padding: const EdgeInsets.symmetric(horizontal: SHFSizes.md, vertical: SHFSizes.sm),
       child: SHFAppBar(
-        /// Mobile Menu
+        /// Menu di động
         leadingIcon: !SHFDeviceUtils.isDesktopScreen(context) ? Iconsax.menu : null,
         leadingOnPressed: !SHFDeviceUtils.isDesktopScreen(context) ? () => scaffoldKey.currentState?.openDrawer() : null,
         title: Row(
           children: [
-            /// Search
+            /// Tìm kiếm
             if (SHFDeviceUtils.isDesktopScreen(context))
               SizedBox(
                 width: 400,
                 child: TextFormField(
-                  decoration: const InputDecoration(prefixIcon: Icon(Iconsax.search_normal), hintText: 'Search anything...'),
+                  decoration: const InputDecoration(prefixIcon: Icon(Iconsax.search_normal), hintText: 'Tìm kiếm...'),
                 ),
               ),
           ],
         ),
         actions: [
-          // Search Icon on Mobile
+          // Biểu tượng Tìm kiếm trên di động
           if (!SHFDeviceUtils.isDesktopScreen(context)) IconButton(icon: const Icon(Iconsax.search_normal), onPressed: () {}),
 
-          // Notification Icon
+          // Biểu tượng Thông báo
           IconButton(icon: const Icon(Iconsax.notification), onPressed: () {}),
           const SizedBox(width: SHFSizes.spaceBtwItems / 2),
 
-          /// User Data
+          /// Dữ liệu Người dùng
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              /// User Profile Image
+              /// Hình ảnh Hồ sơ Người dùng
               Obx(
-                () => SHFRoundedImage(
+                    () => SHFRoundedImage(
                   width: 40,
                   padding: 2,
                   height: 40,
@@ -72,10 +71,10 @@ class SHFHeader extends StatelessWidget implements PreferredSizeWidget {
 
               const SizedBox(width: SHFSizes.sm),
 
-              /// User Profile Data [Hide on Mobile]
+              /// Dữ liệu Hồ sơ Người dùng [Ẩn trên di động]
               if (!SHFDeviceUtils.isMobileScreen(context))
                 Obx(
-                  () => Column(
+                      () => Column(
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

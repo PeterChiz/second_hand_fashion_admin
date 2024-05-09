@@ -9,8 +9,6 @@ import '../../../utils/exceptions/firebase_exceptions.dart';
 import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
-
-
 class BrandRepository extends GetxController {
   // Singleton instance of the BrandRepository
   static BrandRepository get instance => Get.find();
@@ -18,11 +16,12 @@ class BrandRepository extends GetxController {
   // Firebase Firestore instance
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  // Get all brands from the 'Brands' collection
+  // Lấy tất cả các thương hiệu từ bộ sưu tập 'Brands'
   Future<List<BrandModel>> getAllBrands() async {
     try {
       final snapshot = await _db.collection("Brands").get();
-      final result = snapshot.docs.map((e) => BrandModel.fromSnapshot(e)).toList();
+      final result =
+          snapshot.docs.map((e) => BrandModel.fromSnapshot(e)).toList();
       return result;
     } on FirebaseException catch (e) {
       throw e.message!;
@@ -31,15 +30,17 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.message!;
     } catch (e) {
-      throw 'Something Went Wrong! Please try again.';
+      throw 'Đã xảy ra lỗi! Vui lòng thử lại.';
     }
   }
 
-  // Get all brand categories from the 'BrandCategory' collection
+  // Lấy tất cả các danh mục thương hiệu từ bộ sưu tập 'BrandCategory'
   Future<List<BrandCategoryModel>> getAllBrandCategories() async {
     try {
       final brandCategoryQuery = await _db.collection('BrandCategory').get();
-      final brandCategories = brandCategoryQuery.docs.map((doc) => BrandCategoryModel.fromSnapshot(doc)).toList();
+      final brandCategories = brandCategoryQuery.docs
+          .map((doc) => BrandCategoryModel.fromSnapshot(doc))
+          .toList();
       return brandCategories;
     } on FirebaseException catch (e) {
       throw e.message!;
@@ -48,15 +49,21 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.message!;
     } catch (e) {
-      throw 'Something Went Wrong! Please try again.';
+      throw 'Đã xảy ra lỗi! Vui lòng thử lại.';
     }
   }
 
-  // Get specific brand categories for a given brand ID
-  Future<List<BrandCategoryModel>> getSpecificBrandCategories(String brandId) async {
+  // Lấy các danh mục thương hiệu cụ thể cho một ID thương hiệu nhất định
+  Future<List<BrandCategoryModel>> getSpecificBrandCategories(
+      String brandId) async {
     try {
-      final brandCategoryQuery = await _db.collection('BrandCategory').where('brandId', isEqualTo: brandId).get();
-      final brandCategories = brandCategoryQuery.docs.map((doc) => BrandCategoryModel.fromSnapshot(doc)).toList();
+      final brandCategoryQuery = await _db
+          .collection('BrandCategory')
+          .where('brandId', isEqualTo: brandId)
+          .get();
+      final brandCategories = brandCategoryQuery.docs
+          .map((doc) => BrandCategoryModel.fromSnapshot(doc))
+          .toList();
       return brandCategories;
     } on FirebaseException catch (e) {
       throw e.message!;
@@ -65,11 +72,11 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.message!;
     } catch (e) {
-      throw 'Something Went Wrong! Please try again.';
+      throw 'Đã xảy ra lỗi! Vui lòng thử lại.';
     }
   }
 
-  // Create a new brand document in the 'Brands' collection
+  // Tạo một tài liệu thương hiệu mới trong bộ sưu tập 'Brands'
   Future<String> createBrand(BrandModel brand) async {
     try {
       final result = await _db.collection("Brands").add(brand.toJson());
@@ -81,14 +88,15 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  // Create a new brand category document in the 'BrandCategory' collection
+  // Tạo một tài liệu danh mục thương hiệu mới trong bộ sưu tập 'BrandCategory'
   Future<String> createBrandCategory(BrandCategoryModel brandCategory) async {
     try {
-      final result = await _db.collection("BrandCategory").add(brandCategory.toJson());
+      final result =
+          await _db.collection("BrandCategory").add(brandCategory.toJson());
       return result.id;
     } on FirebaseException catch (e) {
       throw SHFFirebaseException(e.code).message;
@@ -97,11 +105,11 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  // Update an existing brand document in the 'Brands' collection
+  // Cập nhật một tài liệu thương hiệu hiện có trong bộ sưu tập 'Brands'
   Future<void> updateBrand(BrandModel brand) async {
     try {
       await _db.collection("Brands").doc(brand.id).update(brand.toJson());
@@ -112,11 +120,11 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  // Delete an existing brand document and its associated brand categories
+  // Xóa một tài liệu thương hiệu hiện có và các danh mục thương hiệu liên quan của nó
   Future<void> deleteBrand(BrandModel brand) async {
     try {
       await _db.runTransaction((transaction) async {
@@ -124,15 +132,20 @@ class BrandRepository extends GetxController {
         final brandSnap = await transaction.get(brandRef);
 
         if (!brandSnap.exists) {
-          throw Exception("Brand not found");
+          throw Exception("Thương hiệu không tồn tại");
         }
 
-        final brandCategoriesSnapshot = await _db.collection('BrandCategory').where('brandId', isEqualTo: brand.id).get();
-        final brandCategories = brandCategoriesSnapshot.docs.map((e) => BrandCategoryModel.fromSnapshot(e));
+        final brandCategoriesSnapshot = await _db
+            .collection('BrandCategory')
+            .where('brandId', isEqualTo: brand.id)
+            .get();
+        final brandCategories = brandCategoriesSnapshot.docs
+            .map((e) => BrandCategoryModel.fromSnapshot(e));
 
         if (brandCategories.isNotEmpty) {
           for (var brandCategory in brandCategories) {
-            transaction.delete(_db.collection('BrandCategory').doc(brandCategory.id));
+            transaction
+                .delete(_db.collection('BrandCategory').doc(brandCategory.id));
           }
         }
 
@@ -145,11 +158,11 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  // Delete a brand category document in the 'BrandCategory' collection
+  // Xóa một tài liệu danh mục thương hiệu trong bộ sưu tập 'BrandCategory'
   Future<void> deleteBrandCategory(String brandCategoryId) async {
     try {
       await _db.collection("BrandCategory").doc(brandCategoryId).delete();
@@ -160,7 +173,7 @@ class BrandRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 }

@@ -17,36 +17,36 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
-  // Get Authenticated User Data
+  // Lấy dữ liệu người dùng đã xác thực
   User? get authUser => _auth.currentUser;
 
-  // Get IsAuthenticated User
+  // Kiểm tra người dùng đã xác thực hay chưa
   bool get isAuthenticated => _auth.currentUser != null;
 
-  // Called from main.dart on app launch
+  // Được gọi từ main.dart khi ứng dụng được khởi chạy
   @override
   void onReady() {
     _auth.setPersistence(Persistence.LOCAL);
-    // Redirect to the appropriate screen
+    // Chuyển hướng đến màn hình tương ứng
     screenRedirect();
   }
 
-  // Function to determine the relevant screen and redirect accordingly.
+  // Hàm xác định màn hình liên quan và chuyển hướng tương ứng.
   void screenRedirect() async {
     final user = _auth.currentUser;
 
-    // If the user is logged in
+    // Nếu người dùng đã đăng nhập
     if (user != null) {
-      // Navigate to the Home
+      // Chuyển đến Trang chủ
       Get.offAllNamed(SHFRoutes.dashboard);
     } else {
       Get.offAllNamed(SHFRoutes.login);
     }
   }
 
-  // Email & Password sign-in
+  // Đăng nhập bằng Email & Password
 
-  // LOGIN
+  // ĐĂNG NHẬP
   Future<UserCredential> loginWithEmailAndPassword(String email, String password) async {
     try {
       return await _auth.signInWithEmailAndPassword(email: email, password: password);
@@ -59,11 +59,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // REGISTER
+  // ĐĂNG KÝ
   Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
     try {
       return await _auth.createUserWithEmailAndPassword(email: email, password: password);
@@ -76,11 +76,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // REGISTER USER BY ADMIN
+  // ĐĂNG KÝ NGƯỜI DÙNG BỞI QUẢN TRỊ VIÊN
   Future<UserCredential> registerUserByAdmin(String email, String password) async {
     try {
       FirebaseApp app = await Firebase.initializeApp(name: 'RegisterUser', options: Firebase.app().options);
@@ -98,11 +98,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // EMAIL VERIFICATION
+  // XÁC THỰC EMAIL
   Future<void> sendEmailVerification() async {
     try {
       await _auth.currentUser?.sendEmailVerification();
@@ -115,11 +115,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // FORGET PASSWORD
+  // QUÊN MẬT KHẨU
   Future<void> sendPasswordResetEmail(String email) async {
     try {
       await _auth.sendPasswordResetEmail(email: email);
@@ -132,17 +132,17 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // RE AUTHENTICATE USER
+  // XÁC THỰC LẠI NGƯỜI DÙNG
   Future<void> reAuthenticateWithEmailAndPassword(String email, String password) async {
     try {
-      // Create a credential
+      // Tạo một thông tin xác thực
       AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
 
-      // ReAuthenticate
+      // Xác thực lại
       await _auth.currentUser!.reauthenticateWithCredential(credential);
     } on FirebaseAuthException catch (e) {
       throw SHFFirebaseAuthException(e.code).message;
@@ -153,12 +153,11 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-
-  // Logout User
+  // Đăng xuất Người dùng
   Future<void> logout() async {
     try {
       await FirebaseAuth.instance.signOut();
@@ -177,11 +176,11 @@ class AuthenticationRepository extends GetxController {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
       if (kDebugMode) print(e);
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // DELETE USER - Remove user Auth and Firestore Account.
+  // XÓA TÀI KHOẢN - Xóa Tài khoản xác thực và Firestore.
   Future<void> deleteAccount() async {
     try {
       // await UserRepository.instance.removeUserRecord(_auth.currentUser!.uid);
@@ -195,7 +194,7 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 }

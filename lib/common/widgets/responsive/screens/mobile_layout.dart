@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 import '../../layouts/headers/header.dart';
 import '../../layouts/sidebars/sidebar.dart';
 
-/// Widget for the mobile layout
+/// Widget cho bố cục di động
 class MobileLayout extends StatelessWidget {
-  MobileLayout({super.key, this.body});
+  MobileLayout({
+    super.key,
+    this.body,
+  });
 
-  /// Widget to be displayed as the body of the mobile layout
+  /// Widget sẽ được hiển thị như là phần thân của bố cục di động
   final Widget? body;
 
-  /// Key for the scaffold widget
+  /// Key cho scaffold widget
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: const SHFSidebar(), // Sidebar
-      appBar: SHFHeader(scaffoldKey: scaffoldKey), // Header
-      body: body ?? Container(), // Body
+      drawer: const SHFSidebar(), // Thanh bên
+      appBar: SHFHeader(scaffoldKey: scaffoldKey), // Đầu trang
+      body: body ?? Container(), // Thân
     );
   }
 }
-

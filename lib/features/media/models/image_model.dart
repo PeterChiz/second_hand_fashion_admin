@@ -7,7 +7,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 import '../../../utils/formatters/formatter.dart';
 
-/// Model class representing user data.
+/// Lớp mô hình đại diện cho dữ liệu hình ảnh.
 class ImageModel {
   String id;
   final String url;
@@ -20,19 +20,19 @@ class ImageModel {
   final String? contentType;
   String mediaCategory;
 
-  // Use to select any image
+  // Sử dụng để chọn bất kỳ hình ảnh nào
   RxBool isSelected = false.obs;
 
-  // Toggle image Selection
+  // Chuyển đổi lựa chọn hình ảnh
   void toggleSelected() {
     isSelected.toggle();
   }
 
-  // Not Mapped
+  // Không được ánh xạ
   final File? file;
   final Uint8List? localImageToDisplay;
 
-  /// Constructor for ImageModel.
+  /// Constructor cho ImageModel.
   ImageModel({
     this.id = '',
     required this.url,
@@ -48,7 +48,7 @@ class ImageModel {
     this.mediaCategory = '',
   });
 
-  /// Static function to create an empty user model.
+  /// Hàm tĩnh để tạo một mô hình người dùng trống.
   static ImageModel empty() => ImageModel(url: '', folder: '', filename: '');
 
   String get createdAtFormatted => SHFFormatter.formatDate(createdAt);
@@ -84,12 +84,12 @@ class ImageModel {
     };
   }
 
-  /// Convert Firestore Json
+  /// Chuyển đổi JSON từ Firestore
   factory ImageModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
 
-      // Map JSON Record to the Model
+      // Ánh xạ Bản ghi JSON thành Mô hình
       return ImageModel(
         id: document.id,
         url: data['url'] ?? '',
@@ -107,7 +107,7 @@ class ImageModel {
     }
   }
 
-  /// Map Firebase Storage Data
+  /// Ánh xạ Dữ liệu Lưu trữ Firebase
   factory ImageModel.fromFirebaseMetadata(FullMetadata metadata, String folder, String filename, String downloadUrl) {
     return ImageModel(
       url: downloadUrl,

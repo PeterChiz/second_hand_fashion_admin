@@ -5,61 +5,61 @@ import '../../utils/constants/sizes.dart';
 import '../../utils/popups/full_screen_loader.dart';
 import '../../utils/popups/loaders.dart';
 
-/// A generic controller class for managing data tables using GetX state management.
-/// This class provides common functionalities for handling data tables, including fetching, updating, and deleting items.
+/// Một lớp controller chung để quản lý các bảng dữ liệu bằng cách sử dụng GetX state management.
+/// Lớp này cung cấp các chức năng chung để xử lý các bảng dữ liệu, bao gồm lấy, cập nhật và xóa mục.
 abstract class SHFBaseController<T> extends GetxController {
-  RxBool isLoading = true.obs; // Observables for managing loading state
-  RxInt sortColumnIndex = 1.obs; // Observable for tracking the index of the column for sorting
-  RxList<T> allItems = <T>[].obs; // Observable list to store all items
-  RxBool sortAscending = true.obs; // Observable for tracking the sorting order (ascending or descending)
-  RxList<T> filteredItems = <T>[].obs; // Observable list to store filtered items
-  RxList<bool> selectedRows = <bool>[].obs; // Observable list to store selected rows
-  final searchTextController = TextEditingController(); // Controller for handling search text input
+  RxBool isLoading = true.obs; // Observables để quản lý trạng thái tải
+  RxInt sortColumnIndex = 1.obs; // Observable để theo dõi chỉ mục của cột để sắp xếp
+  RxList<T> allItems = <T>[].obs; // Danh sách quan sát để lưu trữ tất cả các mục
+  RxBool sortAscending = true.obs; // Observable để theo dõi thứ tự sắp xếp (tăng dần hoặc giảm dần)
+  RxList<T> filteredItems = <T>[].obs; // Danh sách quan sát để lưu trữ các mục đã lọc
+  RxList<bool> selectedRows = <bool>[].obs; // Danh sách quan sát để lưu trữ các hàng đã chọn
+  final searchTextController = TextEditingController(); // Controller để xử lý nhập văn bản tìm kiếm
 
   @override
   void onInit() {
-    fetchData(); // Initialize data fetching when the controller is initialized
+    fetchData(); // Khởi tạo việc lấy dữ liệu khi controller được khởi tạo
     super.onInit();
   }
 
-  /// Abstract method to be implemented by subclasses for fetching items.
+  /// Phương thức trừu tượng để được thực hiện bởi các lớp con để lấy các mục.
   Future<List<T>> fetchItems();
 
-  /// Abstract method to be implemented by subclasses for deleting an item.
+  /// Phương thức trừu tượng để được thực hiện bởi các lớp con để xóa một mục.
   Future<void> deleteItem(T item);
 
-  /// Common method for fetching data.
+  /// Phương thức chung để lấy dữ liệu.
   Future<void> fetchData() async {
     try {
-      isLoading.value = true; // Set loading state to true
+      isLoading.value = true; // Đặt trạng thái tải là true
       List<T> fetchedItems = [];
       if (allItems.isEmpty) {
-        fetchedItems = await fetchItems(); // Fetch items (to be implemented in subclasses)
+        fetchedItems = await fetchItems(); // Lấy các mục (sẽ được thực hiện trong các lớp con)
       }
-      allItems.assignAll(fetchedItems); // Assign fetched items to the allItems list
-      filteredItems.assignAll(allItems); // Initially, set filtered items to all items
-      selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Initialize selected rows
+      allItems.assignAll(fetchedItems); // Gán các mục đã lấy được vào danh sách allItems
+      filteredItems.assignAll(allItems); // Ban đầu, đặt các mục đã lọc là tất cả các mục
+      selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Khởi tạo các hàng đã chọn
     } catch (e) {
-      // Handle error (to be implemented in subclasses)
+      // Xử lý lỗi (sẽ được thực hiện trong các lớp con)
     } finally {
-      isLoading.value = false; // Set loading state to false, regardless of success or failure
+      isLoading.value = false; // Đặt trạng thái tải là false, bất kể thành công hay không
     }
   }
 
-  /// Common method for searching based on a query
+  /// Phương thức chung để tìm kiếm dựa trên một truy vấn
   void searchQuery(String query) {
     filteredItems.assignAll(
       allItems.where((item) => containsSearchQuery(item, query)),
     );
 
-    // Notify listeners about the change
+    // Thông báo cho người nghe về sự thay đổi
     update();
   }
 
-  /// Abstract method to be implemented by subclasses for checking if an item contains the search query.
+  /// Phương thức trừu tượng để được thực hiện bởi các lớp con để kiểm tra xem một mục có chứa truy vấn tìm kiếm không.
   bool containsSearchQuery(T item, String query);
 
-  /// Common method for sorting items by a property
+  /// Phương thức chung để sắp xếp các mục theo một thuộc tính
   void sortByProperty(int sortColumnIndex, bool ascending, Function(T) property) {
     sortAscending.value = ascending;
     filteredItems.sort((a, b) {
@@ -74,15 +74,15 @@ abstract class SHFBaseController<T> extends GetxController {
     update();
   }
 
-  /// Method for adding an item to the lists.
+  /// Phương thức để thêm một mục vào danh sách.
   void addItemToLists(T item) {
     allItems.add(item);
     filteredItems.add(item);
-    selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Initialize selected rows
-    allItems.refresh(); // Refresh the UI to reflect the changes
+    selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Khởi tạo các hàng đã chọn
+    allItems.refresh(); // Làm mới giao diện người dùng để phản ánh các thay đổi
   }
 
-  /// Method for updating an item in the lists.
+  /// Phương thức để cập nhật một mục trong danh sách.
   void updateItemFromLists(T item) {
     final itemIndex = allItems.indexWhere((i) => i == item);
     final filteredItemIndex = filteredItems.indexWhere((i) => i == item);
@@ -90,25 +90,25 @@ abstract class SHFBaseController<T> extends GetxController {
     if (itemIndex != -1) allItems[itemIndex] = item;
     if (filteredItemIndex != -1) filteredItems[itemIndex] = item;
 
-    allItems.refresh(); // Refresh the UI to reflect the changes
+    allItems.refresh(); // Làm mới giao diện người dùng để phản ánh các thay đổi
   }
 
-  /// Method for removing an item from the lists.
+  /// Phương thức để xóa một mục khỏi danh sách.
   void removeItemFromLists(T item) {
     allItems.remove(item);
     filteredItems.remove(item);
-    selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Initialize selected rows
+    selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Khởi tạo các hàng đã chọn
 
-    update(); // Trigger UI update
+    update(); // Kích hoạt cập nhật giao diện người dùng
   }
 
-  /// Common method for confirming deletion and performing the deletion.
+  /// Phương thức chung để xác nhận xóa và thực hiện xóa.
   Future<void> confirmAndDeleteItem(T item) async {
     try {
-      // Show a confirmation dialog
+      // Hiển thị hộp thoại xác nhận
       Get.defaultDialog(
-        title: 'Delete Item',
-        content: const Text('Are you sure you want to delete this item?'),
+        title: 'Xóa mục',
+        content: const Text('Bạn có chắc chắn muốn xóa mục này không?'),
         confirm: SizedBox(
           width: 60,
           child: ElevatedButton(
@@ -135,20 +135,20 @@ abstract class SHFBaseController<T> extends GetxController {
         ),
       );
     } catch (e) {
-      // Handle error (to be implemented in subclasses)
+      // Xử lý lỗi (sẽ được thực hiện trong các lớp con)
     }
   }
 
-  /// Method to be implemented by subclasses for handling confirmation before deleting an item.
+  /// Phương thức được thực hiện bởi các lớp con để xác nhận trước khi xóa một mục.
   Future<void> deleteOnConfirm(T item) async {
     try {
-      // Remove the Confirmation Dialog
+      // Ẩn Hộp thoại Xác nhận
       SHFFullScreenLoader.stopLoading();
 
-      // Start the loader
+      // Bắt đầu bộ lọc
       SHFFullScreenLoader.popUpCircular();
 
-      // Delete Firestore Data
+      // Xóa dữ liệu Firestore
       await deleteItem(item);
 
       removeItemFromLists(item);
@@ -156,7 +156,7 @@ abstract class SHFBaseController<T> extends GetxController {
       update();
 
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.successSnackBar(title: 'Item Deleted', message: 'Your Item has been Deleted');
+      SHFLoaders.successSnackBar(title: 'Đã xóa mục', message: 'Mục của bạn đã được xóa');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
       SHFLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());

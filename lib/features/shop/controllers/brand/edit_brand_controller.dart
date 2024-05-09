@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -26,7 +25,7 @@ class EditBrandController extends GetxController {
   final repository = Get.put(BrandRepository());
   final List<CategoryModel> selectedCategories = <CategoryModel>[].obs;
 
-  /// Init Data
+  /// Khởi tạo Dữ liệu
   void init(BrandModel brand) {
     name.text = brand.name;
     imageURL.value = brand.image;
@@ -36,7 +35,7 @@ class EditBrandController extends GetxController {
     }
   }
 
-  /// Toggle Category Selection
+  /// Chuyển đổi Lựa chọn Danh mục
   void toggleSelection(CategoryModel category) {
     if (selectedCategories.contains(category)) {
       selectedCategories.remove(category);
@@ -47,7 +46,7 @@ class EditBrandController extends GetxController {
     update();
   }
 
-  /// Method to reset fields
+  /// Phương thức để đặt lại trường
   void resetFields() {
     name.clear();
     loading(false);
@@ -56,70 +55,70 @@ class EditBrandController extends GetxController {
     selectedCategories.clear();
   }
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn Hình Ảnh Đại Diện từ Phương Tiện
   void pickImage() async {
     final controller = Get.put(MediaController());
     List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các hình ảnh đã chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt hình ảnh đã chọn là hình ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật hình ảnh chính bằng selectedImage
       imageURL.value = selectedImage.url;
     }
   }
 
-  /// Register new Brand
+  /// Cập nhật Thương hiệu
   Future<void> updateBrand(BrandModel brand) async {
     try {
-      // Start Loading
+      // Bắt đầu Loading
       SHFFullScreenLoader.popUpCircular();
 
-      // Check Internet Connectivity
+      // Kiểm tra Kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Kiểm tra Validation Form
       if (!formKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Is Data Updated
+      // Dữ liệu đã được cập nhật
       bool isBrandUpdated = false;
       if (brand.image != imageURL.value || brand.name != name.text.trim() || brand.isFeatured != isFeatured.value) {
         isBrandUpdated = true;
 
-        // Map Data
+        // Ánh xạ Dữ liệu
         brand.image = imageURL.value;
         brand.name = name.text.trim();
         brand.isFeatured = isFeatured.value;
         brand.updatedAt = DateTime.now();
 
-        // Call Repository to Update
+        // Gọi Repository để Cập nhật
         await repository.updateBrand(brand);
       }
 
-      // Update BrandCategories
+      // Cập nhật BrandCategories
       if (selectedCategories.isNotEmpty) await updateBrandCategories(brand);
 
-      // Update Brand Data in Products
+      // Cập nhật Dữ liệu Thương hiệu trong Sản phẩm
       if (isBrandUpdated) await updateBrandInProducts(brand);
 
-      // Update All Data list
+      // Cập nhật Tất cả danh sách dữ liệu
       BrandController.instance.updateItemFromLists(brand);
 
-      // Update UI Listeners
+      // Cập nhật Người nghe UI
       update();
 
-      // Remove Loader
+      // Loại bỏ Loader
       SHFFullScreenLoader.stopLoading();
 
-      // Success Message & Redirect
+      // Thông báo Thành công & Chuyển hướng
       SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi của bạn đã được cập nhật.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
@@ -127,29 +126,29 @@ class EditBrandController extends GetxController {
     }
   }
 
-  /// Update Categories of this Brand
+  /// Cập nhật Danh mục của Thương hiệu này
   updateBrandCategories(BrandModel brand) async {
-    // Fetch all BrandCategories
+    // Lấy tất cả BrandCategories
     final brandCategories = await repository.getSpecificBrandCategories(brand.id);
 
-    // SelectedCategoryIds
+    // Ids của các Category được chọn
     final selectedCategoryIds = selectedCategories.map((e) => e.id);
 
-    // Identify categories to remove
+    // Xác định các danh mục cần xóa
     final categoriesToRemove =
-        brandCategories.where((existingCategory) => !selectedCategoryIds.contains(existingCategory.categoryId)).toList();
+    brandCategories.where((existingCategory) => !selectedCategoryIds.contains(existingCategory.categoryId)).toList();
 
-    // Remove unselected categories
+    // Loại bỏ các danh mục không được chọn
     for (var categoryToRemove in categoriesToRemove) {
       await BrandRepository.instance.deleteBrandCategory(categoryToRemove.id ?? '');
     }
 
-    // Identify new categories to add
+    // Xác định danh mục mới để thêm
     final newCategoriesToAdd = selectedCategories
         .where((newCategory) => !brandCategories.any((existingCategory) => existingCategory.categoryId == newCategory.id))
         .toList();
 
-    // Add new categories
+    // Thêm danh mục mới
     for (var newCategory in newCategoriesToAdd) {
       var brandCategory = BrandCategoryModel(brandId: brand.id, categoryId: newCategory.id);
       brandCategory.id = await BrandRepository.instance.createBrandCategory(brandCategory);
@@ -159,26 +158,26 @@ class EditBrandController extends GetxController {
     BrandController.instance.updateItemFromLists(brand);
   }
 
-  /// Update Products of this Brand
+  /// Cập nhật Sản phẩm của Thương hiệu này
   updateBrandInProducts(BrandModel brand) async {
     final productController = Get.put(ProductController());
 
-    // Check if Products are available, if not then fetch them
+    // Kiểm tra xem có Sản phẩm không, nếu không thì lấy chúng
     if (productController.allItems.isEmpty) {
       await productController.fetchItems();
     }
 
-    // Once products are fetched, Get all products of this brand
+    // Một khi các sản phẩm đã được lấy, Lấy tất cả sản phẩm của thương hiệu này
     final brandProducts = productController.allItems.where((product) => product.brand != null && product.brand!.id == brand.id).toList();
     if (brandProducts.isNotEmpty) {
-      // Update Brand in Products
+      // Cập nhật Thương hiệu trong Sản phẩm
       for (var product in brandProducts) {
         product.brand = brand;
         await ProductRepository.instance.updateProductSpecificValue(product.id, {'Brand': brand.toJson()});
       }
 
-      // Update brand in Local Already Fetched List of Products
-      // Todo: Update Products Brand Value in Local List --> Just un comment Line Below
+      // Cập nhật thương hiệu trong Danh sách Các Sản phẩm đã lấy cục bộ
+      // Để làm: Cập nhật Giá trị Thương hiệu Sản phẩm trong Danh sách Cục bộ --> Chỉ cần bỏ comment dòng bên dưới
       // productController.updateItemFromLists(brand);
     }
   }

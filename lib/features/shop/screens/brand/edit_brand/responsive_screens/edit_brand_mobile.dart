@@ -20,7 +20,7 @@ class EditBrandMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Create Brand', breadcrumbItems: [SHFRoutes.categories, 'Create Category']),
+              const SHFBreadcrumbsWithHeading(heading: 'Tạo thương hiệu', breadcrumbItems: [SHFRoutes.categories, 'Tạo danh mục']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

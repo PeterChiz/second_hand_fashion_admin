@@ -5,27 +5,27 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-/// Service class for Firebase Storage operations
+/// Lớp dịch vụ cho các hoạt động liên quan đến Firebase Storage
 class SHFFirebaseStorageService extends GetxController {
   static SHFFirebaseStorageService get instance => Get.find();
 
   final _firebaseStorage = FirebaseStorage.instance;
 
-  /// Uploads image data from assets to Firebase Storage
-  /// Returns a Uint8List containing image data.
+  /// Tải dữ liệu hình ảnh từ tài nguyên đến Firebase Storage
+  /// Trả về một Uint8List chứa dữ liệu hình ảnh.
   Future<Uint8List> getImageDataFromAssets(String path) async {
     try {
       final byteData = await rootBundle.load(path);
       final imageData = byteData.buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes);
       return imageData;
     } catch (e) {
-      // Handle exceptions gracefully
-      throw 'Error loading image data: $e';
+      // Xử lý ngoại lệ một cách lịch sự
+      throw 'Lỗi khi tải dữ liệu hình ảnh: $e';
     }
   }
 
-  /// Uploads image data to Firebase Storage
-  /// Returns the download URL of the uploaded image.
+  /// Tải dữ liệu hình ảnh lên Firebase Storage
+  /// Trả về URL tải xuống của hình ảnh đã tải lên.
   Future<String> uploadImageData(String path, Uint8List image, String name) async {
     try {
       final ref = _firebaseStorage.ref(path).child(name);
@@ -33,21 +33,21 @@ class SHFFirebaseStorageService extends GetxController {
       final url = await ref.getDownloadURL();
       return url;
     } catch (e) {
-      // Handle exceptions gracefully
+      // Xử lý ngoại lệ một cách lịch sự
       if (e is FirebaseException) {
-        throw 'Firebase Exception: ${e.message}';
+        throw 'Ngoại lệ Firebase: ${e.message}';
       } else if (e is SocketException) {
-        throw 'Network Error: ${e.message}';
+        throw 'Lỗi Mạng: ${e.message}';
       } else if (e is PlatformException) {
-        throw 'Platform Exception: ${e.message}';
+        throw 'Ngoại lệ Nền tảng: ${e.message}';
       } else {
-        throw 'Something went wrong! Please try again.';
+        throw 'Đã xảy ra lỗi! Vui lòng thử lại.';
       }
     }
   }
 
-  /// Uploads image file to Firebase Storage
-  /// Returns the download URL of the uploaded image.
+  /// Tải tệp hình ảnh lên Firebase Storage
+  /// Trả về URL tải xuống của hình ảnh đã tải lên.
   Future<String> uploadImageFile(String path, XFile image) async {
     try {
       final ref = _firebaseStorage.ref(path).child(image.name);
@@ -55,15 +55,15 @@ class SHFFirebaseStorageService extends GetxController {
       final url = await ref.getDownloadURL();
       return url;
     } catch (e) {
-      // Handle exceptions gracefully
+      // Xử lý ngoại lệ một cách lịch sự
       if (e is FirebaseException) {
-        throw 'Firebase Exception: ${e.message}';
+        throw 'Ngoại lệ Firebase: ${e.message}';
       } else if (e is SocketException) {
-        throw 'Network Error: ${e.message}';
+        throw 'Lỗi Mạng: ${e.message}';
       } else if (e is PlatformException) {
-        throw 'Platform Exception: ${e.message}';
+        throw 'Ngoại lệ Nền tảng: ${e.message}';
       } else {
-        throw 'Something went wrong! Please try again.';
+        throw 'Đã xảy ra lỗi! Vui lòng thử lại.';
       }
     }
   }

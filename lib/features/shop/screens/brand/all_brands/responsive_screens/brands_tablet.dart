@@ -9,7 +9,9 @@ import '../table/data_table.dart';
 import '../widgets/table_header.dart';
 
 class BrandsTabletScreen extends StatelessWidget {
-  const BrandsTabletScreen({super.key});
+  const BrandsTabletScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,26 +24,29 @@ class BrandsTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Categories', breadcrumbItems: ['Categories']),
+              // Breadcrumbs
+              const SHFBreadcrumbsWithHeading(
+                  heading: 'Danh mục', breadcrumbItems: ['Danh mục']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Table Body
+              // Nội dung Bảng
               Obx(() {
-                // Show Loader
+                // Hiển thị Loader
                 if (controller.isLoading.value) return const SHFLoaderAnimation();
 
                 return const SHFRoundedContainer(
-                child: Column(
-                  children: [
-                    // Table Header
-                    BrandTableHeader(),
-                    SizedBox(height: SHFSizes.spaceBtwItems),
+                  child: Column(
+                    children: [
+                      // Tiêu đề Bảng
+                      BrandTableHeader(),
+                      SizedBox(height: SHFSizes.spaceBtwItems),
 
-                    // Table
-                    BrandTable(),
-                  ],
-                ),
-              ); }),
+                      // Bảng
+                      BrandTable(),
+                    ],
+                  ),
+                );
+              }),
             ],
           ),
         ),

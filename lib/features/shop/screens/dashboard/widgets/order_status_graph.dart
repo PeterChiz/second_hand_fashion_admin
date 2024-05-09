@@ -60,9 +60,9 @@ class OrderStatusPieChart extends StatelessWidget {
           child: Obx(
             () => DataTable(
               columns: const [
-                DataColumn(label: Text('Status')),
-                DataColumn(label: Text('Orders')),
-                DataColumn(label: Text('Total')),
+                DataColumn(label: Text('Trạng thái')),
+                DataColumn(label: Text('Đơn hàng')),
+                DataColumn(label: Text('Tổng')),
               ],
               rows: controller.orderStatusData.entries.map((entry) {
                 final OrderStatus status = entry.key;

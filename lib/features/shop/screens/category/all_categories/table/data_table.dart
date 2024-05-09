@@ -6,28 +6,28 @@ import '../../../../controllers/category/category_controller.dart';
 import 'table_source.dart';
 
 class CategoryTable extends StatelessWidget {
-  const CategoryTable({super.key});
+  const CategoryTable({super.key,});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(CategoryController());
     return Obx(
-      () {
-        // Categories & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
+          () {
+        // Các danh mục & Các hàng đã chọn được ẩn => Chỉ để cập nhật giao diện => Obx => [Các hàng sản phẩm]
         Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
         Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
 
-        // Table
+        // Bảng
         return SHFPaginatedDataTable(
           minWidth: 700,
           sortAscending: controller.sortAscending.value,
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
-            DataColumn2(label: const Text('Category'), onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending)),
-            const DataColumn2(label: Text('Parent Category')),
-            const DataColumn2(label: Text('Featured')),
-            const DataColumn2(label: Text('Date')),
-            const DataColumn2(label: Text('Action'), fixedWidth: 100),
+            DataColumn2(label: const Text('Danh mục'), onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending)),
+            const DataColumn2(label: Text('Danh mục cha')),
+            const DataColumn2(label: Text('Nổi bật')),
+            const DataColumn2(label: Text('Ngày')),
+            const DataColumn2(label: Text('Hành động'), fixedWidth: 100),
           ],
           source: CategoryRows(),
         );

@@ -14,13 +14,13 @@ class SHFBreadcrumbsWithHeading extends StatelessWidget {
     this.returnToPreviousScreen = false,
   });
 
-  // The heading for the page
+  // Tiêu đề của trang
   final String heading;
 
-  // List of breadcrumb items representing the navigation path
+  // Danh sách các mục breadcrumb đại diện cho đường dẫn điều hướng
   final List<String> breadcrumbItems;
 
-  // Flag indicating whether to include a button to return to the previous screen
+  // Cờ chỉ định liệu có bao gồm một nút để quay lại màn hình trước đó không
   final bool returnToPreviousScreen;
 
   @override
@@ -28,10 +28,10 @@ class SHFBreadcrumbsWithHeading extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Breadcrumb trail
+        // Dấu chân breadcrumb
         Row(
           children: [
-            // Dashboard link
+            // Liên kết Dashboard
             InkWell(
               onTap: () => Get.offAllNamed(SHFRoutes.dashboard),
               child: Padding(
@@ -42,17 +42,17 @@ class SHFBreadcrumbsWithHeading extends StatelessWidget {
                 ),
               ),
             ),
-            // Breadcrumb items
+            // Các mục breadcrumb
             for (int i = 0; i < breadcrumbItems.length; i++)
               Row(
                 children: [
-                  const Text('/'), // Separator
+                  const Text('/'), // Dấu phân cách
                   InkWell(
-                    // Last item should not be clickable
+                    // Mục cuối cùng không được nhấp vào
                     onTap: i == breadcrumbItems.length - 1 ? null : () => Get.toNamed(breadcrumbItems[i]),
                     child: Padding(
                       padding: const EdgeInsets.all(SHFSizes.xs),
-                      // Format breadcrumb item: capitalize and remove leading '/'
+                      // Định dạng mục breadcrumb: viết hoa chữ cái đầu và loại bỏ dấu '/'
                       child: Text(
                         i == breadcrumbItems.length - 1
                             ? breadcrumbItems[i].capitalize.toString()
@@ -66,7 +66,7 @@ class SHFBreadcrumbsWithHeading extends StatelessWidget {
           ],
         ),
         const SizedBox(height: SHFSizes.sm),
-        // Heading of the page
+        // Tiêu đề của trang
         Row(
           children: [
             if (returnToPreviousScreen) IconButton(onPressed: () => Get.back(), icon: const Icon(Iconsax.arrow_left)),
@@ -78,7 +78,7 @@ class SHFBreadcrumbsWithHeading extends StatelessWidget {
     );
   }
 
-  // Function to capitalize the first letter of a string
+  // Hàm viết hoa chữ cái đầu của một chuỗi
   String capitalize(String s) {
     return s.isEmpty ? '' : s[0].toUpperCase() + s.substring(1);
   }

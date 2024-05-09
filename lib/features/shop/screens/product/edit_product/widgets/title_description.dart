@@ -28,7 +28,7 @@ class ProductTitleAndDescription extends StatelessWidget {
             // Product Title Input Field
             TextFormField(
               controller: controller.title,
-              validator: (value) => SHFValidator.validateEmptyText('Product Title', value),
+              validator: (value) => SHFValidator.validationEmptyText('Product Title', value),
               decoration: const InputDecoration(labelText: 'Product Title'),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
@@ -43,7 +43,7 @@ class ProductTitleAndDescription extends StatelessWidget {
                 controller: controller.description,
                 keyboardType: TextInputType.multiline,
                 textAlignVertical: TextAlignVertical.top,
-                validator: (value) => SHFValidator.validateEmptyText('Product Description', value),
+                validator: (value) => SHFValidator.validationEmptyText('Product Description', value),
                 decoration: const InputDecoration(
                   labelText: 'Product Description',
                   hintText: 'Add your Product Description here...',

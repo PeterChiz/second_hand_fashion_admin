@@ -11,12 +11,12 @@ class OrderDetailController extends GetxController {
   Rx<OrderModel> order = OrderModel.empty().obs;
   Rx<UserModel> customer = UserModel.empty().obs;
 
-  /// -- Load customer orders
+  /// -- Tải thông tin khách hàng của đơn hàng hiện tại
   Future<void> getCustomerOfCurrentOrder() async {
     try {
-      // Show loader while loading categories
+      // Hiển thị trình tải trong khi tải danh sách đơn hàng
       loading.value = true;
-      // Fetch customer orders & addresses
+      // Lấy thông tin khách hàng & địa chỉ từ đơn hàng
       final user = await UserRepository.instance.fetchUserDetails(order.value.userId);
 
       customer.value = user;

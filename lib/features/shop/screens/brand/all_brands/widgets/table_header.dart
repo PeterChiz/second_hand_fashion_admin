@@ -29,7 +29,7 @@ class BrandTableHeader extends StatelessWidget {
           child: TextFormField(
             controller: controller.searchTextController,
             onChanged: (query) => controller.searchQuery(query),
-            decoration: const InputDecoration(hintText: 'Search Brands', prefixIcon: Icon(Iconsax.search_normal)),
+            decoration: const InputDecoration(hintText: 'Tìm kiếm thương hiệu', prefixIcon: Icon(Iconsax.search_normal)),
           ),
         ),
       ],

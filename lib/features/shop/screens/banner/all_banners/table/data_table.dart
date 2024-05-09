@@ -6,18 +6,24 @@ import '../../../../controllers/banner/banner_controller.dart';
 import 'table_source.dart';
 
 class BannersTable extends StatelessWidget {
-  const BannersTable({super.key});
+  const BannersTable({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(BannerController());
     return Obx(
       () {
-        // Categories & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
-        Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
-        Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
+        // Các mục Danh mục & Hàng đã chọn bị ẩn => Chỉ để cập nhật giao diện => Obx => [ProductRows]
+        Visibility(
+            visible: false,
+            child: Text(controller.filteredItems.length.toString()));
+        Visibility(
+            visible: false,
+            child: Text(controller.selectedRows.length.toString()));
 
-        // Table
+        // Bảng
         return SHFPaginatedDataTable(
           minWidth: 700,
           tableHeight: 900,
@@ -26,9 +32,9 @@ class BannersTable extends StatelessWidget {
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: const [
             DataColumn2(label: Text('Banner')),
-            DataColumn2(label: Text('Redirect Screen')),
-            DataColumn2(label: Text('Active')),
-            DataColumn2(label: Text('Action'), fixedWidth: 100),
+            DataColumn2(label: Text('Màn hình chuyển hướng')),
+            DataColumn2(label: Text('Hoạt động')),
+            DataColumn2(label: Text('Hành động'), fixedWidth: 100),
           ],
           source: BannersRows(),
         );

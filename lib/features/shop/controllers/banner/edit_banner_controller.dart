@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,68 +20,68 @@ class EditBannerController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final repository = Get.put(BannerRepository());
 
-  /// Init Data
+  /// Khởi tạo Dữ liệu
   void init(BannerModel banner) {
     imageURL.value = banner.imageUrl;
     isActive.value = banner.active;
     targetScreen.value = banner.targetScreen;
   }
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn Hình ảnh Thumbnail từ Media
   void pickImage() async {
     final controller = Get.put(MediaController());
     List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các hình ảnh đã chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt hình ảnh được chọn là hình ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật hình ảnh chính bằng selectedImage
       imageURL.value = selectedImage.url;
     }
   }
 
-  /// Register new Banner
+  /// Cập nhật Banner mới
   Future<void> updateBanner(BannerModel banner) async {
     try {
-      // Start Loading
+      // Bắt đầu Loading
       SHFFullScreenLoader.popUpCircular();
 
-      // Check Internet Connectivity
+      // Kiểm tra Kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Kiểm tra Validation Form
       if (!formKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Is Data Updated
+      // Có dữ liệu được cập nhật không
       if (banner.imageUrl != imageURL.value || banner.targetScreen != targetScreen.value || banner.active != isActive.value) {
 
-        // Map Data
+        // Map Dữ liệu
         banner.imageUrl = imageURL.value;
         banner.targetScreen = targetScreen.value;
         banner.active = isActive.value;
 
-        // Call Repository to Update
+        // Gọi Repository để Cập nhật
         await repository.updateBanner(banner);
       }
 
-      // Update the List
+      // Cập nhật Danh sách
       BannerController.instance.updateItemFromLists(banner);
 
-      // Update UI Listeners
+      // Cập nhật Listeners UI
       update();
 
-      // Remove Loader
+      // Xóa Loader
       SHFFullScreenLoader.stopLoading();
 
-      // Success Message & Redirect
+      // Thông báo thành công & Chuyển hướng
       SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi của bạn đã được cập nhật.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();

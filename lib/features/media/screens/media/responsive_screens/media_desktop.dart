@@ -8,7 +8,9 @@ import '../widgets/media_content.dart';
 import '../widgets/media_uploader.dart';
 
 class MediaDesktopScreen extends StatelessWidget {
-  const MediaDesktopScreen({super.key});
+  const MediaDesktopScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +27,14 @@ class MediaDesktopScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SHFBreadcrumbsWithHeading(heading: 'Phương tiện truyền thông', breadcrumbItems: ['Media']),
+                  const SHFBreadcrumbsWithHeading(
+                      heading: 'Thêm ảnh',
+                      breadcrumbItems: ['Media']),
                   SizedBox(
                     width: SHFSizes.buttonWidth * 1.5,
                     child: ElevatedButton.icon(
-                      onPressed: () => controller.showImagesUploaderSection.value = !controller.showImagesUploaderSection.value,
+                      onPressed: () => controller.showImagesUploaderSection
+                          .value = !controller.showImagesUploaderSection.value,
                       icon: const Icon(Iconsax.cloud_add),
                       label: const Text('Đăng tải hình ảnh'),
                     ),

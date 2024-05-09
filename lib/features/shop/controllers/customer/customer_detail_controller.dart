@@ -20,24 +20,24 @@ class CustomerDetailController extends GetxController {
   RxList<OrderModel> allCustomerOrders = <OrderModel>[].obs;
   RxList<OrderModel> filteredCustomerOrders = <OrderModel>[].obs;
 
-  /// -- Load customer orders
+  /// -- Tải các đơn hàng của khách hàng
   Future<void> getCustomerOrders() async {
     try {
-      // Show loader while loading categories
+      // Hiển thị trình tải trong khi tải các đơn hàng
       ordersLoading.value = true;
 
-      // Fetch customer orders & addresses
+      // Lấy các đơn hàng và địa chỉ của khách hàng
       if (customer.value.id != null && customer.value.id!.isNotEmpty) {
         customer.value.orders = await UserRepository.instance.fetchUserOrders(customer.value.id!);
       }
 
-      // Update the categories list
+      // Cập nhật danh sách các đơn hàng
       allCustomerOrders.assignAll(customer.value.orders ?? []);
 
-      // Filter featured categories
+      // Lọc các đơn hàng nổi bật
       filteredCustomerOrders.assignAll(customer.value.orders ?? []);
 
-      // Add all rows as false [Not Selected] & Toggle when required
+      // Đặt tất cả các hàng là false [Chưa được chọn] & Chuyển đổi khi cần
       selectedRows.assignAll(List.generate(customer.value.orders != null ? customer.value.orders!.length : 0, (index) => false));
     } catch (e) {
       SHFLoaders.errorSnackBar(title: 'Có lỗi!', message: e.toString());
@@ -46,13 +46,13 @@ class CustomerDetailController extends GetxController {
     }
   }
 
-  /// -- Load customer orders
+  /// -- Tải địa chỉ của khách hàng
   Future<void> getCustomerAddresses() async {
     try {
-      // Show loader while loading categories
+      // Hiển thị trình tải trong khi tải địa chỉ
       addressesLoading.value = true;
 
-      // Fetch customer orders & addresses
+      // Lấy các đơn hàng và địa chỉ của khách hàng
       if (customer.value.id != null && customer.value.id!.isNotEmpty) {
         customer.value.addresses = await addressRepository.fetchUserAddresses(customer.value.id!);
       }
@@ -63,18 +63,18 @@ class CustomerDetailController extends GetxController {
     }
   }
 
-  /// -- Search Query Filter
+  /// -- Bộ lọc truy vấn tìm kiếm
   void searchQuery(String query) {
     filteredCustomerOrders.assignAll(
       allCustomerOrders.where((customer) =>
-          customer.id.toLowerCase().contains(query.toLowerCase()) || customer.orderDate.toString().contains(query.toLowerCase())),
+      customer.id.toLowerCase().contains(query.toLowerCase()) || customer.orderDate.toString().contains(query.toLowerCase())),
     );
 
-    // Notify listeners about the change
+    // Thông báo cho người nghe về sự thay đổi
     update();
   }
 
-  /// Sorting related code
+  /// Mã sắp xếp liên quan
   void sortById(int sortColumnIndex, bool ascending) {
     sortAscending.value = ascending;
     filteredCustomerOrders.sort((a, b) {

@@ -24,7 +24,7 @@ class OrderDetailMobileScreen extends StatelessWidget {
             children: [
               // Breadcrumbs
               SHFBreadcrumbsWithHeading(
-                  returnToPreviousScreen: true, heading: order.id, breadcrumbItems: const [SHFRoutes.orders, 'Details']),
+                  returnToPreviousScreen: true, heading: order.id, breadcrumbItems: const [SHFRoutes.orders, 'Chi tiết']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Body

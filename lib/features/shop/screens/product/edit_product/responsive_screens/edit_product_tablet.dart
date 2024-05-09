@@ -15,7 +15,7 @@ class CreateProductTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Create Product', breadcrumbItems: [SHFRoutes.products, 'Create Product']),
+              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Tạo sản phẩm', breadcrumbItems: [SHFRoutes.products, 'Tạo sản phẩm']),
               SizedBox(height: SHFSizes.spaceBtwSections),
             ],
           ),

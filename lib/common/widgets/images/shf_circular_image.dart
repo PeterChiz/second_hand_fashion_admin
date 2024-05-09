@@ -69,10 +69,10 @@ class SHFCircularImage extends StatelessWidget {
     );
   }
 
-  // Function to build the network image widget
+  // Hàm để tạo widget hình ảnh mạng
   Widget _buildNetworkImage() {
     if (image != null) {
-      // Use CachedNetworkImage for efficient loading and caching of network images // Not working in Web but just for loading
+      // Sử dụng CachedNetworkImage để tải và cache hình ảnh từ mạng hiệu quả // Không hoạt động trên Web nhưng chỉ để tải
       return CachedNetworkImage(
         fit: fit,
         color: overlayColor,
@@ -81,40 +81,40 @@ class SHFCircularImage extends StatelessWidget {
         progressIndicatorBuilder: (context, url, downloadProgress) => const SHFShimmerEffect(width: 55, height: 55),
       );
     } else {
-      // Return an empty container if no image is provided
+      // Trả về container trống nếu không có hình ảnh được cung cấp
       return Container();
     }
   }
 
-  // Function to build the memory image widget
+  // Hàm để tạo widget hình ảnh từ bộ nhớ
   Widget _buildMemoryImage() {
     if (memoryImage != null) {
-      // Display image from memory using Image widget
+      // Hiển thị hình ảnh từ bộ nhớ sử dụng widget Image
       return Image(fit: fit, image: MemoryImage(memoryImage!), color: overlayColor);
     } else {
-      // Return an empty container if no image is provided
+      // Trả về container trống nếu không có hình ảnh được cung cấp
       return Container();
     }
   }
 
-  // Function to build the asset image widget
+  // Hàm để tạo widget hình ảnh từ file
   Widget _buildFileImage() {
     if (file != null) {
-      // Display image from assets using Image widget
+      // Hiển thị hình ảnh từ file sử dụng widget Image
       return Image(fit: fit, image: FileImage(file!), color: overlayColor);
     } else {
-      // Return an empty container if no image is provided
+      // Trả về container trống nếu không có hình ảnh được cung cấp
       return Container();
     }
   }
 
-  // Function to build the asset image widget
+  // Hàm để tạo widget hình ảnh từ asset
   Widget _buildAssetImage() {
     if (image != null) {
-      // Display image from assets using Image widget
+      // Hiển thị hình ảnh từ asset sử dụng widget Image
       return Image(fit: fit, image: AssetImage(image!), color: overlayColor);
     } else {
-      // Return an empty container if no image is provided
+      // Trả về container trống nếu không có hình ảnh được cung cấp
       return Container();
     }
   }

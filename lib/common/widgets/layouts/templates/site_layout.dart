@@ -4,20 +4,20 @@ import '../../responsive/screens/desktop_layout.dart';
 import '../../responsive/screens/mobile_layout.dart';
 import '../../responsive/screens/tablet_layout.dart';
 
-/// Template for the overall site layout, responsive to different screen sizes
+/// Mẫu cho bố cục tổng thể của trang web, đáp ứng với các kích thước màn hình khác nhau
 class SHFSiteTemplate extends StatelessWidget {
   const SHFSiteTemplate({super.key, this.desktop, this.tablet, this.mobile, this.useLayout = true});
 
-  /// Widget for desktop layout
+  /// Tiện ích cho bố cục máy tính để bàn
   final Widget? desktop;
 
-  /// Widget for tablet layout
+  /// Tiện ích cho bố cục máy tính bảng
   final Widget? tablet;
 
-  /// Widget for mobile layout
+  /// Tiện ích cho bố cục di động
   final Widget? mobile;
 
-  /// Flag to determine whether to use the layout
+  /// Cờ để xác định liệu có sử dụng bố cục hay không
   final bool useLayout;
 
   @override

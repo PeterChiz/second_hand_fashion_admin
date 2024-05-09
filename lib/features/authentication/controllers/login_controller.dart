@@ -13,47 +13,47 @@ import '../../../utils/constants/text_strings.dart';
 import '../../personalization/models/user_model.dart';
 import 'admin_controller.dart';
 
-/// Controller for handling login functionality
+/// Bộ điều khiển để xử lý chức năng đăng nhập
 class LoginController extends GetxController {
   static LoginController get instance => Get.find();
 
-  /// Whether the login process is currently loading
+  /// Dữ liệu đang tải
   final isLoading = false.obs;
 
-  /// Whether the password should be hidden
+  /// Ẩn mật khẩu
   final hidePassword = true.obs;
 
-  /// Whether the user has selected "Remember Me"
+  /// Người dùng đã chọn "Nhớ tôi"
   final rememberMe = false.obs;
 
-  /// Local storage instance for remembering email and password
+  /// Lưu trữ cục bộ để nhớ email và mật khẩu
   final localStorage = GetStorage();
 
-  /// Text editing controller for the email field
+  /// Bộ điều khiển chỉnh sửa văn bản cho trường email
   final email = TextEditingController();
 
-  /// Text editing controller for the password field
+  /// Bộ điều khiển chỉnh sửa văn bản cho trường mật khẩu
   final password = TextEditingController();
 
-  /// Form key for the login form
+  /// Khóa mẫu cho biểu mẫu đăng nhập
   final loginFormKey = GlobalKey<FormState>();
 
   @override
   void onInit() {
-    // Retrieve stored email and password if "Remember Me" is selected
+    // Lấy email và mật khẩu đã lưu nếu người dùng đã chọn "Nhớ tôi"
     email.text = localStorage.read('REMEMBER_ME_EMAIL') ?? '';
     password.text = localStorage.read('REMEMBER_ME_PASSWORD') ?? '';
     super.onInit();
   }
 
-  /// Handles email and password sign-in process
+  /// Xử lý quá trình đăng nhập bằng email và mật khẩu
   Future<void> emailAndPasswordSignIn() async {
     try {
-      // Start Loading
+      // Bắt đầu tải
       isLoading.value = true;
       SHFFullScreenLoader.openLoadingDialog('Đang đăng nhập...', SHFImages.docerAnimation);
 
-      // Check Internet Connectivity
+      // Kiểm tra kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         isLoading.value = false;
@@ -61,34 +61,34 @@ class LoginController extends GetxController {
         return;
       }
 
-      // Form Validation
+      // Xác nhận biểu mẫu
       if (!loginFormKey.currentState!.validate()) {
         isLoading.value = false;
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Save Data if Remember Me is selected
+      // Lưu dữ liệu nếu người dùng chọn "Nhớ tôi"
       if (rememberMe.value) {
         localStorage.write('REMEMBER_ME_EMAIL', email.text.trim());
         localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
       }
 
-      // Login user using Email & Password Authentication
+      // Đăng nhập người dùng bằng Email & Mật khẩu
       await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
 
-      // Fetch user details and assign to UserController
+      // Lấy chi tiết người dùng và gán vào UserController
       final user = await AdminController.instance.fetchUserDetails();
 
-      // Remove Loader
+      // Dừng tải
       SHFFullScreenLoader.stopLoading();
 
-      // If user is not admin, logout and return
+      // Nếu người dùng không phải là quản trị viên, đăng xuất và trả về
       if (user.role != AppRole.admin) {
         await AuthenticationRepository.instance.logout();
         SHFLoaders.errorSnackBar(title: 'Không được ủy quyền', message: 'Bạn không được ủy quyền hoặc có quyền truy cập. Liên hệ với quản trị viên');
       } else {
-        // Redirect
+        // Chuyển hướng
         AuthenticationRepository.instance.screenRedirect();
       }
     } catch (e) {
@@ -98,14 +98,14 @@ class LoginController extends GetxController {
     }
   }
 
-  /// Handles registration of admin user
+  /// Xử lý việc đăng ký người dùng quản trị
   Future<void> registerAdmin() async {
     try {
-      // Start Loading
+      // Bắt đầu tải
       isLoading.value = true;
       SHFFullScreenLoader.openLoadingDialog('Đang đăng ký tài khoản quản trị...', SHFImages.docerAnimation);
 
-      // Check Internet Connectivity
+      // Kiểm tra kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         isLoading.value = false;
@@ -113,10 +113,10 @@ class LoginController extends GetxController {
         return;
       }
 
-      // Register user using Email & Password Authentication
+      // Đăng ký người dùng bằng Email & Mật khẩu
       await AuthenticationRepository.instance.registerWithEmailAndPassword(SHFTexts.adminEmail, SHFTexts.adminPassword);
 
-      // Create admin record in the Firestore
+      // Tạo bản ghi quản trị trong Firestore
       final userRepository = Get.put(UserRepository());
       await userRepository.createUser(
         UserModel(
@@ -129,10 +129,10 @@ class LoginController extends GetxController {
         ),
       );
 
-      // Remove Loader
+      // Dừng tải
       SHFFullScreenLoader.stopLoading();
 
-      // Redirect
+      // Chuyển hướng
       AuthenticationRepository.instance.screenRedirect();
     } catch (e) {
       isLoading.value = false;

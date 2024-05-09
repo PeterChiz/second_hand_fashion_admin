@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
@@ -28,7 +27,9 @@ class CustomerDetailDesktopScreen extends StatelessWidget {
             children: [
               // Breadcrumbs
               SHFBreadcrumbsWithHeading(
-                  returnToPreviousScreen: true, heading: customer.fullName, breadcrumbItems: const [SHFRoutes.customers, 'Details']),
+                  returnToPreviousScreen: true,
+                  heading: customer.fullName,
+                  breadcrumbItems: const [SHFRoutes.customers, 'Chi tiết']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Body

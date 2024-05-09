@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import '../../../utils/constants/colors.dart';
 
-/// Widget for displaying action buttons for table rows
+/// Widget để hiển thị các nút hành động cho các dòng bảng
 class SHFTableActionButtons extends StatelessWidget {
   const SHFTableActionButtons({
     super.key,
@@ -14,22 +14,22 @@ class SHFTableActionButtons extends StatelessWidget {
     this.onDeletePressed,
   });
 
-  /// Flag to determine whether the view button is enabled
+  /// Cờ để xác định xem nút xem có được kích hoạt hay không
   final bool view;
 
-  /// Flag to determine whether the edit button is enabled
+  /// Cờ để xác định xem nút chỉnh sửa có được kích hoạt hay không
   final bool edit;
 
-  /// Flag to determine whether the delete button is enabled
+  /// Cờ để xác định xem nút xóa có được kích hoạt hay không
   final bool delete;
 
-  /// Callback function for when the view button is pressed
+  /// Hàm gọi lại khi nút xem được nhấn
   final VoidCallback? onViewPressed;
 
-  /// Callback function for when the edit button is pressed
+  /// Hàm gọi lại khi nút chỉnh sửa được nhấn
   final VoidCallback? onEditPressed;
 
-  /// Callback function for when the delete button is pressed
+  /// Hàm gọi lại khi nút xóa được nhấn
   final VoidCallback? onDeletePressed;
 
   @override

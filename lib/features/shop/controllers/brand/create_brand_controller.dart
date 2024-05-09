@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,7 +22,7 @@ class CreateBrandController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final List<CategoryModel> selectedCategories = <CategoryModel>[].obs;
 
-  /// Toggle Category Selection
+  /// Chuyển đổi Lựa chọn Danh mục
   void toggleSelection(CategoryModel category) {
     if (selectedCategories.contains(category)) {
       selectedCategories.remove(category);
@@ -34,7 +33,7 @@ class CreateBrandController extends GetxController {
     update();
   }
 
-  /// Method to reset fields
+  /// Phương thức để đặt lại các trường
   void resetFields() {
     name.clear();
     loading(false);
@@ -43,40 +42,40 @@ class CreateBrandController extends GetxController {
     selectedCategories.clear();
   }
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn Hình ảnh Thumbnail từ Media
   void pickImage() async {
     final controller = Get.put(MediaController());
     List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các hình ảnh đã chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt hình ảnh được chọn là hình ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật hình ảnh chính bằng selectedImage
       imageURL.value = selectedImage.url;
     }
   }
 
-  /// Register new Brand
+  /// Đăng ký thương hiệu mới
   Future<void> createBrand() async {
     try {
-      // Start Loading
+      // Bắt đầu Loading
       SHFFullScreenLoader.popUpCircular();
 
-      // Check Internet Connectivity
+      // Kiểm tra Kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Kiểm tra Validation Form
       if (!formKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Map Data
+      // Map Dữ liệu
       final newRecord = BrandModel(
         id: '',
         productsCount: 0,
@@ -86,16 +85,16 @@ class CreateBrandController extends GetxController {
         isFeatured: isFeatured.value,
       );
 
-      // Call Repository to Create New Brand
+      // Gọi Repository để Tạo Thương hiệu Mới
       newRecord.id = await BrandRepository.instance.createBrand(newRecord);
 
-      // Register brand categories if any
+      // Đăng ký các danh mục thương hiệu nếu có
       if (selectedCategories.isNotEmpty) {
         if (newRecord.id.isEmpty) throw 'Lỗi lưu trữ dữ liệu quan hệ. Thử lại';
 
-        // Loop selected Brand Categories
+        // Lặp lại các Danh mục Thương hiệu được chọn
         for (var category in selectedCategories) {
-          // Map Data
+          // Map Dữ liệu
           final brandCategory = BrandCategoryModel(brandId: newRecord.id, categoryId: category.id);
           await BrandRepository.instance.createBrandCategory(brandCategory);
         }
@@ -104,19 +103,19 @@ class CreateBrandController extends GetxController {
         newRecord.brandCategories!.addAll(selectedCategories);
       }
 
-      // Update All Data list
+      // Cập nhật Tất cả dữ liệu danh sách
       BrandController.instance.addItemToLists(newRecord);
 
-      // Update UI Listeners
+      // Cập nhật Listeners UI
       update();
 
-      // Reset Form
+      // Đặt lại Form
       resetFields();
 
-      // Remove Loader
+      // Xóa Loader
       SHFFullScreenLoader.stopLoading();
 
-      // Success Message & Redirect
+      // Thông báo thành công & Chuyển hướng
       SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi mới đã được thêm vào.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();

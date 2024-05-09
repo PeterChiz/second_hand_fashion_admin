@@ -16,7 +16,7 @@ class CreateCategoryTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SHFBreadcrumbsWithHeading(heading: 'Create Category', breadcrumbItems: [SHFRoutes.categories, 'Create Category']),
+              SHFBreadcrumbsWithHeading(heading: 'Tạo danh mục', breadcrumbItems: [SHFRoutes.categories, 'Tạo danh mục']),
               SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

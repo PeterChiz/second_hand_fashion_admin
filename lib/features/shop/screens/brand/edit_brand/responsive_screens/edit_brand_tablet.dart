@@ -19,7 +19,7 @@ class EditBrandTabletScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Update Brand', breadcrumbItems: [SHFRoutes.categories, 'Update Brand']),
+              const SHFBreadcrumbsWithHeading(heading: 'Cập nhật thương hiệu', breadcrumbItems: [SHFRoutes.categories, 'Cập nhật thương hiệu']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

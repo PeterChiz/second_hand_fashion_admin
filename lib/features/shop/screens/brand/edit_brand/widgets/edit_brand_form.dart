@@ -30,21 +30,26 @@ class EditBrandForm extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Heading
+            // Tiêu đề
             const SizedBox(height: SHFSizes.sm),
-            Text('Update Brand', style: Theme.of(context).textTheme.headlineMedium),
+            Text('Cập Nhật Thương Hiệu',
+                style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: SHFSizes.spaceBtwSections),
 
-            // Name Text Field
+            // Ô văn bản Tên Thương hiệu
             TextFormField(
               controller: controller.name,
-              validator: (value) => SHFValidator.validateEmptyText('Name', value),
-              decoration: const InputDecoration(labelText: 'Brand Name', prefixIcon: Icon(Iconsax.category)),
+              validator: (value) =>
+                  SHFValidator.validationEmptyText('Tên', value),
+              decoration: const InputDecoration(
+                  labelText: 'Tên Thương hiệu',
+                  prefixIcon: Icon(Iconsax.category)),
             ),
 
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-            Text('Select Categories', style: Theme.of(context).textTheme.titleMedium),
+            Text('Chọn Danh mục',
+                style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: SHFSizes.spaceBtwInputFields / 2),
             Obx(() => Wrap(
                   spacing: SHFSizes.sm,
@@ -54,8 +59,10 @@ class EditBrandForm extends StatelessWidget {
                           padding: const EdgeInsets.only(bottom: SHFSizes.sm),
                           child: SHFChoiceChip(
                             text: element.name,
-                            selected: controller.selectedCategories.contains(element),
-                            onSelected: (value) => controller.toggleSelection(element),
+                            selected:
+                                controller.selectedCategories.contains(element),
+                            onSelected: (value) =>
+                                controller.toggleSelection(element),
                           ),
                         ),
                       )
@@ -64,13 +71,17 @@ class EditBrandForm extends StatelessWidget {
 
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),
 
-            // Image Uploader & Featured Checkbox
+            // Trình tải hình ảnh & Ô đánh dấu Nổi bật
             Obx(
               () => SHFImageUploader(
                 width: 80,
                 height: 80,
-                image: controller.imageURL.value.isNotEmpty ? controller.imageURL.value : SHFImages.defaultImage,
-                imageType: controller.imageURL.value.isNotEmpty ? ImageType.network : ImageType.asset,
+                image: controller.imageURL.value.isNotEmpty
+                    ? controller.imageURL.value
+                    : SHFImages.defaultImage,
+                imageType: controller.imageURL.value.isNotEmpty
+                    ? ImageType.network
+                    : ImageType.asset,
                 onIconButtonPressed: () => controller.pickImage(),
               ),
             ),
@@ -78,8 +89,9 @@ class EditBrandForm extends StatelessWidget {
             Obx(
               () => CheckboxMenuButton(
                 value: controller.isFeatured.value,
-                onChanged: (value) => controller.isFeatured.value = value ?? false,
-                child: const Text('Featured'),
+                onChanged: (value) =>
+                    controller.isFeatured.value = value ?? false,
+                child: const Text('Nổi bật'),
               ),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),
@@ -90,7 +102,9 @@ class EditBrandForm extends StatelessWidget {
                     ? const Center(child: CircularProgressIndicator())
                     : SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(onPressed: () => controller.updateBrand(brand), child: const Text('Update')),
+                        child: ElevatedButton(
+                            onPressed: () => controller.updateBrand(brand),
+                            child: const Text('Cập Nhật')),
                       ),
               ),
             ),

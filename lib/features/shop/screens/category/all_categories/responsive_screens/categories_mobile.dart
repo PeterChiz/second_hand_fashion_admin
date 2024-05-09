@@ -9,7 +9,7 @@ import '../table/data_table.dart';
 import '../widgets/table_header.dart';
 
 class CategoriesMobileScreen extends StatelessWidget {
-  const CategoriesMobileScreen({super.key});
+  const CategoriesMobileScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {
@@ -22,19 +22,20 @@ class CategoriesMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Categories', breadcrumbItems: ['Categories']),
+              // Dẫn dắt
+              const SHFBreadcrumbsWithHeading(heading: 'Danh mục', breadcrumbItems: ['Danh mục']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
-              // Table Body
+              // Thân bảng
               Obx(() {
                 if (controller.isLoading.value) return const SHFLoaderAnimation();
                 return const SHFRoundedContainer(
                   child: Column(
                     children: [
-                      // Table Header
+                      // Tiêu đề Bảng
                       CategoryTableHeader(),
                       SizedBox(height: SHFSizes.spaceBtwItems),
 
-                      // Table
+                      // Bảng
                       CategoryTable(),
                     ],
                   ),

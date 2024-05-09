@@ -7,7 +7,7 @@ import '../../../../utils/constants/sizes.dart';
 import '../../images/shf_circular_image.dart';
 import 'menu/menu_item.dart';
 
-/// Sidebar widget for navigation menu
+/// Tiện ích thanh bên cho menu điều hướng
 class SHFSidebar extends StatelessWidget {
   const SHFSidebar({super.key});
 
@@ -32,21 +32,21 @@ class SHFSidebar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text('MENU', style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2)),
-                    // Menu Items
-                    const SHFMenuItem(route: SHFRoutes.dashboard, icon: Iconsax.status, itemName: 'Dashboard'),
-                    const SHFMenuItem(route: SHFRoutes.media, icon: Iconsax.image, itemName: 'Media'),
-                    const SHFMenuItem(route: SHFRoutes.banners, icon: Iconsax.picture_frame, itemName: 'Banners'),
-                    const SHFMenuItem(route: SHFRoutes.products, icon: Iconsax.shopping_bag, itemName: 'Products'),
-                    const SHFMenuItem(route: SHFRoutes.categories, icon: Iconsax.category_2, itemName: 'Categories'),
-                    const SHFMenuItem(route: SHFRoutes.brands, icon: Iconsax.dcube, itemName: 'Brands'),
-                    const SHFMenuItem(route: SHFRoutes.customers, icon: Iconsax.profile_2user, itemName: 'Customers'),
-                    const SHFMenuItem(route: SHFRoutes.orders, icon: Iconsax.box, itemName: 'Orders'),
-                    const SHFMenuItem(route: SHFRoutes.coupons, icon: Iconsax.code, itemName: 'Coupons'),
+                    // Các mục menu
+                    const SHFMenuItem(route: SHFRoutes.dashboard, icon: Iconsax.status, itemName: 'Doanh thu'),
+                    const SHFMenuItem(route: SHFRoutes.media, icon: Iconsax.image, itemName: 'Kho ảnh'),
+                    const SHFMenuItem(route: SHFRoutes.banners, icon: Iconsax.picture_frame, itemName: 'Banner'),
+                    const SHFMenuItem(route: SHFRoutes.products, icon: Iconsax.shopping_bag, itemName: 'Sản phẩm'),
+                    const SHFMenuItem(route: SHFRoutes.categories, icon: Iconsax.category_2, itemName: 'Danh mục'),
+                    const SHFMenuItem(route: SHFRoutes.brands, icon: Iconsax.dcube, itemName: 'Thương hiệu'),
+                    const SHFMenuItem(route: SHFRoutes.customers, icon: Iconsax.profile_2user, itemName: 'Khách hàng'),
+                    const SHFMenuItem(route: SHFRoutes.orders, icon: Iconsax.box, itemName: 'Đơn hàng'),
+                    const SHFMenuItem(route: SHFRoutes.coupons, icon: Iconsax.code, itemName: 'Phiếu giảm giá'),
                     const SizedBox(height: SHFSizes.spaceBtwItems),
-                    Text('OTHER', style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2)),
-                    // Other menu items
-                    const SHFMenuItem(route: SHFRoutes.settings, icon: Iconsax.setting_2, itemName: 'Settings'),
-                    const SHFMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Logout'),
+                    Text('KHÁC', style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2)),
+                    // Các mục menu khác
+                    const SHFMenuItem(route: SHFRoutes.settings, icon: Iconsax.setting_2, itemName: 'Cài đặt'),
+                    const SHFMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Đăng xuất'),
                   ],
                 ),
               ),

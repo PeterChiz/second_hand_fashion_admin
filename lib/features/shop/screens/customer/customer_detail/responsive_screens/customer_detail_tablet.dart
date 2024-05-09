@@ -27,7 +27,7 @@ class CustomerDetailTabletScreen extends StatelessWidget {
             children: [
               // Breadcrumbs
               SHFBreadcrumbsWithHeading(
-                  returnToPreviousScreen: true, heading: customer.fullName, breadcrumbItems: const [SHFRoutes.customers, 'Details']),
+                  returnToPreviousScreen: true, heading: customer.fullName, breadcrumbItems: const [SHFRoutes.customers, 'Chi tiết']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Body

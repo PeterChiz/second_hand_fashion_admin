@@ -4,42 +4,42 @@ import '../../../../routes/routes.dart';
 import '../../../../utils/device/device_utility.dart';
 import '../../../../utils/popups/loaders.dart';
 
-/// Controller for managing the sidebar state and functionality
+/// Controller để quản lý trạng thái và chức năng của thanh bên
 class SidebarController extends GetxController {
-  /// Instance of SidebarController
+  /// Thể hiện của SidebarController
   static SidebarController instance = Get.find();
 
-  /// Observable variable to track the active menu item
+  /// Biến quan sát để theo dõi mục menu hoạt động
   final activeItem = SHFRoutes.dashboard.obs;
 
-  /// Observable variable to track the menu item being hovered over
+  /// Biến quan sát để theo dõi mục menu được di chuột qua
   final hoverItem = ''.obs;
 
-  /// Change the active menu item
+  /// Thay đổi mục menu hoạt động
   void changeActiveItem(String route) => activeItem.value = route;
 
-  /// Change the menu item being hovered over
+  /// Thay đổi mục menu được di chuột qua
   void changeHoverItem(String route) {
     if (!isActive(route)) hoverItem.value = route;
   }
 
-  /// Check if a route is the active menu item
+  /// Kiểm tra xem một route có phải là mục menu hoạt động hay không
   bool isActive(String route) => activeItem.value == route;
 
-  /// Check if a route is being hovered over
+  /// Kiểm tra xem một route có được di chuột qua hay không
   bool isHovering(String route) => hoverItem.value == route;
 
-  /// Handler for menu item tap
+  /// Xử lý khi nhấp vào mục menu
   Future<void> menuOnTap(String route) async {
     try {
       if (!isActive(route)) {
-        // Update Selected Menu Item
+        // Cập nhật Mục Menu Được Chọn
         changeActiveItem(route);
 
-        // If Menu Drawer opened in Mobile, Close it.
+        // Nếu Menu Drawer mở trên Điện thoại, Đóng nó.
         if (SHFDeviceUtils.isMobileScreen(Get.context!)) Get.back();
 
-        // Navigate to other screen OR Logout
+        // Di chuyển đến màn hình khác HOẶC Đăng xuất
         if (route == 'logout') {
           await AuthenticationRepository.instance.logout();
         } else {
@@ -47,8 +47,8 @@ class SidebarController extends GetxController {
         }
       }
     } catch (e) {
-      // Show error snack bar if an error occurs
-      SHFLoaders.errorSnackBar(title: 'Error', message: e.toString());
+      // Hiển thị thanh snack bar lỗi nếu có lỗi xảy ra
+      SHFLoaders.errorSnackBar(title: 'Lỗi', message: e.toString());
     }
   }
 }

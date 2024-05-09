@@ -7,13 +7,13 @@ import '../../../../controllers/order/order_controller.dart';
 import 'table_source.dart';
 
 class OrderTable extends StatelessWidget {
-  const OrderTable({super.key});
+  const OrderTable({super.key,});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(OrderController());
     return Obx(
-      () {
+          () {
         // Orders & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
         Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
         Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
@@ -24,12 +24,12 @@ class OrderTable extends StatelessWidget {
           sortAscending: controller.sortAscending.value,
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
-            DataColumn2(label: const Text('Order ID'), onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)),
-            const DataColumn2(label: Text('Date')),
-            const DataColumn2(label: Text('Items')),
-            DataColumn2(label: const Text('Status'), fixedWidth: SHFDeviceUtils.isMobileScreen(context) ? 120 : null),
-            const DataColumn2(label: Text('Amount')),
-            const DataColumn2(label: Text('Action'), fixedWidth: 100),
+            DataColumn2(label: const Text('Mã đơn hàng'), onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)),
+            const DataColumn2(label: Text('Ngày')),
+            const DataColumn2(label: Text('Số lượng')),
+            DataColumn2(label: const Text('Trạng thái'), fixedWidth: SHFDeviceUtils.isMobileScreen(context) ? 120 : null),
+            const DataColumn2(label: Text('Số tiền')),
+            const DataColumn2(label: Text('Hành động'), fixedWidth: 100),
           ],
           source: OrderRows(),
         );

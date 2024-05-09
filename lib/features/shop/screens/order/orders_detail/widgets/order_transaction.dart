@@ -25,7 +25,7 @@ class OrderTransaction extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Transactions', style: Theme.of(context).textTheme.headlineMedium),
+          Text('Giao dịch', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: SHFSizes.spaceBtwSections),
 
           // Adjust as per your needs
@@ -40,10 +40,10 @@ class OrderTransaction extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Payment via ${order.paymentMethod.capitalize}',
+                          Text('Thanh toán qua ${order.paymentMethod.capitalize}',
                               style: Theme.of(context).textTheme.titleLarge),
                           // Adjust your Payment Method Fee if any
-                          Text('${order.paymentMethod.capitalize} fee \$25',
+                          Text('Phí thanh toán ${order.paymentMethod.capitalize} \$25',
                               style: Theme.of(context).textTheme.labelMedium),
                         ],
                       ),
@@ -55,8 +55,8 @@ class OrderTransaction extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Date', style: Theme.of(context).textTheme.labelMedium),
-                    Text('April 21, 2025', style: Theme.of(context).textTheme.bodyLarge),
+                    Text('Ngày', style: Theme.of(context).textTheme.labelMedium),
+                    Text('21 Tháng Tư, 2025', style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
               ),
@@ -64,7 +64,7 @@ class OrderTransaction extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Total', style: Theme.of(context).textTheme.labelMedium),
+                    Text('Tổng cộng', style: Theme.of(context).textTheme.labelMedium),
                     Text('\$${order.totalAmount}', style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),

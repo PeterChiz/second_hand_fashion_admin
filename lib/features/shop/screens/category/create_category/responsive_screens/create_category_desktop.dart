@@ -17,7 +17,7 @@ class CreateCategoryDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Create Category', breadcrumbItems: [SHFRoutes.categories, 'Create Category']),
+              SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Tạo danh mục', breadcrumbItems: [SHFRoutes.categories, 'Tạo danh mục']),
               SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

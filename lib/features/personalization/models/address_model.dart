@@ -8,9 +8,6 @@ class AddressModel {
   final String phoneNumber;
   final String street;
   final String city;
-  final String state;
-  final String postalCode;
-  final String country;
   final DateTime? dateTime;
   bool selectedAddress;
 
@@ -20,19 +17,16 @@ class AddressModel {
     required this.phoneNumber,
     required this.street,
     required this.city,
-    required this.state,
-    required this.postalCode,
-    required this.country,
     this.dateTime,
     this.selectedAddress = true,
   });
 
   String get formattedPhoneNo => SHFFormatter.formatPhoneNumber(phoneNumber);
 
+  // Tạo một AddressModel trống.
+  static AddressModel empty() => AddressModel(id: '', name: '', phoneNumber: '', street: '', city: '');
 
-  static AddressModel empty() => AddressModel(id: '', name: '', phoneNumber: '', street: '', city: '', state: '', postalCode: '', country: '');
-
-
+  // Chuyển đổi sang dạng Json.
   Map<String, dynamic> toJson() {
     return {
       'Id': id,
@@ -40,15 +34,12 @@ class AddressModel {
       'PhoneNumber': phoneNumber,
       'Street': street,
       'City': city,
-      'State': state,
-      'PostalCode': postalCode,
-      'Country': country,
-      'DateTime' : DateTime.now(),
-      'SelectedAddress' : selectedAddress,
+      'DateTime': DateTime.now(),
+      'SelectedAddress': selectedAddress,
     };
   }
 
-
+  // Tạo một AddressModel từ Map.
   factory AddressModel.fromMap(Map<String, dynamic> data) {
     return AddressModel(
       id: data['Id'] as String,
@@ -56,15 +47,12 @@ class AddressModel {
       phoneNumber: data['PhoneNumber'] as String,
       street: data['Street'] as String,
       city: data['City'] as String,
-      state: data['State'] as String,
-      postalCode: data['PostalCode'] as String,
-      country: data['Country'] as String,
       selectedAddress: data['SelectedAddress'] as bool,
-      dateTime: (data['DateTime'] as Timestamp).toDate(),
+      dateTime: (data['DateTime'] as Timestamp?)?.toDate(),
     );
   }
 
-  // Factory constructor to create an AddressModel from a DocumentSnapshot
+  // Tạo một AddressModel từ DocumentSnapshot.
   factory AddressModel.fromDocumentSnapshot(DocumentSnapshot snapshot) {
     final data = snapshot.data() as Map<String, dynamic>;
 
@@ -74,16 +62,13 @@ class AddressModel {
       phoneNumber: data['PhoneNumber'] ?? '',
       street: data['Street'] ?? '',
       city: data['City'] ?? '',
-      state: data['State'] ?? '',
-      postalCode: data['PostalCode'] ?? '',
-      country: data['Country'] ?? '',
-      dateTime: (data['DateTime'] as Timestamp).toDate(),
       selectedAddress: data['SelectedAddress'] as bool,
+      dateTime: (data['DateTime'] as Timestamp?)?.toDate(),
     );
   }
 
   @override
   String toString() {
-    return '$street, $city, $state $postalCode, $country';
+    return '$street, $city';
   }
 }

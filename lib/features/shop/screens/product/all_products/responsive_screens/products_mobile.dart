@@ -21,7 +21,7 @@ class ProductsMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Products', breadcrumbItems: ['Products']),
+              const SHFBreadcrumbsWithHeading(heading: 'Sản phẩm', breadcrumbItems: ['Sản phẩm']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Table Body

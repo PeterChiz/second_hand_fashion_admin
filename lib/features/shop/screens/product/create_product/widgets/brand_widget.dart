@@ -16,11 +16,11 @@ class ProductBrand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get instances of controllers
+    // Lấy các instances của controllers
     final controller = Get.put(CreateProductController());
     final brandController = Get.put(BrandController());
 
-    // Fetch brands if the list is empty
+    // Lấy dữ liệu về các thương hiệu nếu danh sách rỗng
     if (brandController.allItems.isEmpty) {
       brandController.fetchItems();
     }
@@ -29,11 +29,11 @@ class ProductBrand extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Brand label
-          Text('Brand', style: Theme.of(context).textTheme.headlineSmall),
+          // Nhãn Thương Hiệu
+          Text('Thương Hiệu', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // TypeAheadField for brand selection
+          // TypeAheadField để chọn thương hiệu
           Obx(
             () => brandController.isLoading.value
                 ? const SHFShimmerEffect(width: double.infinity, height: 50)
@@ -44,14 +44,16 @@ class ProductBrand extends StatelessWidget {
                         controller: controller.brandTextField = ctr,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Select Brand',
+                          labelText: 'Chọn Thương Hiệu',
                           suffixIcon: Icon(Iconsax.box),
                         ),
                       );
                     },
                     suggestionsCallback: (pattern) {
-                      // Return filtered brand suggestions based on the search pattern
-                      return brandController.allItems.where((brand) => brand.name.contains(pattern)).toList();
+                      // Trả về danh sách gợi ý thương hiệu đã lọc dựa trên mẫu tìm kiếm
+                      return brandController.allItems
+                          .where((brand) => brand.name.contains(pattern))
+                          .toList();
                     },
                     itemBuilder: (context, suggestion) {
                       return ListTile(

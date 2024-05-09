@@ -15,88 +15,88 @@ class BannerRepository extends GetxController {
   // Firebase Firestore instance
   final _db = FirebaseFirestore.instance;
 
-  // Get all banners from Firestore
+  // Lấy tất cả các banner từ Firestore
   Future<List<BannerModel>> getAllBanners() async {
     try {
-      // Query Firestore collection to get all banners
+      // Truy vấn bộ sưu tập Firestore để lấy tất cả các banner
       final snapshot = await _db.collection("Banners").get();
-      // Convert Firestore document snapshots to BannerModel objects
+      // Chuyển đổi snapshot tài liệu Firestore thành đối tượng BannerModel
       final result = snapshot.docs.map((e) => BannerModel.fromSnapshot(e)).toList();
       return result;
     } on FirebaseException catch (e) {
-      // Handle Firebase exceptions
+      // Xử lý các ngoại lệ Firebase
       throw e.message!;
     } on SocketException catch (e) {
-      // Handle Socket exceptions
+      // Xử lý các ngoại lệ Socket
       throw e.message;
     } on PlatformException catch (e) {
-      // Handle Platform exceptions
+      // Xử lý các ngoại lệ Platform
       throw e.message!;
     } catch (e) {
-      // Catch any other exceptions
-      throw 'Something Went Wrong! Please try again.';
+      // Bắt các ngoại lệ khác
+      throw 'Có lỗi xảy ra! Vui lòng thử lại.';
     }
   }
 
-  // Create a new banner in Firestore
+  // Tạo một banner mới trong Firestore
   Future<String> createBanner(BannerModel banner) async {
     try {
-      // Add the banner to the "Banners" collection in Firestore
+      // Thêm banner vào bộ sưu tập "Banners" trong Firestore
       final result = await _db.collection("Banners").add(banner.toJson());
-      // Return the ID of the newly created banner
+      // Trả về ID của banner mới được tạo
       return result.id;
     } on FirebaseException catch (e) {
-      // Handle Firebase exceptions
+      // Xử lý các ngoại lệ Firebase
       throw SHFFirebaseException(e.code).message;
     } on FormatException catch (_) {
-      // Handle Format exceptions
+      // Xử lý các ngoại lệ Format
       throw const SHFFormatException();
     } on PlatformException catch (e) {
-      // Handle Platform exceptions
+      // Xử lý các ngoại lệ Platform
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      // Catch any other exceptions
-      throw 'Something went wrong. Please try again';
+      // Bắt các ngoại lệ khác
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // Update an existing banner in Firestore
+  // Cập nhật một banner đã tồn tại trong Firestore
   Future<void> updateBanner(BannerModel banner) async {
     try {
-      // Update the banner with the specified ID in Firestore
+      // Cập nhật banner với ID đã chỉ định trong Firestore
       await _db.collection("Banners").doc(banner.id).update(banner.toJson());
     } on FirebaseException catch (e) {
-      // Handle Firebase exceptions
+      // Xử lý các ngoại lệ Firebase
       throw SHFFirebaseException(e.code).message;
     } on FormatException catch (_) {
-      // Handle Format exceptions
+      // Xử lý các ngoại lệ Format
       throw const SHFFormatException();
     } on PlatformException catch (e) {
-      // Handle Platform exceptions
+      // Xử lý các ngoại lệ Platform
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      // Catch any other exceptions
-      throw 'Something went wrong. Please try again';
+      // Bắt các ngoại lệ khác
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 
-  // Delete a banner from Firestore
+  // Xóa một banner khỏi Firestore
   Future<void> deleteBanner(String bannerId) async {
     try {
-      // Delete the banner with the specified ID from Firestore
+      // Xóa banner có ID đã chỉ định khỏi Firestore
       await _db.collection("Banners").doc(bannerId).delete();
     } on FirebaseException catch (e) {
-      // Handle Firebase exceptions
+      // Xử lý các ngoại lệ Firebase
       throw SHFFirebaseException(e.code).message;
     } on FormatException catch (_) {
-      // Handle Format exceptions
+      // Xử lý các ngoại lệ Format
       throw const SHFFormatException();
     } on PlatformException catch (e) {
-      // Handle Platform exceptions
+      // Xử lý các ngoại lệ Platform
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      // Catch any other exceptions
-      throw 'Something went wrong. Please try again';
+      // Bắt các ngoại lệ khác
+      throw 'Có điều gì đó đã sai. Vui lòng thử lại';
     }
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -21,40 +20,40 @@ class CreateBannerController extends GetxController {
   final RxString targetScreen = AppScreens.allAppScreenItems[0].obs;
   final formKey = GlobalKey<FormState>();
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn Hình Ảnh Đại Diện từ Phương Tiện
   void pickImage() async {
     final controller = Get.put(MediaController());
     List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các hình ảnh đã chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt hình ảnh đã chọn là hình ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật hình ảnh chính bằng selectedImage
       imageURL.value = selectedImage.url;
     }
   }
 
-  /// Register new Banner
+  /// Đăng ký Banner mới
   Future<void> createBanner() async {
     try {
-      // Start Loading
+      // Bắt đầu Loading
       SHFFullScreenLoader.popUpCircular();
 
-      // Check Internet Connectivity
+      // Kiểm tra Kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Kiểm tra Validation Form
       if (!formKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Map Data
+      // Ánh xạ Dữ liệu
       final newRecord = BannerModel(
         id: '',
         active: isActive.value,
@@ -62,16 +61,16 @@ class CreateBannerController extends GetxController {
         targetScreen: targetScreen.value,
       );
 
-      // Call Repository to Create New Banner and update Id
+      // Gọi Repository để Tạo Banner mới và cập nhật Id
       newRecord.id = await BannerRepository.instance.createBanner(newRecord);
 
-      // Update All Data list
+      // Cập nhật Tất cả danh sách dữ liệu
       BannerController.instance.addItemToLists(newRecord);
 
-      // Remove Loader
+      // Loại bỏ Loader
       SHFFullScreenLoader.stopLoading();
 
-      // Success Message & Redirect
+      // Thông báo Thành công & Chuyển hướng
       SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi mới đã được thêm vào.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();

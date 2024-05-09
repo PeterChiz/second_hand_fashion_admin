@@ -28,7 +28,7 @@ class ProductStockAndPricing extends StatelessWidget {
                     child: TextFormField(
                       controller: controller.stock,
                       decoration: const InputDecoration(labelText: 'Stock'),
-                      validator: (value) => SHFValidator.validateEmptyText('Stock', value),
+                      validator: (value) => SHFValidator.validationEmptyText('Stock', value),
                     ),
                   ),
                   const SizedBox(height: SHFSizes.spaceBtwInputFields),
@@ -41,7 +41,7 @@ class ProductStockAndPricing extends StatelessWidget {
                         child: TextFormField(
                           controller: controller.price,
                           decoration: const InputDecoration(labelText: 'Price', hintText: '\$'),
-                          validator: (value) => SHFValidator.validateEmptyText('Price', value),
+                          validator: (value) => SHFValidator.validationEmptyText('Price', value),
                         ),
                       ),
                       const SizedBox(width: SHFSizes.spaceBtwItems),

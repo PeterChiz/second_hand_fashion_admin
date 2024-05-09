@@ -1,4 +1,3 @@
-
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,9 @@ import '../../../../controllers/product/product_controller.dart';
 import 'table_source.dart';
 
 class ProductsTable extends StatelessWidget {
-  const ProductsTable({super.key});
+  const ProductsTable({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +17,12 @@ class ProductsTable extends StatelessWidget {
     return Obx(
       () {
         // Products & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
-        Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
-        Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
+        Visibility(
+            visible: false,
+            child: Text(controller.filteredItems.length.toString()));
+        Visibility(
+            visible: false,
+            child: Text(controller.selectedRows.length.toString()));
 
         // Table
         return SHFPaginatedDataTable(
@@ -26,21 +31,24 @@ class ProductsTable extends StatelessWidget {
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
             DataColumn2(
-              label: const Text('Product'),
+              label: const Text('Sản phẩm'),
               fixedWidth: !SHFDeviceUtils.isDesktopScreen(context) ? 300 : 400,
-              onSort: (columnIndex, ascending) => controller.sortByName(columnIndex, ascending),
+              onSort: (columnIndex, ascending) =>
+                  controller.sortByName(columnIndex, ascending),
             ),
             DataColumn2(
-              label: const Text('Stock'),
-              onSort: (columnIndex, ascending) => controller.sortByStock(columnIndex, ascending),
+              label: const Text('Hàng tồn'),
+              onSort: (columnIndex, ascending) =>
+                  controller.sortByStock(columnIndex, ascending),
             ),
-            const DataColumn2(label: Text('Brand')),
+            const DataColumn2(label: Text('Thương hiệu')),
             DataColumn2(
-              label: const Text('Price'),
-              onSort: (columnIndex, ascending) => controller.sortByPrice(columnIndex, ascending),
+              label: const Text('Giá'),
+              onSort: (columnIndex, ascending) =>
+                  controller.sortByPrice(columnIndex, ascending),
             ),
-            const DataColumn2(label: Text('Date')),
-            const DataColumn2(label: Text('Action'), fixedWidth: 100),
+            const DataColumn2(label: Text('Ngày')),
+            const DataColumn2(label: Text('Hành động'), fixedWidth: 100),
           ],
           source: ProductsRows(),
         );

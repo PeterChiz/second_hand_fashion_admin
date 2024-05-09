@@ -9,7 +9,9 @@ import '../table/data_table.dart';
 import '../widgets/table_header.dart';
 
 class CategoriesDesktopScreen extends StatelessWidget {
-  const CategoriesDesktopScreen({super.key});
+  const CategoriesDesktopScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +23,24 @@ class CategoriesDesktopScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Breadcrumbs
-              const SHFBreadcrumbsWithHeading(heading: 'Categories', breadcrumbItems: ['Categories']),
+              // Tiêu đề
+              const SHFBreadcrumbsWithHeading(
+                  heading: 'Danh mục', breadcrumbItems: ['Danh mục']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Table Body
+              // Thân bảng
               Obx(() {
-                // Show Loader
+                // Hiển thị Trình tải
                 if (controller.isLoading.value) return const SHFLoaderAnimation();
 
                 return const SHFRoundedContainer(
                   child: Column(
                     children: [
-                      // Table Header
+                      // Tiêu đề Bảng
                       CategoryTableHeader(),
                       SizedBox(height: SHFSizes.spaceBtwItems),
 
-                      // Table
+                      // Bảng
                       CategoryTable(),
                     ],
                   ),

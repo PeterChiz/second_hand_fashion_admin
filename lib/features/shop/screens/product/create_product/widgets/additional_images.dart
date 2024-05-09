@@ -19,11 +19,11 @@ class ProductAdditionalImages extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Obx(
-      () => SizedBox(
+          () => SizedBox(
         height: 300,
         child: Column(
           children: [
-            // Section to Add Additional Product Images
+            // Phần thêm hình ảnh sản phẩm bổ sung
             Expanded(
               flex: 2,
               child: GestureDetector(
@@ -34,7 +34,7 @@ class ProductAdditionalImages extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(SHFImages.defaultMultiImageIcon, width: 50, height: 50),
-                        const Text('Add Additional Product Images'),
+                        const Text('Thêm hình ảnh sản phẩm bổ sung'),
                       ],
                     ),
                   ),
@@ -42,14 +42,14 @@ class ProductAdditionalImages extends StatelessWidget {
               ),
             ),
 
-            // Section to Display Uploaded Images
+            // Phần hiển thị hình ảnh đã tải lên
             Expanded(
               child: Row(
                 children: [
                   Expanded(flex: 2, child: SizedBox(height: 80, child: _uploadedImagesOrEmptyList())),
                   const SizedBox(width: SHFSizes.spaceBtwItems / 2),
 
-                  // Add More Images Button
+                  // Nút Thêm Hình Ảnh
                   SHFRoundedContainer(
                     width: 80,
                     height: 80,
@@ -68,12 +68,12 @@ class ProductAdditionalImages extends StatelessWidget {
     );
   }
 
-  // Widget to Display Either Uploaded Images or Empty List
+  // Widget hiển thị hình ảnh đã tải lên hoặc danh sách trống
   Widget _uploadedImagesOrEmptyList() {
     return additionalProductImagesURLs.isNotEmpty ? _uploadedImages() : emptyList();
   }
 
-  // Widget to Display Empty List Placeholder
+  // Widget hiển thị danh sách trống
   Widget emptyList() {
     return ListView.separated(
       itemCount: 6,
@@ -83,7 +83,7 @@ class ProductAdditionalImages extends StatelessWidget {
     );
   }
 
-  // Widget to Display Uploaded Images
+  // Widget hiển thị hình ảnh đã tải lên
   ListView _uploadedImages() {
     return ListView.separated(
       scrollDirection: Axis.horizontal,

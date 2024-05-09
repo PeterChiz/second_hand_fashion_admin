@@ -1,16 +1,15 @@
-
 class ProductAttributeModel {
   String? name;
   final List<String>? values;
 
   ProductAttributeModel({this.name, this.values});
 
-  /// Json Format
+  /// Định dạng Json
   toJson() {
     return {'Name': name, 'Values': values};
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
+  /// Ánh xạ dữ liệu từ tài liệu snapshot từ Firebase thành Model
   factory ProductAttributeModel.fromJson(Map<String, dynamic> document) {
     final data = document;
 

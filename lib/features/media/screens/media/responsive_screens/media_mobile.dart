@@ -5,7 +5,7 @@ class BrandsMobileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Add Your own Design If required
+    // Thêm thiết kế nếu cần thiết
     return const Scaffold(body: SingleChildScrollView());
   }
 }

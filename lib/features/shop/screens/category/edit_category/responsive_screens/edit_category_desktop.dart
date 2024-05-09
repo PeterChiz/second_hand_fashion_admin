@@ -20,7 +20,10 @@ class EditCategoryDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              const SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: 'Update Category', breadcrumbItems: [SHFRoutes.categories, 'Update Category']),
+              const SHFBreadcrumbsWithHeading(
+                  returnToPreviousScreen: true,
+                  heading: 'Cập nhật danh mục',
+                  breadcrumbItems: [SHFRoutes.categories, 'Cập nhật danh mục']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form

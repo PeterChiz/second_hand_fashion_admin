@@ -12,18 +12,18 @@ class BrandController extends SHFBaseController<BrandModel> {
 
   @override
   Future<List<BrandModel>> fetchItems() async {
-    // Fetch brands
+    // Lấy các thương hiệu
     final fetchedBrands = await _brandRepository.getAllBrands();
 
-    // Fetch Brand Categories Relational Data
+    // Lấy Dữ liệu Mối quan hệ Thương hiệu Danh mục
     final fetchedBrandCategories = await _brandRepository.getAllBrandCategories();
 
-    // Fetch All Categories is data does not already exist
+    // Lấy Tất cả các Danh mục nếu dữ liệu chưa tồn tại
     if (categoryController.allItems.isNotEmpty) await categoryController.fetchItems();
 
-    // Loop all brands and fetch categories of each
+    // Duyệt qua tất cả các thương hiệu và lấy các danh mục của mỗi thương hiệu
     for (var brand in fetchedBrands) {
-      // Extract categoryIds from the documents
+      // Trích xuất các Id danh mục từ các tài liệu
       List<String> categoryIds = fetchedBrandCategories
           .where((brandCategory) => brandCategory.brandId == brand.id)
           .map((brandCategory) => brandCategory.categoryId)

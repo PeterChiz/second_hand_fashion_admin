@@ -20,7 +20,11 @@ class CategoryTableHeader extends StatelessWidget {
           flex: !SHFDeviceUtils.isDesktopScreen(context) ? 1 : 3,
           child: Row(
             children: [
-              SizedBox(width: 200, child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createCategory), child: const Text('Create New Category'))),
+              SizedBox(
+                  width: 200,
+                  child: ElevatedButton(
+                      onPressed: () => Get.toNamed(SHFRoutes.createCategory),
+                      child: const Text('Tạo Danh mục mới'))),
             ],
           ),
         ),
@@ -29,7 +33,9 @@ class CategoryTableHeader extends StatelessWidget {
           child: TextFormField(
             controller: controller.searchTextController,
             onChanged: (query) => controller.searchQuery(query),
-            decoration: const InputDecoration(hintText: 'Search Categories', prefixIcon: Icon(Iconsax.search_normal)),
+            decoration: const InputDecoration(
+                hintText: 'Tìm kiếm danh mục',
+                prefixIcon: Icon(Iconsax.search_normal)),
           ),
         ),
       ],

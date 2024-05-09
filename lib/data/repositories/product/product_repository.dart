@@ -9,16 +9,16 @@ import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
 
-/// Repository for managing product-related data and operations.
+/// Repository quản lý dữ liệu và hoạt động liên quan đến sản phẩm.
 class ProductRepository extends GetxController {
   static ProductRepository get instance => Get.find();
 
-  /// Firestore instance for database interactions.
+  /// Firestore instance để tương tác với cơ sở dữ liệu.
   final _db = FirebaseFirestore.instance;
 
-  /* ---------------------------- FUNCTIONS ---------------------------------*/
+  /* ---------------------------- HÀM ---------------------------------*/
 
-  /// Create product.
+  /// Tạo sản phẩm.
   Future<String> createProduct(ProductModel product) async {
     try {
       final result = await _db.collection('Products').add(product.toJson());
@@ -30,11 +30,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Create new product category
+  /// Tạo danh mục sản phẩm mới
   Future<String> createProductCategory(ProductCategoryModel productCategory) async {
     try {
       final result = await _db.collection("ProductCategory").add(productCategory.toJson());
@@ -46,11 +46,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Update product.
+  /// Cập nhật sản phẩm.
   Future<void> updateProduct(ProductModel product) async {
     try {
       await _db.collection('Products').doc(product.id).update(product.toJson());
@@ -61,11 +61,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Update Product Instance
+  /// Cập nhật Instance Sản phẩm
   Future<void> updateProductSpecificValue(id, Map<String, dynamic> data) async {
     try {
       await _db.collection('Products').doc(id).update(data);
@@ -76,11 +76,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Get limited featured products.
+  /// Lấy các sản phẩm nổi bật giới hạn.
   Future<List<ProductModel>> getAllProducts() async {
     try {
       final snapshot = await _db.collection('Products').get();
@@ -90,11 +90,11 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Get limited featured products.
+  /// Lấy danh mục sản phẩm giới hạn.
   Future<List<ProductCategoryModel>> getProductCategories(String productId) async {
     try {
       final snapshot = await _db.collection('ProductCategory').where('productId', isEqualTo: productId).get();
@@ -104,15 +104,15 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Remove product category
+  /// Xóa danh mục sản phẩm
   Future<void> removeProductCategory(String productId, String categoryId) async {
     try {
       final result =
-          await _db.collection("ProductCategory").where('productId', isEqualTo: productId).where('categoryId', isEqualTo: categoryId).get();
+      await _db.collection("ProductCategory").where('productId', isEqualTo: productId).where('categoryId', isEqualTo: categoryId).get();
 
       for (final doc in result.docs) {
         await doc.reference.delete();
@@ -124,23 +124,23 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Delete product
+  /// Xóa sản phẩm
   Future<void> deleteProduct(ProductModel product) async {
     try {
-      // Delete all data at once from Firebase Firestore
+      // Xóa tất cả dữ liệu cùng lúc từ Firebase Firestore
       await _db.runTransaction((transaction) async {
         final productRef = _db.collection("Products").doc(product.id);
         final productSnap = await transaction.get(productRef);
 
         if (!productSnap.exists) {
-          throw Exception("Product not found");
+          throw Exception("Không tìm thấy sản phẩm");
         }
 
-        // Fetch ProductCategories
+        // Lấy các danh mục sản phẩm
         final productCategoriesSnapshot = await _db.collection('ProductCategory').where('productId', isEqualTo: product.id).get();
         final productCategories = productCategoriesSnapshot.docs.map((e) => ProductCategoryModel.fromSnapshot(e));
 
@@ -159,7 +159,7 @@ class ProductRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 }

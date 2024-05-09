@@ -10,8 +10,6 @@ import 'package:get/get.dart';
 import '../../../features/media/models/image_model.dart';
 import '../../../utils/constants/enums.dart';
 
-
-
 class MediaRepository extends GetxController {
   static MediaRepository get instance => Get.find();
 
@@ -21,15 +19,15 @@ class MediaRepository extends GetxController {
   /// Upload any Image using File
   Future<ImageModel> uploadImageFileInStorage({required html.File file, required String path, required String imageName}) async {
     try {
-      // Reference to the storage location
+      // Tham chiếu đến vị trí lưu trữ
       final Reference ref = _storage.ref('$path/$imageName');
-      // Upload file
+      // Tải lên tệp
       await ref.putBlob(file);
 
-      // Get download URL
+      // Lấy URL tải xuống
       final String downloadURL = await ref.getDownloadURL();
 
-      // Fetch metadata
+      // Lấy dữ liệu siêu dữ liệu
       final FullMetadata metadata = await ref.getMetadata();
 
       return ImageModel.fromFirebaseMetadata(metadata, path, imageName, downloadURL);
@@ -40,11 +38,11 @@ class MediaRepository extends GetxController {
     } on PlatformException catch (e) {
       throw e.message!;
     } catch (e) {
-      throw e.toString();
+      throw 'Đã xảy ra lỗi. Vui lòng thử lại';
     }
   }
 
-  /// Upload Image data in Firestore
+  /// Upload dữ liệu hình ảnh vào Firestore
   Future<String> uploadImageFileInDatabase(ImageModel image) async {
     try {
       final data = await FirebaseFirestore.instance.collection("Images").add(image.toJson());
@@ -60,7 +58,7 @@ class MediaRepository extends GetxController {
     }
   }
 
-  // Fetch images from Firestore based on media category and load count
+  // Lấy hình ảnh từ Firestore dựa trên danh mục phương tiện và số lượng tải
   Future<List<ImageModel>> fetchImagesFromDatabase(MediaCategory mediaCategory, int loadCount) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
@@ -82,7 +80,7 @@ class MediaRepository extends GetxController {
     }
   }
 
-  // Load more images from Firestore based on media category, load count, and last fetched date
+  // Tải thêm hình ảnh từ Firestore dựa trên danh mục phương tiện, số lượng tải và ngày cuối cùng đã tải
   Future<List<ImageModel>> loadMoreImagesFromDatabase(MediaCategory mediaCategory, int loadCount, DateTime lastFetchedDate) async {
     try {
       final querySnapshot = await FirebaseFirestore.instance
@@ -99,7 +97,7 @@ class MediaRepository extends GetxController {
     }
   }
 
-  // Fetch all images from Firebase Storage
+  // Lấy tất cả hình ảnh từ Firebase Storage
   Future<List<ImageModel>> fetchAllImages() async {
     try {
       final ListResult result = await _storage.ref().listAll();
@@ -108,10 +106,10 @@ class MediaRepository extends GetxController {
       for (final Reference ref in result.items) {
         final String filename = ref.name;
 
-        // Fetch download URL
+        // Lấy URL tải xuống
         final String downloadURL = await ref.getDownloadURL();
 
-        // Fetch metadata
+        // Lấy dữ liệu siêu dữ liệu
         final FullMetadata metadata = await ref.getMetadata();
 
         images.add(ImageModel.fromFirebaseMetadata(metadata, '', filename, downloadURL));
@@ -129,7 +127,7 @@ class MediaRepository extends GetxController {
     }
   }
 
-  // Delete file from Firebase Storage and corresponding document from Firestore
+  // Xóa tệp từ Firebase Storage và tài liệu tương ứng từ Firestore
   Future<void> deleteFileFromStorage(ImageModel image, String path) async {
     try {
       Reference ref = FirebaseStorage.instance.refFromURL(image.url);
@@ -139,7 +137,7 @@ class MediaRepository extends GetxController {
       if (kDebugMode) print('File deleted successfully.');
     } on FirebaseException catch (e) {
       if (e.code == 'object-not-found') {
-        if (kDebugMode) print('The file does not exist in Firebase Storage.');
+        if (kDebugMode) print('Tệp không tồn tại trong Firebase Storage.');
       } else {
         throw e.message!;
       }

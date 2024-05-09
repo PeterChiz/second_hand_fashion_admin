@@ -19,15 +19,15 @@ class ProductVisibilityWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Visibility Header
-          Text('Visibility', style: Theme.of(context).textTheme.headlineSmall),
+          Text('Hiển Thị', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
           // Radio buttons for product visibility
           Obx(
-            () => Column(
+                () => Column(
               children: [
-                _buildVisibilityRadioButton(controller, ProductVisibility.published, 'Published'),
-                _buildVisibilityRadioButton(controller, ProductVisibility.hidden, 'Hidden'),
+                _buildVisibilityRadioButton(controller, ProductVisibility.published, 'Xuất bản'),
+                _buildVisibilityRadioButton(controller, ProductVisibility.hidden, 'Ẩn'),
               ],
             ),
           ),

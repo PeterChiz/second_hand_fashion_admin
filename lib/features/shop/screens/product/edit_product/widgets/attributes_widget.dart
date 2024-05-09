@@ -160,7 +160,7 @@ class ProductAttributes extends StatelessWidget {
   TextFormField _buildAttributeName(ProductAttributesController controller) {
     return TextFormField(
       controller: controller.attributeName,
-      validator: (value) => SHFValidator.validateEmptyText('Attribute Name', value),
+      validator: (value) => SHFValidator.validationEmptyText('Attribute Name', value),
       decoration: const InputDecoration(labelText: 'Attribute Name', hintText: 'Colors, Sizes, Material'),
     );
   }
@@ -176,7 +176,7 @@ class ProductAttributes extends StatelessWidget {
         controller: controller.attributes,
         keyboardType: TextInputType.multiline,
         textAlignVertical: TextAlignVertical.top,
-        validator: (value) => SHFValidator.validateEmptyText('Attributes Field', value),
+        validator: (value) => SHFValidator.validationEmptyText('Attributes Field', value),
         decoration: const InputDecoration(
           labelText: 'Attributes',
           hintText: 'Add attributes separated by |  Example: Green | Blue | Yellow',

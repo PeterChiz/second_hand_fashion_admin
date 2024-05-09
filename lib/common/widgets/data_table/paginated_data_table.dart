@@ -7,7 +7,7 @@ import '../../../utils/constants/image_strings.dart';
 import '../../../utils/constants/sizes.dart';
 import '../loaders/animation_loader.dart';
 
-/// Custom PaginatedDataTable widget with additional features
+/// Widget PaginatedDataTable tùy chỉnh với các tính năng bổ sung
 class SHFPaginatedDataTable extends StatelessWidget {
   const SHFPaginatedDataTable({
     super.key,
@@ -22,41 +22,42 @@ class SHFPaginatedDataTable extends StatelessWidget {
     this.minWidth = 1000,
   });
 
-  /// Whether to sort the DataTable in ascending or descending order.
+  /// Cho biết liệu có nên sắp xếp DataTable theo thứ tự tăng dần hay giảm dần.
   final bool sortAscending;
 
-  /// Index of the column to sort by.
+  /// Chỉ mục của cột để sắp xếp theo.
   final int? sortColumnIndex;
 
-  /// Number of rows to display per page.
+  /// Số hàng được hiển thị mỗi trang.
   final int rowsPerPage;
 
-  /// Data source for the DataTable.
+  /// Nguồn dữ liệu cho DataTable.
   final DataTableSource source;
 
-  /// List of columns for the DataTable.
+  /// Danh sách các cột cho DataTable.
   final List<DataColumn> columns;
 
-  /// Callback function to handle page changes.
+  /// Hàm gọi lại để xử lý thay đổi trang.
   final Function(int)? onPageChanged;
 
-  /// Height of each data row in the DataTable.
+  /// Chiều cao của mỗi hàng dữ liệu trong DataTable.
   final double dataRowHeight;
 
-  /// Height of the entire DataTable.
+  /// Chiều cao của toàn bộ DataTable.
   final double tableHeight;
 
-  /// Minimum Width of the entire DataTable.
+  /// Chiều rộng tối thiểu của toàn bộ DataTable.
   final double? minWidth;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // Set the dynamic height of the PaginatedDataTable
+      // Đặt chiều cao động của PaginatedDataTable
       height: tableHeight,
       child: Theme(
-        // Use to set the Backend color
-        data: Theme.of(context).copyWith(cardTheme: const CardTheme(color: Colors.white, elevation: 0)),
+        // Sử dụng để đặt màu nền
+        data: Theme.of(context).copyWith(
+            cardTheme: const CardTheme(color: Colors.white, elevation: 0)),
         child: PaginatedDataTable2(
           source: source,
           columns: columns,
@@ -74,8 +75,13 @@ class SHFPaginatedDataTable extends StatelessWidget {
           onRowsPerPageChanged: (noOfRows) {},
           sortColumnIndex: sortColumnIndex,
           headingTextStyle: Theme.of(context).textTheme.titleMedium,
-          headingRowColor: MaterialStateProperty.resolveWith((states) => SHFColors.primaryBackground),
-          empty: SHFAnimationLoaderWidget(animation: SHFImages.packageAnimation, text: 'Nothing Found', height: 200, width: 200),
+          headingRowColor: MaterialStateProperty.resolveWith(
+              (states) => SHFColors.primaryBackground),
+          empty: SHFAnimationLoaderWidget(
+              animation: SHFImages.packageAnimation,
+              text: 'Không có gì được tìm thấy',
+              height: 200,
+              width: 200),
           headingRowDecoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(SHFSizes.borderRadiusMd),
@@ -84,7 +90,8 @@ class SHFPaginatedDataTable extends StatelessWidget {
           ),
           sortArrowBuilder: (bool ascending, bool sorted) {
             if (sorted) {
-              return Icon(ascending ? Iconsax.arrow_up_3 : Iconsax.arrow_down, size: SHFSizes.iconSm);
+              return Icon(ascending ? Iconsax.arrow_up_3 : Iconsax.arrow_down,
+                  size: SHFSizes.iconSm);
             } else {
               return const Icon(Iconsax.arrow_3, size: SHFSizes.iconSm);
             }

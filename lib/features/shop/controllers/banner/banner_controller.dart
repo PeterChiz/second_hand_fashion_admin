@@ -18,13 +18,13 @@ class BannerController extends SHFBaseController<BannerModel> {
     return await _bannerRepository.getAllBanners();
   }
 
-  /// Method for formatting a route string.
+  /// Phương thức để định dạng một chuỗi tuyến đường.
   String formatRoute(String route) {
     if (route.isEmpty) return '';
-    // Remove the leading '/'
+    // Xóa dấu '/'
     String formatted = route.substring(1);
 
-    // Capitalize the first character
+    // Viết hoa ký tự đầu tiên
     formatted = formatted[0].toUpperCase() + formatted.substring(1);
 
     return formatted;

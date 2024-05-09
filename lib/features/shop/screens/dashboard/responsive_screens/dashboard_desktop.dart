@@ -13,7 +13,7 @@ import '../widgets/order_status_graph.dart';
 import '../widgets/weekly_sales.dart';
 
 class DashboardDesktopScreen extends StatelessWidget {
-  const DashboardDesktopScreen({super.key});
+  const DashboardDesktopScreen({super.key, });
 
   @override
   Widget build(BuildContext context) {
@@ -28,29 +28,29 @@ class DashboardDesktopScreen extends StatelessWidget {
               const SHFPageHeading(heading: 'Dashboard'),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Card Stats
+              // Thẻ Thống kê
               Row(
                 children: [
                   Expanded(
                     child: Obx(
-                      () => SHFDashboardCard(
+                          () => SHFDashboardCard(
                         stats: 25,
                         context: context,
-                        title: 'Sales total',
+                        title: 'Tổng doanh số',
                         subTitle:
-                            '\$${controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount)}',
+                        '\$${controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount)}',
                       ),
                     ),
                   ),
                   const SizedBox(width: SHFSizes.spaceBtwItems),
                   Expanded(
                     child: Obx(
-                      () => SHFDashboardCard(
+                          () => SHFDashboardCard(
                         stats: 15,
                         context: context,
-                        title: 'Average Order Value',
+                        title: 'Giá trị trung bình đơn hàng',
                         subTitle:
-                            '\$${(controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.orderController.allItems.length).toStringAsFixed(2)}',
+                        '\$${(controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.orderController.allItems.length).toStringAsFixed(2)}',
                         icon: Iconsax.arrow_down,
                         color: SHFColors.error,
                       ),
@@ -59,21 +59,21 @@ class DashboardDesktopScreen extends StatelessWidget {
                   const SizedBox(width: SHFSizes.spaceBtwItems),
                   Expanded(
                     child: Obx(
-                      () => SHFDashboardCard(
+                          () => SHFDashboardCard(
                         stats: 44,
                         context: context,
-                        title: 'Total Orders',
+                        title: 'Tổng số đơn hàng',
                         subTitle: '\$${controller.orderController.allItems.length}',
                       ),
                     ),
                   ),
                   const SizedBox(width: SHFSizes.spaceBtwItems),
-                  Expanded(child: SHFDashboardCard(context: context, title: 'Visitors', subTitle: '25,035', stats: 2)),
+                  Expanded(child: SHFDashboardCard(context: context, title: 'Khách truy cập', subTitle: '25,035', stats: 2)),
                 ],
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Graphs
+              // Biểu đồ
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -81,15 +81,15 @@ class DashboardDesktopScreen extends StatelessWidget {
                     flex: 2,
                     child: Column(
                       children: [
-                        // Weekly Sales Graph
+                        // Biểu đồ Doanh số hàng tuần
                         const SHFWeeklySalesGraph(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Orders
+                        // Đơn hàng
                         SHFRoundedContainer(child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Recent Orders', style: Theme.of(context).textTheme.headlineSmall),
+                            Text('Đơn hàng gần đây', style: Theme.of(context).textTheme.headlineSmall),
                             const SizedBox(height: SHFSizes.spaceBtwSections),
                             const DashboardOrderTable(),
                           ],
@@ -103,7 +103,7 @@ class DashboardDesktopScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Orders Status', style: Theme.of(context).textTheme.headlineSmall),
+                          Text('Trạng thái đơn hàng', style: Theme.of(context).textTheme.headlineSmall),
                           const SizedBox(height: SHFSizes.spaceBtwSections),
                           const OrderStatusPieChart(),
                         ],

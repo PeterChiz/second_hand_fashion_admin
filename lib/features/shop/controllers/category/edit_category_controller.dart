@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +21,7 @@ class EditCategoryController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final repository = Get.put(CategoryRepository());
 
-  /// Init Data
+  /// Khởi tạo dữ liệu
   void init(CategoryModel category){
     if(category.parentId.isNotEmpty) {
       selectedParent.value = CategoryController.instance.allItems.where((c) => c.id == category.parentId).single;
@@ -32,7 +31,7 @@ class EditCategoryController extends GetxController {
     imageURL.value = category.image;
   }
 
-  /// Method to reset fields
+  /// Phương thức để đặt lại các trường
   void resetFields() {
     selectedParent(CategoryModel.empty());
     loading(false);
@@ -41,59 +40,59 @@ class EditCategoryController extends GetxController {
     imageURL.value = '';
   }
 
-  /// Pick Thumbnail Image from Media
+  /// Chọn ảnh thu nhỏ từ phương tiện
   void pickImage() async {
     final controller = Get.put(MediaController());
     List<ImageModel>? selectedImages = await controller.selectImagesFromMedia();
 
-    // Handle the selected images
+    // Xử lý các ảnh được chọn
     if (selectedImages != null && selectedImages.isNotEmpty) {
-      // Set the selected image to the main image or perform any other action
+      // Đặt ảnh được chọn là ảnh chính hoặc thực hiện bất kỳ hành động nào khác
       ImageModel selectedImage = selectedImages.first;
-      // Update the main image using the selectedImage
+      // Cập nhật ảnh chính bằng cách sử dụng selectedImage
       imageURL.value = selectedImage.url;
     }
   }
 
-  /// Register new Category
+  /// Đăng ký danh mục mới
   Future<void> updateCategory(CategoryModel category) async {
     try {
-      // Start Loading
+      // Bắt đầu tải
       SHFFullScreenLoader.popUpCircular();
 
-      // Check Internet Connectivity
+      // Kiểm tra Kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Xác nhận Form
       if (!formKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Map Data
+      // Ánh xạ Dữ liệu
       category.image = imageURL.value;
       category.name = name.text.trim();
       category.parentId = selectedParent.value.id;
       category.isFeatured = isFeatured.value;
       category.updatedAt = DateTime.now();
 
-      // Call Repository to Create New User
+      // Gọi Repository để Cập nhật Danh mục
       await repository.updateCategory(category);
 
-      // Update All Data list
+      // Cập nhật Tất cả danh sách Dữ liệu
       CategoryController.instance.updateItemFromLists(category);
 
-      // Reset Form
+      // Đặt lại Form
       resetFields();
 
-      // Remove Loader
+      // Loại bỏ Loader
       SHFFullScreenLoader.stopLoading();
 
-      // Success Message & Redirect
+      // Thông báo Thành công & Chuyển hướng
       SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi của bạn đã được cập nhật.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();

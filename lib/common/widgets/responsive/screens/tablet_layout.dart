@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 import '../../layouts/headers/header.dart';
 import '../../layouts/sidebars/sidebar.dart';
 
-/// Widget for the tablet layout
+/// Widget cho bố cục máy tính bảng
 class TabletLayout extends StatelessWidget {
   TabletLayout({super.key, this.body});
 
-  /// Widget to be displayed as the body of the tablet layout
+  /// Widget để hiển thị là phần thân của bố cục máy tính bảng
   final Widget? body;
 
-  /// Key for the scaffold widget
+  /// Key cho scaffold widget
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      drawer: const SHFSidebar(), // Sidebar
-      appBar: SHFHeader(scaffoldKey: scaffoldKey), // Header
-      body: body ?? Container(), // Body
+      drawer: const SHFSidebar(), // Thanh bên
+      appBar: SHFHeader(scaffoldKey: scaffoldKey), // Đầu trang
+      body: body ?? Container(), // Phần thân
     );
   }
 }

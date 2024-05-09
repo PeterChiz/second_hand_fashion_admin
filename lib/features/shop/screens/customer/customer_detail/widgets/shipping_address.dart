@@ -24,7 +24,8 @@ class ShippingAddress extends StatelessWidget {
         AddressModel selectedAddress = AddressModel.empty();
         if (controller.customer.value.addresses != null) {
           if (controller.customer.value.addresses!.isNotEmpty) {
-            selectedAddress = controller.customer.value.addresses!.where((element) => element.selectedAddress).single;
+            selectedAddress = controller.customer.value.addresses!
+                .singleWhere((element) => element.selectedAddress);
           }
         }
 
@@ -33,44 +34,43 @@ class ShippingAddress extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Shipping Address', style: Theme.of(context).textTheme.headlineMedium),
+              Text('Địa chỉ giao hàng',
+                  style: Theme.of(context).textTheme.headlineMedium),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Meta Data
               Row(
                 children: [
-                  const SizedBox(width: 120, child: Text('Name')),
-                  const Text(':'),
-                  const SizedBox(width: SHFSizes.spaceBtwItems / 2),
-                  Expanded(child: Text(selectedAddress.name, style: Theme.of(context).textTheme.titleMedium)),
-                ],
-              ),
-              const SizedBox(height: SHFSizes.spaceBtwItems),
-              Row(
-                children: [
-                  const SizedBox(width: 120, child: Text('Country')),
-                  const Text(':'),
-                  const SizedBox(width: SHFSizes.spaceBtwItems / 2),
-                  Expanded(child: Text(selectedAddress.country, style: Theme.of(context).textTheme.titleMedium)),
-                ],
-              ),
-              const SizedBox(height: SHFSizes.spaceBtwItems),
-              Row(
-                children: [
-                  const SizedBox(width: 120, child: Text('Phone Number')),
-                  const Text(':'),
-                  const SizedBox(width: SHFSizes.spaceBtwItems / 2),
-                  Expanded(child: Text(selectedAddress.phoneNumber, style: Theme.of(context).textTheme.titleMedium)),
-                ],
-              ),
-              const SizedBox(height: SHFSizes.spaceBtwItems),
-              Row(
-                children: [
-                  const SizedBox(width: 120, child: Text('Address')),
+                  const SizedBox(width: 120, child: Text('Tên')),
                   const Text(':'),
                   const SizedBox(width: SHFSizes.spaceBtwItems / 2),
                   Expanded(
-                      child: Text(selectedAddress.id.isNotEmpty ? selectedAddress.toString() : '',
+                      child: Text(selectedAddress.name,
+                          style: Theme.of(context).textTheme.titleMedium)),
+                ],
+              ),
+              const SizedBox(height: SHFSizes.spaceBtwItems),
+              Row(
+                children: [
+                  const SizedBox(width: 120, child: Text('Số điện thoại')),
+                  const Text(':'),
+                  const SizedBox(width: SHFSizes.spaceBtwItems / 2),
+                  Expanded(
+                      child: Text(selectedAddress.phoneNumber,
+                          style: Theme.of(context).textTheme.titleMedium)),
+                ],
+              ),
+              const SizedBox(height: SHFSizes.spaceBtwItems),
+              Row(
+                children: [
+                  const SizedBox(width: 120, child: Text('Địa chỉ')),
+                  const Text(':'),
+                  const SizedBox(width: SHFSizes.spaceBtwItems / 2),
+                  Expanded(
+                      child: Text(
+                          selectedAddress.id.isNotEmpty
+                              ? selectedAddress.toString()
+                              : '',
                           style: Theme.of(context).textTheme.titleMedium)),
                 ],
               ),

@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 
-/// A container widget with rounded corners and customizable properties.
+/// Một widget container với góc bo tròn và các thuộc tính có thể tùy chỉnh.
 class SHFRoundedContainer extends StatelessWidget {
-  /// Create a rounded container with customizable properties.
+  /// Tạo một container với góc bo tròn và các thuộc tính có thể tùy chỉnh.
   ///
-  /// Parameters:
-  ///   - width: The width of the container.
-  ///   - height: The height of the container.
-  ///   - radius: The border radius for the rounded corners.
-  ///   - padding: The padding inside the container.
-  ///   - margin: The margin around the container.
-  ///   - child: The widget to be placed inside the container.
-  ///   - backgroundColor: The background color of the container.
-  ///   - borderColor: The color of the container's border.
-  ///   - showBorder: A flag to determine if the container should have a border.
+  /// Tham số:
+  ///   - width: Chiều rộng của container.
+  ///   - height: Chiều cao của container.
+  ///   - radius: Bán kính của góc bo tròn.
+  ///   - padding: Khoảng cách lề bên trong container.
+  ///   - margin: Khoảng cách lề xung quanh container.
+  ///   - child: Widget sẽ được đặt bên trong container.
+  ///   - backgroundColor: Màu nền của container.
+  ///   - borderColor: Màu của viền container.
+  ///   - showBorder: Cờ xác định liệu container có nên có viền không.
   const SHFRoundedContainer({
     super.key,
     this.child,

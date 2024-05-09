@@ -16,7 +16,7 @@ class OrderRepository extends GetxController {
 
   /* ---------------------------- FUNCTIONS ---------------------------------*/
 
-  // Get all orders related to the current user
+  // Lấy tất cả các đơn hàng liên quan đến người dùng hiện tại
   Future<List<OrderModel>> getAllOrders() async {
     try {
       final result = await _db.collection('Orders').get();
@@ -28,11 +28,11 @@ class OrderRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 
-  // Store a new user order
+  // Lưu đơn đặt hàng mới
   Future<void> addOrder(OrderModel order) async {
     try {
       await _db.collection('Orders').add(order.toJson());
@@ -43,11 +43,11 @@ class OrderRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 
-  // Update a specific value of an order instance
+  // Cập nhật một giá trị cụ thể của một đơn đặt hàng
   Future<void> updateOrderSpecificValue(String orderId, Map<String, dynamic> data) async {
     try {
       await _db.collection('Orders').doc(orderId).update(data);
@@ -58,11 +58,11 @@ class OrderRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 
-  // Delete an order
+  // Xóa một đơn đặt hàng
   Future<void> deleteOrder(String orderId) async {
     try {
       await _db.collection("Orders").doc(orderId).delete();
@@ -73,7 +73,7 @@ class OrderRepository extends GetxController {
     } on PlatformException catch (e) {
       throw SHFPlatformException(e.code).message;
     } catch (e) {
-      throw 'Something went wrong. Please try again';
+      throw 'Có lỗi xảy ra. Vui lòng thử lại';
     }
   }
 }

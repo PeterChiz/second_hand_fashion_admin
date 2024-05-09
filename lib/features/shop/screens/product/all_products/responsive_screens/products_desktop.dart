@@ -22,7 +22,7 @@ class ProductsDesktopScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Breadcrumbs
-              const SHFBreadcrumbsWithHeading(heading: 'Products', breadcrumbItems: ['Products']),
+              const SHFBreadcrumbsWithHeading(heading: 'Sản phẩm', breadcrumbItems: ['Sản phẩm']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Table Body

@@ -30,7 +30,7 @@ class ProductStockAndPricing extends StatelessWidget {
                     child: TextFormField(
                       controller: controller.stock,
                       decoration: const InputDecoration(labelText: 'Stock', hintText: 'Add Stock, only numbers are allowed'),
-                      validator: (value) => SHFValidator.validateEmptyText('Stock', value),
+                      validator: (value) => SHFValidator.validationEmptyText('Stock', value),
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                     ),
@@ -45,7 +45,7 @@ class ProductStockAndPricing extends StatelessWidget {
                         child: TextFormField(
                           controller: controller.price,
                           decoration: const InputDecoration(labelText: 'Price', hintText: 'Price with up-to 2 decimals'),
-                          validator: (value) => SHFValidator.validateEmptyText('Price', value),
+                          validator: (value) => SHFValidator.validationEmptyText('Price', value),
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}$')),

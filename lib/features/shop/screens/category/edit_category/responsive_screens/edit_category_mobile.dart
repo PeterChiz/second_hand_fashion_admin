@@ -10,7 +10,6 @@ class EditCategoryMobileScreen extends StatelessWidget {
 
   final CategoryModel category;
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +19,15 @@ class EditCategoryMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Update Category', breadcrumbItems: [SHFRoutes.categories, 'Update Category']),
+              const SHFBreadcrumbsWithHeading(
+                  heading: 'Cập nhật danh mục',
+                  breadcrumbItems: [SHFRoutes.categories, 'Cập nhật danh mục']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Form
-              EditCategoryForm(category: category,),
+              EditCategoryForm(
+                category: category,
+              ),
             ],
           ),
         ),

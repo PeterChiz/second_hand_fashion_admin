@@ -22,7 +22,7 @@ class OrdersMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFBreadcrumbsWithHeading(heading: 'Orders', breadcrumbItems: ['Orders']),
+              const SHFBreadcrumbsWithHeading(heading: 'Đơn hàng', breadcrumbItems: ['Đơn hàng']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
               // Table Body
               Obx(() {

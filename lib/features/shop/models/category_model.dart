@@ -25,13 +25,16 @@ class CategoryModel {
     this.childCategories,
   });
 
+  /// Lấy ngày được định dạng
   String get formattedDate => SHFFormatter.formatDate(createdAt);
+
+  /// Lấy ngày cập nhật được định dạng
   String get formattedUpdatedAtDate => SHFFormatter.formatDate(updatedAt);
+
   /// Empty Helper Function
   static CategoryModel empty() => CategoryModel(id: '', image: '', name: '', isFeatured: false);
 
-
-  /// Convert model to Json structure so that you can store data in Firebase
+  /// Chuyển đổi đối tượng thành cấu trúc Json để lưu trữ dữ liệu trong Firebase
   toJson() {
     return {
       'Name': name,
@@ -43,12 +46,12 @@ class CategoryModel {
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to UserModel
+  /// Ánh xạ dữ liệu từ tài liệu snapshot từ Firebase thành CategoryModel
   factory CategoryModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     if (document.data() != null) {
       final data = document.data()!;
 
-      // Map JSON Record to the Model
+      // Ánh xạ dòng dữ liệu JSON thành mô hình
       return CategoryModel(
         id: document.id,
         name: data['Name'] ?? '',

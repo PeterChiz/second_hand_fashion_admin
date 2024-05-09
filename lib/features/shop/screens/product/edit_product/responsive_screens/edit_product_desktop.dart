@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../../utils/device/device_utility.dart';
@@ -40,9 +41,9 @@ class EditProductDesktopScreen extends StatelessWidget {
             children: [
               // Breadcrumbs
               const SHFBreadcrumbsWithHeading(
-                heading: 'Edit Product',
+                heading: 'Chỉnh sửa sản phẩm',
                 returnToPreviousScreen: true,
-                breadcrumbItems: [SHFRoutes.products, 'Edit Product'],
+                breadcrumbItems: [SHFRoutes.products, 'Chỉnh sửa sản phẩm'],
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
@@ -65,7 +66,7 @@ class EditProductDesktopScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Heading
-                              Text('Stock & Pricing', style: Theme.of(context).textTheme.headlineSmall),
+                              Text('Tồn kho & Giá', style: Theme.of(context).textTheme.headlineSmall),
                               const SizedBox(height: SHFSizes.spaceBtwItems),
 
                               // Product Type
@@ -104,7 +105,7 @@ class EditProductDesktopScreen extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('All Product Images', style: Theme.of(context).textTheme.headlineSmall),
+                              Text('Tất cả hình ảnh sản phẩm', style: Theme.of(context).textTheme.headlineSmall),
                               const SizedBox(height: SHFSizes.spaceBtwItems),
                               ProductAdditionalImages(
                                 additionalProductImagesURLs: controller.additionalProductImagesUrls,

@@ -21,7 +21,7 @@ class OrderTableHeader extends StatelessWidget {
           child: TextFormField(
             controller: controller.searchTextController,
             onChanged: (query) => controller.searchQuery(query),
-            decoration: const InputDecoration(hintText: 'Search Orders', prefixIcon: Icon(Iconsax.search_normal)),
+            decoration: const InputDecoration(hintText: 'Tìm kiếm đơn hàng', prefixIcon: Icon(Iconsax.search_normal)),
           ),
         ),
       ],

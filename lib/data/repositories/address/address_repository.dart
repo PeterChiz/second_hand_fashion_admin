@@ -11,44 +11,44 @@ class AddressRepository extends GetxController {
   // Firebase Firestore instance
   final _db = FirebaseFirestore.instance;
 
-  // Fetch user addresses from Firestore based on userId
+  // Lấy địa chỉ người dùng từ Firestore dựa trên userId
   Future<List<AddressModel>> fetchUserAddresses(String userId) async {
     try {
-      // Query Firestore collection to get user addresses
+      // Truy vấn bộ sưu tập Firestore để lấy địa chỉ người dùng
       final result = await _db.collection('Users').doc(userId).collection('Addresses').get();
-      // Convert Firestore document snapshots to AddressModel objects
+      // Chuyển đổi các snapshot tài liệu Firestore thành các đối tượng AddressModel
       return result.docs.map((documentSnapshot) => AddressModel.fromDocumentSnapshot(documentSnapshot)).toList();
     } catch (e) {
-      // Throw an error if fetching addresses fails
-      throw 'Something went wrong while fetching Address Information. Try again later';
+      // Ném một lỗi nếu việc lấy địa chỉ thất bại
+      throw 'Có lỗi xảy ra khi lấy Thông tin Địa chỉ. Thử lại sau';
     }
   }
 
-  // Update the "SelectedAddress" field for a specific address
+  // Cập nhật trường "SelectedAddress" cho một địa chỉ cụ thể
   Future<void> updateSelectedField(String addressId, bool selected) async {
     try {
-      // Get the current user's ID
+      // Lấy ID người dùng hiện tại
       final userId = AuthenticationRepository.instance.authUser!.uid;
-      // Update the selected field for the specified address in Firestore
+      // Cập nhật trường được chọn cho địa chỉ cụ thể trong Firestore
       await _db.collection('Users').doc(userId).collection('Addresses').doc(addressId).update({'SelectedAddress': selected});
     } catch (e) {
-      // Throw an error if updating address selection fails
-      throw 'Unable to update your address selection. Try again later';
+      // Ném một lỗi nếu việc cập nhật việc chọn địa chỉ thất bại
+      throw 'Không thể cập nhật việc chọn địa chỉ của bạn. Thử lại sau';
     }
   }
 
-  // Add a new address to Firestore
+  // Thêm một địa chỉ mới vào Firestore
   Future<String> addAddress(AddressModel address) async {
     try {
-      // Get the current user's ID
+      // Lấy ID người dùng hiện tại
       final userId = AuthenticationRepository.instance.authUser!.uid;
-      // Add the address to the user's collection in Firestore
+      // Thêm địa chỉ vào bộ sưu tập của người dùng trong Firestore
       final currentAddress = await _db.collection('Users').doc(userId).collection('Addresses').add(address.toJson());
-      // Return the ID of the newly added address
+      // Trả về ID của địa chỉ mới được thêm
       return currentAddress.id;
     } catch (e) {
-      // Throw an error if adding the address fails
-      throw 'Something went wrong while saving Address Information. Try again later';
+      // Ném một lỗi nếu việc thêm địa chỉ thất bại
+      throw 'Có lỗi xảy ra khi lưu Thông tin Địa chỉ. Thử lại sau';
     }
   }
 }

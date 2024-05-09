@@ -10,7 +10,7 @@ import '../../../../../../utils/constants/enums.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import 'shf_rounded_image.dart';
 
-/// Widget for uploading images with optional editing functionality
+/// Widget để tải lên hình ảnh với chức năng chỉnh sửa tùy chọn
 class SHFImageUploader extends StatelessWidget {
   const SHFImageUploader({
     super.key,
@@ -28,47 +28,47 @@ class SHFImageUploader extends StatelessWidget {
     this.left = 0,
   });
 
-  /// Whether to display the image in a circular shape
+  /// Cho biết liệu có hiển thị hình ảnh dưới dạng hình tròn hay không
   final bool circular;
 
-  /// URL or path of the image to display
+  /// URL hoặc đường dẫn của hình ảnh để hiển thị
   final String? image;
 
-  /// Type of image (network, asset, memory, etc.)
+  /// Loại hình ảnh (mạng, tài nguyên, bộ nhớ, v.v.)
   final ImageType imageType;
 
-  /// Width of the image uploader widget
+  /// Chiều rộng của widget tải lên hình ảnh
   final double width;
 
-  /// Height of the image uploader widget
+  /// Chiều cao của widget tải lên hình ảnh
   final double height;
 
-  /// Byte data of the image (for memory images)
+  /// Dữ liệu byte của hình ảnh (cho hình ảnh trong bộ nhớ)
   final Uint8List? memoryImage;
 
-  /// Icon to display on the image uploader widget
+  /// Biểu tượng để hiển thị trên widget tải lên hình ảnh
   final IconData icon;
 
-  /// Offset from the top edge of the widget
+  /// Khoảng cách từ đỉnh của widget
   final double? top;
 
-  /// Offset from the bottom edge of the widget
+  /// Khoảng cách từ đáy của widget
   final double? bottom;
 
-  /// Offset from the right edge of the widget
+  /// Khoảng cách từ phải của widget
   final double? right;
 
-  /// Offset from the left edge of the widget
+  /// Khoảng cách từ trái của widget
   final double? left;
 
-  /// Callback function for when the icon button is pressed
+  /// Hàm gọi lại khi nút biểu tượng được nhấn
   final void Function()? onIconButtonPressed;
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // Display the image in either circular or rounded shape
+        // Hiển thị hình ảnh dưới dạng hình tròn hoặc hình vuông
         circular
             ? SHFCircularImage(
                 image: image,
@@ -86,7 +86,7 @@ class SHFImageUploader extends StatelessWidget {
                 memoryImage: memoryImage,
                 backgroundColor: SHFColors.primaryBackground,
               ),
-        // Display the edit icon button on top of the image
+        // Hiển thị nút biểu tượng chỉnh sửa trên hình ảnh
         Positioned(
           top: top,
           left: left,

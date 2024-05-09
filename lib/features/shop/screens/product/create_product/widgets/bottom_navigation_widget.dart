@@ -15,21 +15,21 @@ class ProductBottomNavigationButtons extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Discard button
+          // Nút Hủy
           OutlinedButton(
             onPressed: () {
-              // Add functionality to discard changes if needed
+              // Thêm chức năng để hủy các thay đổi nếu cần
             },
-            child: const Text('Discard'),
+            child: const Text('Hủy'),
           ),
           const SizedBox(width: SHFSizes.spaceBtwItems / 2),
 
-          // Save Changes button
+          // Nút Lưu Thay Đổi
           SizedBox(
             width: 160,
             child: ElevatedButton(
               onPressed: () => CreateProductController.instance.createProduct(),
-              child: const Text('Save Changes'),
+              child: const Text('Lưu Thay Đổi'),
             ),
           ),
         ],
