@@ -22,35 +22,35 @@ class OrderStatusPieChart extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Obx(
-          () => controller.orderStatusData.isNotEmpty
+              () => controller.orderStatusData.isNotEmpty
               ? SizedBox(
-                  height: 400,
-                  child: PieChart(
-                    PieChartData(
-                      sectionsSpace: 0,
-                      centerSpaceRadius: SHFDeviceUtils.isTabletScreen(context) ? 80 : 55,
-                      startDegreeOffset: 180,
-                      sections: controller.orderStatusData.entries.map((entry) {
-                        final OrderStatus status = entry.key;
-                        final int count = entry.value;
+            height: 400,
+            child: PieChart(
+              PieChartData(
+                sectionsSpace: 0,
+                centerSpaceRadius: SHFDeviceUtils.isTabletScreen(context) ? 80 : 55,
+                startDegreeOffset: 180,
+                sections: controller.orderStatusData.entries.map((entry) {
+                  final OrderStatus status = entry.key;
+                  final int count = entry.value;
 
-                        return PieChartSectionData(
-                          color: SHFHelperFunctions.getOrderStatusColor(status),
-                          value: count.toDouble(),
-                          title: '$count',
-                          radius: SHFDeviceUtils.isTabletScreen(context) ? 80 : 100,
-                          titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-                        );
-                      }).toList(),
-                      pieTouchData: PieTouchData(
-                        touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                          // Handle touch events here if needed
-                        },
-                        enabled: true,
-                      ),
-                    ),
-                  ),
-                )
+                  return PieChartSectionData(
+                    color: SHFHelperFunctions.getOrderStatusColor(status),
+                    value: count.toDouble(),
+                    title: '$count',
+                    radius: SHFDeviceUtils.isTabletScreen(context) ? 80 : 100,
+                    titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+                  );
+                }).toList(),
+                pieTouchData: PieTouchData(
+                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                    // Handle touch events here if needed
+                  },
+                  enabled: true,
+                ),
+              ),
+            ),
+          )
               : const SizedBox(height: 400, child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [SHFLoaderAnimation()])),
         ),
 
@@ -58,10 +58,10 @@ class OrderStatusPieChart extends StatelessWidget {
         SizedBox(
           width: double.infinity,
           child: Obx(
-            () => DataTable(
+                () => DataTable(
               columns: const [
                 DataColumn(label: Text('Trạng thái')),
-                DataColumn(label: Text('Đơn hàng')),
+                DataColumn(label: Text('SL')),
                 DataColumn(label: Text('Tổng')),
               ],
               rows: controller.orderStatusData.entries.map((entry) {
@@ -80,7 +80,7 @@ class OrderStatusPieChart extends StatelessWidget {
                     ),
                   ),
                   DataCell(Text(count.toString())),
-                  DataCell(Text('\$${totalAmount.toStringAsFixed(2)}')), // Format as needed
+                  DataCell(Text('${totalAmount.toStringAsFixed(0)}đ')), // Format as needed
                 ]);
               }).toList(),
             ),

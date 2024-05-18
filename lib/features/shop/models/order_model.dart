@@ -12,7 +12,7 @@ class OrderModel {
   OrderStatus status;
   final double totalAmount;
   final DateTime orderDate;
-  final String paymentMethod;
+  final String  paymentMethod;
   final AddressModel? address;
   final DateTime? deliveryDate;
   final List<CartItemModel> items;

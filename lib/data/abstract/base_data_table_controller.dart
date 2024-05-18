@@ -7,12 +7,12 @@ import '../../utils/popups/loaders.dart';
 
 /// Một lớp controller chung để quản lý các bảng dữ liệu bằng cách sử dụng GetX state management.
 /// Lớp này cung cấp các chức năng chung để xử lý các bảng dữ liệu, bao gồm lấy, cập nhật và xóa mục.
-abstract class SHFBaseController<T> extends GetxController {
+abstract class SHFBaseController<S> extends GetxController {
   RxBool isLoading = true.obs; // Observables để quản lý trạng thái tải
   RxInt sortColumnIndex = 1.obs; // Observable để theo dõi chỉ mục của cột để sắp xếp
-  RxList<T> allItems = <T>[].obs; // Danh sách quan sát để lưu trữ tất cả các mục
+  RxList<S> allItems = <S>[].obs; // Danh sách quan sát để lưu trữ tất cả các mục
   RxBool sortAscending = true.obs; // Observable để theo dõi thứ tự sắp xếp (tăng dần hoặc giảm dần)
-  RxList<T> filteredItems = <T>[].obs; // Danh sách quan sát để lưu trữ các mục đã lọc
+  RxList<S> filteredItems = <S>[].obs; // Danh sách quan sát để lưu trữ các mục đã lọc
   RxList<bool> selectedRows = <bool>[].obs; // Danh sách quan sát để lưu trữ các hàng đã chọn
   final searchTextController = TextEditingController(); // Controller để xử lý nhập văn bản tìm kiếm
 
@@ -23,16 +23,16 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức trừu tượng để được thực hiện bởi các lớp con để lấy các mục.
-  Future<List<T>> fetchItems();
+  Future<List<S>> fetchItems();
 
   /// Phương thức trừu tượng để được thực hiện bởi các lớp con để xóa một mục.
-  Future<void> deleteItem(T item);
+  Future<void> deleteItem(S item);
 
   /// Phương thức chung để lấy dữ liệu.
   Future<void> fetchData() async {
     try {
       isLoading.value = true; // Đặt trạng thái tải là true
-      List<T> fetchedItems = [];
+      List<S> fetchedItems = [];
       if (allItems.isEmpty) {
         fetchedItems = await fetchItems(); // Lấy các mục (sẽ được thực hiện trong các lớp con)
       }
@@ -57,10 +57,10 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức trừu tượng để được thực hiện bởi các lớp con để kiểm tra xem một mục có chứa truy vấn tìm kiếm không.
-  bool containsSearchQuery(T item, String query);
+  bool containsSearchQuery(S item, String query);
 
   /// Phương thức chung để sắp xếp các mục theo một thuộc tính
-  void sortByProperty(int sortColumnIndex, bool ascending, Function(T) property) {
+  void sortByProperty(int sortColumnIndex, bool ascending, Function(S) property) {
     sortAscending.value = ascending;
     filteredItems.sort((a, b) {
       if (ascending) {
@@ -75,7 +75,7 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức để thêm một mục vào danh sách.
-  void addItemToLists(T item) {
+  void addItemToLists(S item) {
     allItems.add(item);
     filteredItems.add(item);
     selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Khởi tạo các hàng đã chọn
@@ -83,7 +83,7 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức để cập nhật một mục trong danh sách.
-  void updateItemFromLists(T item) {
+  void updateItemFromLists(S item) {
     final itemIndex = allItems.indexWhere((i) => i == item);
     final filteredItemIndex = filteredItems.indexWhere((i) => i == item);
 
@@ -94,7 +94,7 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức để xóa một mục khỏi danh sách.
-  void removeItemFromLists(T item) {
+  void removeItemFromLists(S item) {
     allItems.remove(item);
     filteredItems.remove(item);
     selectedRows.assignAll(List.generate(allItems.length, (index) => false)); // Khởi tạo các hàng đã chọn
@@ -103,7 +103,7 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức chung để xác nhận xóa và thực hiện xóa.
-  Future<void> confirmAndDeleteItem(T item) async {
+  Future<void> confirmAndDeleteItem(S item) async {
     try {
       // Hiển thị hộp thoại xác nhận
       Get.defaultDialog(
@@ -130,7 +130,7 @@ abstract class SHFBaseController<T> extends GetxController {
               padding: const EdgeInsets.symmetric(vertical: SHFSizes.buttonHeight / 2),
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.buttonRadius * 5)),
             ),
-            child: const Text('Cancel'),
+            child: const Text('Hủy'),
           ),
         ),
       );
@@ -140,7 +140,7 @@ abstract class SHFBaseController<T> extends GetxController {
   }
 
   /// Phương thức được thực hiện bởi các lớp con để xác nhận trước khi xóa một mục.
-  Future<void> deleteOnConfirm(T item) async {
+  Future<void> deleteOnConfirm(S item) async {
     try {
       // Ẩn Hộp thoại Xác nhận
       SHFFullScreenLoader.stopLoading();
@@ -159,7 +159,7 @@ abstract class SHFBaseController<T> extends GetxController {
       SHFLoaders.successSnackBar(title: 'Đã xóa mục', message: 'Mục của bạn đã được xóa');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi!', message: e.toString());
     }
   }
 }

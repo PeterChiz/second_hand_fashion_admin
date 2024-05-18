@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class SHFDialogs {
   static defaultDialog({
     required BuildContext context,
-    String title = 'Removal Confirmation',
-    String content = 'Removing this data will delete all related data. Are you sure?',
-    String cancelText = 'Cancel',
-    String confirmText = 'Remove',
+    String title = 'Xác nhận xóa',
+    String content = 'Xóa dữ liệu này sẽ xóa tất cả dữ liệu liên quan. Bạn có chắc không?',
+    String cancelText = 'Hủy',
+    String confirmText = 'Xóa',
     Function()? onCancel,
     Function()? onConfirm,
   }) {

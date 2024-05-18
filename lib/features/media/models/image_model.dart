@@ -89,7 +89,7 @@ class ImageModel {
     if (document.data() != null) {
       final data = document.data()!;
 
-      // Ánh xạ Bản ghi JSON thành Mô hình
+      // Map JSON Record to the Model
       return ImageModel(
         id: document.id,
         url: data['url'] ?? '',
@@ -107,7 +107,7 @@ class ImageModel {
     }
   }
 
-  /// Ánh xạ Dữ liệu Lưu trữ Firebase
+  ///Ánh xạ Dữ liệu Lưu trữ Firebase
   factory ImageModel.fromFirebaseMetadata(FullMetadata metadata, String folder, String filename, String downloadUrl) {
     return ImageModel(
       url: downloadUrl,

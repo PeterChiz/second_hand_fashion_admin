@@ -8,70 +8,70 @@ import '../../../utils/helpers/network_manager.dart';
 import '../../../utils/popups/full_screen_loader.dart';
 import '../../../utils/popups/loaders.dart';
 
-/// Controller for handling forget password functionality
+/// Bộ điều khiển cho việc xử lý quên mật khẩu
 class ForgetPasswordController extends GetxController {
   static ForgetPasswordController get instance => Get.find();
 
-  /// Text editing controller for email field
+  /// Bộ điều khiển chỉnh sửa văn bản cho trường email
   final email = TextEditingController();
 
-  /// Form key for forget password form
+  /// Khóa form cho form quên mật khẩu
   final forgetPasswordFormKey = GlobalKey<FormState>();
 
-  /// Sends a password reset email
+  /// Gửi email đặt lại mật khẩu
   sendPasswordResetEmail() async {
     try {
-      // Start Loading
+      // Bắt đầu tải
       SHFFullScreenLoader.openLoadingDialog('Đang xử lý yêu cầu của bạn...', SHFImages.docerAnimation);
 
-      // Check Internet Connectivity
+      // Kiểm tra kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Form Validation
+      // Xác thực form
       if (!forgetPasswordFormKey.currentState!.validate()) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Send Email to Reset Password
+      // Gửi email để đặt lại mật khẩu
       await AuthenticationRepository.instance.sendPasswordResetEmail(email.text.trim());
 
-      // Remove Loader
+      // Dừng tải
       SHFFullScreenLoader.stopLoading();
 
-      // Redirect
+      // Chuyển hướng
       SHFLoaders.successSnackBar(title: 'Email đã gửi', message: 'Liên kết email được gửi để đặt lại mật khẩu của bạn'.tr);
-      Get.offNamed(SHFRoutes.resetPassword,arguments: email.text.trim());
+      Get.offNamed(SHFRoutes.resetPassword, arguments: email.text.trim());
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
       SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 
-  /// Resends a password reset email
+  /// Gửi lại email đặt lại mật khẩu
   resendPasswordResetEmail(String email) async {
     try {
-      // Start Loading
+      // Bắt đầu tải
       SHFFullScreenLoader.openLoadingDialog('Đang xử lý yêu cầu của bạn...', SHFImages.docerAnimation);
 
-      // Check Internet Connectivity
+      // Kiểm tra kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
       if (!isConnected) {
         SHFFullScreenLoader.stopLoading();
         return;
       }
 
-      // Send Email to Reset Password
+      // Gửi email để đặt lại mật khẩu
       await AuthenticationRepository.instance.sendPasswordResetEmail(email.trim());
 
-      // Remove Loader
+      // Dừng tải
       SHFFullScreenLoader.stopLoading();
 
-      // Show success message
+      // Hiển thị thông báo thành công
       SHFLoaders.successSnackBar(title: 'Email đã gửi', message: 'Liên kết email được gửi để đặt lại mật khẩu của bạn'.tr);
     } catch (e) {
       SHFFullScreenLoader.stopLoading();

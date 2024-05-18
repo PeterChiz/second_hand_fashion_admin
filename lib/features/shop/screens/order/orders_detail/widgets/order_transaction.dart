@@ -7,6 +7,7 @@ import '../../../../../../utils/constants/enums.dart';
 import '../../../../../../utils/constants/image_strings.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import '../../../../../../utils/device/device_utility.dart';
+import '../../../../../../utils/helpers/pricing_calculator.dart';
 import '../../../../models/order_model.dart';
 
 
@@ -20,6 +21,9 @@ class OrderTransaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final subTotal = order.items.fold(0.0, (previousValue, element) => previousValue + (element.price * element.quantity));
+    final totalPrice = SHFPricingCalculator.calculateTotalPrice(subTotal, order.address?.city ?? '');
+
     return SHFRoundedContainer(
       padding: const EdgeInsets.all(SHFSizes.defaultSpace),
       child: Column(
@@ -28,7 +32,6 @@ class OrderTransaction extends StatelessWidget {
           Text('Giao dịch', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: SHFSizes.spaceBtwSections),
 
-          // Adjust as per your needs
           Row(
             children: [
               Expanded(
@@ -42,9 +45,6 @@ class OrderTransaction extends StatelessWidget {
                         children: [
                           Text('Thanh toán qua ${order.paymentMethod.capitalize}',
                               style: Theme.of(context).textTheme.titleLarge),
-                          // Adjust your Payment Method Fee if any
-                          Text('Phí thanh toán ${order.paymentMethod.capitalize} \$25',
-                              style: Theme.of(context).textTheme.labelMedium),
                         ],
                       ),
                     )
@@ -56,7 +56,7 @@ class OrderTransaction extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Ngày', style: Theme.of(context).textTheme.labelMedium),
-                    Text('21 Tháng Tư, 2025', style: Theme.of(context).textTheme.bodyLarge),
+                    Text(order.formattedOrderDate, style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
               ),
@@ -65,7 +65,7 @@ class OrderTransaction extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Tổng cộng', style: Theme.of(context).textTheme.labelMedium),
-                    Text('\$${order.totalAmount}', style: Theme.of(context).textTheme.bodyLarge),
+                    Text('$totalPrice\đ', style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
               ),

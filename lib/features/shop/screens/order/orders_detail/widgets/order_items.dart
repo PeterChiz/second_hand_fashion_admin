@@ -68,8 +68,8 @@ class OrderItems extends StatelessWidget {
                   ),
                   const SizedBox(width: SHFSizes.spaceBtwItems),
                   SizedBox(
-                    width: SHFSizes.xl * 2,
-                    child: Text('\$${item.price.toStringAsFixed(1)}', style: Theme.of(context).textTheme.bodyLarge),
+                    width: SHFSizes.xl * 3,
+                    child: Text('${item.price}\đ', style: Theme.of(context).textTheme.bodyLarge),
                   ),
                   SizedBox(
                     width: SHFDeviceUtils.isMobileScreen(context) ? SHFSizes.xl * 1.4 : SHFSizes.xl * 2,
@@ -77,7 +77,7 @@ class OrderItems extends StatelessWidget {
                   ),
                   SizedBox(
                     width: SHFDeviceUtils.isMobileScreen(context) ? SHFSizes.xl * 1.4 : SHFSizes.xl * 2,
-                    child: Text('\$${item.totalAmount}', style: Theme.of(context).textTheme.bodyLarge),
+                    child: Text('${item.totalAmount}\đ', style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ],
               );
@@ -95,24 +95,16 @@ class OrderItems extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text('Tổng cộng', style: Theme.of(context).textTheme.titleLarge),
-                    Text('\$$subTotal', style: Theme.of(context).textTheme.titleLarge),
+                    Text('$subTotal\đ', style: Theme.of(context).textTheme.titleLarge),
                   ],
                 ),
                 const SizedBox(height: SHFSizes.spaceBtwItems),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Giảm giá', style: Theme.of(context).textTheme.titleLarge),
-                    Text('\$0.00', style: Theme.of(context).textTheme.titleLarge),
-                  ],
-                ),
-                const SizedBox(height: SHFSizes.spaceBtwItems),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Vận chuyển', style: Theme.of(context).textTheme.titleLarge),
+                    Text('Phí vận chuyển', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${SHFPricingCalculator.calculateShippingCost(subTotal, '')}',
+                      '${SHFPricingCalculator.calculateShippingCost(subTotal, order.address?.city ?? '')}\đ',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -121,9 +113,9 @@ class OrderItems extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text('Thuế', style: Theme.of(context).textTheme.titleLarge),
+                    Text('Thuế (VAT)', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${SHFPricingCalculator.calculateTax(subTotal, '')}',
+                      '${SHFPricingCalculator.calculateTax(subTotal)}\đ',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],
@@ -136,7 +128,7 @@ class OrderItems extends StatelessWidget {
                   children: [
                     Text('Tổng', style: Theme.of(context).textTheme.titleLarge),
                     Text(
-                      '\$${SHFPricingCalculator.calculateTotalPrice(subTotal, '')}',
+                      '${SHFPricingCalculator.calculateTotalPrice(subTotal, order.address?.city ?? '')}\đ',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                   ],

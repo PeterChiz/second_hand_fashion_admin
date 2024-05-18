@@ -27,11 +27,11 @@ class CustomerOrderTable extends StatelessWidget {
           sortAscending: controller.sortAscending.value,
           sortColumnIndex: controller.sortColumnIndex.value,
           columns: [
-            DataColumn2(label: const Text('Order ID'), onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)),
-            const DataColumn2(label: Text('Date')),
-            const DataColumn2(label: Text('Items')),
-            DataColumn2(label: const Text('Status'), fixedWidth: SHFDeviceUtils.isMobileScreen(context) ? 100 : null),
-            const DataColumn2(label: Text('Amount'), numeric: true),
+            DataColumn2(label: const Text('Mã đơn hàng'), onSort: (columnIndex, ascending) => controller.sortById(columnIndex, ascending)),
+            const DataColumn2(label: Text('Ngày đặt')),
+            const DataColumn2(label: Text('Số lượng')),
+            DataColumn2(label: const Text('Trạng thái'), fixedWidth: SHFDeviceUtils.isMobileScreen(context) ? 100 : null),
+            const DataColumn2(label: Text('Số tiền'), numeric: true),
           ],
           source: CustomerOrdersRows(),
         );

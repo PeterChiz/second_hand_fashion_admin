@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -20,7 +19,7 @@ class ProductAttributes extends StatelessWidget {
     super.key,
   });
 
-  // Controllers
+  // Các bộ điều khiển
   final attributeController = Get.put(ProductAttributesController());
   final variationController = Get.put(ProductVariationController());
 
@@ -31,7 +30,7 @@ class ProductAttributes extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // Divider based on product type
+        // Phân cách dựa trên loại sản phẩm
         Obx(() => productController.productType.value == ProductType.single
             ? const Divider(color: SHFColors.primaryBackground)
             : const SizedBox.shrink()),
@@ -39,107 +38,107 @@ class ProductAttributes extends StatelessWidget {
             ? const SizedBox(height: SHFSizes.spaceBtwSections)
             : const SizedBox.shrink()),
 
-        Text('Add Product Attributes', style: Theme.of(context).textTheme.headlineSmall),
+        Text('Thêm Thuộc Tính Sản Phẩm', style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: SHFSizes.spaceBtwItems),
 
-        // Form to add new attribute
+        // Biểu mẫu để thêm thuộc tính mới
         Form(
           key: attributeController.attributesFormKey,
           child: SHFDeviceUtils.isDesktopScreen(context)
               ? Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: _buildAttributeName(attributeController),
-                    ),
-                    const SizedBox(width: SHFSizes.spaceBtwItems),
-                    Expanded(
-                      flex: 2,
-                      child: _buildAttributes(attributeController),
-                    ),
-                    const SizedBox(width: SHFSizes.spaceBtwItems),
-                    _buildAddAttributeButton(attributeController),
-                  ],
-                )
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: _buildAttributeName(attributeController),
+              ),
+              const SizedBox(width: SHFSizes.spaceBtwItems),
+              Expanded(
+                flex: 2,
+                child: _buildAttributes(attributeController),
+              ),
+              const SizedBox(width: SHFSizes.spaceBtwItems),
+              _buildAddAttributeButton(attributeController),
+            ],
+          )
               : Column(
-                  children: [
-                    _buildAttributeName(attributeController),
-                    const SizedBox(height: SHFSizes.spaceBtwItems),
-                    _buildAttributes(attributeController),
-                    const SizedBox(height: SHFSizes.spaceBtwItems),
-                    _buildAddAttributeButton(attributeController),
-                  ],
-                ),
+            children: [
+              _buildAttributeName(attributeController),
+              const SizedBox(height: SHFSizes.spaceBtwItems),
+              _buildAttributes(attributeController),
+              const SizedBox(height: SHFSizes.spaceBtwItems),
+              _buildAddAttributeButton(attributeController),
+            ],
+          ),
         ),
         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-        // List of added attributes
-        Text('All Attributes', style: Theme.of(context).textTheme.headlineSmall),
+        // Danh sách các thuộc tính đã thêm
+        Text('Tất Cả Thuộc Tính', style: Theme.of(context).textTheme.headlineSmall),
         const SizedBox(height: SHFSizes.spaceBtwItems),
 
-        // Display added attributes in a rounded container
+        // Hiển thị các thuộc tính đã thêm trong một hộp tròn
         SHFRoundedContainer(
           backgroundColor: SHFColors.primaryBackground,
           child: Obx(
-            () => attributeController.productAttributes.isNotEmpty
+                () => attributeController.productAttributes.isNotEmpty
                 ? ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: attributeController.productAttributes.length,
-                    separatorBuilder: (_, __) => const SizedBox(height: SHFSizes.spaceBtwItems),
-                    itemBuilder: (_, index) {
-                      return Container(
-                        decoration: BoxDecoration(
-                          color: SHFColors.white,
-                          borderRadius: BorderRadius.circular(SHFSizes.borderRadiusLg),
-                        ),
-                        child: ListTile(
-                          title: Text(attributeController.productAttributes[index].name ?? ''),
-                          subtitle: Text(attributeController.productAttributes[index].values!.map((e) => e.trim()).toString()),
-                          trailing: IconButton(
-                            onPressed: () => attributeController.removeAttribute(index, context),
-                            icon: const Icon(Iconsax.trash, color: SHFColors.error),
-                          ),
-                        ),
-                      );
-                    },
-                  )
-                : const Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SHFRoundedImage(width: 150, height: 80, imageType: ImageType.asset, image: SHFImages.defaultAttributeColorsImageIcon),
-                        ],
-                      ),
-                      SizedBox(height: SHFSizes.spaceBtwItems),
-                      Text('There are no attributes added for this product'),
-                    ],
+              shrinkWrap: true,
+              itemCount: attributeController.productAttributes.length,
+              separatorBuilder: (_, __) => const SizedBox(height: SHFSizes.spaceBtwItems),
+              itemBuilder: (_, index) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: SHFColors.white,
+                    borderRadius: BorderRadius.circular(SHFSizes.borderRadiusLg),
                   ),
+                  child: ListTile(
+                    title: Text(attributeController.productAttributes[index].name ?? ''),
+                    subtitle: Text(attributeController.productAttributes[index].values!.map((e) => e.trim()).toString()),
+                    trailing: IconButton(
+                      onPressed: () => attributeController.removeAttribute(index, context),
+                      icon: const Icon(Iconsax.trash, color: SHFColors.error),
+                    ),
+                  ),
+                );
+              },
+            )
+                : const Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SHFRoundedImage(width: 150, height: 80, imageType: ImageType.asset, image: SHFImages.defaultAttributeColorsImageIcon),
+                  ],
+                ),
+                SizedBox(height: SHFSizes.spaceBtwItems),
+                Text('Không có thuộc tính nào được thêm cho sản phẩm này'),
+              ],
+            ),
           ),
         ),
 
         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-        // Generate Variations Button
+        // Nút Tạo Biến Thể
         Obx(
-          () => productController.productType.value == ProductType.variable && variationController.productVariations.isEmpty
+              () => productController.productType.value == ProductType.variable && variationController.productVariations.isEmpty
               ? Center(
-                  child: SizedBox(
-                    width: 200,
-                    child: ElevatedButton.icon(
-                      icon: const Icon(Iconsax.activity),
-                      label: const Text('Generate Variations'),
-                      onPressed: () => variationController.generateVariationsConfirmation(context),
-                    ),
-                  ),
-                )
+            child: SizedBox(
+              width: 200,
+              child: ElevatedButton.icon(
+                icon: const Icon(Iconsax.activity),
+                label: const Text('Tạo Biến Thể'),
+                onPressed: () => variationController.generateVariationsConfirmation(context),
+              ),
+            ),
+          )
               : const SizedBox.shrink(),
         ),
       ],
     );
   }
 
-  // Build button to add a new attribute
+  // Xây dựng nút để thêm thuộc tính mới
   SizedBox _buildAddAttributeButton(ProductAttributesController controller) {
     return SizedBox(
       width: 100,
@@ -151,21 +150,21 @@ class ProductAttributes extends StatelessWidget {
           backgroundColor: SHFColors.secondary,
           side: const BorderSide(color: SHFColors.secondary),
         ),
-        label: const Text('Add'),
+        label: const Text('Thêm'),
       ),
     );
   }
 
-  // Build text form field for attribute name
+  // Xây dựng trường văn bản cho tên thuộc tính
   TextFormField _buildAttributeName(ProductAttributesController controller) {
     return TextFormField(
       controller: controller.attributeName,
-      validator: (value) => SHFValidator.validationEmptyText('Attribute Name', value),
-      decoration: const InputDecoration(labelText: 'Attribute Name', hintText: 'Colors, Sizes, Material'),
+      validator: (value) => SHFValidator.validationEmptyText('Tên Thuộc Tính', value),
+      decoration: const InputDecoration(labelText: 'Tên Thuộc Tính', hintText: 'Màu sắc, Kích thước, Chất liệu'),
     );
   }
 
-  // Build text form field for attribute values
+  // Xây dựng trường văn bản cho các giá trị thuộc tính
   SizedBox _buildAttributes(ProductAttributesController controller) {
     return SizedBox(
       height: 80,
@@ -176,10 +175,10 @@ class ProductAttributes extends StatelessWidget {
         controller: controller.attributes,
         keyboardType: TextInputType.multiline,
         textAlignVertical: TextAlignVertical.top,
-        validator: (value) => SHFValidator.validationEmptyText('Attributes Field', value),
+        validator: (value) => SHFValidator.validationEmptyText('Trường Thuộc Tính', value),
         decoration: const InputDecoration(
-          labelText: 'Attributes',
-          hintText: 'Add attributes separated by |  Example: Green | Blue | Yellow',
+          labelText: 'Thuộc Tính',
+          hintText: 'Thêm thuộc tính cách nhau bởi |  Ví dụ: Xanh lá | Xanh dương | Vàng',
           alignLabelWithHint: true,
         ),
       ),
