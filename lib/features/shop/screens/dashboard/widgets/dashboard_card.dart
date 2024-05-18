@@ -12,7 +12,6 @@ class SHFDashboardCard extends StatelessWidget {
     required this.context,
     required this.title,
     required this.subTitle,
-    required this.stats,
     this.icon = Iconsax.arrow_up_3,
     this.color = SHFColors.success,
     this.onTap,
@@ -22,7 +21,6 @@ class SHFDashboardCard extends StatelessWidget {
   final String title, subTitle;
   final IconData icon;
   final Color color;
-  final int stats;
   final void Function()? onTap;
 
   @override
@@ -40,32 +38,7 @@ class SHFDashboardCard extends StatelessWidget {
             children: [
               Text(subTitle, style: Theme.of(context).textTheme.headlineMedium),
 
-              /// Right Side Stats
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  /// Indicator
-                  SizedBox(
-                    child: Row(
-                      children: [
-                        Icon(icon, color: color, size: SHFSizes.iconSm),
-                        Text(
-                          '$stats%',
-                          style: Theme.of(context).textTheme.titleLarge!.apply(color: color, overflow: TextOverflow.ellipsis),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 135,
-                    child: Text(
-                      'Compared to Dec 2023',
-                      style: Theme.of(context).textTheme.labelMedium,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
+
             ],
           ),
         ],

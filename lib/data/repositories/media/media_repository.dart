@@ -16,7 +16,7 @@ class MediaRepository extends GetxController {
   // Firebase Storage instance
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
-  /// Upload any Image using File
+  /// Tải bất kì ảnh sử dụng file
   Future<ImageModel> uploadImageFileInStorage({required html.File file, required String path, required String imageName}) async {
     try {
       // Tham chiếu đến vị trí lưu trữ
@@ -134,7 +134,7 @@ class MediaRepository extends GetxController {
       await ref.delete();
       await FirebaseFirestore.instance.collection('Images').doc(image.id).delete();
 
-      if (kDebugMode) print('File deleted successfully.');
+      if (kDebugMode) print('Xóa thành công file');
     } on FirebaseException catch (e) {
       if (e.code == 'object-not-found') {
         if (kDebugMode) print('Tệp không tồn tại trong Firebase Storage.');

@@ -18,13 +18,13 @@ import '../../../utils/popups/full_screen_loader.dart';
 import '../models/image_model.dart';
 import '../screens/media/widgets/media_content.dart';
 
-/// Controller for managing media operations
+/// Bộ điều khiển cho việc quản lý các hoạt động phương tiện truyền thông
 class MediaController extends GetxController {
   static MediaController get instance => Get.find();
 
   late DropzoneViewController dropzoneController;
 
-  // Lists to store additional product images
+  // Danh sách để lưu trữ hình ảnh sản phẩm bổ sung
   final RxBool loading = false.obs;
   final RxBool showImagesUploaderSection = false.obs;
   final Rx<MediaCategory> selectedPath = MediaCategory.folders.obs;
@@ -49,7 +49,7 @@ class MediaController extends GetxController {
   final RxList<ImageModel> selectedImagesToUpload = <ImageModel>[].obs;
   final MediaRepository mediaRepository = MediaRepository();
 
-  // Get Images
+  // Lấy Hình ảnh
   void getBannerImages() async {
     try {
       loading.value = true;
@@ -78,7 +78,7 @@ class MediaController extends GetxController {
   }
 
   Future<void> selectLocalImages() async {
-    final files = await dropzoneController.pickFiles(multiple: true, mime: ['image/jpeg', 'image/png']);
+    final files = await dropzoneController.pickFiles(multiple: true, mime: ['image/jpeg', 'image/png', 'image/jpg']);
 
     if (files.isNotEmpty) {
       for (var file in files) {
@@ -106,7 +106,7 @@ class MediaController extends GetxController {
     SHFDialogs.defaultDialog(
       context: Get.context!,
       title: 'Đăng tải hình ảnh',
-      confirmText: 'Upload',
+      confirmText: 'Tải lên',
       onConfirm: () async => await uploadImages(),
       content: 'Bạn có chắc chắn muốn tải lên tất cả các Hình ảnh trong thư mục ${selectedPath.value.name.toUpperCase()} ?',
     );
@@ -114,19 +114,19 @@ class MediaController extends GetxController {
 
   Future<void> uploadImages() async {
     try {
-      // Remove confirmation box
+      // Đóng hộp xác nhận
       Get.back();
 
-      // Start Loader
+      // Bắt đầu tải
       uploadImagesLoader();
 
-      // Get the selected category
+      // Lấy danh mục đã chọn
       MediaCategory selectedCategory = selectedPath.value;
 
-      // Get the corresponding list to update
+      // Lấy danh sách tương ứng để cập nhật
       RxList<ImageModel> targetList;
 
-      // Check the selected category and update the corresponding list
+      // Kiểm tra danh mục đã chọn và cập nhật danh sách tương ứng
       switch (selectedCategory) {
         case MediaCategory.banners:
           targetList = allBannerImages;
@@ -147,20 +147,20 @@ class MediaController extends GetxController {
           return;
       }
 
-      // Upload and add images to the target list
-      // Using a reverse loop to avoid 'Concurrent modification during iteration' error
+      // Tải lên và thêm hình ảnh vào danh sách mục tiêu
+      // Sử dụng vòng lặp ngược để tránh lỗi 'Concurrent modification during iteration'
       for (int i = selectedImagesToUpload.length - 1; i >= 0; i--) {
         var selectedImage = selectedImagesToUpload[i];
         final image = selectedImage.file!;
 
-        // Upload Image to the Storage
+        // Tải Hình ảnh lên Lưu trữ
         final ImageModel uploadedImage = await mediaRepository.uploadImageFileInStorage(
           file: image,
           path: getSelectedPath(),
           imageName: selectedImage.filename,
         );
 
-        // Upload Image to the Firestore
+        // Tải Hình ảnh lên Firestore
         uploadedImage.mediaCategory = selectedCategory.name;
         final id = await mediaRepository.uploadImageFileInDatabase(uploadedImage);
 
@@ -170,12 +170,12 @@ class MediaController extends GetxController {
         targetList.add(uploadedImage);
       }
 
-      // Stop Loader after successful upload
+      // Dừng tải sau khi tải lên thành công
       SHFFullScreenLoader.stopLoading();
     } catch (e) {
-      // Stop Loader in case of an error
+      // Dừng tải trong trường hợp xảy ra lỗi
       SHFFullScreenLoader.stopLoading();
-      // Show a warning snackbar for the error
+      // Hiển thị thông báo cảnh báo lỗi
       SHFLoaders.warningSnackBar(title: 'Lỗi tải hình ảnh lên', message: 'Đã xảy ra lỗi khi tải hình ảnh của bạn lên.');
     }
   }
@@ -254,14 +254,14 @@ class MediaController extends GetxController {
     );
   }
 
-  /// Function to remove cloud image
+  /// Chức năng để xóa hình ảnh trên cloud
   void removeCloudImageConfirmation(ImageModel image) {
-    // Delete Confirmation
+    // Xác nhận xóa
     SHFDialogs.defaultDialog(
       context: Get.context!,
       content: 'Bạn có chắc muốn xóa ảnh này không?',
       onConfirm: () {
-        // Close the previous Dialog
+        // Đóng hộp thoại trước đó
         Get.back();
 
         removeCloudImage(image);
@@ -271,10 +271,10 @@ class MediaController extends GetxController {
 
   removeCloudImage(ImageModel image) async {
     try {
-      // Close the previous Dialog
+      // Đóng hộp thoại trước đó
       Get.back();
 
-      // Show Loader
+      // Hiển thị tải
       Get.defaultDialog(
         title: '',
         barrierDismissible: false,
@@ -282,13 +282,13 @@ class MediaController extends GetxController {
         content: const PopScope(canPop: false, child: SizedBox(width: 150, height: 150, child: SHFCircularLoader())),
       );
 
-      // Delete Image
+      // Xóa hình ảnh
       await mediaRepository.deleteFileFromStorage(image, getSelectedPath());
 
-      // Get the corresponding list to update
+      // Lấy danh sách tương ứng để cập nhật
       RxList<ImageModel> targetList;
 
-      // Check the selected category and update the corresponding list
+      // Kiểm tra danh mục đã chọn và cập nhật danh sách tương ứng
       switch (selectedPath.value) {
         case MediaCategory.banners:
           targetList = allBannerImages;
@@ -309,7 +309,7 @@ class MediaController extends GetxController {
           return;
       }
 
-      // Remove from the list
+      // Xóa khỏi danh sách
       targetList.remove(image);
 
       update();

@@ -21,7 +21,7 @@ class CartItemModel {
   });
 
   /// Tính tổng số tiền
-  String get totalAmount => (price * quantity).toStringAsFixed(1);
+  String get totalAmount => (price * quantity).toStringAsFixed(0);
 
   /// Giỏ hàng trống
   static CartItemModel empty() => CartItemModel(productId: '', quantity: 0);

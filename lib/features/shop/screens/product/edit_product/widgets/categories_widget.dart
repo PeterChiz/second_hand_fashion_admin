@@ -28,7 +28,7 @@ class ProductCategories extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Categories label
-          Text('Categories', style: Theme.of(context).textTheme.headlineSmall),
+          Text('Danh mục', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
           // MultiSelectDialogField for selecting categories
@@ -40,8 +40,8 @@ class ProductCategories extends StatelessWidget {
               if(widget != null) return widget;
 
               return MultiSelectDialogField(
-                buttonText: const Text("Select Categories"),
-                title: const Text("Categories"),
+                buttonText: const Text("Thay đổi danh mục"),
+                title: const Text("Danh mục"),
                 initialValue: List<CategoryModel>.from(productController.selectedCategories),
                 items: CategoryController.instance.allItems.map((category) => MultiSelectItem(category, category.name)).toList(),
                 listType: MultiSelectListType.CHIP,

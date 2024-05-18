@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
 /* -- Light & Dark Elevated Button Themes -- */
-class SHFTElevatedButtonTheme {
-  SHFTElevatedButtonTheme._(); //To avoid creating instances
+class SHFElevatedButtonTheme {
+  SHFElevatedButtonTheme._(); //To avoid creating instances
 
 
   /* -- Light Theme -- */
@@ -18,7 +19,7 @@ class SHFTElevatedButtonTheme {
       side: const BorderSide(color: SHFColors.primary),
       padding: const EdgeInsets.symmetric(vertical: SHFSizes.buttonHeight),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.buttonRadius)),
-      textStyle: const TextStyle(fontSize: 16, color: SHFColors.textWhite, fontWeight: FontWeight.w500, fontFamily: 'Urbanist'),
+      textStyle: const TextStyle(fontSize: 16, color: SHFColors.textWhite, fontWeight: FontWeight.w600, fontFamily: 'Poppins'),
     ),
   );
 
@@ -33,7 +34,7 @@ class SHFTElevatedButtonTheme {
       side: const BorderSide(color: SHFColors.primary),
       padding: const EdgeInsets.symmetric(vertical: SHFSizes.buttonHeight),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.buttonRadius)),
-      textStyle: const TextStyle(fontSize: 16, color: SHFColors.textWhite, fontWeight: FontWeight.w600, fontFamily: 'Urbanist'),
+      textStyle: const TextStyle(fontSize: 16, color: SHFColors.textWhite, fontWeight: FontWeight.w600, fontFamily: 'Poppins'),
     ),
   );
 }

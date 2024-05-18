@@ -56,7 +56,7 @@ class CreateBannerForm extends StatelessWidget {
               () => CheckboxMenuButton(
                 value: controller.isActive.value,
                 onChanged: (value) => controller.isActive.value = value ?? false,
-                child: const Text('Active'),
+                child: const Text('Hoạt động'),
               ),
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),

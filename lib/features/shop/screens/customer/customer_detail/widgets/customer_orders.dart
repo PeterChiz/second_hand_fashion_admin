@@ -26,7 +26,7 @@ class CustomerOrders extends StatelessWidget {
         () {
           if (controller.ordersLoading.value) return const SHFLoaderAnimation();
           if (controller.allCustomerOrders.isEmpty) {
-            return SHFAnimationLoaderWidget(text: 'No Orders Found', animation: SHFImages.packageAnimation);
+            return SHFAnimationLoaderWidget(text: 'Không có đơn hàng nào cả', animation: SHFImages.packageAnimation);
           }
 
           final totalAmount = controller.allCustomerOrders.fold(0.0,
@@ -37,21 +37,21 @@ class CustomerOrders extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Orders',
+                  Text('Đơn hàng',
                       style: Theme.of(context).textTheme.headlineMedium),
                   Text.rich(
                     TextSpan(
                       children: [
-                        const TextSpan(text: 'Total Spent '),
+                        const TextSpan(text: 'Tổng chi tiêu'),
                         TextSpan(
-                            text: '\$${totalAmount.toString()}',
+                            text: '${totalAmount.toString()}đ',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyLarge!
                                 .apply(color: SHFColors.primary)),
                         TextSpan(
                             text:
-                                ' on ${controller.allCustomerOrders.length} Orders',
+                                ' cho ${controller.allCustomerOrders.length} đơn hàng',
                             style: Theme.of(context).textTheme.bodyLarge),
                       ],
                     ),
@@ -63,7 +63,7 @@ class CustomerOrders extends StatelessWidget {
                 controller: controller.searchTextController,
                 onChanged: (query) => controller.searchQuery(query),
                 decoration: const InputDecoration(
-                    hintText: 'Search Orders',
+                    hintText: 'Tìm kiếm đơn hàng',
                     prefixIcon: Icon(Iconsax.search_normal)),
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),

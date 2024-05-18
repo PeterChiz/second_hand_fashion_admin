@@ -23,7 +23,7 @@ class CustomerInfo extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Customer Information', style: Theme.of(context).textTheme.headlineMedium),
+          Text('Thông tin khách hàng', style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: SHFSizes.spaceBtwSections),
 
           // Personal Info Card
@@ -59,82 +59,10 @@ class CustomerInfo extends StatelessWidget {
               Expanded(child: Text(customer.userName, style: Theme.of(context).textTheme.titleMedium)),
             ],
           ),
-          const SizedBox(height: SHFSizes.spaceBtwItems),
-          Row(
-            children: [
-              const SizedBox(width: 120, child: Text('Country')),
-              const Text(':'),
-              const SizedBox(width: SHFSizes.spaceBtwItems / 2),
-              Expanded(child: Text('Pakistan', style: Theme.of(context).textTheme.titleMedium)),
-            ],
-          ),
-          const SizedBox(height: SHFSizes.spaceBtwItems),
-          Row(
-            children: [
-              const SizedBox(width: 120, child: Text('Phone Number')),
-              const Text(':'),
-              const SizedBox(width: SHFSizes.spaceBtwItems / 2),
-              Expanded(child: Text(customer.phoneNumber, style: Theme.of(context).textTheme.titleMedium)),
-            ],
-          ),
-          const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // Divider
-          const Divider(),
-          const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // Additional Details
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Last Order', style: Theme.of(context).textTheme.titleLarge),
-                    const Text('7 Days Ago, #[36d54]'),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Average Order Value', style: Theme.of(context).textTheme.titleLarge),
-                    const Text('\$352'),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // Additional Details Cont.
-          Row(
-            children: [
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Registered', style: Theme.of(context).textTheme.titleLarge),
-                    Text(customer.formattedDate),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Email Marketing', style: Theme.of(context).textTheme.titleLarge),
-                    const Text('Subscribed'),
-                  ],
-                ),
-              ),
-            ],
-          ),
+
         ],
       ),
     );

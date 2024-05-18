@@ -25,7 +25,7 @@ class DashboardDesktopScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFPageHeading(heading: 'Dashboard'),
+              const SHFPageHeading(heading: 'Doanh thu'),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
               // Thẻ Thống kê
@@ -34,11 +34,10 @@ class DashboardDesktopScreen extends StatelessWidget {
                   Expanded(
                     child: Obx(
                           () => SHFDashboardCard(
-                        stats: 25,
                         context: context,
                         title: 'Tổng doanh số',
                         subTitle:
-                        '\$${controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount)}',
+                        '${controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount)}đ',
                       ),
                     ),
                   ),
@@ -46,12 +45,10 @@ class DashboardDesktopScreen extends StatelessWidget {
                   Expanded(
                     child: Obx(
                           () => SHFDashboardCard(
-                        stats: 15,
                         context: context,
                         title: 'Giá trị trung bình đơn hàng',
                         subTitle:
-                        '\$${(controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.orderController.allItems.length).toStringAsFixed(2)}',
-                        icon: Iconsax.arrow_down,
+                        '${(controller.orderController.allItems.fold(0.0, (previousValue, element) => previousValue + element.totalAmount) / controller.orderController.allItems.length).toStringAsFixed(0)}đ',
                         color: SHFColors.error,
                       ),
                     ),
@@ -60,15 +57,13 @@ class DashboardDesktopScreen extends StatelessWidget {
                   Expanded(
                     child: Obx(
                           () => SHFDashboardCard(
-                        stats: 44,
                         context: context,
                         title: 'Tổng số đơn hàng',
-                        subTitle: '\$${controller.orderController.allItems.length}',
+                        subTitle: '${controller.orderController.allItems.length}',
                       ),
                     ),
                   ),
                   const SizedBox(width: SHFSizes.spaceBtwItems),
-                  Expanded(child: SHFDashboardCard(context: context, title: 'Khách truy cập', subTitle: '25,035', stats: 2)),
                 ],
               ),
               const SizedBox(height: SHFSizes.spaceBtwSections),

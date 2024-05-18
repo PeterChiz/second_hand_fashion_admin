@@ -31,10 +31,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1088264323064-epq3lnu943bh19k96hntjfesf8qu28af.apps.googleusercontent.com",
+              "client_id": "1088264323064-60grc77o186ricv396tdj5cb8g4i8gdd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.hoashopsi.secondHandFashionApp"
+                "bundle_id": "com.hoashopsi.secondHandFashionAdmin"
               }
             }
           ]
@@ -75,10 +75,10 @@
               "client_type": 3
             },
             {
-              "client_id": "1088264323064-epq3lnu943bh19k96hntjfesf8qu28af.apps.googleusercontent.com",
+              "client_id": "1088264323064-60grc77o186ricv396tdj5cb8g4i8gdd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.hoashopsi.secondHandFashionApp"
+                "bundle_id": "com.hoashopsi.secondHandFashionAdmin"
               }
             }
           ]

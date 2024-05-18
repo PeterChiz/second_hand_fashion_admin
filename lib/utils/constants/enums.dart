@@ -1,9 +1,4 @@
-/* --
-      LIST OF Enums
-      They cannot be created inside a class.
--- */
 
-/// Switch of Custom Brand-Text-Size Widget
 enum AppRole { admin, user }
 
 enum TransactionType { buy, sell }

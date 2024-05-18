@@ -30,7 +30,7 @@ class BrandsMobileScreen extends StatelessWidget {
                 // Hiển thị Loader
                 if (controller.isLoading.value) return const SHFLoaderAnimation();
 
-                return SHFRoundedContainer(
+                return const SHFRoundedContainer(
                   child: Column(
                     children: [
                       // Tiêu đề Bảng

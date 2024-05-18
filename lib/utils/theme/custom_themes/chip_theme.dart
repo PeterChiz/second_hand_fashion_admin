@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../constants/colors.dart';
 
-class SHFChipTheme {
+class SHFChipTheme{
   SHFChipTheme._();
 
   static ChipThemeData lightChipTheme = ChipThemeData(
@@ -9,7 +10,7 @@ class SHFChipTheme {
     selectedColor: SHFColors.primary,
     disabledColor: SHFColors.grey.withOpacity(0.4),
     padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
-    labelStyle: const TextStyle(color: SHFColors.black, fontFamily: 'Urbanist'),
+    labelStyle: const TextStyle(color: SHFColors.black, fontFamily: 'Poppins'),
   );
 
   static ChipThemeData darkChipTheme = const ChipThemeData(
@@ -17,6 +18,6 @@ class SHFChipTheme {
     selectedColor: SHFColors.primary,
     disabledColor: SHFColors.darkerGrey,
     padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
-    labelStyle: TextStyle(color: SHFColors.white, fontFamily: 'Urbanist'),
+    labelStyle: TextStyle(color: SHFColors.white, fontFamily: 'Poppins'),
   );
 }

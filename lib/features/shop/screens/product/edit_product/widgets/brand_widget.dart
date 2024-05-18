@@ -45,7 +45,7 @@ class ProductBrand extends StatelessWidget {
                         controller: ctr,
                         decoration: const InputDecoration(
                           border: OutlineInputBorder(),
-                          labelText: 'Select Brand',
+                          labelText: 'Thay đổi thương hiệu',
                           suffixIcon: Icon(Iconsax.box),
                         ),
                       );

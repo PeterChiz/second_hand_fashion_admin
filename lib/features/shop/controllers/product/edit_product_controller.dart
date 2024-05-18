@@ -138,7 +138,7 @@ class EditProductController extends GetxController {
         return;
       }
 
-      if (selectedBrand.value == null) throw 'Select Brand for this product';
+      if (selectedBrand.value == null) throw 'Lựa chọn thương hiệu cho sản phẩm này';
 
       if (productType.value == ProductType.variable && ProductVariationController.instance.productVariations.isEmpty) {
         throw 'Không có biến thể cho Loại Sản phẩm Biến thể. Tạo một số biến thể hoặc thay đổi loại Sản phẩm.';
@@ -159,7 +159,7 @@ class EditProductController extends GetxController {
 
       final imagesController = ProductImagesController.instance;
       if (imagesController.selectedThumbnailImageUrl.value == null || imagesController.selectedThumbnailImageUrl.value!.isEmpty) {
-        throw 'Upload Product Thumbnail Image';
+        throw 'Tải lên hình ảnh thu nhỏ của sản phẩm';
       }
 
       var variations = ProductVariationController.instance.productVariations;
@@ -211,7 +211,7 @@ class EditProductController extends GetxController {
       showCompletionDialog();
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
   }
 
@@ -247,19 +247,19 @@ class EditProductController extends GetxController {
       builder: (context) => PopScope(
         canPop: false,
         child: AlertDialog(
-          title: const Text('Updating Product'),
+          title: const Text('Cập nhật sản phẩm'),
           content: Obx(
                 () => Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Image.asset(SHFImages.creatingProductIllustration, height: 200, width: 200),
                 const SizedBox(height: SHFSizes.spaceBtwItems),
-                buildCheckbox('Thumbnail Image', thumbnailUploader),
-                buildCheckbox('Additional Images', additionalImagesUploader),
-                buildCheckbox('Product Data, Attributes & Variations', productDataUploader),
-                buildCheckbox('Product Categories', categoriesRelationshipUploader),
+                buildCheckbox('Ảnh Thumbnail', thumbnailUploader),
+                buildCheckbox('Ảnh Bổ Sung', additionalImagesUploader),
+                buildCheckbox('Dữ Liệu Sản Phẩm, Thuộc Tính & Biến Thể', productDataUploader),
+                buildCheckbox('Danh Mục Sản Phẩm', categoriesRelationshipUploader),
                 const SizedBox(height: SHFSizes.spaceBtwItems),
-                const Text('Sit Tight, Your product is uploading...'),
+                const Text('Vui lòng đợi sản phẩm của bạn đang được tải lên'),
               ],
             ),
           ),
@@ -288,23 +288,23 @@ class EditProductController extends GetxController {
   void showCompletionDialog() {
     Get.dialog(
       AlertDialog(
-        title: const Text('Congratulations'),
+        title: const Text('Chúc mừng'),
         actions: [
           TextButton(
               onPressed: () {
                 Get.back();
                 Get.back();
               },
-              child: const Text('Go to Products'))
+              child: const Text('Đi đến mục sản phẩm'))
         ],
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(SHFImages.productsIllustration, height: 200, width: 200),
             const SizedBox(height: SHFSizes.spaceBtwItems),
-            Text('Congratulations', style: Theme.of(Get.context!).textTheme.headlineSmall),
+            Text('Chúc mừng', style: Theme.of(Get.context!).textTheme.headlineSmall),
             const SizedBox(height: SHFSizes.spaceBtwItems),
-            const Text('Your Product has been Created'),
+            const Text('Sản phẩm của bạn đã được tạo'),
           ],
         ),
       ),

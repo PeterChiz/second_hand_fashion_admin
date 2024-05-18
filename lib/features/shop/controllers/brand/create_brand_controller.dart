@@ -116,7 +116,7 @@ class CreateBrandController extends GetxController {
       SHFFullScreenLoader.stopLoading();
 
       // Thông báo thành công & Chuyển hướng
-      SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Bản ghi mới đã được thêm vào.');
+      SHFLoaders.successSnackBar(title: 'Chúc mừng', message: 'Thương hiệu mới đã được thêm vào.');
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
       SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());

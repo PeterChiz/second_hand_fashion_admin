@@ -5,27 +5,27 @@ import '../../common/widgets/loaders/circular_loader.dart';
 import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
-/// A utility class for managing a full-screen loading dialog.
+/// Một lớp tiện ích để quản lý hộp thoại tải toàn màn hình.
 class SHFFullScreenLoader {
-  /// Open a full-screen loading dialog with a given text and animation.
-  /// This method doesn't return anything.
+  /// Mở một hộp thoại tải toàn màn hình với văn bản và hoạt ảnh đã cho.
+  /// Phương thức này không trả về bất cứ điều gì.
   ///
-  /// Parameters:
-  ///   - text: The text to be displayed in the loading dialog.
-  ///   - animation: The Lottie animation to be shown.
+  /// Tham số:
+  /// - text: Văn bản sẽ được hiển thị trong hộp thoại tải.
+  /// - animation: Hoạt ảnh Lottie sẽ được hiển thị.
   static void openLoadingDialog(String text, String animation) {
     showDialog(
-      context: Get.overlayContext!, // Use Get.overlayContext for overlay dialogs
-      barrierDismissible: false, // The dialog can't be dismissed by tapping outside it
+      context: Get.overlayContext!, // Sử dụng Get.overlayContext cho các hộp thoại overlay
+      barrierDismissible: false, // Hộp thoại không thể bị tắt bằng cách chạm ra ngoài nó
       builder: (_) => PopScope(
-        canPop: false, // Disable popping with the back button
+        canPop: false, // Vô hiệu hóa việc tắt bằng nút quay lại
         child: Container(
           color: SHFHelperFunctions.isDarkMode(Get.context!) ? SHFColors.dark : SHFColors.white,
           width: double.infinity,
           height: double.infinity,
           child: Column(
             children: [
-              const SizedBox(height: 250), // Adjust the spacing as needed
+              const SizedBox(height: 250), // Điều chỉnh khoảng cách nếu cần
               SHFAnimationLoaderWidget(text: text, animation: animation),
             ],
           ),
@@ -43,9 +43,9 @@ class SHFFullScreenLoader {
     );
   }
 
-  /// Stop the currently open loading dialog.
-  /// This method doesn't return anything.
+  /// Dừng hộp thoại tải hiện đang mở.
+  /// Phương thức này không trả về bất cứ điều gì.
   static stopLoading() {
-    Navigator.of(Get.overlayContext!).pop(); // Close the dialog using the Navigator
+    Navigator.of(Get.overlayContext!).pop(); // Đóng hộp thoại bằng cách sử dụng Navigator
   }
 }

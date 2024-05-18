@@ -12,9 +12,9 @@ import '../../../../models/order_model.dart';
 
 class OrderCustomer extends StatelessWidget {
   const OrderCustomer({
-    Key? key,
+    super.key,
     required this.order,
-  }) : super(key: key);
+  });
 
   final OrderModel order;
 

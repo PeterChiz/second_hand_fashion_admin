@@ -23,7 +23,7 @@ class ProductBottomNavigationButtons extends StatelessWidget {
             onPressed: () {
               // Add functionality to discard changes if needed
             },
-            child: const Text('Discard'),
+            child: const Text('Loại bỏ'),
           ),
           const SizedBox(width: SHFSizes.spaceBtwItems / 2),
 
@@ -32,7 +32,7 @@ class ProductBottomNavigationButtons extends StatelessWidget {
             width: 160,
             child: ElevatedButton(
               onPressed: () => EditProductController.instance.editProduct(product),
-              child: const Text('Save Changes'),
+              child: const Text('Lưu thay đổi'),
             ),
           ),
         ],
