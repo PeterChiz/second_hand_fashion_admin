@@ -18,11 +18,11 @@ class ProductVisibilityWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Visibility Header
+          // Tiêu đề Hiển Thị
           Text('Hiển Thị', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // Radio buttons for product visibility
+          // Các nút radio cho hiển thị sản phẩm
           Obx(
                 () => Column(
               children: [
@@ -36,7 +36,7 @@ class ProductVisibilityWidget extends StatelessWidget {
     );
   }
 
-  // Helper method to build a radio button for product visibility
+  // Phương thức trợ giúp để tạo nút radio cho hiển thị sản phẩm
   Widget _buildVisibilityRadioButton(CreateProductController controller, ProductVisibility value, String label) {
     return RadioMenuButton<ProductVisibility>(
       value: value,

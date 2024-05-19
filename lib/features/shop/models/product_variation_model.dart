@@ -1,9 +1,7 @@
-
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class ProductVariationModel {
   final String id;
-  String sku;
   Rx<String> image;
   String? description;
   double price;
@@ -13,7 +11,6 @@ class ProductVariationModel {
 
   ProductVariationModel({
     required this.id,
-    this.sku = '',
     String image = '',
     this.description = '',
     this.price = 0.0,
@@ -22,11 +19,10 @@ class ProductVariationModel {
     required this.attributeValues,
   }) : image = image.obs;
 
-
-  /// Create Empty func for clean code
+  /// Tạo hàm trống cho mã sạch
   static ProductVariationModel empty() => ProductVariationModel(id: '', attributeValues: {});
 
-  /// Json Format
+  /// Định dạng Json
   toJson() {
     return {
       'Id': id,
@@ -34,20 +30,18 @@ class ProductVariationModel {
       'Description': description,
       'Price': price,
       'SalePrice': salePrice,
-      'SKU': sku,
       'Stock': stock,
       'AttributeValues': attributeValues,
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
+  /// Ánh xạ tài liệu định hướng Json từ Firebase sang Model
   factory ProductVariationModel.fromJson(Map<String, dynamic> document) {
     final data = document;
     if (data.isEmpty) return ProductVariationModel.empty();
     return ProductVariationModel(
       id: data['Id'] ?? '',
       price: double.parse((data['Price'] ?? 0.0).toString()),
-      sku: data['SKU'] ?? '',
       description: data['Description'] ?? '',
       stock: data['Stock'] ?? 0,
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),

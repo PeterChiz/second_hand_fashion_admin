@@ -1,4 +1,3 @@
-
 class ProductReviewModel {
   final String id;
   final String userId;
@@ -22,8 +21,8 @@ class ProductReviewModel {
     this.companyTimestamp,
   });
 
-  /// Create Empty func for clean code
+  /// Tạo hàm trống cho mã sạch
   static ProductReviewModel empty() => ProductReviewModel(id: '', userId: '', rating: 5, timestamp: DateTime.now());
 
-  /// Map Json oriented document snapshot from Firebase to Model
+/// Ánh xạ tài liệu định hướng Json từ Firebase sang Model
 }

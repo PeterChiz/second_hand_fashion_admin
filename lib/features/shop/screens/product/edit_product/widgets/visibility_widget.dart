@@ -18,16 +18,16 @@ class ProductVisibilityWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Visibility Header
-          Text('Visibility', style: Theme.of(context).textTheme.headlineSmall),
+          // Tiêu đề Hiển Thị
+          Text('Hiển Thị', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // Radio buttons for product visibility
+          // Các nút radio cho việc hiển thị sản phẩm
           Obx(
-            () => Column(
+                () => Column(
               children: [
-                _buildVisibilityRadioButton(controller, ProductVisibility.published, 'Published'),
-                _buildVisibilityRadioButton(controller, ProductVisibility.hidden, 'Hidden'),
+                _buildVisibilityRadioButton(controller, ProductVisibility.published, 'Xuất bản'),
+                _buildVisibilityRadioButton(controller, ProductVisibility.hidden, 'Ẩn'),
               ],
             ),
           ),
@@ -36,7 +36,7 @@ class ProductVisibilityWidget extends StatelessWidget {
     );
   }
 
-  // Helper method to build a radio button for product visibility
+  // Phương thức hỗ trợ để tạo nút radio cho việc hiển thị sản phẩm
   Widget _buildVisibilityRadioButton(EditProductController controller, ProductVisibility value, String label) {
     return RadioMenuButton<ProductVisibility>(
       value: value,

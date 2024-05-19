@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -24,33 +23,39 @@ class ProductVariations extends StatelessWidget {
     final variationController = ProductVariationController.instance;
 
     return Obx(
-      () => EditProductController.instance.productType.value == ProductType.variable
+      () => EditProductController.instance.productType.value ==
+              ProductType.variable
           ? SHFRoundedContainer(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Product Variations Header
+                  // Header cho Biến thể Sản phẩm
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Product Variations', style: Theme.of(context).textTheme.headlineSmall),
+                      Text('Biến thể Sản phẩm',
+                          style: Theme.of(context).textTheme.headlineSmall),
                       TextButton(
-                        onPressed: () => variationController.removeVariations(context),
-                        child: const Text('Remove Variations'),
+                        onPressed: () =>
+                            variationController.removeVariations(context),
+                        child: const Text('Xóa Biến thể'),
                       ),
                     ],
                   ),
                   const SizedBox(height: SHFSizes.spaceBtwItems),
 
-                  // Variations List
+                  // Danh sách Biến thể
                   if (variationController.productVariations.isNotEmpty)
                     ListView.separated(
                       itemCount: variationController.productVariations.length,
                       shrinkWrap: true,
-                      separatorBuilder: (_, __) => const SizedBox(height: SHFSizes.spaceBtwItems),
+                      separatorBuilder: (_, __) =>
+                          const SizedBox(height: SHFSizes.spaceBtwItems),
                       itemBuilder: (_, index) {
-                        final variation = variationController.productVariations[index];
-                        return _buildVariationTile(context, index, variation, variationController);
+                        final variation =
+                            variationController.productVariations[index];
+                        return _buildVariationTile(
+                            context, index, variation, variationController);
                       },
                     )
                   else
@@ -62,39 +67,52 @@ class ProductVariations extends StatelessWidget {
     );
   }
 
-  // Helper method to build a variation tile
+  // Phương thức hỗ trợ để tạo tile cho biến thể
   Widget _buildVariationTile(
-      BuildContext context, int index, ProductVariationModel variation, ProductVariationController variationController) {
+      BuildContext context,
+      int index,
+      ProductVariationModel variation,
+      ProductVariationController variationController) {
     return ExpansionTile(
       backgroundColor: SHFColors.lightGrey,
       collapsedBackgroundColor: SHFColors.lightGrey,
       childrenPadding: const EdgeInsets.all(SHFSizes.md),
       expandedCrossAxisAlignment: CrossAxisAlignment.start,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.borderRadiusLg)),
-      title: Text(variation.attributeValues.entries.map((entry) => '${entry.key}: ${entry.value}').join(', ')),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(SHFSizes.borderRadiusLg)),
+      title: Text(variation.attributeValues.entries
+          .map((entry) => '${entry.key}: ${entry.value}')
+          .join(', ')),
       children: [
-        // Upload Variation Image
+        // Tải ảnh Biến thể
         Obx(
           () => SHFImageUploader(
             right: 0,
             left: null,
             circular: true,
-            imageType: variation.image.value.isNotEmpty ? ImageType.network : ImageType.asset,
-            image: variation.image.value.isNotEmpty ? variation.image.value : SHFImages.defaultImage,
-            onIconButtonPressed: () => ProductImagesController.instance.selectVariationImage(variation),
+            imageType: variation.image.value.isNotEmpty
+                ? ImageType.network
+                : ImageType.asset,
+            image: variation.image.value.isNotEmpty
+                ? variation.image.value
+                : SHFImages.defaultImage,
+            onIconButtonPressed: () => ProductImagesController.instance
+                .selectVariationImage(variation),
           ),
         ),
         const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-        // Variation Stock, and Pricing
+        // Kho Biến thể và Giá
         Row(
           children: [
             Expanded(
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) => variation.stock = int.parse(value),
-                decoration: const InputDecoration(labelText: 'Stock', hintText: '0'),
-                controller: variationController.stockControllersList[index][variation],
+                decoration:
+                    const InputDecoration(labelText: 'Kho', hintText: '0'),
+                controller: variationController.stockControllersList[index]
+                    [variation],
               ),
             ),
             const SizedBox(width: SHFSizes.spaceBtwInputFields),
@@ -102,8 +120,10 @@ class ProductVariations extends StatelessWidget {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) => variation.price = double.parse(value),
-                decoration: const InputDecoration(labelText: 'Price', hintText: '\$'),
-                controller: variationController.priceControllersList[index][variation],
+                decoration:
+                    const InputDecoration(labelText: 'Giá', hintText: 'đ'),
+                controller: variationController.priceControllersList[index]
+                    [variation],
               ),
             ),
             const SizedBox(width: SHFSizes.spaceBtwInputFields),
@@ -111,37 +131,45 @@ class ProductVariations extends StatelessWidget {
               child: TextFormField(
                 keyboardType: TextInputType.number,
                 onChanged: (value) => variation.salePrice = double.parse(value),
-                controller: variationController.salePriceControllersList[index][variation],
-                decoration: const InputDecoration(labelText: 'Discounted Price', hintText: '\$'),
+                controller: variationController.salePriceControllersList[index]
+                    [variation],
+                decoration: const InputDecoration(
+                    labelText: 'Giá ưu đãi', hintText: 'đ'),
               ),
             ),
           ],
         ),
         const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-        // Variation Description
+        // Mô tả Biến thể
         TextFormField(
           onChanged: (value) => variation.description = value,
-          controller: variationController.descriptionControllersList[index][variation],
-          decoration: const InputDecoration(labelText: 'Description', hintText: 'Add description of this variation...'),
+          controller: variationController.descriptionControllersList[index]
+              [variation],
+          decoration: const InputDecoration(
+              labelText: 'Mô tả', hintText: 'Thêm mô tả của biến thể này...'),
         ),
         const SizedBox(height: SHFSizes.spaceBtwSections),
       ],
     );
   }
 
-  // Helper method to build message when there are no variations
+  // Phương thức hỗ trợ để hiển thị thông báo khi không có biến thể
   Widget _buildNoVariationsMessage() {
     return const Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SHFRoundedImage(width: 200, height: 200, imageType: ImageType.asset, image: SHFImages.defaultVariationImageIcon),
+            SHFRoundedImage(
+                width: 200,
+                height: 200,
+                imageType: ImageType.asset,
+                image: SHFImages.defaultVariationImageIcon),
           ],
         ),
         SizedBox(height: SHFSizes.spaceBtwItems),
-        Text('There are no Variations added for this product'),
+        Text('Không có Biến thể nào được thêm cho sản phẩm này'),
       ],
     );
   }

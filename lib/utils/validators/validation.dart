@@ -10,15 +10,16 @@ class SHFValidator{
     return null;
   }
 
-  static String? validateEmail(String? value){
-    if(value == null || value.isEmpty){
+  static String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
       return 'Vui lòng nhập Email';
     }
 
     //Biểu thức chính quy để kiểm tra định dạng email theo chuẩn RFC 5322
-    final emailRegExp = RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
+    final emailRegExp =
+    RegExp(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
 
-    if(!emailRegExp.hasMatch(value)){
+    if (!emailRegExp.hasMatch(value)) {
       return 'Địa chỉ email không hợp lệ.';
     }
 

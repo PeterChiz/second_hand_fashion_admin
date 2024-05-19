@@ -2,7 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../../../../common/widgets/containers/rounded_container.dart';
+import '../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../common/widgets/loaders/loader_animation.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/sizes.dart';

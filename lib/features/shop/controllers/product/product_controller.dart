@@ -19,9 +19,7 @@ class ProductController extends SHFBaseController<ProductModel> {
   @override
   bool containsSearchQuery(ProductModel item, String query) {
     return item.title.toLowerCase().contains(query.toLowerCase()) ||
-        item.brand!.name.toLowerCase().contains(query.toLowerCase()) ||
-        item.stock.toString().contains(query) ||
-        item.price.toString().contains(query);
+        item.brand!.name.toLowerCase().contains(query.toLowerCase());
   }
 
   @override
@@ -88,19 +86,12 @@ class ProductController extends SHFBaseController<ProductModel> {
         return largestPrice.toString();
       } else {
         // Nếu không, trả về một phạm vi giá
-        return '$smallestPrice - \$$largestPrice';
+        return '$smallestPriceđ - $largestPrice';
       }
     }
   }
 
-  /// -- Tính phần trăm giảm giá
-  String? calculateSalePercentage(double originalPrice, double? salePrice) {
-    if (salePrice == null || salePrice <= 0.0) return null;
-    if (originalPrice <= 0) return null;
 
-    double percentage = ((originalPrice - salePrice) / originalPrice) * 100;
-    return percentage.toStringAsFixed(0);
-  }
 
   /// -- Tính tổng số lượng sản phẩm
   String getProductStockTotal(ProductModel product) {

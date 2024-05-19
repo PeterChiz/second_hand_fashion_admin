@@ -16,7 +16,7 @@ class SHFOutlinedButtonTheme {
       side: const BorderSide(color: SHFColors.borderPrimary),
       padding: const EdgeInsets.symmetric(vertical: SHFSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.buttonRadius)),
-      textStyle: const TextStyle(fontSize: 16, color: SHFColors.black, fontWeight: FontWeight.w600, fontFamily: 'Urbanist'),
+      textStyle: const TextStyle(fontSize: 16, color: SHFColors.black, fontWeight: FontWeight.w600, fontFamily: 'Poppins'),
     ),
   );
 
@@ -27,7 +27,7 @@ class SHFOutlinedButtonTheme {
       side: const BorderSide(color: SHFColors.borderPrimary),
       padding: const EdgeInsets.symmetric(vertical: SHFSizes.buttonHeight, horizontal: 20),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.buttonRadius)),
-      textStyle: const TextStyle(fontSize: 16, color: SHFColors.textWhite, fontWeight: FontWeight.w600, fontFamily: 'Urbanist'),
+      textStyle: const TextStyle(fontSize: 16, color: SHFColors.textWhite, fontWeight: FontWeight.w600, fontFamily: 'Poppins'),
     ),
   );
 }

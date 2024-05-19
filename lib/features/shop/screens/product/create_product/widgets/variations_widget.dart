@@ -24,51 +24,51 @@ class ProductVariations extends StatelessWidget {
     final variationController = ProductVariationController.instance;
 
     return Obx(
-      () => CreateProductController.instance.productType.value ==
-              ProductType.variable
+          () => CreateProductController.instance.productType.value ==
+          ProductType.variable
           ? SHFRoundedContainer(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Header for Product Variations
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Biến thể Sản phẩm',
-                          style: Theme.of(context).textTheme.headlineSmall),
-                      TextButton(
-                        onPressed: () =>
-                            variationController.removeVariations(context),
-                        child: const Text('Xóa Biến thể'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: SHFSizes.spaceBtwItems),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Tiêu đề cho Biến thể Sản phẩm
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Biến thể Sản phẩm',
+                    style: Theme.of(context).textTheme.headlineSmall),
+                TextButton(
+                  onPressed: () =>
+                      variationController.removeVariations(context),
+                  child: const Text('Xóa Biến thể'),
+                ),
+              ],
+            ),
+            const SizedBox(height: SHFSizes.spaceBtwItems),
 
-                  // List of Variations
-                  if (variationController.productVariations.isNotEmpty)
-                    ListView.separated(
-                      itemCount: variationController.productVariations.length,
-                      shrinkWrap: true,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(height: SHFSizes.spaceBtwItems),
-                      itemBuilder: (_, index) {
-                        final variation =
-                            variationController.productVariations[index];
-                        return _buildVariationTile(
-                            context, index, variation, variationController);
-                      },
-                    )
-                  else
-                    _buildNoVariationsMessage(),
-                ],
-              ),
-            )
+            // Danh sách Biến thể
+            if (variationController.productVariations.isNotEmpty)
+              ListView.separated(
+                itemCount: variationController.productVariations.length,
+                shrinkWrap: true,
+                separatorBuilder: (_, __) =>
+                const SizedBox(height: SHFSizes.spaceBtwItems),
+                itemBuilder: (_, index) {
+                  final variation =
+                  variationController.productVariations[index];
+                  return _buildVariationTile(
+                      context, index, variation, variationController);
+                },
+              )
+            else
+              _buildNoVariationsMessage(),
+          ],
+        ),
+      )
           : const SizedBox.shrink(),
     );
   }
 
-  // Helper method to build a variation tile
+  // Phương thức trợ giúp để tạo một ô biến thể
   Widget _buildVariationTile(
       BuildContext context,
       int index,
@@ -85,9 +85,9 @@ class ProductVariations extends StatelessWidget {
           .map((entry) => '${entry.key}: ${entry.value}')
           .join(', ')),
       children: [
-        // Upload Variation Image
+        // Tải Ảnh Biến thể
         Obx(
-          () => SHFImageUploader(
+              () => SHFImageUploader(
             right: 0,
             left: null,
             imageType: variation.image.value.isNotEmpty
@@ -102,7 +102,7 @@ class ProductVariations extends StatelessWidget {
         ),
         const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-        // Variation Stock, and Pricing
+        // Kho, và Giá Biến thể
         Row(
           children: [
             Expanded(
@@ -111,7 +111,7 @@ class ProductVariations extends StatelessWidget {
                 decoration: const InputDecoration(
                     labelText: 'Kho', hintText: 'Thêm Kho, chỉ cho phép số'),
                 controller: variationController.stockControllersList[index]
-                    [variation],
+                [variation],
                 keyboardType: TextInputType.number,
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.digitsOnly
@@ -122,7 +122,7 @@ class ProductVariations extends StatelessWidget {
             Expanded(
               child: TextFormField(
                 keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}$')),
                 ],
@@ -131,20 +131,20 @@ class ProductVariations extends StatelessWidget {
                     labelText: 'Giá',
                     hintText: 'Giá với tối đa 2 chữ số thập phân'),
                 controller: variationController.priceControllersList[index]
-                    [variation],
+                [variation],
               ),
             ),
             const SizedBox(width: SHFSizes.spaceBtwInputFields),
             Expanded(
               child: TextFormField(
                 keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
+                const TextInputType.numberWithOptions(decimal: true),
                 inputFormatters: <TextInputFormatter>[
                   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}$')),
                 ],
                 onChanged: (value) => variation.salePrice = double.parse(value),
                 controller: variationController.salePriceControllersList[index]
-                    [variation],
+                [variation],
                 decoration: const InputDecoration(
                     labelText: 'Giá Giảm',
                     hintText: 'Giá với tối đa 2 chữ số thập phân'),
@@ -154,11 +154,11 @@ class ProductVariations extends StatelessWidget {
         ),
         const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-        // Variation Description
+        // Mô tả Biến thể
         TextFormField(
           onChanged: (value) => variation.description = value,
           controller: variationController.descriptionControllersList[index]
-              [variation],
+          [variation],
           decoration: const InputDecoration(
               labelText: 'Mô Tả', hintText: 'Thêm mô tả của biến thể này...'),
         ),
@@ -167,7 +167,7 @@ class ProductVariations extends StatelessWidget {
     );
   }
 
-  // Helper method to build message when there are no variations
+  // Phương thức trợ giúp để tạo thông báo khi không có biến thể
   Widget _buildNoVariationsMessage() {
     return const Column(
       children: [

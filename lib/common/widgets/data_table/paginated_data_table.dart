@@ -67,7 +67,7 @@ class SHFPaginatedDataTable extends StatelessWidget {
           horizontalMargin: 12,
           rowsPerPage: rowsPerPage,
           showFirstLastButtons: true,
-          showCheckboxColumn: true,
+          showCheckboxColumn: false,
           sortAscending: sortAscending,
           onPageChanged: onPageChanged,
           dataRowHeight: dataRowHeight,
