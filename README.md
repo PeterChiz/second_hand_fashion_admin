@@ -1,6 +1,5 @@
 # second_hand_fashion_admin
-
-A new Flutter project.
+https://secondhandfashionapp.web.app
 
 ## Getting Started
 

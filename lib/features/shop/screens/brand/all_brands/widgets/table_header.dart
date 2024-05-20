@@ -20,7 +20,7 @@ class BrandTableHeader extends StatelessWidget {
           flex: !SHFDeviceUtils.isDesktopScreen(context) ? 1 : 3,
           child: Row(
             children: [
-              SizedBox(width: 200, child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createBrand), child: const Text('Create New Brand'))),
+              SizedBox(width: 200, child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createBrand), child: const Text('Tạo thương hiệu mới'))),
             ],
           ),
         ),

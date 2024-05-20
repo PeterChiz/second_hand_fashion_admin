@@ -23,7 +23,7 @@ class ProductTableHeader extends StatelessWidget {
             children: [
               SizedBox(
                 width: 140,
-                child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createProduct), child: const Text('Add Product')),
+                child: ElevatedButton(onPressed: () => Get.toNamed(SHFRoutes.createProduct), child: const Text('Thêm sản phẩm')),
               ),
             ],
           ),

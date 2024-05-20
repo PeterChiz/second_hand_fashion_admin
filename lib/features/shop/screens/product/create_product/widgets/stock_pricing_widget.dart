@@ -29,8 +29,8 @@ class ProductStockAndPricing extends StatelessWidget {
                     widthFactor: 0.45,
                     child: TextFormField(
                       controller: controller.stock,
-                      decoration: const InputDecoration(labelText: 'Stock', hintText: 'Add Stock, only numbers are allowed'),
-                      validator: (value) => SHFValidator.validationEmptyText('Stock', value),
+                      decoration: const InputDecoration(labelText: 'Số lượng', hintText: 'Thêm hàng, chỉ cho phép số nguyên'),
+                      validator: (value) => SHFValidator.validationEmptyText('Số lượng', value),
                       keyboardType: TextInputType.number,
                       inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly],
                     ),
@@ -44,8 +44,8 @@ class ProductStockAndPricing extends StatelessWidget {
                       Expanded(
                         child: TextFormField(
                           controller: controller.price,
-                          decoration: const InputDecoration(labelText: 'Price', hintText: 'Price with up-to 2 decimals'),
-                          validator: (value) => SHFValidator.validationEmptyText('Price', value),
+                          decoration: const InputDecoration(labelText: 'Giá', hintText: 'Chỉ cho phép số nguyên'),
+                          validator: (value) => SHFValidator.validationEmptyText('Giá', value),
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}$')),
@@ -58,7 +58,7 @@ class ProductStockAndPricing extends StatelessWidget {
                       Expanded(
                         child: TextFormField(
                           controller: controller.salePrice,
-                          decoration: const InputDecoration(labelText: 'Discounted Price', hintText: 'Price with up-to 2 decimals'),
+                          decoration: const InputDecoration(labelText: 'Giảm', hintText: 'Chỉ cho phép nhập số nguyên'),
                           keyboardType: const TextInputType.numberWithOptions(decimal: true),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d{0,2}$')),

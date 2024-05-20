@@ -71,7 +71,7 @@ class ProductsRows extends DataTableSource {
             ],
           ),
         ),
-        DataCell(Text('\$${controller.getProductPrice(product)}')),
+        DataCell(Text('${controller.getProductPrice(product)}đ')),
         DataCell(Text(product.formattedDate)),
         DataCell(
           SHFTableActionButtons(

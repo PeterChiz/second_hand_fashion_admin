@@ -40,7 +40,7 @@ class OrderRows extends DataTableSource {
             ),
           ),
         ),
-        DataCell(Text('\$${order.totalAmount}')),
+        DataCell(Text('${order.totalAmount}đ')),
         DataCell(
           SHFTableActionButtons(
             view: true,

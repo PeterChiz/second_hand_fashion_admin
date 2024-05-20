@@ -8,6 +8,7 @@ import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import '../../../../../../utils/helpers/helper_functions.dart';
+import '../../../../../../utils/helpers/pricing_calculator.dart';
 import '../../../../controllers/customer/customer_detail_controller.dart';
 
 class CustomerOrdersRows extends DataTableSource {
@@ -16,7 +17,8 @@ class CustomerOrdersRows extends DataTableSource {
   @override
   DataRow? getRow(int index) {
     final order = controller.filteredCustomerOrders[index];
-    final totalAmount = order.items.fold<double>(0, (previousValue, element) => previousValue + element.price);
+    final subTotal = order.items.fold<double>(0, (previousValue, element) => previousValue + (element.price * element.quantity));
+    final totalPrice = SHFPricingCalculator.calculateTotalPrice(subTotal, order.address?.city ?? '');
     return DataRow2(
       onTap: () => Get.toNamed(SHFRoutes.orderDetails, arguments: order),
       selected: controller.selectedRows[index],
@@ -37,7 +39,7 @@ class CustomerOrdersRows extends DataTableSource {
             child: Text(order.status.name.capitalize.toString(), style: TextStyle(color: SHFHelperFunctions.getOrderStatusColor(order.status)),),
           ),
         ),
-        DataCell(Text('\$$totalAmount')),
+        DataCell(Text('$totalPriceđ')),
       ],
     );
   }
