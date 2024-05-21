@@ -41,11 +41,9 @@ class SHFSidebar extends StatelessWidget {
                     const SHFMenuItem(route: SHFRoutes.brands, icon: Iconsax.dcube, itemName: 'Thương hiệu'),
                     const SHFMenuItem(route: SHFRoutes.customers, icon: Iconsax.profile_2user, itemName: 'Khách hàng'),
                     const SHFMenuItem(route: SHFRoutes.orders, icon: Iconsax.box, itemName: 'Đơn hàng'),
-                    const SHFMenuItem(route: SHFRoutes.coupons, icon: Iconsax.code, itemName: 'Phiếu giảm giá'),
                     const SizedBox(height: SHFSizes.spaceBtwItems),
                     Text('KHÁC', style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2)),
-                    // Các mục menu khác
-                    const SHFMenuItem(route: SHFRoutes.settings, icon: Iconsax.setting_2, itemName: 'Cài đặt'),
+
                     const SHFMenuItem(route: 'logout', icon: Iconsax.logout, itemName: 'Đăng xuất'),
                   ],
                 ),

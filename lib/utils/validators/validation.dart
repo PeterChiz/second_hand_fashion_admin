@@ -1,7 +1,7 @@
 
 class SHFValidator{
 
-  ///Empty Text Validation
+  ///Xác thực văn bản trống
   static String? validationEmptyText(String? fieldName, String? value){
     if(value == null || value.isEmpty){
       return 'Vui lòng nhập $fieldName';
