@@ -47,23 +47,22 @@ class SHFWeeklySalesGraph extends StatelessWidget {
                           drawVerticalLine: false, // Loại bỏ đường dọc
                           horizontalInterval: 200, // Đặt khoảng cách mong muốn
                         ),
-                        barGroups: controller.weeklySales
-                            .asMap()
-                            .entries
-                            .map(
-                              (entry) => BarChartGroupData(
-                                x: entry.key,
-                                barRods: [
-                                  BarChartRodData(
-                                      width: 30,
-                                      toY: entry.value,
-                                      color: SHFColors.primary,
-                                      borderRadius:
-                                          BorderRadius.circular(SHFSizes.sm)),
-                                ],
+                        barGroups: List.generate(7, (index) {
+                          final dayIndex = index % 7; // Đảm bảo chỉ mục vòng quanh cho ngày đúng
+                          final value = controller.weeklySales[dayIndex]; // Lấy giá trị doanh số tương ứng
+
+                          return BarChartGroupData(
+                            x: dayIndex,
+                            barRods: [
+                              BarChartRodData(
+                                width: 30,
+                                toY: value,
+                                color: SHFColors.primary,
+                                borderRadius: BorderRadius.circular(SHFSizes.sm),
                               ),
-                            )
-                            .toList(),
+                            ],
+                          );
+                        }),
                         groupsSpace: SHFSizes.spaceBtwItems,
                         barTouchData: BarTouchData(
                           touchTooltipData: BarTouchTooltipData(

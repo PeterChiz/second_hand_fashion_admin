@@ -100,8 +100,5 @@ class ProductController extends SHFBaseController<ProductModel> {
         : product.productVariations!.fold<int>(0, (previousValue, element) => previousValue + element.stock).toString();
   }
 
-  /// -- Kiểm tra Trạng thái Hàng tồn kho
-  String getProductStockStatus(ProductModel product) {
-    return product.stock > 0 ? 'Còn hàng' : 'Hết hàng';
-  }
+
 }

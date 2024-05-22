@@ -44,13 +44,14 @@ class DashboardController extends SHFBaseController<OrderModel> {
         // Đảm bảo chỉ mục là không âm
         index = index < 0 ? index + 7 : index;
 
-        print('Ngày đơn hàng: ${order.orderDate}, Ngày bắt đầu Tuần: $orderWeekStart, Chỉ mục: $index');
+        print('Đơn hàng ngày: ${order.orderDate}, Ngày đầu tiên của tuần hiện tại: $orderWeekStart, Index: $index');
 
-        weeklySales[index] += order.totalAmount;
+        weeklySales[index] += (order.totalAmount) / 1000;
       }
     }
 
-    print('Doanh số hàng tuần: $weeklySales');
+    print('Bán hàng hàng tuần: $weeklySales');
+
   }
 
   // Gọi hàm này để tính toán số lượng trạng thái đơn hàng
@@ -72,6 +73,7 @@ class DashboardController extends SHFBaseController<OrderModel> {
     }
 
     print('Dữ liệu trạng thái đơn hàng: $orderStatusData');
+
   }
 
   String getDisplayStatusName(OrderStatus status) {

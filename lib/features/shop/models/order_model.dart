@@ -25,7 +25,7 @@ class OrderModel {
     required this.items,
     required this.totalAmount,
     required this.orderDate,
-    this.paymentMethod = 'Paypal',
+    this.paymentMethod = 'Thanh toán khi nhận hàng',
     this.address,
     this.deliveryDate,
   });
