@@ -21,7 +21,7 @@ class SHFWeeklySalesGraph extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Doanh số hàng tuần',
+          Text('Doanh số hàng tuần (Đơn vị: nghìn đồng)',
               style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwSections),
 

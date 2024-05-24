@@ -3,7 +3,7 @@
 class SHFTexts {
 
   // -- Admin Default Credentials
-  static const String adminEmail = "Thaonguyenafvn@gmail.com";
+  static const String adminEmail = "buithienchi209@gmail.com";
   static const String adminPassword = "Chi@200218";
 
   // -- Storage Paths

@@ -73,7 +73,9 @@ class MediaController extends GetxController {
       loading.value = false;
     } catch (e) {
       loading.value = false;
-      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: 'Không thể tìm nạp Hình ảnh, Đã xảy ra lỗi. Thử lại');
+      // SHFLoaders.errorSnackBar(title: 'Có lỗi', message: 'Không thể tìm nạp Hình ảnh, Đã xảy ra lỗi. Thử lại');
+      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
+      print('Lỗi: ${e.toString()}');
     }
   }
 
@@ -322,7 +324,7 @@ class MediaController extends GetxController {
     }
   }
 
-  Future<List<ImageModel>?> selectImagesFromMedia(
+  Future<List<ImageModel>?> selectImagesFromMedia( //là phương thức chính được sử dụng để hiển thị hình ảnh từ Firebase.
       {List<String>? alreadySelectedUrls, bool allowSelection = true, bool allowMultipleSelection = false}) async {
     List<ImageModel>? selectedImages = await Get.bottomSheet<List<ImageModel>>(
       enableDrag: false,

@@ -71,7 +71,7 @@ class SHFLoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               // Un Comment this line to register admin
-              // child: ElevatedButton(onPressed: () => controller.registerAdmin(), child: const Text('Register Admin')),
+              // child: ElevatedButton(onPressed: () => controller.registerAdmin(), child: const Text('Đăng kí Admin')),
               child: ElevatedButton(onPressed: () => controller.emailAndPasswordSignIn(), child: const Text(SHFTexts.signIn)),
             ),
           ],

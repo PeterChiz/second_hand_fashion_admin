@@ -40,7 +40,7 @@ class MediaUploader extends StatelessWidget {
                     alignment: Alignment.center,
                     children: [
                       DropzoneView(
-                        mime: const ['image/jpeg', 'image/png'],
+                        mime: const ['image/jpeg', 'image/png', 'image/jpg'],
                         cursor: CursorType.Default,
                         operation: DragOperation.copy,
                         onCreated: (ctrl) =>
