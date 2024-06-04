@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/* -- Light & Dark Outlined Button Themes -- */
+/* -- Chủ đề Nút Đường viền Sáng & Tối -- */
 class SHFOutlinedButtonTheme {
-  SHFOutlinedButtonTheme._(); //To avoid creating instances
+  SHFOutlinedButtonTheme._(); // Để tránh tạo thể hiện
 
 
-  /* -- Light Theme -- */
+  /* -- Chủ đề Sáng -- */
   static final lightOutlinedButtonTheme  = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       elevation: 0,
@@ -20,7 +20,7 @@ class SHFOutlinedButtonTheme {
     ),
   );
 
-  /* -- Dark Theme -- */
+  /* -- Chủ đề Tối -- */
   static final darkOutlinedButtonTheme = OutlinedButtonThemeData(
     style: OutlinedButton.styleFrom(
       foregroundColor: SHFColors.light,

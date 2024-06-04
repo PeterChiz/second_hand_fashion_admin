@@ -33,7 +33,7 @@ class SHFSidebar extends StatelessWidget {
                   children: [
                     Text('MENU', style: Theme.of(context).textTheme.bodySmall!.apply(letterSpacingDelta: 1.2)),
                     // Các mục menu
-                    const SHFMenuItem(route: SHFRoutes.dashboard, icon: Iconsax.status, itemName: 'Doanh thu'),
+                    const SHFMenuItem(route: SHFRoutes.dashboard, icon: Iconsax.status, itemName: 'Trang chủ'),
                     const SHFMenuItem(route: SHFRoutes.media, icon: Iconsax.image, itemName: 'Kho ảnh'),
                     const SHFMenuItem(route: SHFRoutes.banners, icon: Iconsax.picture_frame, itemName: 'Banner'),
                     const SHFMenuItem(route: SHFRoutes.products, icon: Iconsax.shopping_bag, itemName: 'Sản phẩm'),

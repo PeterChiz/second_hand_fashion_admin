@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/// Custom Class for Light & Dark Text Themes
+/// Lớp tùy chỉnh cho Chủ đề Văn bản Sáng & Tối
 class SHFCheckboxTheme {
-  SHFCheckboxTheme._(); // To avoid creating instances
+  SHFCheckboxTheme._(); // Để tránh tạo thể hiện
 
-  /// Customizable Light Text Theme
+  /// Chủ đề văn bản Sáng có thể tùy chỉnh
   static CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.xs)),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(SHFSizes.xs)),
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return SHFColors.white;
       } else {
         return SHFColors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return SHFColors.primary;
       } else {
         return Colors.transparent;
@@ -26,18 +27,19 @@ class SHFCheckboxTheme {
     }),
   );
 
-  /// Customizable Dark Text Theme
+  /// Chủ đề văn bản Tối có thể tùy chỉnh
   static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SHFSizes.xs)),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(SHFSizes.xs)),
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return SHFColors.white;
       } else {
         return SHFColors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return SHFColors.primary;
       } else {
         return Colors.transparent;

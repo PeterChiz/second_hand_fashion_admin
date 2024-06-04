@@ -5,7 +5,7 @@ import '../utils/helpers/network_manager.dart';
 class GeneralBindings extends Bindings {
   @override
   void dependencies() {
-    /// -- Core
+    /// Phần chính
     Get.lazyPut(() => NetworkManager(), fenix: true);
     Get.lazyPut(() => AdminController(), fenix: true);
   }

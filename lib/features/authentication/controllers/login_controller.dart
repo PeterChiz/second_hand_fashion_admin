@@ -98,12 +98,12 @@ class LoginController extends GetxController {
     }
   }
 
-  /// Xử lý việc đăng ký người dùng quản trị
+  /// Xử lý đăng ký người dùng quản trị viên
   Future<void> registerAdmin() async {
     try {
       // Bắt đầu tải
       isLoading.value = true;
-      SHFFullScreenLoader.openLoadingDialog('Đang đăng ký tài khoản quản trị...', SHFImages.docerAnimation);
+      SHFFullScreenLoader.openLoadingDialog('Đang đăng ký tài khoản quản trị viên...', SHFImages.docerAnimation);
 
       // Kiểm tra kết nối Internet
       final isConnected = await NetworkManager.instance.isConnected();
@@ -113,15 +113,15 @@ class LoginController extends GetxController {
         return;
       }
 
-      // Đăng ký người dùng bằng Email & Mật khẩu
+      // Đăng ký người dùng bằng xác thực Email & Mật khẩu
       await AuthenticationRepository.instance.registerWithEmailAndPassword(SHFTexts.adminEmail, SHFTexts.adminPassword);
 
-      // Tạo bản ghi quản trị trong Firestore
+      // Tạo bản ghi quản trị viên trong Firestore
       final userRepository = Get.put(UserRepository());
       await userRepository.createUser(
         UserModel(
           id: AuthenticationRepository.instance.authUser!.uid,
-          firstName: 'Bùi Thiện Chí',
+          firstName: 'CwT',
           lastName: 'Admin',
           email: SHFTexts.adminEmail,
           role: AppRole.admin,
@@ -129,7 +129,7 @@ class LoginController extends GetxController {
         ),
       );
 
-      // Dừng tải
+      // Gỡ Loader
       SHFFullScreenLoader.stopLoading();
 
       // Chuyển hướng
@@ -137,7 +137,9 @@ class LoginController extends GetxController {
     } catch (e) {
       isLoading.value = false;
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Oh Snap', message: e.toString());
     }
   }
+
+
 }

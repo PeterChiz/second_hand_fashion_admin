@@ -54,7 +54,7 @@ class OrderStatusPieChart extends StatelessWidget {
               : const SizedBox(height: 400, child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [SHFLoaderAnimation()])),
         ),
 
-        // Show Status and Color Meta
+        // Show trạng thái và màu Meta
         SizedBox(
           width: double.infinity,
           child: Obx(
@@ -91,7 +91,7 @@ class OrderStatusPieChart extends StatelessWidget {
   }
 
   Color getOrderStatusColor(OrderStatus status) {
-    // Define colors for each order status
+    // Điều chỉnh màu sắc cho trạng thái đơn hàng
     switch (status) {
       case OrderStatus.pending:
         return SHFColors.primary.withOpacity(0.4);

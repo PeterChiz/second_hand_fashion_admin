@@ -8,7 +8,6 @@ import 'product_variation_model.dart';
 class ProductModel {
   String id;
   int stock;
-  String? sku;
   double price;
   String title;
   DateTime? date;
@@ -30,7 +29,6 @@ class ProductModel {
     required this.price,
     required this.thumbnail,
     required this.productType,
-    this.sku,
     this.brand,
     this.date,
     this.images,
@@ -44,13 +42,12 @@ class ProductModel {
 
   String get formattedDate => SHFFormatter.formatDate(date);
 
-  /// Create Empty func for clean code
+  /// Tạo hàm trống để giữ mã nguồn sạch
   static ProductModel empty() => ProductModel(id: '', title: '', stock: 0, price: 0, thumbnail: '', productType: '');
 
-  /// Json Format
+  /// Định dạng Json
   toJson() {
     return {
-      'SKU': sku,
       'Title': title,
       'Stock': stock,
       'Price': price,
@@ -67,14 +64,13 @@ class ProductModel {
     };
   }
 
-  /// Map Json oriented document snapshot from Firebase to Model
+  /// Ánh xạ tài liệu theo định hướng Json từ Firebase sang Model
   factory ProductModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return ProductModel(
       id: document.id,
       title: data['Title'],
       price: double.parse((data['Price'] ?? 0.0).toString()),
-      sku: data['SKU'],
       stock: data['Stock'] ?? 0,
       isFeatured: data['IsFeatured'] ?? false,
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),
@@ -89,14 +85,13 @@ class ProductModel {
     );
   }
 
-  // Map Json-oriented document snapshot from Firebase to Model
+  // Ánh xạ tài liệu theo định hướng Json từ Firebase sang Model
   factory ProductModel.fromQuerySnapshot(QueryDocumentSnapshot<Object?> document) {
     final data = document.data() as Map<String, dynamic>;
     return ProductModel(
       id: document.id,
       title: data['Title'] ?? '',
       price: double.parse((data['Price'] ?? 0.0).toString()),
-      sku: data['SKU'] ?? '',
       stock: data['Stock'] ?? 0,
       isFeatured: data['IsFeatured'] ?? false,
       salePrice: double.parse((data['SalePrice'] ?? 0.0).toString()),

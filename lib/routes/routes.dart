@@ -50,7 +50,7 @@ class SHFRoutes {
   ];
 }
 
-// All App Screens
+// Tất cả màn hình ứng dụng
 class AppScreens {
   static const home = '/';
   static const store = '/store';

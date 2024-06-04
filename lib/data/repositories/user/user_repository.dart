@@ -107,36 +107,6 @@ class UserRepository extends GetxController {
     }
   }
 
-  /// Hàm để cập nhật dữ liệu người dùng trong Firestore.
-  Future<void> updateUserDetails(UserModel updatedUser) async {
-    try {
-      await _db.collection("Users").doc(updatedUser.id).update(updatedUser.toJson());
-    } on FirebaseAuthException catch (e) {
-      throw SHFFirebaseAuthException(e.code).message;
-    } on FormatException catch (_) {
-      throw const SHFFormatException();
-    } on PlatformException catch (e) {
-      throw SHFPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Có lỗi xảy ra. Vui lòng thử lại';
-    }
-  }
-
-  /// Cập nhật bất kỳ trường nào trong Bộ sưu tập Người dùng cụ thể
-  Future<void> updateSingleField(Map<String, dynamic> json) async {
-    try {
-      await _db.collection("Users").doc(AuthenticationRepository.instance.authUser!.uid).update(json);
-    } on FirebaseAuthException catch (e) {
-      throw SHFFirebaseAuthException(e.code).message;
-    } on FormatException catch (_) {
-      throw const SHFFormatException();
-    } on PlatformException catch (e) {
-      throw SHFPlatformException(e.code).message;
-    } catch (e) {
-      throw 'Có lỗi xảy ra. Vui lòng thử lại';
-    }
-  }
-
   /// Xóa dữ liệu người dùng
   Future<void> deleteUser(String id) async {
     try {

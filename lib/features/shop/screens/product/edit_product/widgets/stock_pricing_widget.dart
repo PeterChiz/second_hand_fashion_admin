@@ -16,48 +16,48 @@ class ProductStockAndPricing extends StatelessWidget {
     final controller = EditProductController.instance;
 
     return Obx(
-      () => controller.productType.value == ProductType.single
+          () => controller.productType.value == ProductType.single
           ? Form(
-              key: controller.stockPriceFormKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Stock
-                  FractionallySizedBox(
-                    widthFactor: 0.45,
-                    child: TextFormField(
-                      controller: controller.stock,
-                      decoration: const InputDecoration(labelText: 'Số lượng'),
-                      validator: (value) => SHFValidator.validationEmptyText('Số lượng', value),
-                    ),
-                  ),
-                  const SizedBox(height: SHFSizes.spaceBtwInputFields),
-
-                  // Pricing
-                  Row(
-                    children: [
-                      // Price
-                      Expanded(
-                        child: TextFormField(
-                          controller: controller.price,
-                          decoration: const InputDecoration(labelText: 'Giá', hintText: 'đ'),
-                          validator: (value) => SHFValidator.validationEmptyText('Giá', value),
-                        ),
-                      ),
-                      const SizedBox(width: SHFSizes.spaceBtwItems),
-
-                      // Sale Price
-                      Expanded(
-                        child: TextFormField(
-                          controller: controller.salePrice,
-                          decoration: const InputDecoration(labelText: 'Giá ưu đãi', hintText: 'đ'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+        key: controller.stockPriceFormKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Số lượng
+            FractionallySizedBox(
+              widthFactor: 0.45,
+              child: TextFormField(
+                controller: controller.stock,
+                decoration: const InputDecoration(labelText: 'Số lượng'),
+                validator: (value) => SHFValidator.validationEmptyText('Số lượng', value),
               ),
-            )
+            ),
+            const SizedBox(height: SHFSizes.spaceBtwInputFields),
+
+            // Giá cả
+            Row(
+              children: [
+                // Giá
+                Expanded(
+                  child: TextFormField(
+                    controller: controller.price,
+                    decoration: const InputDecoration(labelText: 'Giá', hintText: 'đ'),
+                    validator: (value) => SHFValidator.validationEmptyText('Giá', value),
+                  ),
+                ),
+                const SizedBox(width: SHFSizes.spaceBtwItems),
+
+                // Giá ưu đãi
+                Expanded(
+                  child: TextFormField(
+                    controller: controller.salePrice,
+                    decoration: const InputDecoration(labelText: 'Giá ưu đãi', hintText: 'đ'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      )
           : const SizedBox.shrink(),
     );
   }

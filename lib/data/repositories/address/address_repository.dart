@@ -5,7 +5,7 @@ import '../../../features/personalization/models/address_model.dart';
 import '../authentication/authentication_repository.dart';
 
 class AddressRepository extends GetxController {
-  // Get instance of AddressRepository using Get.find()
+  // Lấy bản của AddressRepository bằng cách dùng Get.find()
   static AddressRepository get instance => Get.find();
 
   // Firebase Firestore instance

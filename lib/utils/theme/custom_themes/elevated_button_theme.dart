@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
-/* -- Light & Dark Elevated Button Themes -- */
+/* -- Chủ đề Nút Nổi Sáng & Tối -- */
 class SHFElevatedButtonTheme {
-  SHFElevatedButtonTheme._(); //To avoid creating instances
+  SHFElevatedButtonTheme._(); // Để tránh tạo thể hiện
 
 
-  /* -- Light Theme -- */
+  /* -- Chủ đề Sáng -- */
   static final lightElevatedButtonTheme  = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,
@@ -23,7 +23,7 @@ class SHFElevatedButtonTheme {
     ),
   );
 
-  /* -- Dark Theme -- */
+  /* -- Chủ đề Tối -- */
   static final darkElevatedButtonTheme = ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       elevation: 0,

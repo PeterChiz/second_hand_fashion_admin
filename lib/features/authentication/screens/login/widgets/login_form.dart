@@ -48,11 +48,11 @@ class SHFLoginForm extends StatelessWidget {
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields / 2),
 
-            /// Remember Me & Forget Password
+            /// Nho mat khau va quen mat khau
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /// Remember Me
+                /// nho mat khau
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -61,7 +61,7 @@ class SHFLoginForm extends StatelessWidget {
                   ],
                 ),
 
-                /// Forget Password
+                /// quen mat khau
                 TextButton(onPressed: () => Get.toNamed(SHFRoutes.forgetPassword), child: const Text(SHFTexts.forgetPassword)),
               ],
             ),
@@ -70,7 +70,7 @@ class SHFLoginForm extends StatelessWidget {
             /// Sign In Button
             SizedBox(
               width: double.infinity,
-              // Un Comment this line to register admin
+              // Bỏ dấu chú thích dòng này để đăng ký admin
               // child: ElevatedButton(onPressed: () => controller.registerAdmin(), child: const Text('Đăng kí Admin')),
               child: ElevatedButton(onPressed: () => controller.emailAndPasswordSignIn(), child: const Text(SHFTexts.signIn)),
             ),

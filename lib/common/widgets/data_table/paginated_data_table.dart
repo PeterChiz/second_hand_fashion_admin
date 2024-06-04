@@ -75,7 +75,7 @@ class SHFPaginatedDataTable extends StatelessWidget {
           onRowsPerPageChanged: (noOfRows) {},
           sortColumnIndex: sortColumnIndex,
           headingTextStyle: Theme.of(context).textTheme.titleMedium,
-          headingRowColor: MaterialStateProperty.resolveWith(
+          headingRowColor: WidgetStateProperty.resolveWith(
               (states) => SHFColors.primaryBackground),
           empty: SHFAnimationLoaderWidget(
               animation: SHFImages.packageAnimation,

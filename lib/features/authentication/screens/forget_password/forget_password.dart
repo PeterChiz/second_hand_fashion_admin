@@ -3,7 +3,7 @@ import 'package:second_hand_fashion_admin/features/authentication/screens/forget
 
 import '../../../../common/widgets/layouts/templates/site_layout.dart';
 
-/// Screen for handling the forget password process
+/// Màn hình xử lý quá trình quên mật khẩu
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
 

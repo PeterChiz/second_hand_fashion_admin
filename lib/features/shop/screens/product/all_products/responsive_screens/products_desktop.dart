@@ -21,23 +21,23 @@ class ProductsDesktopScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Breadcrumbs
+              // Đường dẫn
               const SHFBreadcrumbsWithHeading(heading: 'Sản phẩm', breadcrumbItems: ['Sản phẩm']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Table Body
+              // Nội dung bảng
               Obx(() {
-                // Show Loader
+                // Hiển thị trạng thái tải
                 if (controller.isLoading.value) return const SHFLoaderAnimation();
 
                 return const SHFRoundedContainer(
                   child: Column(
                     children: [
-                      // Table Header
+                      // Tiêu đề bảng
                       ProductTableHeader(),
                       SizedBox(height: SHFSizes.spaceBtwItems),
 
-                      // Table
+                      // Bảng
                       ProductsTable(),
                     ],
                   ),

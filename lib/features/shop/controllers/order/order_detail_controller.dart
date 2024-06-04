@@ -21,7 +21,7 @@ class OrderDetailController extends GetxController {
 
       customer.value = user;
     } catch (e) {
-      SHFLoaders.errorSnackBar(title: 'Có lỗi!', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Thông báo!', message: e.toString());
     } finally {
       loading.value = false;
     }

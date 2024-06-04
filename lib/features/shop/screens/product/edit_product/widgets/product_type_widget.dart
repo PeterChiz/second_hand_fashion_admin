@@ -15,26 +15,26 @@ class ProductTypeWidget extends StatelessWidget {
     final controller = EditProductController.instance;
 
     return Obx(
-      () => Row(
+          () => Row(
         children: [
           Text('Loại sản phẩm', style: Theme.of(context).textTheme.bodyMedium),
           const SizedBox(width: SHFSizes.spaceBtwItems),
-          // Radio button for Single Product Type
+          // Nút radio cho Loại sản phẩm Đơn
           RadioMenuButton(
             value: ProductType.single,
             groupValue: controller.productType.value,
             onChanged: (value) {
-              // Update the selected product type in the controller
+              // Cập nhật loại sản phẩm đã chọn trong controller
               controller.productType.value = value ?? ProductType.single;
             },
             child: const Text('Đơn'),
           ),
-          // Radio button for Variable Product Type
+          // Nút radio cho Loại sản phẩm Biến thể
           RadioMenuButton(
             value: ProductType.variable,
             groupValue: controller.productType.value,
             onChanged: (value) {
-              // Update the selected product type in the controller
+              // Cập nhật loại sản phẩm đã chọn trong controller
               controller.productType.value = value ?? ProductType.single;
             },
             child: const Text('Biến thể'),

@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-// Import các controllers, models, và utility classes cần thiết
 import '../../../../data/repositories/product/product_repository.dart';
 import '../../../../features/shop/controllers/product/product_attributes_controller.dart';
 import '../../../../features/shop/controllers/product/product_controller.dart';
@@ -26,7 +25,6 @@ class CreateProductController extends GetxController {
   // Các observables cho trạng thái loading và chi tiết sản phẩm
   final isLoading = false.obs;
   final productType = ProductType.single.obs;
-  final productVisibility = ProductVisibility.hidden.obs;
 
   // Controllers và keys
   final stockPriceFormKey = GlobalKey<FormState>();
@@ -115,7 +113,6 @@ class CreateProductController extends GetxController {
       // Ánh xạ dữ liệu sản phẩm thành ProductModel
       final newRecord = ProductModel(
         id: '',
-        sku: '',
         isFeatured: true,
         title: title.text.trim(),
         brand: selectedBrand.value,
@@ -158,7 +155,7 @@ class CreateProductController extends GetxController {
       showCompletionDialog();
     } catch (e) {
       SHFFullScreenLoader.stopLoading();
-      SHFLoaders.errorSnackBar(title: 'Rất tiếc', message: e.toString());
+      SHFLoaders.errorSnackBar(title: 'Thông báo', message: e.toString());
     }
   }
 
@@ -166,7 +163,6 @@ class CreateProductController extends GetxController {
   void resetValues() {
     isLoading.value = false;
     productType.value = ProductType.single;
-    productVisibility.value = ProductVisibility.hidden;
     stockPriceFormKey.currentState?.reset();
     titleDescriptionFormKey.currentState?.reset();
     title.clear();

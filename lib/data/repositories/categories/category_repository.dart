@@ -8,7 +8,7 @@ import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
 class CategoryRepository extends GetxController {
-  // Singleton instance of the CategoryRepository
+  //Bản Singleton của CategoryRepository
   static CategoryRepository get instance => Get.find();
 
   // Firebase Firestore instance

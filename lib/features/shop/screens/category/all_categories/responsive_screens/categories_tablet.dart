@@ -9,7 +9,7 @@ import '../table/data_table.dart';
 import '../widgets/table_header.dart';
 
 class CategoriesTabletScreen extends StatelessWidget {
-  const CategoriesTabletScreen({Key? key});
+  const CategoriesTabletScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {

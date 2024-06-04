@@ -38,7 +38,7 @@ class OrderTransaction extends StatelessWidget {
                 flex: SHFDeviceUtils.isMobileScreen(context) ? 2 : 1,
                 child: Row(
                   children: [
-                    const SHFRoundedImage(imageType: ImageType.asset, image: SHFImages.paypal),
+                    const SHFRoundedImage(imageType: ImageType.asset, image: SHFImages.creditCard),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +65,7 @@ class OrderTransaction extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('Tổng cộng', style: Theme.of(context).textTheme.labelMedium),
-                    Text('$totalPrice\đ', style: Theme.of(context).textTheme.bodyLarge),
+                    Text('$totalPriceđ', style: Theme.of(context).textTheme.bodyLarge),
                   ],
                 ),
               ),

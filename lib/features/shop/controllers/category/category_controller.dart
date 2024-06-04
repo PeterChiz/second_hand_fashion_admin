@@ -23,7 +23,7 @@ class CategoryController extends SHFBaseController<CategoryModel> {
     return item.name.toLowerCase().contains(query.toLowerCase());
   }
 
-  /// Sorting related code
+  /// Sắp xếp tên liên quan
   void sortByName(int sortColumnIndex, bool ascending) {
     sortByProperty(sortColumnIndex, ascending, (CategoryModel category) => category.name.toLowerCase());
   }

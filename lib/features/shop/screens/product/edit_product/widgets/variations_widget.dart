@@ -23,46 +23,46 @@ class ProductVariations extends StatelessWidget {
     final variationController = ProductVariationController.instance;
 
     return Obx(
-      () => EditProductController.instance.productType.value ==
-              ProductType.variable
+          () => EditProductController.instance.productType.value ==
+          ProductType.variable
           ? SHFRoundedContainer(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Header cho Biến thể Sản phẩm
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('Biến thể Sản phẩm',
-                          style: Theme.of(context).textTheme.headlineSmall),
-                      TextButton(
-                        onPressed: () =>
-                            variationController.removeVariations(context),
-                        child: const Text('Xóa Biến thể'),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: SHFSizes.spaceBtwItems),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Tiêu đề cho Biến thể Sản phẩm
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Biến thể Sản phẩm',
+                    style: Theme.of(context).textTheme.headlineSmall),
+                TextButton(
+                  onPressed: () =>
+                      variationController.removeVariations(context),
+                  child: const Text('Xóa Biến thể'),
+                ),
+              ],
+            ),
+            const SizedBox(height: SHFSizes.spaceBtwItems),
 
-                  // Danh sách Biến thể
-                  if (variationController.productVariations.isNotEmpty)
-                    ListView.separated(
-                      itemCount: variationController.productVariations.length,
-                      shrinkWrap: true,
-                      separatorBuilder: (_, __) =>
-                          const SizedBox(height: SHFSizes.spaceBtwItems),
-                      itemBuilder: (_, index) {
-                        final variation =
-                            variationController.productVariations[index];
-                        return _buildVariationTile(
-                            context, index, variation, variationController);
-                      },
-                    )
-                  else
-                    _buildNoVariationsMessage(),
-                ],
-              ),
-            )
+            // Danh sách Biến thể
+            if (variationController.productVariations.isNotEmpty)
+              ListView.separated(
+                itemCount: variationController.productVariations.length,
+                shrinkWrap: true,
+                separatorBuilder: (_, __) =>
+                const SizedBox(height: SHFSizes.spaceBtwItems),
+                itemBuilder: (_, index) {
+                  final variation =
+                  variationController.productVariations[index];
+                  return _buildVariationTile(
+                      context, index, variation, variationController);
+                },
+              )
+            else
+              _buildNoVariationsMessage(),
+          ],
+        ),
+      )
           : const SizedBox.shrink(),
     );
   }
@@ -86,7 +86,7 @@ class ProductVariations extends StatelessWidget {
       children: [
         // Tải ảnh Biến thể
         Obx(
-          () => SHFImageUploader(
+              () => SHFImageUploader(
             right: 0,
             left: null,
             circular: true,
@@ -110,9 +110,9 @@ class ProductVariations extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 onChanged: (value) => variation.stock = int.parse(value),
                 decoration:
-                    const InputDecoration(labelText: 'Kho', hintText: '0'),
+                const InputDecoration(labelText: 'Kho', hintText: '0'),
                 controller: variationController.stockControllersList[index]
-                    [variation],
+                [variation],
               ),
             ),
             const SizedBox(width: SHFSizes.spaceBtwInputFields),
@@ -121,9 +121,9 @@ class ProductVariations extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 onChanged: (value) => variation.price = double.parse(value),
                 decoration:
-                    const InputDecoration(labelText: 'Giá', hintText: 'đ'),
+                const InputDecoration(labelText: 'Giá', hintText: 'đ'),
                 controller: variationController.priceControllersList[index]
-                    [variation],
+                [variation],
               ),
             ),
             const SizedBox(width: SHFSizes.spaceBtwInputFields),
@@ -132,7 +132,7 @@ class ProductVariations extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 onChanged: (value) => variation.salePrice = double.parse(value),
                 controller: variationController.salePriceControllersList[index]
-                    [variation],
+                [variation],
                 decoration: const InputDecoration(
                     labelText: 'Giá ưu đãi', hintText: 'đ'),
               ),
@@ -145,7 +145,7 @@ class ProductVariations extends StatelessWidget {
         TextFormField(
           onChanged: (value) => variation.description = value,
           controller: variationController.descriptionControllersList[index]
-              [variation],
+          [variation],
           decoration: const InputDecoration(
               labelText: 'Mô tả', hintText: 'Thêm mô tả của biến thể này...'),
         ),

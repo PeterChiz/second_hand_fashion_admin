@@ -6,7 +6,6 @@ import '../constants/colors.dart';
 import '../helpers/helper_functions.dart';
 
 class SHFLoaders {
-  static hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
   static customToast({required message}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(

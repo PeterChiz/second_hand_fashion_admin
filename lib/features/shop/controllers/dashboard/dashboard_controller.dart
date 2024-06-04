@@ -85,7 +85,7 @@ class DashboardController extends SHFBaseController<OrderModel> {
       case OrderStatus.shipped:
         return 'Đã gửi';
       case OrderStatus.delivered:
-        return 'Đã giao hàng';
+        return 'Đang giao hàng';
       case OrderStatus.cancelled:
         return 'Đã hủy';
       default:

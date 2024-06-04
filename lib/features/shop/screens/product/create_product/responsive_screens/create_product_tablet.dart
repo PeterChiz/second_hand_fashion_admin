@@ -4,7 +4,7 @@ import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/sizes.dart';
 
 class CreateProductTabletScreen extends StatelessWidget {
-  const CreateProductTabletScreen({Key? key});
+  const CreateProductTabletScreen({super.key,});
 
   @override
   Widget build(BuildContext context) {

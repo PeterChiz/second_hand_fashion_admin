@@ -22,39 +22,39 @@ class OrderDetailDesktopScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Breadcrumbs
+              // Đường dẫn
               SHFBreadcrumbsWithHeading(returnToPreviousScreen: true, heading: order.id, breadcrumbItems: const [SHFRoutes.orders, 'Chi tiết']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Body
+              // Nội dung
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Left Side Order Information
+                  // Thông tin đơn hàng bên trái
                   Expanded(
                     flex: 2,
                     child: Column(
                       children: [
-                        // Order Info
+                        // Thông tin đơn hàng
                         OrderInfo(order: order),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Items
+                        // Sản phẩm
                         OrderItems(order: order),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Transactions
+                        // Giao dịch
                         OrderTransaction(order: order)
                       ],
                     ),
                   ),
                   const SizedBox(width: SHFSizes.spaceBtwSections),
 
-                  // Right Side Order Orders
+                  // Đơn hàng bên phải
                   Expanded(
                     child: Column(
                       children: [
-                        // Customer Info
+                        // Thông tin khách hàng
                         OrderCustomer(order: order),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
                       ],

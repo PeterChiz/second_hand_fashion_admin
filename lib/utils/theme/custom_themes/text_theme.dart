@@ -22,7 +22,6 @@ class SHFTextTheme{
     labelMedium: const TextStyle().copyWith(fontSize: 12.0, fontWeight: FontWeight.normal, color: SHFColors.dark.withOpacity(0.5)),
   );
 
-  /// Customizable Dark Text Theme
   static TextTheme darkTextTheme = TextTheme(
     headlineLarge: const TextStyle().copyWith(fontSize: 32.0, fontWeight: FontWeight.bold, color: SHFColors.light),
     headlineMedium: const TextStyle().copyWith(fontSize: 24.0, fontWeight: FontWeight.w600, color: SHFColors.light),

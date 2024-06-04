@@ -15,7 +15,7 @@ class CustomerOrderTable extends StatelessWidget {
     final controller = CustomerDetailController.instance;
     return Obx(
       () {
-        // Customers & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
+        // Khách Hàng & Các Hàng Được Chọn Đã Ẩn => Cập Nhật Giao Diện Người Dùng => Obx => [Các Hàng Sản Phẩm]
         Visibility(visible: false, child: Text(controller.filteredCustomerOrders.length.toString()));
         Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
 

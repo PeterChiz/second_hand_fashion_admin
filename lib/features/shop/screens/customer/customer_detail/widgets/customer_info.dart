@@ -53,7 +53,7 @@ class CustomerInfo extends StatelessWidget {
           // Meta Data
           Row(
             children: [
-              const SizedBox(width: 120, child: Text('Username')),
+              const SizedBox(width: 120, child: Text('Tên user')),
               const Text(':'),
               const SizedBox(width: SHFSizes.spaceBtwItems / 2),
               Expanded(child: Text(customer.userName, style: Theme.of(context).textTheme.titleMedium)),

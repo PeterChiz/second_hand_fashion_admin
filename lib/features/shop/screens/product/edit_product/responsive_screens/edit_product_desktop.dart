@@ -18,7 +18,6 @@ import '../widgets/product_type_widget.dart';
 import '../widgets/stock_pricing_widget.dart';
 import '../widgets/title_description.dart';
 import '../widgets/variations_widget.dart';
-import '../widgets/visibility_widget.dart';
 
 class EditProductDesktopScreen extends StatelessWidget {
   const EditProductDesktopScreen({
@@ -66,7 +65,7 @@ class EditProductDesktopScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               // Heading
-                              Text('Tồn kho & Giá', style: Theme.of(context).textTheme.headlineSmall),
+                              Text('Điều chỉnh sản phẩm trước khi bán', style: Theme.of(context).textTheme.headlineSmall),
                               const SizedBox(height: SHFSizes.spaceBtwItems),
 
                               // Product Type
@@ -125,9 +124,7 @@ class EditProductDesktopScreen extends StatelessWidget {
                         ProductCategories(product: product),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Product Visibility
-                        const ProductVisibilityWidget(),
-                        const SizedBox(height: SHFSizes.spaceBtwSections),
+
                       ],
                     ),
                   ),

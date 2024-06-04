@@ -31,8 +31,9 @@ class BrandsDesktopScreen extends StatelessWidget {
               // Nội dung Bảng
               Obx(() {
                 // Hiển thị Loader
-                if (controller.isLoading.value)
+                if (controller.isLoading.value) {
                   return const SHFLoaderAnimation();
+                }
 
                 return const SHFRoundedContainer(
                   child: Column(

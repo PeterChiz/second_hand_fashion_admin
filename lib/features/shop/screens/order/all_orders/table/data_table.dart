@@ -14,7 +14,7 @@ class OrderTable extends StatelessWidget {
     final controller = Get.put(OrderController());
     return Obx(
           () {
-        // Orders & Selected Rows are Hidden => Just to update the UI => Obx => [ProductRows]
+        // Các đơn hàng & Rows được chọn được ẩn => Cập nhật UI => Obx => [ProductRows]
         Visibility(visible: false, child: Text(controller.filteredItems.length.toString()));
         Visibility(visible: false, child: Text(controller.selectedRows.length.toString()));
 

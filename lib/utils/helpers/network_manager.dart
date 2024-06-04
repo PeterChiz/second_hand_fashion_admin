@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 
 import '../popups/loaders.dart';
 
-/// Manages the network connectivity status and provides methods to check and handle connectivity changes.
+/// Quản lý trạng thái kết nối mạng và cung cấp các phương thức để kiểm tra và xử lý thay đổi kết nối.
 class NetworkManager extends GetxController {
   static NetworkManager get instance => Get.find();
 
@@ -13,23 +13,23 @@ class NetworkManager extends GetxController {
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
   final RxList<ConnectivityResult> _connectionStatus = <ConnectivityResult>[].obs;
 
-  /// Initialize the network manager and set up a stream to continually check the connection status.
+  /// Khởi tạo quản lý mạng và thiết lập một luồng để liên tục kiểm tra trạng thái kết nối.
   @override
   void onInit() {
     super.onInit();
     _connectivitySubscription = _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
   }
 
-  /// Update the connection status based on changes in connectivity and show a relevant popup for no internet connection.
+  /// Cập nhật trạng thái kết nối dựa trên thay đổi kết nối và hiển thị cửa sổ bật lên liên quan đến không có kết nối internet.
   Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
     _connectionStatus.value = result;
     if (result.contains(ConnectivityResult.none)) {
-      SHFLoaders.customToast(message: 'No Internet Connection');
+      SHFLoaders.customToast(message: 'Không có kết nối Internet');
     }
   }
 
-  /// Check the internet connection status.
-  /// Returns `true` if connected, `false` otherwise.
+  /// Kiểm tra trạng thái kết nối internet.
+  /// Trả về `true` nếu đã kết nối, `false` nếu ngược lại.
   Future<bool> isConnected() async {
     try {
       final result = await _connectivity.checkConnectivity();
@@ -43,10 +43,11 @@ class NetworkManager extends GetxController {
     }
   }
 
-  /// Dispose or close the active connectivity stream.
+  /// Hủy hoặc đóng luồng kết nối đang hoạt động.
   @override
   void onClose() {
     super.onClose();
     _connectivitySubscription.cancel();
   }
 }
+

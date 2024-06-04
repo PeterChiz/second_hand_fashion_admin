@@ -25,33 +25,33 @@ class CustomerDetailDesktopScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Breadcrumbs
+              // Đường dẫn
               SHFBreadcrumbsWithHeading(
                   returnToPreviousScreen: true,
                   heading: customer.fullName,
                   breadcrumbItems: const [SHFRoutes.customers, 'Chi tiết']),
               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-              // Body
+              // Nội dung chính
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Right Side Customer Information
+                  // Thông tin khách hàng bên phải
                   Expanded(
                     child: Column(
                       children: [
-                        // Customer Info
+                        // Thông tin khách hàng
                         CustomerInfo(customer: customer),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Shipping Address
+                        // Địa chỉ giao hàng
                         const ShippingAddress(),
                       ],
                     ),
                   ),
                   const SizedBox(width: SHFSizes.spaceBtwSections),
 
-                  // Left Side Customer Orders
+                  // Đơn hàng của khách hàng bên trái
                   const Expanded(flex: 2, child: CustomerOrders()),
                 ],
               )

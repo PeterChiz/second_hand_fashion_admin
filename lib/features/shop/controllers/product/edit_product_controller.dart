@@ -1,4 +1,3 @@
-// Import các controllers, models, và utility classes cần thiết
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
@@ -29,7 +28,6 @@ class EditProductController extends GetxController {
   final isLoading = false.obs;
   final selectedCategoriesLoader = false.obs;
   final productType = ProductType.single.obs;
-  final productVisibility = ProductVisibility.hidden.obs;
 
   // Controllers và keys
   final variationsController = Get.put(ProductVariationController());
@@ -168,7 +166,6 @@ class EditProductController extends GetxController {
         variations.value = [];
       }
 
-      product.sku = '';
       product.isFeatured = true;
       product.title = title.text.trim();
       product.brand = selectedBrand.value;
@@ -219,7 +216,6 @@ class EditProductController extends GetxController {
   void resetValues() {
     isLoading.value = false;
     productType.value = ProductType.single;
-    productVisibility.value = ProductVisibility.hidden;
     stockPriceFormKey.currentState?.reset();
     titleDescriptionFormKey.currentState?.reset();
     title.clear();

@@ -26,7 +26,7 @@ class DashboardMobileScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SHFPageHeading(heading: 'Doanh thu'),
+              const SHFPageHeading(heading: 'Trang chủ'),
               const SizedBox(height: SHFSizes.spaceBtwSections),
               Obx(
                 () => SHFDashboardCard(

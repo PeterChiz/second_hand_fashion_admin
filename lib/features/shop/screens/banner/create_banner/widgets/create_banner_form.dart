@@ -30,7 +30,7 @@ class CreateBannerForm extends StatelessWidget {
             Text('Tạo Banner mới', style: Theme.of(context).textTheme.headlineMedium),
             const SizedBox(height: SHFSizes.spaceBtwSections),
 
-            // Image Uploader & Featured Checkbox
+            // Trình Tải Lên Hình Ảnh & Ô Chọn Nổi Bật
             Column(
               children: [
                 Obx(
@@ -61,7 +61,7 @@ class CreateBannerForm extends StatelessWidget {
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-            // Dropdown Menu Screens
+            // Màn Hình Menu Thả Xuống
             Obx(
               () {
                 return DropdownButton<String>(

@@ -74,7 +74,7 @@ class EditCategoryForm extends StatelessWidget {
 
             const SizedBox(height: SHFSizes.spaceBtwInputFields * 2),
 
-            // Image Uploader & Featured Checkbox
+            // Trình Tải Lên Hình Ảnh & Ô Chọn Nổi Bật
             Obx(
               () => SHFImageUploader(
                 width: 80,

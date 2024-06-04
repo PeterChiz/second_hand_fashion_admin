@@ -9,7 +9,7 @@ import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
 class BannerRepository extends GetxController {
-  // Get instance of BannerRepository using Get.find()
+  // Lấy bản của BannerRepository bằng cách sử dụng Get.find()
   static BannerRepository get instance => Get.find();
 
   // Firebase Firestore instance

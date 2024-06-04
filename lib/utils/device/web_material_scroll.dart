@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class MyCustomScrollBehavior extends MaterialScrollBehavior {
-  // Override behavior methods and getters like dragDevices
+  // Ghi đè các phương thức và getter hành vi như dragDevices
   @override
   Set<PointerDeviceKind> get dragDevices => {
     PointerDeviceKind.touch,

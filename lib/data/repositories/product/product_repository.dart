@@ -16,8 +16,6 @@ class ProductRepository extends GetxController {
   /// Firestore instance để tương tác với cơ sở dữ liệu.
   final _db = FirebaseFirestore.instance;
 
-  /* ---------------------------- HÀM ---------------------------------*/
-
   /// Tạo sản phẩm.
   Future<String> createProduct(ProductModel product) async {
     try {

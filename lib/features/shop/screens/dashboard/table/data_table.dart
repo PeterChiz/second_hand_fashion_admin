@@ -17,7 +17,7 @@ class DashboardOrderTable extends StatelessWidget {
     final controller = OrderController.instance;
     return Obx(
       () {
-        // Các đơn hàng & Các hàng được chọn được ẩn => Chỉ để cập nhật giao diện người dùng => Obx => [ProductRows]
+        // Các đơn hàng & Rows được chọn được ẩn => Cập nhật UI => Obx => [ProductRows]
         Visibility(
             visible: false,
             child: Text(controller.filteredItems.length.toString()));

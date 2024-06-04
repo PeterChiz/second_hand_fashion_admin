@@ -140,7 +140,7 @@ class EditBrandController extends GetxController {
 
     // Loại bỏ các danh mục không được chọn
     for (var categoryToRemove in categoriesToRemove) {
-      await BrandRepository.instance.deleteBrandCategory(categoryToRemove.id ?? '');
+      await BrandRepository.instance. deleteBrandCategory(categoryToRemove.id ?? '');
     }
 
     // Xác định danh mục mới để thêm

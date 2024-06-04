@@ -16,11 +16,11 @@ class ProductBrand extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get instances of controllers
+    // Lấy các thể hiện của controllers
     final controller = Get.put(EditProductController());
     final brandController = Get.put(BrandController());
 
-    // Fetch brands if the list is empty
+    // Lấy danh sách thương hiệu nếu danh sách đang trống
     if (brandController.allItems.isEmpty) {
       brandController.fetchItems();
     }
@@ -29,41 +29,41 @@ class ProductBrand extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Brand label
-          Text('Brand', style: Theme.of(context).textTheme.headlineSmall),
+          // Nhãn thương hiệu
+          Text('Thương hiệu', style: Theme.of(context).textTheme.headlineSmall),
           const SizedBox(height: SHFSizes.spaceBtwItems),
 
-          // TypeAheadField for brand selection
+          // TypeAheadField để chọn thương hiệu
           Obx(
-            () => brandController.isLoading.value
+                () => brandController.isLoading.value
                 ? const SHFShimmerEffect(width: double.infinity, height: 50)
                 : TypeAheadField(
-                    controller: controller.brandTextField,
-                    builder: (context, ctr, focusNode) {
-                      return TextFormField(
-                        focusNode: focusNode,
-                        controller: ctr,
-                        decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: 'Thay đổi thương hiệu',
-                          suffixIcon: Icon(Iconsax.box),
-                        ),
-                      );
-                    },
-                    suggestionsCallback: (pattern) {
-                      // Return filtered brand suggestions based on the search pattern
-                      return brandController.allItems.where((brand) => brand.name.contains(pattern)).toList();
-                    },
-                    itemBuilder: (context, suggestion) {
-                      return ListTile(
-                        title: Text(suggestion.name),
-                      );
-                    },
-                    onSelected: (suggestion) {
-                      controller.selectedBrand.value = suggestion;
-                      controller.brandTextField.text = suggestion.name;
-                    },
+              controller: controller.brandTextField,
+              builder: (context, ctr, focusNode) {
+                return TextFormField(
+                  focusNode: focusNode,
+                  controller: ctr,
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Thay đổi thương hiệu',
+                    suffixIcon: Icon(Iconsax.box),
                   ),
+                );
+              },
+              suggestionsCallback: (pattern) {
+                // Trả về các gợi ý thương hiệu đã được lọc dựa trên mẫu tìm kiếm
+                return brandController.allItems.where((brand) => brand.name.contains(pattern)).toList();
+              },
+              itemBuilder: (context, suggestion) {
+                return ListTile(
+                  title: Text(suggestion.name),
+                );
+              },
+              onSelected: (suggestion) {
+                controller.selectedBrand.value = suggestion;
+                controller.brandTextField.text = suggestion.name;
+              },
+            ),
           ),
         ],
       ),

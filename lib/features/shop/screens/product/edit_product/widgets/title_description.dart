@@ -21,11 +21,11 @@ class ProductTitleAndDescription extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Basic Information Text
+            // Văn bản Thông tin cơ bản
             Text('Thông tin cơ bản', style: Theme.of(context).textTheme.headlineSmall),
             const SizedBox(height: SHFSizes.spaceBtwItems),
 
-            // Product Title Input Field
+            // Trường nhập Tiêu đề sản phẩm
             TextFormField(
               controller: controller.title,
               validator: (value) => SHFValidator.validationEmptyText('Tiêu đề sản phẩm', value),
@@ -33,7 +33,7 @@ class ProductTitleAndDescription extends StatelessWidget {
             ),
             const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-            // Product Description Input Field
+            // Trường nhập Mô tả sản phẩm
             SizedBox(
               height: 300,
               child: TextFormField(

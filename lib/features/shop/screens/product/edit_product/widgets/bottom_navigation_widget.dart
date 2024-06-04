@@ -18,16 +18,16 @@ class ProductBottomNavigationButtons extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          // Discard button
+          // Nút loại bỏ
           OutlinedButton(
             onPressed: () {
-              // Add functionality to discard changes if needed
+              // Thêm chức năng để loại bỏ thay đổi nếu cần
             },
             child: const Text('Loại bỏ'),
           ),
           const SizedBox(width: SHFSizes.spaceBtwItems / 2),
 
-          // Save Changes button
+          // Nút lưu thay đổi
           SizedBox(
             width: 160,
             child: ElevatedButton(

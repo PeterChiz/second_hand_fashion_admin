@@ -37,7 +37,7 @@ class SHFBreadcrumbsWithHeading extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(SHFSizes.xs),
                 child: Text(
-                  'Doanh thu',
+                  'Trang chủ',
                   style: Theme.of(context).textTheme.bodySmall!.apply(fontWeightDelta: -1),
                 ),
               ),

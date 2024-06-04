@@ -75,7 +75,7 @@ class MediaController extends GetxController {
       loading.value = false;
       // SHFLoaders.errorSnackBar(title: 'Có lỗi', message: 'Không thể tìm nạp Hình ảnh, Đã xảy ra lỗi. Thử lại');
       SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
-      print('Lỗi: ${e.toString()}');
+      print('Error: ${e.toString()}');
     }
   }
 
@@ -110,7 +110,7 @@ class MediaController extends GetxController {
       title: 'Đăng tải hình ảnh',
       confirmText: 'Tải lên',
       onConfirm: () async => await uploadImages(),
-      content: 'Bạn có chắc chắn muốn tải lên tất cả các Hình ảnh trong thư mục ${selectedPath.value.name.toUpperCase()} ?',
+      content: 'Bạn có chắc chắn muốn tải lên tất cả các hình ảnh trong thư mục ${selectedPath.value.name.toUpperCase()} ?',
     );
   }
 

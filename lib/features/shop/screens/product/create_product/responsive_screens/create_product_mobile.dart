@@ -15,7 +15,6 @@ import '../widgets/stock_pricing_widget.dart';
 import '../widgets/thumbnail_widget.dart';
 import '../widgets/title_description.dart';
 import '../widgets/variations_widget.dart';
-import '../widgets/visibility_widget.dart';
 
 class CreateProductMobileScreen extends StatelessWidget {
   const CreateProductMobileScreen({super.key, });
@@ -101,9 +100,6 @@ class CreateProductMobileScreen extends StatelessWidget {
                   const ProductCategories(),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                  // Tính năng hiển thị sản phẩm
-                  const ProductVisibilityWidget(),
-                  const SizedBox(height: SHFSizes.spaceBtwSections),
                 ],
               ),
             ],

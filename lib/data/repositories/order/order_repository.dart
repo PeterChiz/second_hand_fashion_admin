@@ -8,7 +8,7 @@ import '../../../utils/exceptions/format_exceptions.dart';
 import '../../../utils/exceptions/platform_exceptions.dart';
 
 class OrderRepository extends GetxController {
-  // Singleton instance of the OrderRepository
+  //Bản Singleton của OrderRepository
   static OrderRepository get instance => Get.find();
 
   // Firebase Firestore instance
