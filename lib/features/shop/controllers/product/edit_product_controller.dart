@@ -28,6 +28,7 @@ class EditProductController extends GetxController {
   final isLoading = false.obs;
   final selectedCategoriesLoader = false.obs;
   final productType = ProductType.single.obs;
+  final productVisibility = ProductVisibility.hidden.obs;
 
   // Controllers và keys
   final variationsController = Get.put(ProductVariationController());
@@ -210,29 +211,6 @@ class EditProductController extends GetxController {
       SHFFullScreenLoader.stopLoading();
       SHFLoaders.errorSnackBar(title: 'Có lỗi', message: e.toString());
     }
-  }
-
-  // Đặt lại các giá trị của biểu mẫu và cờ
-  void resetValues() {
-    isLoading.value = false;
-    productType.value = ProductType.single;
-    stockPriceFormKey.currentState?.reset();
-    titleDescriptionFormKey.currentState?.reset();
-    title.clear();
-    description.clear();
-    stock.clear();
-    price.clear();
-    salePrice.clear();
-    brandTextField.clear();
-    selectedBrand.value = null;
-    selectedCategories.clear();
-    ProductVariationController.instance.resetAllValues();
-    ProductAttributesController.instance.resetProductAttributes();
-
-    thumbnailUploader.value = false;
-    additionalImagesUploader.value = false;
-    productDataUploader.value = false;
-    categoriesRelationshipUploader.value = false;
   }
 
   // Hiển thị hộp thoại tiến trình

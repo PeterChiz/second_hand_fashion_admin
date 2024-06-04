@@ -16,6 +16,7 @@ import '../widgets/stock_pricing_widget.dart';
 import '../widgets/thumbnail_widget.dart';
 import '../widgets/title_description.dart';
 import '../widgets/variations_widget.dart';
+import '../widgets/visibility_widget.dart';
 
 class CreateProductDesktopScreen extends StatelessWidget {
   const CreateProductDesktopScreen({
@@ -127,6 +128,10 @@ class CreateProductDesktopScreen extends StatelessWidget {
 
                         // Danh mục sản phẩm
                         const ProductCategories(),
+                        const SizedBox(height: SHFSizes.spaceBtwSections),
+
+                        //Sản phẩm có được xuất hiện ở màn hình chính không ?
+                        const ProductVisibilityWidget(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
                       ],

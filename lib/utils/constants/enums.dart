@@ -9,4 +9,7 @@ enum MediaCategory { folders, banners, brands, categories, products, users }
 
 enum OrderStatus { pending, processing, shipped, delivered, cancelled }
 
+enum ProductVisibility { published, hidden }
+
+
 

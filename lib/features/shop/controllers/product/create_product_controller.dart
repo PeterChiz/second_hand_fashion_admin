@@ -25,6 +25,7 @@ class CreateProductController extends GetxController {
   // Các observables cho trạng thái loading và chi tiết sản phẩm
   final isLoading = false.obs;
   final productType = ProductType.single.obs;
+  final productVisibility = ProductVisibility.hidden.obs;
 
   // Controllers và keys
   final stockPriceFormKey = GlobalKey<FormState>();
@@ -159,31 +160,6 @@ class CreateProductController extends GetxController {
     }
   }
 
-  // Đặt lại các giá trị và cờ của biểu mẫu
-  void resetValues() {
-    isLoading.value = false;
-    productType.value = ProductType.single;
-    stockPriceFormKey.currentState?.reset();
-    titleDescriptionFormKey.currentState?.reset();
-    title.clear();
-    description.clear();
-    stock.clear();
-    price.clear();
-    salePrice.clear();
-    brandTextField.clear();
-    selectedBrand.value = null;
-    selectedCategories.clear();
-    ProductVariationController.instance.resetAllValues();
-    ProductAttributesController.instance.resetProductAttributes();
-
-    // Đặt lại cờ Tải lên
-    thumbnailUploader.value = false;
-    additionalImagesUploader.value = false;
-    productDataUploader.value = false;
-    categoriesRelationshipUploader.value = false;
-  }
-
-  // Hiển thị hộp thoại tiến trình
   void showProgressDialog() {
     showDialog(
       context: Get.context!,

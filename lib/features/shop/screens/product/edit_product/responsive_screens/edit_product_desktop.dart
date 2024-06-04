@@ -10,6 +10,7 @@ import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/sizes.dart';
 import '../../create_product/widgets/additional_images.dart';
 import '../../create_product/widgets/thumbnail_widget.dart';
+import '../../create_product/widgets/visibility_widget.dart';
 import '../widgets/attributes_widget.dart';
 import '../widgets/bottom_navigation_widget.dart';
 import '../widgets/brand_widget.dart';
@@ -124,7 +125,9 @@ class EditProductDesktopScreen extends StatelessWidget {
                         ProductCategories(product: product),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-
+                        // Sản phẩm có được xuất hiện ở màn hình chính không ?
+                        const ProductVisibilityWidget(),
+                        const SizedBox(height: SHFSizes.spaceBtwSections),
                       ],
                     ),
                   ),
