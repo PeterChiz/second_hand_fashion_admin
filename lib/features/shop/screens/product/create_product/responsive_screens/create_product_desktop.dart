@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../../../../common/widgets/breadcrumbs/breadcrumb_with_heading.dart';
 import '../../../../../../common/widgets/containers/rounded_container.dart';
-import '../../../../../../utils/device/device_utility.dart';
 import '../../../../controllers/product/product_images_controller.dart';
 import '../widgets/additional_images.dart';
 import '../../../../../../routes/routes.dart';
@@ -47,7 +46,7 @@ class CreateProductDesktopScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
-                    flex: SHFDeviceUtils.isTabletScreen(context) ? 2 : 3,
+                    flex: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

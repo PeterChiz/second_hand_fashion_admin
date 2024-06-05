@@ -8,7 +8,6 @@ import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/device/device_utility.dart';
 import '../../appbar/appbar.dart';
 import '../../images/shf_rounded_image.dart';
-import '../../shimmers/shimmer.dart';
 
 /// Widget tiêu đề cho ứng dụng
 class SHFHeader extends StatelessWidget implements PreferredSizeWidget {
@@ -47,25 +46,6 @@ class SHFHeader extends StatelessWidget implements PreferredSizeWidget {
                   image: controller.user.value.profilePicture.isNotEmpty ? controller.user.value.profilePicture : SHFImages.user,
                 ),
               ),
-
-              const SizedBox(width: SHFSizes.sm),
-
-              /// Dữ liệu Hồ sơ Người dùng [Ẩn trên di động]
-              if (!SHFDeviceUtils.isMobileScreen(context))
-                Obx(
-                      () => Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      controller.loading.value
-                          ? const SHFShimmerEffect(width: 50, height: 13)
-                          : Text(controller.user.value.fullName, style: Theme.of(context).textTheme.titleLarge),
-                      controller.loading.value
-                          ? const SHFShimmerEffect(width: 70, height: 13)
-                          : Text(controller.user.value.email, style: Theme.of(context).textTheme.labelMedium),
-                    ],
-                  ),
-                ),
             ],
           ),
         ],

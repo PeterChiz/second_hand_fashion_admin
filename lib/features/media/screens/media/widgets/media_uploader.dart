@@ -11,7 +11,6 @@ import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/enums.dart';
 import '../../../../../utils/constants/image_strings.dart';
 import '../../../../../utils/constants/sizes.dart';
-import '../../../../../utils/device/device_utility.dart';
 import '../../../controllers/media_controller.dart';
 import '../../../models/image_model.dart';
 
@@ -152,9 +151,7 @@ class MediaUploader extends StatelessWidget {
                                   .clear(),
                               child: const Text('Xóa Tất Cả')),
                           const SizedBox(width: SHFSizes.spaceBtwItems),
-                          SHFDeviceUtils.isMobileScreen(context)
-                              ? const SizedBox.shrink()
-                              : SizedBox(
+                          SizedBox(
                             width: SHFSizes.buttonWidth,
                             child: ElevatedButton(
                               onPressed: () => controller
@@ -186,8 +183,7 @@ class MediaUploader extends StatelessWidget {
                         .toList(),
                   ),
                   const SizedBox(height: SHFSizes.spaceBtwSections),
-                  SHFDeviceUtils.isMobileScreen(context)
-                      ? SizedBox(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () =>
@@ -195,7 +191,6 @@ class MediaUploader extends StatelessWidget {
                       child: const Text('Tải Lên'),
                     ),
                   )
-                      : const SizedBox.shrink()
                 ],
               ),
             ),

@@ -8,7 +8,6 @@ import '../../../../../common/widgets/containers/circular_container.dart';
 import '../../../../../common/widgets/loaders/loader_animation.dart';
 import '../../../../../utils/constants/colors.dart';
 import '../../../../../utils/constants/enums.dart';
-import '../../../../../utils/device/device_utility.dart';
 import '../../../../../utils/helpers/helper_functions.dart';
 import '../../../controllers/dashboard/dashboard_controller.dart';
 
@@ -28,7 +27,7 @@ class OrderStatusPieChart extends StatelessWidget {
             child: PieChart(
               PieChartData(
                 sectionsSpace: 0,
-                centerSpaceRadius: SHFDeviceUtils.isTabletScreen(context) ? 80 : 55,
+                centerSpaceRadius:  55,
                 startDegreeOffset: 180,
                 sections: controller.orderStatusData.entries.map((entry) {
                   final OrderStatus status = entry.key;
@@ -38,7 +37,7 @@ class OrderStatusPieChart extends StatelessWidget {
                     color: SHFHelperFunctions.getOrderStatusColor(status),
                     value: count.toDouble(),
                     title: '$count',
-                    radius: SHFDeviceUtils.isTabletScreen(context) ? 80 : 100,
+                    radius: 100,
                     titleStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
                   );
                 }).toList(),

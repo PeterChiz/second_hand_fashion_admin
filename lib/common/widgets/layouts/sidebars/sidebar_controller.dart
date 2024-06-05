@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
 import '../../../../data/repositories/authentication/authentication_repository.dart';
 import '../../../../routes/routes.dart';
-import '../../../../utils/device/device_utility.dart';
 import '../../../../utils/popups/loaders.dart';
 
 /// Controller để quản lý trạng thái và chức năng của thanh bên
@@ -35,9 +34,6 @@ class SidebarController extends GetxController {
       if (!isActive(route)) {
         // Cập nhật Mục Menu Được Chọn
         changeActiveItem(route);
-
-        // Nếu Menu Drawer mở trên Điện thoại, Đóng nó.
-        if (SHFDeviceUtils.isMobileScreen(Get.context!)) Get.back();
 
         // Di chuyển đến màn hình khác HOẶC Đăng xuất
         if (route == 'logout') {

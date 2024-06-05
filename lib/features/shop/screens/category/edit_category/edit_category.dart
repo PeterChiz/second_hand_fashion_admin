@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 
 import '../../../../../common/widgets/layouts/templates/site_layout.dart';
 import 'responsive_screens/edit_category_desktop.dart';
-import 'responsive_screens/edit_category_mobile.dart';
-import 'responsive_screens/edit_category_tablet.dart';
 
 class EditCategoryScreen extends StatelessWidget {
   const EditCategoryScreen({super.key});
@@ -14,8 +12,7 @@ class EditCategoryScreen extends StatelessWidget {
     final category = Get.arguments;
     return SHFSiteTemplate(
       desktop: EditCategoryDesktopScreen(category: category),
-      tablet: EditCategoryTabletScreen(category: category),
-      mobile: EditCategoryMobileScreen(category: category),
+
     );
   }
 }

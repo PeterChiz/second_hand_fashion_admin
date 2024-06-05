@@ -6,7 +6,6 @@ import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/enums.dart';
 import '../../../../../../utils/constants/image_strings.dart';
 import '../../../../../../utils/constants/sizes.dart';
-import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/helpers/pricing_calculator.dart';
 import '../../../../models/order_model.dart';
 
@@ -72,11 +71,11 @@ class OrderItems extends StatelessWidget {
                     child: Text('${item.price}đ', style: Theme.of(context).textTheme.bodyLarge),
                   ),
                   SizedBox(
-                    width: SHFDeviceUtils.isMobileScreen(context) ? SHFSizes.xl * 1.4 : SHFSizes.xl * 2,
+                    width: SHFSizes.xl * 2,
                     child: Text(item.quantity.toString(), style: Theme.of(context).textTheme.bodyLarge),
                   ),
                   SizedBox(
-                    width: SHFDeviceUtils.isMobileScreen(context) ? SHFSizes.xl * 1.4 : SHFSizes.xl * 2,
+                    width: SHFSizes.xl * 2,
                     child: Text('${item.totalAmount}đ', style: Theme.of(context).textTheme.bodyLarge),
                   ),
                 ],

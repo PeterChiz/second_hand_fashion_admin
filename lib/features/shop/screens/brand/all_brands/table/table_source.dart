@@ -10,7 +10,6 @@ import '../../../../../../routes/routes.dart';
 import '../../../../../../utils/constants/colors.dart';
 import '../../../../../../utils/constants/enums.dart';
 import '../../../../../../utils/constants/sizes.dart';
-import '../../../../../../utils/device/device_utility.dart';
 import '../../../../controllers/brand/brand_controller.dart';
 
 class BrandRows extends DataTableSource {
@@ -54,11 +53,11 @@ class BrandRows extends DataTableSource {
               scrollDirection: Axis.vertical,
               child: Wrap(
                 spacing: SHFSizes.xs,
-                direction: SHFDeviceUtils.isMobileScreen(Get.context!) ? Axis.vertical : Axis.horizontal,
+                direction: Axis.horizontal,
                 children: brand.brandCategories != null
                     ? brand.brandCategories!
                         .map((e) => Padding(
-                              padding: EdgeInsets.only(bottom: SHFDeviceUtils.isMobileScreen(Get.context!) ? 0 : SHFSizes.xs),
+                              padding: const EdgeInsets.only(bottom: SHFSizes.xs),
                               child: Chip(label: Text(e.name), padding: const EdgeInsets.all(SHFSizes.xs)),
                             ))
                         .toList()

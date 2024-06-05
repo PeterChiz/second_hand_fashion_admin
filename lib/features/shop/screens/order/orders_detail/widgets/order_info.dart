@@ -5,7 +5,6 @@ import '../../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../../common/widgets/shimmers/shimmer.dart';
 import '../../../../../../utils/constants/enums.dart';
 import '../../../../../../utils/constants/sizes.dart';
-import '../../../../../../utils/device/device_utility.dart';
 import '../../../../../../utils/helpers/helper_functions.dart';
 import '../../../../controllers/order/order_controller.dart';
 import '../../../../models/order_model.dart';
@@ -47,7 +46,7 @@ class OrderInfo extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: SHFDeviceUtils.isMobileScreen(context) ? 2 : 1,
+                flex:  1,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
