@@ -55,28 +55,28 @@ class EditProductDesktopScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Basic Information
+                        // Thông tin cơ bản
                         const ProductTitleAndDescription(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Stock & Pricing
+                        // Số lượng & Giá
                         SHFRoundedContainer(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Heading
+                              // Tiêu đề
                               Text('Điều chỉnh sản phẩm trước khi bán', style: Theme.of(context).textTheme.headlineSmall),
                               const SizedBox(height: SHFSizes.spaceBtwItems),
 
-                              // Product Type
+                              // Loại sản phẩm
                               const ProductTypeWidget(),
                               const SizedBox(height: SHFSizes.spaceBtwInputFields),
 
-                              // Stock
+                              // Số lượng
                               const ProductStockAndPricing(),
                               const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                              // Attributes
+                              // Thuộc tính
                               ProductAttributes(), // Add/Edit/Delete Attributes
                               const SizedBox(height: SHFSizes.spaceBtwSections),
                             ],
@@ -84,7 +84,7 @@ class EditProductDesktopScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Variations
+                        // Biến thể
                         const ProductVariations(), // Edit/Delete Variations
                       ],
                     ),
@@ -95,11 +95,11 @@ class EditProductDesktopScreen extends StatelessWidget {
                   Expanded(
                     child: Column(
                       children: [
-                        // Product Thumbnail
+                        // Hình ảnh sản phẩm
                         const ProductThumbnailImage(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Product Images
+                        // Tất cả hình ảnh sản phẩm
                         SHFRoundedContainer(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -116,11 +116,11 @@ class EditProductDesktopScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Product Brand
+                        // Thương hiệu sản phẩm
                         const ProductBrand(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Product Categories
+                        // Danh mục sản phẩm
                         ProductCategories(product: product),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 

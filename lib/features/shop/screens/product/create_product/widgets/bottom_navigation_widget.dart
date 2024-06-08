@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../../utils/constants/sizes.dart';
@@ -18,7 +19,7 @@ class ProductBottomNavigationButtons extends StatelessWidget {
           // Nút Hủy
           OutlinedButton(
             onPressed: () {
-              // Thêm chức năng để hủy các thay đổi nếu cần
+              Get.back();
             },
             child: const Text('Hủy'),
           ),
@@ -29,7 +30,7 @@ class ProductBottomNavigationButtons extends StatelessWidget {
             width: 160,
             child: ElevatedButton(
               onPressed: () => CreateProductController.instance.createProduct(),
-              child: const Text('Lưu Thay Đổi'),
+              child: const Text('Lưu thay Đổi'),
             ),
           ),
         ],

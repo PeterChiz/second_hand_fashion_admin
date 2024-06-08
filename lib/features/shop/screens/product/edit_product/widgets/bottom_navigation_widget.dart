@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../../common/widgets/containers/rounded_container.dart';
 import '../../../../../../utils/constants/sizes.dart';
@@ -21,7 +22,7 @@ class ProductBottomNavigationButtons extends StatelessWidget {
           // Nút loại bỏ
           OutlinedButton(
             onPressed: () {
-              // Thêm chức năng để loại bỏ thay đổi nếu cần
+              Get.back();
             },
             child: const Text('Loại bỏ'),
           ),

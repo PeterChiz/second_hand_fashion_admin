@@ -34,7 +34,7 @@ class CreateProductDesktopScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Dẫn đường
+              // Đường dẫn
               const SHFBreadcrumbsWithHeading(
                   returnToPreviousScreen: true,
                   heading: 'Tạo sản phẩm',
@@ -54,8 +54,8 @@ class CreateProductDesktopScreen extends StatelessWidget {
                         const ProductTitleAndDescription(),
                         const SizedBox(height: SHFSizes.spaceBtwSections),
 
-                        // Kho và Giá
-                        SHFRoundedContainer(
+                        // Số lượng và Giá
+                        SHFRoundedContainer (
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -71,7 +71,7 @@ class CreateProductDesktopScreen extends StatelessWidget {
                               const SizedBox(
                                   height: SHFSizes.spaceBtwInputFields),
 
-                              // Kho
+                              // Số lượng
                               const ProductStockAndPricing(),
                               const SizedBox(height: SHFSizes.spaceBtwSections),
 

@@ -32,7 +32,7 @@ class SHFFirebaseException implements Exception {
       case 'operation-not-allowed':
         return 'Thao tác này không được phép. Liên hệ hỗ trợ để được trợ giúp.';
       case 'invalid-credential':
-        return 'Thông tin đăng nhập được cung cấp không đúng cách hoặc đã hết hạn.';
+        return 'Thông tin đăng nhập được cung cấp không đúng.';
       case 'invalid-verification-code':
         return 'Mã xác minh không hợp lệ. Vui lòng nhập một mã hợp lệ.';
       case 'invalid-verification-id':

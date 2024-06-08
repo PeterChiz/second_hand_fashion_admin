@@ -109,7 +109,7 @@ class ProductVariations extends StatelessWidget {
               child: TextFormField(
                 onChanged: (value) => variation.stock = int.parse(value),
                 decoration: const InputDecoration(
-                    labelText: 'Kho', hintText: 'Thêm Kho, chỉ cho phép số'),
+                    labelText: 'Số lượng', hintText: 'Không được âm'),
                 controller: variationController.stockControllersList[index]
                 [variation],
                 keyboardType: TextInputType.number,
@@ -129,7 +129,7 @@ class ProductVariations extends StatelessWidget {
                 onChanged: (value) => variation.price = double.parse(value),
                 decoration: const InputDecoration(
                     labelText: 'Giá',
-                    hintText: 'Giá với tối đa 2 chữ số thập phân'),
+                    hintText: 'Giá không âm'),
                 controller: variationController.priceControllersList[index]
                 [variation],
               ),
@@ -147,7 +147,7 @@ class ProductVariations extends StatelessWidget {
                 [variation],
                 decoration: const InputDecoration(
                     labelText: 'Giá Giảm',
-                    hintText: 'Giá với tối đa 2 chữ số thập phân'),
+                    hintText: 'Giá không âm'),
               ),
             ),
           ],

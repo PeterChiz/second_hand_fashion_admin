@@ -50,7 +50,7 @@ class SHFFirebaseAuthException implements Exception {
       case 'user-token-expired':
         return 'Token của người dùng đã hết hạn, và cần xác thực. Vui lòng đăng nhập lại.';
       case 'invalid-credential':
-        return 'Thông tin đăng nhập được cung cấp không đúng cách hoặc đã hết hạn.';
+        return 'Thông tin đăng nhập được cung cấp không đúng.';
       case 'user-token-revoked':
         return 'Token của người dùng đã bị thu hồi. Vui lòng đăng nhập lại.';
       case 'invalid-message-payload':
